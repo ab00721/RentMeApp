@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RentMeApp.View;
 
 namespace RentMeApp
 {
@@ -16,7 +17,7 @@ namespace RentMeApp
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class EmployeeLoginForm : Form
     {
-        //private MainDashboardWithUserControl _mainDashboard;
+        private MainDashboard _mainDashboard;
         //private AuthenticateController _authenticateController;
 
         /// <summary>
@@ -26,6 +27,7 @@ namespace RentMeApp
         public EmployeeLoginForm()
         {
             InitializeComponent();
+            _mainDashboard = new MainDashboard(this, usernameTextBox.Text);
             ClearMessageLabel();
             //_authenticateController = new AuthenticateController();
         }
@@ -55,12 +57,8 @@ namespace RentMeApp
 
             if (username == "jane" && password == "test1234")
             {
-                loginMessageLabel.Text = "login successful";
-                loginMessageLabel.ForeColor = Color.Red;
-
-                //this.Visible = false;
-                //this._mainDashboard.ShowDialog();
-                //mainForm.ShowDialog();
+                this.Visible = false;
+                this._mainDashboard.ShowDialog();
             }
             else
             {
