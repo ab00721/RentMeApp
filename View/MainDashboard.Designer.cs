@@ -34,7 +34,9 @@
             this.returnTabPage = new System.Windows.Forms.TabPage();
             this.transactionTabPage = new System.Windows.Forms.TabPage();
             this.reportTabPage = new System.Windows.Forms.TabPage();
+            this.searchMemberUserControl1 = new RentMeApp.UserControls.SearchMemberUserControl();
             this.mainTabControl.SuspendLayout();
+            this.membersTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainTabControl
@@ -55,6 +57,7 @@
             // 
             // membersTabPage
             // 
+            this.membersTabPage.Controls.Add(this.searchMemberUserControl1);
             this.membersTabPage.Location = new System.Drawing.Point(4, 29);
             this.membersTabPage.Name = "membersTabPage";
             this.membersTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -103,6 +106,15 @@
             this.reportTabPage.Text = "Reports";
             this.reportTabPage.UseVisualStyleBackColor = true;
             // 
+            // searchMemberUserControl1
+            // 
+            this.searchMemberUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchMemberUserControl1.Location = new System.Drawing.Point(3, 3);
+            this.searchMemberUserControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchMemberUserControl1.Name = "searchMemberUserControl1";
+            this.searchMemberUserControl1.Size = new System.Drawing.Size(786, 411);
+            this.searchMemberUserControl1.TabIndex = 0;
+            // 
             // MainDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -117,6 +129,7 @@
             this.Text = "Rent Me App";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainDashboard_FormClosed);
             this.mainTabControl.ResumeLayout(false);
+            this.membersTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -129,5 +142,6 @@
         private System.Windows.Forms.TabPage returnTabPage;
         private System.Windows.Forms.TabPage transactionTabPage;
         private System.Windows.Forms.TabPage reportTabPage;
+        private UserControls.SearchMemberUserControl searchMemberUserControl1;
     }
 }
