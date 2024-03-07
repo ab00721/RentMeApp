@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RentMeApp.UserControls;
+using System;
 using System.Windows.Forms;
 
 namespace RentMeApp.View
@@ -16,13 +10,22 @@ namespace RentMeApp.View
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class MainDashboard : Form
     {
-        private readonly EmployeeLoginForm _loginForm;
-        private readonly LogoutForm _logoutForm;
-        public MainDashboard(EmployeeLoginForm loginForm, string user) 
+        private readonly LogoutUserControl _logoutUserControl;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainDashboard"/> class.
+        /// </summary>
+        /// <param name="loginForm">The login form.</param>
+        /// <param name="user">The user.</param>
+        public MainDashboard(EmployeeLoginForm loginForm, string user)
         {
             InitializeComponent();
-            _loginForm = loginForm;
-            _logoutForm = new LogoutForm(loginForm, user);
+            _logoutUserControl = new LogoutUserControl(loginForm, user, this)
+            {
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                Dock = DockStyle.Top
+            };
+            this.Controls.Add(_logoutUserControl);
         }
 
         private void MainDashboard_FormClosed(object sender, FormClosedEventArgs e)

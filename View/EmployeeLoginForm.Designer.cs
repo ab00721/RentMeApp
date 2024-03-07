@@ -133,12 +133,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.loginTableLayoutPanel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EmployeeLoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Employee Login";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EmployeeLoginForm_FormClosed);
             this.loginTableLayoutPanel.ResumeLayout(false);
             this.loginTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);

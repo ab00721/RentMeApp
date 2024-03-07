@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using RentMeApp.View;
 
@@ -23,7 +17,6 @@ namespace RentMeApp
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeLoginForm"/> class.
         /// </summary>
-
         public EmployeeLoginForm()
         {
             InitializeComponent();
@@ -53,18 +46,26 @@ namespace RentMeApp
             string password = passwordTextBox.Text;
 
             //bool isAuthenticated = _authenticateController.Authenticate(username, password);
+            
             //if (isAuthenticated)
-
             if (username == "jane" && password == "test1234")
             {
-                this.Visible = false;
-                this._mainDashboard.ShowDialog();
+                using (_mainDashboard = new MainDashboard(this, username))
+                {
+                    this.Visible = false;
+                    this._mainDashboard.ShowDialog();
+                }
             }
             else
             {
                 loginMessageLabel.Text = "Invalid username/password";
                 loginMessageLabel.ForeColor = Color.Red;
             }
+        }
+
+        private void EmployeeLoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
