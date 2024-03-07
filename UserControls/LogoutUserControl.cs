@@ -22,7 +22,8 @@ namespace RentMeApp.UserControls
             InitializeComponent();
             _loginForm = loginForm;
             _mainDashboard = mainDashboard;
-            userLabel.Text = user;
+            nameLabel.Text = user;
+            usernameLabel.Text = user;
         }
 
         private void LogoutLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

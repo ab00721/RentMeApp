@@ -28,22 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.userLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
             this.logoutLinkLabel = new System.Windows.Forms.LinkLabel();
             this.logoutGroupBox = new System.Windows.Forms.GroupBox();
+            this.usernameLabel = new System.Windows.Forms.Label();
             this.logoutGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // userLabel
+            // nameLabel
             // 
-            this.userLabel.AutoSize = true;
-            this.userLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userLabel.Location = new System.Drawing.Point(6, 18);
-            this.userLabel.Name = "userLabel";
-            this.userLabel.Size = new System.Drawing.Size(46, 20);
-            this.userLabel.TabIndex = 8;
-            this.userLabel.Text = "user";
-            this.userLabel.UseWaitCursor = true;
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.Location = new System.Drawing.Point(22, 18);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(54, 20);
+            this.nameLabel.TabIndex = 8;
+            this.nameLabel.Text = "name";
+            this.nameLabel.UseWaitCursor = true;
             // 
             // logoutLinkLabel
             // 
@@ -62,7 +63,8 @@
             // logoutGroupBox
             // 
             this.logoutGroupBox.AutoSize = true;
-            this.logoutGroupBox.Controls.Add(this.userLabel);
+            this.logoutGroupBox.Controls.Add(this.usernameLabel);
+            this.logoutGroupBox.Controls.Add(this.nameLabel);
             this.logoutGroupBox.Controls.Add(this.logoutLinkLabel);
             this.logoutGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.logoutGroupBox.Location = new System.Drawing.Point(0, 0);
@@ -72,6 +74,17 @@
             this.logoutGroupBox.TabIndex = 11;
             this.logoutGroupBox.TabStop = false;
             this.logoutGroupBox.UseWaitCursor = true;
+            // 
+            // usernameLabel
+            // 
+            this.usernameLabel.AutoSize = true;
+            this.usernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameLabel.Location = new System.Drawing.Point(465, 18);
+            this.usernameLabel.Name = "usernameLabel";
+            this.usernameLabel.Size = new System.Drawing.Size(91, 20);
+            this.usernameLabel.TabIndex = 9;
+            this.usernameLabel.Text = "username";
+            this.usernameLabel.UseWaitCursor = true;
             // 
             // LogoutUserControl
             // 
@@ -89,8 +102,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label userLabel;
+        private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.LinkLabel logoutLinkLabel;
         private System.Windows.Forms.GroupBox logoutGroupBox;
+        private System.Windows.Forms.Label usernameLabel;
     }
 }

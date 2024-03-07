@@ -44,12 +44,12 @@
             this.mainTabControl.Controls.Add(this.returnTabPage);
             this.mainTabControl.Controls.Add(this.transactionTabPage);
             this.mainTabControl.Controls.Add(this.reportTabPage);
-            this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainTabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mainTabControl.Location = new System.Drawing.Point(0, 64);
+            this.mainTabControl.Location = new System.Drawing.Point(0, 0);
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
-            this.mainTabControl.Size = new System.Drawing.Size(800, 386);
+            this.mainTabControl.Size = new System.Drawing.Size(800, 450);
             this.mainTabControl.TabIndex = 0;
             this.mainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
@@ -58,7 +58,7 @@
             this.membersTabPage.Location = new System.Drawing.Point(4, 29);
             this.membersTabPage.Name = "membersTabPage";
             this.membersTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.membersTabPage.Size = new System.Drawing.Size(792, 353);
+            this.membersTabPage.Size = new System.Drawing.Size(792, 417);
             this.membersTabPage.TabIndex = 0;
             this.membersTabPage.Text = "Members";
             this.membersTabPage.UseVisualStyleBackColor = true;
