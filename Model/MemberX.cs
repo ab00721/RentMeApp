@@ -10,9 +10,8 @@ namespace RentMeApp.Model
         public int MemberID { get; }
         public string FirstName { get; }
         public string LastName { get; }
-        public string Sex { get; }
-        public DateTime Birthday { get; }
-        public string Address { get; }
+        public string Phone { get; }
+       
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberX"/> class.
@@ -25,7 +24,7 @@ namespace RentMeApp.Model
         /// <param name="address">The address.</param>
         /// <exception cref="System.ArgumentException">Last Name - Last name cannot be null or empty</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">Member ID - Member ID  has to be > 0</exception>
-        public MemberX(int memberID, string firstName, string lastName, string sex, DateTime birthday, string address)
+        public MemberX(int memberID, string firstName, string lastName, string phone)
         {
 
             if (string.IsNullOrEmpty(lastName))
@@ -42,9 +41,7 @@ namespace RentMeApp.Model
             this.MemberID = memberID;
             this.FirstName = firstName;
             this.LastName = lastName;
-            this.Sex = sex;
-            this.Birthday = birthday;
-            this.Address = address;
+            this.Phone = phone;
         }
     }
 }

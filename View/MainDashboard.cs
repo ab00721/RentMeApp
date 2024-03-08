@@ -37,7 +37,7 @@ namespace RentMeApp.View
         {
             if (mainTabControl.SelectedTab == mainTabControl.TabPages["membersTabPage"])
             {
-
+                this.mainSearchMemberUserControl.SearchMemberUserControl_Load(sender, e);
             }
             if (mainTabControl.SelectedTab == mainTabControl.TabPages["rentalTabPage"])
             {

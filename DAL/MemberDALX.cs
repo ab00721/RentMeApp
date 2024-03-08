@@ -8,9 +8,9 @@ namespace RentMeApp.DAL
     {
         private static readonly List<MemberX> _members = new List<MemberX>
         {
-            new MemberX(1, "John", "Doe", "M", DateTime.Now, "123 Main"),
-            new MemberX(2, "Jane", "Doe", "F", DateTime.Now, "123 Main"),
-            new MemberX(3, "Harry", "Potter", "M", DateTime.Now, "123 Hogwarts"),
+            new MemberX(1, "John", "Doe", "111-111-1111"),
+            new MemberX(2, "Jane", "Doe", "222-222-2222"),
+            new MemberX(3, "Harry", "Potter", "333-333-3333"),
         };
 
         /// <summary>
