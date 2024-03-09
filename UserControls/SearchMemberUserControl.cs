@@ -77,9 +77,6 @@ namespace RentMeApp.UserControls
             memberDataGridView.Columns.Add(newOrder);
             memberDataGridView.Columns.Add(newReturn);
 
-            //edit.DisplayIndex = memberDataGridView.Columns.Count - 3;
-            //newOrder.DisplayIndex = memberDataGridView.Columns.Count - 2;
-            //newReturn.DisplayIndex = memberDataGridView.Columns.Count - 1;
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
