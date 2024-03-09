@@ -163,6 +163,7 @@
             this.memberDataGridView.RowTemplate.Height = 24;
             this.memberDataGridView.Size = new System.Drawing.Size(922, 391);
             this.memberDataGridView.TabIndex = 0;
+            this.memberDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MemberDataGridView_CellClick);
             // 
             // memberTableLayoutPanel
             // 

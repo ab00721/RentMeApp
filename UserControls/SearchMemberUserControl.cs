@@ -8,10 +8,18 @@ using System.Text.RegularExpressions;
 
 namespace RentMeApp.UserControls
 {
+    /// <summary>
+    /// Search Member User Control Class
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.UserControl" />
     public partial class SearchMemberUserControl : UserControl
     {
         private readonly MemberControllerX _memberControllerX;
-        private List<MemberX> _members;
+        private readonly List<MemberX> _members;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
+        /// </summary>
         public SearchMemberUserControl()
         {
             InitializeComponent();
@@ -82,18 +90,12 @@ namespace RentMeApp.UserControls
                 switch (memberSearchComboBox.SelectedIndex)
                 {
                     case 0:
-                        searchMessageLabel.Text = "search by ID";
-
                         SearchByID(search);
                         break;
                     case 1:
-                        searchMessageLabel.Text = "search by name";
-
                         SearchByName(search);
                         break;
                     case 2:
-                        searchMessageLabel.Text = "search by phone";
-
                         SearchByPhone(search);
                         break;
                 }
@@ -196,5 +198,42 @@ namespace RentMeApp.UserControls
             searchMessageLabel.Text = string.Empty;
         }
 
+        private void MemberDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string columnName = memberDataGridView.Columns[e.ColumnIndex].Name;
+                MemberX selectedMember = (MemberX)memberDataGridView.Rows[e.RowIndex].DataBoundItem;
+                switch (columnName)
+                {
+                    case "EditColumn":
+                        EditMember(selectedMember);
+                        break;
+
+                    case "NewOrderColumn":
+                        NewOrder(selectedMember); 
+                        break;
+
+                    case "NewReturnColumn":
+                        NewReturn(selectedMember);
+                        break;
+                }
+            }
+        }
+
+        private void EditMember(MemberX selectedMember)
+        {
+            searchMessageLabel.Text = "edit " + selectedMember.FirstName;
+        }
+
+        private void NewOrder(MemberX selectedMember)
+        {
+            searchMessageLabel.Text = "new order " + selectedMember.FirstName;
+        }
+
+        private void NewReturn(MemberX selectedMember)
+        {
+            searchMessageLabel.Text = "new return " + selectedMember.FirstName;
+        }
     }
 }
