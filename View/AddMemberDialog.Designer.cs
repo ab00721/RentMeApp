@@ -308,6 +308,7 @@
             this.AddMemberBtn.TabIndex = 2;
             this.AddMemberBtn.Text = "Create";
             this.AddMemberBtn.UseVisualStyleBackColor = true;
+            this.AddMemberBtn.Click += new System.EventHandler(this.AddMemberBtn_Click);
             // 
             // tableLayoutPanel3
             // 

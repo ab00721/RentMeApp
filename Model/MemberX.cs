@@ -7,10 +7,10 @@ namespace RentMeApp.Model
     /// </summary>
     public class MemberX
     {
-        public int MemberID { get; }
-        public string FirstName { get; }
-        public string LastName { get; }
-        public string Phone { get; }
+        public int MemberID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
        
 
         /// <summary>
@@ -43,5 +43,7 @@ namespace RentMeApp.Model
             this.LastName = lastName;
             this.Phone = phone;
         }
+
+        public MemberX() { }
     }
 }
