@@ -64,6 +64,12 @@
     <Compile Include="UserControls\SearchMemberUserControl.Designer.cs">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\AddMemberDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddMemberDialog.Designer.cs">
+      <DependentUpon>AddMemberDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeeLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchMemberUserControl.resx">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AddMemberDialog.resx">
+      <DependentUpon>AddMemberDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\EmployeeLoginForm.resx">
       <DependentUpon>EmployeeLoginForm.cs</DependentUpon>

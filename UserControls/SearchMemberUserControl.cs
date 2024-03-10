@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using RentMeApp.View;
 
 namespace RentMeApp.UserControls
 {
@@ -199,6 +200,24 @@ namespace RentMeApp.UserControls
         {
             searchMessageLabel.Text = "Add New Member";
             searchMessageLabel.ForeColor = Color.Red;
+
+            using (Form addMember = new View.AddMemberDialog())
+            {
+                DialogResult result = addMember.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    //if (this.UpdateTechnician())
+                    //{
+                    //    this._incidentController.CloseIncident(this.incident.IncidentID);
+                    //    this.UpdateSuccessful();
+                    //}
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    addMember.Close();
+                }
+            }
         }
 
 
