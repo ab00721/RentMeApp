@@ -16,6 +16,7 @@ namespace RentMeApp.UserControls
     {
         private readonly MemberControllerX _memberControllerX;
         private readonly List<MemberX> _members;
+        private MemberX _selectedMember;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
@@ -25,7 +26,6 @@ namespace RentMeApp.UserControls
             InitializeComponent();
             ClearMessageLabel();
             PopulateSearchByComboBox();
-            ConfigureActionColumns();
             _memberControllerX = new MemberControllerX();
             _members = this._memberControllerX.GetMemberInfoX();
         }
@@ -38,52 +38,37 @@ namespace RentMeApp.UserControls
         public void SearchMemberUserControl_Load(object sender, EventArgs e)
         {
             ClearAll();
-            this.RefreshDataGrid(_members);
+            this.RefreshListView(_members);
         }
 
-        private void RefreshDataGrid(List<MemberX> members)
+        private void RefreshListView(List<MemberX> members)
         {
-            this.memberDataGridView.DataSource = null;
-            this.memberDataGridView.DataSource = members;
-        }
+            memberListView.Items.Clear();
+            _selectedMember = null;
 
-        private void ConfigureActionColumns() { 
-
-            DataGridViewButtonColumn edit = new DataGridViewButtonColumn()
+            if (members.Count > 0)
             {
-                Name = "EditColumn",
-                HeaderText = "Edit",
-                Text = "Edit",
-                UseColumnTextForButtonValue = true,
-            };
-
-            DataGridViewButtonColumn newOrder = new DataGridViewButtonColumn()
+                MemberX member;
+                for (int i = 0; i < members.Count; i++)
+                {
+                    member = members[i];
+                    memberListView.Items.Add(member.MemberID.ToString());
+                    memberListView.Items[i].SubItems.Add(member.FirstName.ToString());
+                    memberListView.Items[i].SubItems.Add(member.LastName.ToString());
+                    memberListView.Items[i].SubItems.Add(member.Phone.ToString());
+                    memberListView.Items[i].Tag = member;
+                }
+            }
+            else
             {
-                Name = "NewOrderColumn",
-                HeaderText = "New Order",
-                Text = "New Order",
-                UseColumnTextForButtonValue = true,
-            };
-
-            DataGridViewButtonColumn newReturn = new DataGridViewButtonColumn()
-            {
-                Name = "NewReturnColumn",
-                HeaderText = "New Return",
-                Text = "New Return",
-                UseColumnTextForButtonValue = true,
-            };
-
-            memberDataGridView.Columns.Add(edit);
-            memberDataGridView.Columns.Add(newOrder);
-            memberDataGridView.Columns.Add(newReturn);
-
-            //edit.DisplayIndex = memberDataGridView.Columns.Count - 3;
-            //newOrder.DisplayIndex = memberDataGridView.Columns.Count - 2;
-            //newReturn.DisplayIndex = memberDataGridView.Columns.Count - 1;
+                searchMessageLabel.Text = "No members match search.";
+                searchMessageLabel.ForeColor = Color.Red;
+            }
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            DisableButtons();
             string search = memberSearchTextBox.Text;
             try
             {
@@ -124,7 +109,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("No members found with the specified ID");
             }
-            RefreshDataGrid(members);
+            RefreshListView(members);
         }
 
         private void SearchByName(string name)
@@ -140,7 +125,7 @@ namespace RentMeApp.UserControls
                 throw new Exception("No members found with the specified name");
             }
 
-            RefreshDataGrid(members);
+            RefreshListView(members);
         }
 
         private void SearchByPhone(string phone)
@@ -157,7 +142,7 @@ namespace RentMeApp.UserControls
                 throw new Exception("No members found with the specified phone number");
             }
 
-            RefreshDataGrid(members);
+            RefreshListView(members);
 
         }
 
@@ -170,11 +155,6 @@ namespace RentMeApp.UserControls
         private void MemberSearchComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ClearMessageLabel();
-        }
-
-        private void AddMemberButton_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void PopulateSearchByComboBox()
@@ -196,44 +176,88 @@ namespace RentMeApp.UserControls
             memberSearchComboBox.SelectedIndex = 0;
             memberSearchTextBox.Text = string.Empty;
             searchMessageLabel.Text = string.Empty;
+            DisableButtons();
         }
 
-        private void MemberDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DisableButtons()
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            editMemberButton.Enabled = false;
+            newOrderButton.Enabled = false;
+            newReturnButton.Enabled = false;
+            viewTransactionsButton.Enabled = false;
+        }
+
+        private void EnableButtons()
+        {
+            editMemberButton.Enabled = true;
+            newOrderButton.Enabled = true;
+            newReturnButton.Enabled = true;
+            viewTransactionsButton.Enabled = true;
+        }
+
+        private void AddMemberButton_Click(object sender, EventArgs e)
+        {
+            searchMessageLabel.Text = "Add New Member";
+            searchMessageLabel.ForeColor = Color.Red;
+        }
+
+
+        private void EditMemberButton_Click(object sender, EventArgs e)
+        {
+            EditMember(_selectedMember);
+        }
+
+        private void NewOrderButton_Click(object sender, EventArgs e)
+        {
+            NewOrder(_selectedMember);
+        }
+
+        private void NewReturnButton_Click(object sender, EventArgs e)
+        {
+            NewReturn(_selectedMember);
+        }
+
+        private void ViewTransactionsButton_Click(object sender, EventArgs e)
+        {
+            ViewTransactions(_selectedMember);
+        }
+
+        private void EditMember(MemberX member)
+        {
+            searchMessageLabel.Text = "Edit " + member.FirstName;
+            searchMessageLabel.ForeColor = Color.Red;
+        }
+
+        private void NewOrder(MemberX member)
+        {
+            searchMessageLabel.Text = "New Order " + member.FirstName;
+            searchMessageLabel.ForeColor = Color.Red;
+        }
+
+        private void NewReturn(MemberX member)
+        {
+            searchMessageLabel.Text = "New Return " + member.FirstName;
+            searchMessageLabel.ForeColor = Color.Red;
+        }
+
+        private void ViewTransactions(MemberX member)
+        {
+            searchMessageLabel.Text = "View Transactions " + member.FirstName;
+            searchMessageLabel.ForeColor = Color.Red;
+        }
+
+        private void MemberListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (memberListView.SelectedItems.Count > 0)
             {
-                string columnName = memberDataGridView.Columns[e.ColumnIndex].Name;
-                MemberX selectedMember = (MemberX)memberDataGridView.Rows[e.RowIndex].DataBoundItem;
-                switch (columnName)
-                {
-                    case "EditColumn":
-                        EditMember(selectedMember);
-                        break;
-
-                    case "NewOrderColumn":
-                        NewOrder(selectedMember); 
-                        break;
-
-                    case "NewReturnColumn":
-                        NewReturn(selectedMember);
-                        break;
-                }
+                EnableButtons();
+                _selectedMember = (MemberX)memberListView.SelectedItems[0].Tag;
             }
-        }
-
-        private void EditMember(MemberX selectedMember)
-        {
-            searchMessageLabel.Text = "edit " + selectedMember.FirstName;
-        }
-
-        private void NewOrder(MemberX selectedMember)
-        {
-            searchMessageLabel.Text = "new order " + selectedMember.FirstName;
-        }
-
-        private void NewReturn(MemberX selectedMember)
-        {
-            searchMessageLabel.Text = "new return " + selectedMember.FirstName;
+            else
+            {
+                DisableButtons();
+                _selectedMember = null;
+            } 
         }
     }
 }
