@@ -243,7 +243,12 @@
             // 
             // SexComboBox
             // 
+            this.SexComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SexComboBox.FormattingEnabled = true;
+            this.SexComboBox.Items.AddRange(new object[] {
+            "-- Select --",
+            "M",
+            "F"});
             this.SexComboBox.Location = new System.Drawing.Point(3, 67);
             this.SexComboBox.Name = "SexComboBox";
             this.SexComboBox.Size = new System.Drawing.Size(121, 21);
@@ -272,7 +277,59 @@
             // 
             // StateComboBox
             // 
+            this.StateComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StateComboBox.FormattingEnabled = true;
+            this.StateComboBox.Items.AddRange(new object[] {
+            "AL",
+            "AK",
+            "AZ",
+            "AR",
+            "CA",
+            "CO",
+            "CT",
+            "DE",
+            "FL",
+            "GA",
+            "HI",
+            "ID",
+            "IL",
+            "IN",
+            "IA",
+            "KS",
+            "KY",
+            "LA",
+            "ME",
+            "MD",
+            "MA",
+            "MI",
+            "MN",
+            "MS",
+            "MO",
+            "MT",
+            "NE",
+            "NV",
+            "NH",
+            "NJ",
+            "NM",
+            "NY",
+            "NC",
+            "ND",
+            "OH",
+            "OK",
+            "OR",
+            "PA",
+            "RI",
+            "SC",
+            "SD",
+            "TN",
+            "TX",
+            "UT",
+            "VT",
+            "VA",
+            "WA",
+            "WV",
+            "WI",
+            "WY"});
             this.StateComboBox.Location = new System.Drawing.Point(3, 227);
             this.StateComboBox.Name = "StateComboBox";
             this.StateComboBox.Size = new System.Drawing.Size(121, 21);
@@ -454,6 +511,7 @@
             this.Name = "AddMemberDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Member";
+            this.Load += new System.EventHandler(this.AddMemberDialog_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
