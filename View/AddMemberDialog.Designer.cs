@@ -233,6 +233,7 @@
             this.FirstNameTextBox.Name = "FirstNameTextBox";
             this.FirstNameTextBox.Size = new System.Drawing.Size(194, 20);
             this.FirstNameTextBox.TabIndex = 0;
+            this.FirstNameTextBox.TextChanged += new System.EventHandler(this.FirstNameTextBox_TextChanged);
             // 
             // LastNameTextBox
             // 
@@ -240,6 +241,7 @@
             this.LastNameTextBox.Name = "LastNameTextBox";
             this.LastNameTextBox.Size = new System.Drawing.Size(194, 20);
             this.LastNameTextBox.TabIndex = 1;
+            this.LastNameTextBox.TextChanged += new System.EventHandler(this.LastNameTextBox_TextChanged);
             // 
             // SexComboBox
             // 
@@ -253,6 +255,7 @@
             this.SexComboBox.Name = "SexComboBox";
             this.SexComboBox.Size = new System.Drawing.Size(121, 21);
             this.SexComboBox.TabIndex = 2;
+            this.SexComboBox.SelectedIndexChanged += new System.EventHandler(this.SexComboBox_SelectedIndexChanged);
             // 
             // AddOneTextBox
             // 
@@ -260,6 +263,7 @@
             this.AddOneTextBox.Name = "AddOneTextBox";
             this.AddOneTextBox.Size = new System.Drawing.Size(194, 20);
             this.AddOneTextBox.TabIndex = 4;
+            this.AddOneTextBox.TextChanged += new System.EventHandler(this.AddOneTextBox_TextChanged);
             // 
             // AddTwoTextBox
             // 
@@ -267,6 +271,7 @@
             this.AddTwoTextBox.Name = "AddTwoTextBox";
             this.AddTwoTextBox.Size = new System.Drawing.Size(194, 20);
             this.AddTwoTextBox.TabIndex = 5;
+            this.AddTwoTextBox.TextChanged += new System.EventHandler(this.AddTwoTextBox_TextChanged);
             // 
             // CityTextBox
             // 
@@ -274,6 +279,7 @@
             this.CityTextBox.Name = "CityTextBox";
             this.CityTextBox.Size = new System.Drawing.Size(194, 20);
             this.CityTextBox.TabIndex = 6;
+            this.CityTextBox.TextChanged += new System.EventHandler(this.CityTextBox_TextChanged);
             // 
             // StateComboBox
             // 
@@ -341,6 +347,7 @@
             this.ZipTextBox.Name = "ZipTextBox";
             this.ZipTextBox.Size = new System.Drawing.Size(194, 20);
             this.ZipTextBox.TabIndex = 8;
+            this.ZipTextBox.TextChanged += new System.EventHandler(this.ZipTextBox_TextChanged);
             // 
             // PhoneTextBox
             // 
@@ -348,6 +355,7 @@
             this.PhoneTextBox.Name = "PhoneTextBox";
             this.PhoneTextBox.Size = new System.Drawing.Size(194, 20);
             this.PhoneTextBox.TabIndex = 9;
+            this.PhoneTextBox.TextChanged += new System.EventHandler(this.PhoneTextBox_TextChanged);
             // 
             // DobDatePicker
             // 

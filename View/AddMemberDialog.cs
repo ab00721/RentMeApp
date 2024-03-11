@@ -120,9 +120,6 @@ namespace RentMeApp.View
 
                 MessageBox.Show("Member added successfully");
                 DialogResult = DialogResult.OK;
-            } else
-            {
-                MessageBox.Show("Member added successfully");
             }
         }
 
@@ -130,6 +127,41 @@ namespace RentMeApp.View
         {
             this.SexComboBox.SelectedItem = "-- Select --";
             this.StateComboBox.SelectedItem = "AL";
+        }
+
+        private void FirstNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            FirstNameErrorLabel.Text = "";
+        }
+
+        private void LastNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            LastNameErrorLabel.Text = "";
+        }
+
+        private void SexComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SexErrorLabel.Text = "";
+        }
+
+        private void AddOneTextBox_TextChanged(object sender, EventArgs e)
+        {
+            AddOneErrorLabel.Text = "";
+        }
+
+        private void CityTextBox_TextChanged(object sender, EventArgs e)
+        {
+            CityErrorLabel.Text = "";
+        }
+
+        private void ZipTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ZipErrorLabel.Text = "";
+        }
+
+        private void PhoneTextBox_TextChanged(object sender, EventArgs e)
+        {
+            PhoneErrorLabel.Text = "";
         }
     }
 }
