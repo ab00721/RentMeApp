@@ -16,7 +16,7 @@ namespace RentMeApp.Model
         public string Address2 { get; set; }
         public string City { get; set; }
         public string State {  get; set; }
-        public string Zip { get; set; }
+        public int Zip { get; set; }
         public string Phone { get; set; }
 
        

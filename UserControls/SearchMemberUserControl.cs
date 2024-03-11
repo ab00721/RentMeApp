@@ -44,23 +44,68 @@ namespace RentMeApp.UserControls
 
         private void RefreshListView(List<MemberX> members)
         {
-            memberListView.Items.Clear();
+            //memberListView.Items.Clear();
+            //_selectedMember = null;
+
+            //if (members.Count > 0)
+            //{
+            //    MemberX member;
+            //    for (int i = 0; i < members.Count; i++)
+            //    {
+            //        member = members[i];
+            //        memberListView.Items.Add(member.MemberID.ToString());
+            //        memberListView.Items[i].SubItems.Add(member.FirstName.ToString());
+            //        memberListView.Items[i].SubItems.Add(member.LastName.ToString());
+            //        memberListView.Items[i].SubItems.Add(member.Phone.ToString());
+            //        memberListView.Items[i].Tag = member;
+            //    }
+            //}
+            //else
+            //{
+            //    searchMessageLabel.Text = "No members match search.";
+            //    searchMessageLabel.ForeColor = Color.Red;
+            //}
+
+
+            memberListView.Clear();
             _selectedMember = null;
+            memberListView.View = System.Windows.Forms.View.Details;
 
             if (members.Count > 0)
             {
-                MemberX member;
-                for (int i = 0; i < members.Count; i++)
+                memberListView.Columns.Add("Member ID", -2);
+                memberListView.Columns.Add("First Name", -2);
+                memberListView.Columns.Add("Last Name", -2);
+                memberListView.Columns.Add("Sex", -2);
+                memberListView.Columns.Add("Date of Birth", -2);
+                memberListView.Columns.Add("Address Line 1", -2);
+                memberListView.Columns.Add("Address Line 2", -2);
+                memberListView.Columns.Add("City", -2);
+                memberListView.Columns.Add("State", -2);
+                memberListView.Columns.Add("Zip", -2);
+                memberListView.Columns.Add("Phone", -2);
+
+                ListViewItem item;
+
+                foreach (MemberX member in this._memberControllerX.GetMemberInfoX())
                 {
-                    member = members[i];
-                    memberListView.Items.Add(member.MemberID.ToString());
-                    memberListView.Items[i].SubItems.Add(member.FirstName.ToString());
-                    memberListView.Items[i].SubItems.Add(member.LastName.ToString());
-                    memberListView.Items[i].SubItems.Add(member.Phone.ToString());
-                    memberListView.Items[i].Tag = member;
+                    item = new ListViewItem(member.MemberID.ToString());
+                    item.SubItems.Add(member.FirstName);
+                    item.SubItems.Add(member.LastName);
+                    item.SubItems.Add(member.Sex.ToString());
+                    item.SubItems.Add(member.DateOfBirth.ToString());
+                    item.SubItems.Add(member.Address1);
+                    item.SubItems.Add(member.Address2);
+                    item.SubItems.Add(member.City);
+                    item.SubItems.Add(member.State);
+                    item.SubItems.Add(member.Zip.ToString());
+                    item.SubItems.Add(member.Phone);
+
+
+
+                    this.memberListView.Items.Add(item);
                 }
-            }
-            else
+            } else
             {
                 searchMessageLabel.Text = "No members match search.";
                 searchMessageLabel.ForeColor = Color.Red;
