@@ -73,17 +73,17 @@ namespace RentMeApp.UserControls
 
             if (members.Count > 0)
             {
-                memberListView.Columns.Add("Member ID", -2);
-                memberListView.Columns.Add("First Name", -2);
-                memberListView.Columns.Add("Last Name", -2);
-                memberListView.Columns.Add("Sex", -2);
-                memberListView.Columns.Add("Date of Birth", -2);
-                memberListView.Columns.Add("Address Line 1", -2);
-                memberListView.Columns.Add("Address Line 2", -2);
-                memberListView.Columns.Add("City", -2);
-                memberListView.Columns.Add("State", -2);
-                memberListView.Columns.Add("Zip", -2);
-                memberListView.Columns.Add("Phone", -2);
+                memberListView.Columns.Add("Member ID", 50);
+                memberListView.Columns.Add("First Name", 100);
+                memberListView.Columns.Add("Last Name", 100);
+                memberListView.Columns.Add("Sex", 50);
+                memberListView.Columns.Add("Date of Birth", 100);
+                memberListView.Columns.Add("Address Line 1", 100);
+                memberListView.Columns.Add("Address Line 2", 100);
+                memberListView.Columns.Add("City", 100);
+                memberListView.Columns.Add("State", 50);
+                memberListView.Columns.Add("Zip", 100);
+                memberListView.Columns.Add("Phone", 100);
 
                 ListViewItem item;
 
