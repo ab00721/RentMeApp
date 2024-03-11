@@ -27,18 +27,26 @@ namespace RentMeApp.View
 
         private void AddMemberBtn_Click(object sender, EventArgs e)
         {
+            Boolean errorsExist = false;
             int memberId = 5;
             string firstName = FirstNameTextBox.Text;
             string lastName = LastNameTextBox.Text;
-            //DateTime dob = DateOnly.FromDateTime(DobDatePicker);
+            DateOnly dob = DateOnly.FromDateTime(DobDatePicker.Value);
             string add1 = AddOneTextBox.Text;
             string add2 = AddTwoTextBox.Text;
             string city = CityTextBox.Text;
             string state = StateComboBox.SelectedItem.ToString();
-            //int zip = ZipTextBox.Text;
-            string phone = this.PhoneTextBox.Text;
 
-            Boolean errorsExist = true;
+            int a;
+            if (!int.TryParse(ZipTextBox.Text,out a))
+            {
+                ZipErrorLabel.Text = "Invalid Zip.";
+                errorsExist = true;
+            } else
+            {
+                int zip = int.Parse(ZipTextBox.Text);
+            }
+            string phone = this.PhoneTextBox.Text;
 
             if (string.IsNullOrEmpty(firstName))
             {
@@ -52,7 +60,7 @@ namespace RentMeApp.View
                 errorsExist = true;
             }
 
-            if (this.SexComboBox.SelectedItem == "-- Select --")
+            if (this.SexComboBox.Text == "-- Select --")
             {
                 SexErrorLabel.Text = "Select appropriate value for sex.";
                 errorsExist = true;
@@ -101,7 +109,7 @@ namespace RentMeApp.View
                 member.FirstName = firstName;
                 member.LastName = lastName;
                 member.Sex = Convert.ToChar(SexComboBox.Text);
-                //member.DateOfBirth = dob;
+                member.DateOfBirth = dob;
                 member.Address1 = add1;
                 member.Address2 = add2;
                 member.City = city;
@@ -112,6 +120,9 @@ namespace RentMeApp.View
 
                 MessageBox.Show("Member added successfully");
                 DialogResult = DialogResult.OK;
+            } else
+            {
+                MessageBox.Show("Member added successfully");
             }
         }
 
