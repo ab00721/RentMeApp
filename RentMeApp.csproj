@@ -117,6 +117,12 @@
     <EmbeddedResource Include="View\SearchMemberDialog.resx">
       <DependentUpon>SearchMemberDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Database\category.csv" />
+    <None Include="Database\employee.csv" />
+    <None Include="Database\furniture.csv" />
+    <None Include="Database\login.csv" />
+    <None Include="Database\member.csv" />
+    <None Include="Database\style.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -132,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\cs6232-g5_202403091557.sql" />
+    <Content Include="Database\cs6232-g5_202403111159.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
