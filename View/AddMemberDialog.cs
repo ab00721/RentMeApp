@@ -36,6 +36,9 @@ namespace RentMeApp.View
             string add2 = AddTwoTextBox.Text;
             string city = CityTextBox.Text;
             string state = StateComboBox.SelectedItem.ToString();
+            int zip = 0;
+            string phone = this.PhoneTextBox.Text;
+
 
             int a;
             if (!int.TryParse(ZipTextBox.Text,out a))
@@ -44,9 +47,8 @@ namespace RentMeApp.View
                 errorsExist = true;
             } else
             {
-                int zip = int.Parse(ZipTextBox.Text);
+                zip = int.Parse(ZipTextBox.Text);
             }
-            string phone = this.PhoneTextBox.Text;
 
             if (string.IsNullOrEmpty(firstName))
             {
@@ -114,12 +116,22 @@ namespace RentMeApp.View
                 member.Address2 = add2;
                 member.City = city;
                 member.State = state;
-                //member.Zip = zip;
+                member.Zip = zip;
                 member.Phone = phone;
                 this._MemberControllerX.Register(member);
 
-                MessageBox.Show("Member added successfully");
-                DialogResult = DialogResult.OK;
+                using (Form success = new View.MemberCreatedSuccessfully(memberId))
+                {
+                    DialogResult result = success.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
+                }
+
+                //MessageBox.Show("Member added successfully");
+                //DialogResult = DialogResult.OK;
             }
         }
 

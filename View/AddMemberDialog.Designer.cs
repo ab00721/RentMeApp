@@ -271,7 +271,6 @@
             this.AddTwoTextBox.Name = "AddTwoTextBox";
             this.AddTwoTextBox.Size = new System.Drawing.Size(194, 20);
             this.AddTwoTextBox.TabIndex = 5;
-            this.AddTwoTextBox.TextChanged += new System.EventHandler(this.AddTwoTextBox_TextChanged);
             // 
             // CityTextBox
             // 
