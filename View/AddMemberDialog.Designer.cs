@@ -62,6 +62,7 @@
             this.ZipErrorLabel = new System.Windows.Forms.Label();
             this.PhoneErrorLabel = new System.Windows.Forms.Label();
             this.FirstNameErrorLabel = new System.Windows.Forms.Label();
+            this.CancelBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -366,7 +367,7 @@
             // AddMemberBtn
             // 
             this.AddMemberBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddMemberBtn.Location = new System.Drawing.Point(403, 392);
+            this.AddMemberBtn.Location = new System.Drawing.Point(525, 392);
             this.AddMemberBtn.Name = "AddMemberBtn";
             this.AddMemberBtn.Size = new System.Drawing.Size(75, 23);
             this.AddMemberBtn.TabIndex = 2;
@@ -504,11 +505,23 @@
             this.FirstNameErrorLabel.Size = new System.Drawing.Size(0, 13);
             this.FirstNameErrorLabel.TabIndex = 0;
             // 
+            // CancelBtn
+            // 
+            this.CancelBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelBtn.Location = new System.Drawing.Point(444, 392);
+            this.CancelBtn.Name = "CancelBtn";
+            this.CancelBtn.Size = new System.Drawing.Size(75, 23);
+            this.CancelBtn.TabIndex = 4;
+            this.CancelBtn.Text = "Cancel";
+            this.CancelBtn.UseVisualStyleBackColor = true;
+            this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
+            // 
             // AddMemberDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 460);
+            this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.AddMemberBtn);
             this.Controls.Add(this.tableLayoutPanel2);
@@ -565,5 +578,6 @@
         private System.Windows.Forms.Label ZipErrorLabel;
         private System.Windows.Forms.Label PhoneErrorLabel;
         private System.Windows.Forms.Label FirstNameErrorLabel;
+        private System.Windows.Forms.Button CancelBtn;
     }
 }

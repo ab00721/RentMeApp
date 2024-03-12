@@ -252,11 +252,7 @@ namespace RentMeApp.UserControls
 
                 if (result == DialogResult.OK)
                 {
-                    //if (this.UpdateTechnician())
-                    //{
-                    //    this._incidentController.CloseIncident(this.incident.IncidentID);
-                    //    this.UpdateSuccessful();
-                    //}
+                    this.RefreshListView(_members);
                 }
                 else if (result == DialogResult.Cancel)
                 {

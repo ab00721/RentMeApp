@@ -129,9 +129,6 @@ namespace RentMeApp.View
                         DialogResult = DialogResult.OK;
                     }
                 }
-
-                //MessageBox.Show("Member added successfully");
-                //DialogResult = DialogResult.OK;
             }
         }
 
@@ -174,6 +171,11 @@ namespace RentMeApp.View
         private void PhoneTextBox_TextChanged(object sender, EventArgs e)
         {
             PhoneErrorLabel.Text = "";
+        }
+
+        private void CancelBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }
