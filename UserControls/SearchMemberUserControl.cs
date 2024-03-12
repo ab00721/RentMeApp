@@ -44,32 +44,7 @@ namespace RentMeApp.UserControls
 
         private void RefreshListView(List<MemberX> members)
         {
-            //memberListView.Items.Clear();
-            //_selectedMember = null;
-
-            //if (members.Count > 0)
-            //{
-            //    MemberX member;
-            //    for (int i = 0; i < members.Count; i++)
-            //    {
-            //        member = members[i];
-            //        memberListView.Items.Add(member.MemberID.ToString());
-            //        memberListView.Items[i].SubItems.Add(member.FirstName.ToString());
-            //        memberListView.Items[i].SubItems.Add(member.LastName.ToString());
-            //        memberListView.Items[i].SubItems.Add(member.Phone.ToString());
-            //        memberListView.Items[i].Tag = member;
-            //    }
-            //}
-            //else
-            //{
-            //    searchMessageLabel.Text = "No members match search.";
-            //    searchMessageLabel.ForeColor = Color.Red;
-            //}
-
-
-            memberListView.Clear();
-            _selectedMember = null;
-            memberListView.View = System.Windows.Forms.View.Details;
+            memberListView.Items.Clear();
 
             if (members.Count > 0)
             {
@@ -105,7 +80,8 @@ namespace RentMeApp.UserControls
 
                     this.memberListView.Items.Add(item);
                 }
-            } else
+            }
+            else
             {
                 searchMessageLabel.Text = "No members match search.";
                 searchMessageLabel.ForeColor = Color.Red;
