@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using RentMeApp.DAL;
 using RentMeApp.Model;
 
@@ -29,6 +28,10 @@ namespace RentMeApp.Controller
             return this._memberSourceX.GetMemberInfo();
         }
 
+        /// <summary>
+        /// Registers the specified member.
+        /// </summary>
+        /// <param name="member">The member.</param>
         public void Register(MemberX member)
         {
             this._memberSourceX.Register(member);

@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using RentMeApp.View;
 
 namespace RentMeApp.UserControls
 {
