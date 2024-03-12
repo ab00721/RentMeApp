@@ -30,11 +30,8 @@
         {
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.membersTabPage = new System.Windows.Forms.TabPage();
-            this.rentalTabPage = new System.Windows.Forms.TabPage();
-            this.returnTabPage = new System.Windows.Forms.TabPage();
-            this.transactionTabPage = new System.Windows.Forms.TabPage();
-            this.reportTabPage = new System.Windows.Forms.TabPage();
             this.mainSearchMemberUserControl = new RentMeApp.UserControls.SearchMemberUserControl();
+            this.reportTabPage = new System.Windows.Forms.TabPage();
             this.mainTabControl.SuspendLayout();
             this.membersTabPage.SuspendLayout();
             this.SuspendLayout();
@@ -42,9 +39,6 @@
             // mainTabControl
             // 
             this.mainTabControl.Controls.Add(this.membersTabPage);
-            this.mainTabControl.Controls.Add(this.rentalTabPage);
-            this.mainTabControl.Controls.Add(this.returnTabPage);
-            this.mainTabControl.Controls.Add(this.transactionTabPage);
             this.mainTabControl.Controls.Add(this.reportTabPage);
             this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainTabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -68,50 +62,6 @@
             this.membersTabPage.Text = "Members";
             this.membersTabPage.UseVisualStyleBackColor = true;
             // 
-            // rentalTabPage
-            // 
-            this.rentalTabPage.Location = new System.Drawing.Point(4, 34);
-            this.rentalTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.rentalTabPage.Name = "rentalTabPage";
-            this.rentalTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.rentalTabPage.Size = new System.Drawing.Size(993, 657);
-            this.rentalTabPage.TabIndex = 1;
-            this.rentalTabPage.Text = "Rental";
-            this.rentalTabPage.UseVisualStyleBackColor = true;
-            // 
-            // returnTabPage
-            // 
-            this.returnTabPage.Location = new System.Drawing.Point(4, 34);
-            this.returnTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.returnTabPage.Name = "returnTabPage";
-            this.returnTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.returnTabPage.Size = new System.Drawing.Size(993, 657);
-            this.returnTabPage.TabIndex = 2;
-            this.returnTabPage.Text = "Return";
-            this.returnTabPage.UseVisualStyleBackColor = true;
-            // 
-            // transactionTabPage
-            // 
-            this.transactionTabPage.Location = new System.Drawing.Point(4, 34);
-            this.transactionTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.transactionTabPage.Name = "transactionTabPage";
-            this.transactionTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.transactionTabPage.Size = new System.Drawing.Size(993, 657);
-            this.transactionTabPage.TabIndex = 3;
-            this.transactionTabPage.Text = "Transactions";
-            this.transactionTabPage.UseVisualStyleBackColor = true;
-            // 
-            // reportTabPage
-            // 
-            this.reportTabPage.Location = new System.Drawing.Point(4, 34);
-            this.reportTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.reportTabPage.Name = "reportTabPage";
-            this.reportTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.reportTabPage.Size = new System.Drawing.Size(993, 657);
-            this.reportTabPage.TabIndex = 4;
-            this.reportTabPage.Text = "Reports";
-            this.reportTabPage.UseVisualStyleBackColor = true;
-            // 
             // mainSearchMemberUserControl
             // 
             this.mainSearchMemberUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -120,6 +70,17 @@
             this.mainSearchMemberUserControl.Name = "mainSearchMemberUserControl";
             this.mainSearchMemberUserControl.Size = new System.Drawing.Size(1032, 696);
             this.mainSearchMemberUserControl.TabIndex = 0;
+            // 
+            // reportTabPage
+            // 
+            this.reportTabPage.Location = new System.Drawing.Point(4, 34);
+            this.reportTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.reportTabPage.Name = "reportTabPage";
+            this.reportTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.reportTabPage.Size = new System.Drawing.Size(1038, 704);
+            this.reportTabPage.TabIndex = 4;
+            this.reportTabPage.Text = "Reports";
+            this.reportTabPage.UseVisualStyleBackColor = true;
             // 
             // MainDashboard
             // 
@@ -145,9 +106,6 @@
 
         private System.Windows.Forms.TabControl mainTabControl;
         private System.Windows.Forms.TabPage membersTabPage;
-        private System.Windows.Forms.TabPage rentalTabPage;
-        private System.Windows.Forms.TabPage returnTabPage;
-        private System.Windows.Forms.TabPage transactionTabPage;
         private System.Windows.Forms.TabPage reportTabPage;
         private UserControls.SearchMemberUserControl mainSearchMemberUserControl;
     }
