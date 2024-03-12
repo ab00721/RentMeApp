@@ -243,9 +243,6 @@ namespace RentMeApp.UserControls
 
         private void AddMemberButton_Click(object sender, EventArgs e)
         {
-            searchMessageLabel.Text = "Add New Member";
-            searchMessageLabel.ForeColor = Color.Red;
-
             using (Form addMember = new View.AddMemberDialog())
             {
                 DialogResult result = addMember.ShowDialog();

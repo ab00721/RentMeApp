@@ -84,6 +84,7 @@
             this.MinimizeBox = false;
             this.Name = "MemberCreatedSuccessfully";
             this.Text = "Member Created Successfully";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MemberCreatedSuccessfully_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

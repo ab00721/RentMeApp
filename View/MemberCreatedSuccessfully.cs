@@ -22,5 +22,10 @@ namespace RentMeApp.View
         {
             DialogResult = DialogResult.OK;
         }
+
+        private void MemberCreatedSuccessfully_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
     }
 }
