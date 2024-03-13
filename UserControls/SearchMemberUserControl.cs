@@ -14,9 +14,11 @@ namespace RentMeApp.UserControls
     /// <seealso cref="System.Windows.Forms.UserControl" />
     public partial class SearchMemberUserControl : UserControl
     {
-        private readonly MemberControllerX _memberControllerX;
-        private readonly List<MemberX> _members;
-        private MemberX _selectedMember;
+        //private readonly MemberControllerX _memberControllerX;
+        private readonly MemberController _memberController;
+        private readonly List<Member> _members;
+        private readonly List<Member> _allMembers;
+        private Member _selectedMember;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
@@ -26,8 +28,10 @@ namespace RentMeApp.UserControls
             InitializeComponent();
             ClearMessageLabel();
             PopulateSearchByComboBox();
-            _memberControllerX = new MemberControllerX();
-            _members = this._memberControllerX.GetMemberInfoX();
+            //_memberControllerX = new MemberControllerX();
+            _memberController = new MemberController();
+            _allMembers = this._memberController.GetMemberInfo();
+            _members = _allMembers;
         }
 
         /// <summary>
@@ -41,28 +45,34 @@ namespace RentMeApp.UserControls
             this.RefreshListView(_members);
         }
 
-        private void RefreshListView(List<MemberX> members)
+        private void RefreshListView(List<Member> members)
         {
+            
+            
             memberListView.Items.Clear();
             _selectedMember = null;
 
             if (members.Count > 0)
             {
-                MemberX member;
+                Member member;
                 for (int i = 0; i < members.Count; i++)
                 {
                     member = members[i];
                     memberListView.Items.Add(member.MemberID.ToString());
                     memberListView.Items[i].SubItems.Add(member.FirstName.ToString());
                     memberListView.Items[i].SubItems.Add(member.LastName.ToString());
+                    memberListView.Items[i].SubItems.Add(member.Sex.ToString());
+                    memberListView.Items[i].SubItems.Add(member.DateOfBirth.ToString());
+                    memberListView.Items[i].SubItems.Add(member.AddressOne.ToString());
+                    memberListView.Items[i].SubItems.Add(member.AddressTwo.ToString());
+                    memberListView.Items[i].SubItems.Add(member.City.ToString());
+                    memberListView.Items[i].SubItems.Add(member.State.ToString());
+                    memberListView.Items[i].SubItems.Add(member.Zip.ToString());
                     memberListView.Items[i].SubItems.Add(member.Phone.ToString());
+
                     memberListView.Items[i].Tag = member;
                 }
-            }
-            else
-            {
-                searchMessageLabel.Text = "No members match search.";
-                searchMessageLabel.ForeColor = Color.Red;
+
             }
         }
 
@@ -103,7 +113,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Member ID must be greater than 0");
             }
-            List<MemberX> members = _members.FindAll(e => e.MemberID == id);
+            List<Member> members = _members.FindAll(e => e.MemberID == id);
 
             if (members.Count == 0)
             {
@@ -118,7 +128,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Invalid name");
             }
-            List<MemberX> members = _members.FindAll(e => (e.FirstName + " " + e.LastName).Contains(name));
+            List<Member> members = _members.FindAll(e => (e.FirstName + " " + e.LastName).Contains(name));
 
             if (members.Count == 0)
             {
@@ -135,7 +145,7 @@ namespace RentMeApp.UserControls
                 throw new Exception("Invalid phone number format\n###-###-####");
             }
 
-            List<MemberX> members = _members.FindAll(e => e.Phone == phone);
+            List<Member> members = _members.FindAll(e => e.Phone == phone);
 
             if (members.Count == 0)
             {
@@ -197,8 +207,19 @@ namespace RentMeApp.UserControls
 
         private void AddMemberButton_Click(object sender, EventArgs e)
         {
-            searchMessageLabel.Text = "Add New Member";
-            searchMessageLabel.ForeColor = Color.Red;
+            //using (Form addMember = new View.AddMemberDialog(this.user))
+            //{
+            //    DialogResult result = addMember.ShowDialog();
+
+            //    if (result == DialogResult.OK)
+            //    {
+            //        this.RefreshListView(_members);
+            //    }
+            //    else if (result == DialogResult.Cancel)
+            //    {
+            //        addMember.Close();
+            //    }
+            //}
         }
 
 
@@ -222,25 +243,25 @@ namespace RentMeApp.UserControls
             ViewTransactions(_selectedMember);
         }
 
-        private void EditMember(MemberX member)
+        private void EditMember(Member member)
         {
             searchMessageLabel.Text = "Edit " + member.FirstName;
             searchMessageLabel.ForeColor = Color.Red;
         }
 
-        private void NewOrder(MemberX member)
+        private void NewOrder(Member member)
         {
             searchMessageLabel.Text = "New Order " + member.FirstName;
             searchMessageLabel.ForeColor = Color.Red;
         }
 
-        private void NewReturn(MemberX member)
+        private void NewReturn(Member member)
         {
             searchMessageLabel.Text = "New Return " + member.FirstName;
             searchMessageLabel.ForeColor = Color.Red;
         }
 
-        private void ViewTransactions(MemberX member)
+        private void ViewTransactions(Member member)
         {
             searchMessageLabel.Text = "View Transactions " + member.FirstName;
             searchMessageLabel.ForeColor = Color.Red;
@@ -251,13 +272,19 @@ namespace RentMeApp.UserControls
             if (memberListView.SelectedItems.Count > 0)
             {
                 EnableButtons();
-                _selectedMember = (MemberX)memberListView.SelectedItems[0].Tag;
+                _selectedMember = (Member)memberListView.SelectedItems[0].Tag;
             }
             else
             {
                 DisableButtons();
                 _selectedMember = null;
             } 
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            ClearAll();
+            RefreshListView(_allMembers);
         }
     }
 }
