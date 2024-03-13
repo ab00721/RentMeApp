@@ -13,7 +13,7 @@ namespace RentMeApp.View
     public partial class MainDashboard : Form
     {
         private readonly EmployeeLoginForm _loginForm;
-        //private readonly CurrentUserUserControl _currentUserUserControl;
+        private readonly UserUserControl _userUserControl;
         private readonly EmployeeController _employeeController;
         private readonly EmployeeDTO _employee;
 
@@ -29,12 +29,8 @@ namespace RentMeApp.View
             _employee = _employeeController.GetEmployeeByUsername(user);
             _loginForm = loginForm;
             ViewReports();
-            //_currentUserUserControl = new CurrentUserUserControl(_employee.Username, _employee.FirstName)
-            //{
-            //    Anchor = AnchorStyles.Top | AnchorStyles.Right,
-            //    Dock = DockStyle.Top
-            //};
-            //this.Controls.Add(_currentUserUserControl);
+            _userUserControl = new UserUserControl(_employee.Username, _employee.FirstName);
+            this.userTableLayoutPanel.Controls.Add(_userUserControl);
         }
 
         private void MainDashboard_FormClosed(object sender, FormClosedEventArgs e)

@@ -17,9 +17,7 @@ namespace RentMeApp.Model
         public string City { get; }
         public string State { get; }
         public string Zip { get; }
-
         public string Phone { get; }
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Member"/> class.
