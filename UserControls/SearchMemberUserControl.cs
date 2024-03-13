@@ -19,6 +19,7 @@ namespace RentMeApp.UserControls
         private MemberX _selectedMember;
         private string user;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
         /// </summary>

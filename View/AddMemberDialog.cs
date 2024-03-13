@@ -16,6 +16,7 @@ namespace RentMeApp.View
         private readonly MemberControllerX _MemberControllerX;
         private MemberX member;
         private readonly CurrentUserUserControl _currentUserUserControl;
+        private readonly LogoutUserControl _logoutUserControl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddMemberDialog"/> class.
