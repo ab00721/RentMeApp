@@ -1,5 +1,6 @@
 ﻿using RentMeApp.Controller;
 using RentMeApp.Model;
+using RentMeApp.UserControls;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -14,15 +15,22 @@ namespace RentMeApp.View
     {
         private readonly MemberControllerX _MemberControllerX;
         private MemberX member;
+        private readonly CurrentUserUserControl _currentUserUserControl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddMemberDialog"/> class.
         /// </summary>
-        public AddMemberDialog()
+        public AddMemberDialog(string user)
         {
             InitializeComponent();
             this._MemberControllerX = new MemberControllerX();
             member = new MemberX();
+            _currentUserUserControl = new CurrentUserUserControl(user)
+            {
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                Dock = DockStyle.Top
+            };
+            this.Controls.Add(_currentUserUserControl);
         }
 
         private void AddMemberBtn_Click(object sender, EventArgs e)

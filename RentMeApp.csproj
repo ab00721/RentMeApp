@@ -68,6 +68,12 @@
     <Compile Include="DAL\MemberDALX.cs" />
     <Compile Include="DAL\RentMeDBConnection.cs" />
     <Compile Include="Model\MemberX.cs" />
+    <Compile Include="UserControls\CurrentUserUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CurrentUserUserControl.Designer.cs">
+      <DependentUpon>CurrentUserUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\LogoutUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     <Compile Include="View\SearchMemberDialog.Designer.cs">
       <DependentUpon>SearchMemberDialog.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\CurrentUserUserControl.resx">
+      <DependentUpon>CurrentUserUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\LogoutUserControl.resx">
       <DependentUpon>LogoutUserControl.cs</DependentUpon>
     </EmbeddedResource>

@@ -17,6 +17,7 @@ namespace RentMeApp.UserControls
         private readonly MemberControllerX _memberControllerX;
         private readonly List<MemberX> _members;
         private MemberX _selectedMember;
+        private string user;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
@@ -47,18 +48,6 @@ namespace RentMeApp.UserControls
 
             if (members.Count > 0)
             {
-                memberListView.Columns.Add("Member ID", 50);
-                memberListView.Columns.Add("First Name", 100);
-                memberListView.Columns.Add("Last Name", 100);
-                memberListView.Columns.Add("Sex", 50);
-                memberListView.Columns.Add("Date of Birth", 100);
-                memberListView.Columns.Add("Address Line 1", 100);
-                memberListView.Columns.Add("Address Line 2", 100);
-                memberListView.Columns.Add("City", 100);
-                memberListView.Columns.Add("State", 50);
-                memberListView.Columns.Add("Zip", 100);
-                memberListView.Columns.Add("Phone", 100);
-
                 ListViewItem item;
 
                 foreach (MemberX member in this._memberControllerX.GetMemberInfoX())
@@ -74,8 +63,6 @@ namespace RentMeApp.UserControls
                     item.SubItems.Add(member.State);
                     item.SubItems.Add(member.Zip.ToString());
                     item.SubItems.Add(member.Phone);
-
-
 
                     this.memberListView.Items.Add(item);
                 }
@@ -218,7 +205,7 @@ namespace RentMeApp.UserControls
 
         private void AddMemberButton_Click(object sender, EventArgs e)
         {
-            using (Form addMember = new View.AddMemberDialog())
+            using (Form addMember = new View.AddMemberDialog(this.user))
             {
                 DialogResult result = addMember.ShowDialog();
 
@@ -290,6 +277,11 @@ namespace RentMeApp.UserControls
                 DisableButtons();
                 _selectedMember = null;
             } 
+        }
+
+        internal void SetUser(string user)
+        {
+            this.user = user;
         }
     }
 }

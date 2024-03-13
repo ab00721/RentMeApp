@@ -26,6 +26,7 @@ namespace RentMeApp.View
                 Dock = DockStyle.Top
             };
             this.Controls.Add(_logoutUserControl);
+            this.mainSearchMemberUserControl.SetUser(user);
         }
 
         private void MainDashboard_FormClosed(object sender, FormClosedEventArgs e)
