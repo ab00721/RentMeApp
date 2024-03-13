@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 namespace RentMeApp.DAL
 {
     /// <summary>
-    /// The DAL that interacts with Member objects. 
+    /// Member Data Access Layer
     /// </summary>
     public class MemberDAL
     {

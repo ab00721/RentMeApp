@@ -17,12 +17,12 @@ namespace RentMeApp.UserControls
         /// </summary>
         /// <param name="loginForm">The login form.</param>
         /// <param name="user">The user.</param>
-        public LogoutUserControl(EmployeeLoginForm loginForm, string user, MainDashboard mainDashboard)
+        public LogoutUserControl(EmployeeLoginForm loginForm, string user, string name, MainDashboard mainDashboard)
         {
             InitializeComponent();
             _loginForm = loginForm;
             _mainDashboard = mainDashboard;
-            nameLabel.Text = user;
+            nameLabel.Text = name;
             usernameLabel.Text = user;
         }
 

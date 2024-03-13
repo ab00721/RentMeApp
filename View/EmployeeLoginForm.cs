@@ -21,7 +21,6 @@ namespace RentMeApp
         public EmployeeLoginForm()
         {
             InitializeComponent();
-            _mainDashboard = new MainDashboard(this, usernameTextBox.Text);
             ClearMessageLabel();
             _authenticateController = new AuthenticateController();
         }

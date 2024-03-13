@@ -107,7 +107,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Member ID must be greater than 0");
             }
-            List<MemberDTO> members = _members.FindAll(e => (e.MemberID.ToString()).Contains(memberID));
+            List<MemberDTO> members = _members.FindAll(e => e.MemberID == id);
 
             if (members.Count == 0)
             {
@@ -134,12 +134,12 @@ namespace RentMeApp.UserControls
 
         private void SearchByPhone(string phone)
         {
-            if (!Regex.IsMatch(phone, @"^(\d{1,3})?(-\d{1,3})?(-\d{1,4})?(-\d{1,4})?$"))
+            if (!Regex.IsMatch(phone, @"^\d{3}-\d{3}-\d{4}$"))
             {
                 throw new Exception("Invalid phone number format\n###-###-####");
             }
 
-            List<MemberDTO> members = _members.FindAll(e => (e.Phone).Contains(phone));
+            List<MemberDTO> members = _members.FindAll(e => e.Phone == phone);
 
             if (members.Count == 0)
             {
