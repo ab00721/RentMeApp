@@ -242,7 +242,6 @@ namespace RentMeApp.UserControls
 
         private void EditMember(MemberX member)
         {
-            MessageBox.Show(member.FirstName);
             searchMessageLabel.Text = "Edit " + member.FirstName;
             searchMessageLabel.ForeColor = Color.Red;
         }

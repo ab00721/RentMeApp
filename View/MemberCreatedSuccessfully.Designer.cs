@@ -83,6 +83,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MemberCreatedSuccessfully";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Member Created Successfully";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MemberCreatedSuccessfully_FormClosed);
             this.ResumeLayout(false);
