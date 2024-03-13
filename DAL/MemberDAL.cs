@@ -13,9 +13,9 @@ namespace RentMeApp.DAL
         /// Gets the member information.
         /// </summary>
         /// <returns></returns>
-        public List<MemberDTO> GetMemberInfo()
+        public List<Member> GetMemberInfo()
         {
-            var members = new List<MemberDTO>();
+            var members = new List<Member>();
 
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
             {
@@ -23,7 +23,7 @@ namespace RentMeApp.DAL
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     command.CommandText =
-                        "SELECT M.MemberID, M.FirstName, M.LastName, M.Phone " +
+                        "SELECT M.MemberID, M.FirstName, M.LastName, M.Sex, M.DateOfBirth, M.AddressLine1, M.AddressLine2, M.City, M.State, M.Zip, M.Phone " +
                         "FROM Member M "; 
                     command.Connection = connection;
 
@@ -32,6 +32,13 @@ namespace RentMeApp.DAL
                         int memberIDOrdinal = reader.GetOrdinal("MemberID");
                         int firstNameOrdinal = reader.GetOrdinal("FirstName");
                         int lastNameOrdinal = reader.GetOrdinal("LastName");
+                        int sexOrdinal = reader.GetOrdinal("Sex");
+                        int dateOfBirthOrdinal = reader.GetOrdinal("DateOfBirth");
+                        int addressOneOrdinal = reader.GetOrdinal("AddressLine1");
+                        int addressTwoOrdinal = reader.GetOrdinal("AddressLine2");
+                        int cityOrdinal = reader.GetOrdinal("City");
+                        int stateOrdinal = reader.GetOrdinal("State");
+                        int zipOrdinal = reader.GetOrdinal("Zip");
                         int phoneOrdinal = reader.GetOrdinal("Phone");
 
                         while (reader.Read())
@@ -39,10 +46,17 @@ namespace RentMeApp.DAL
                             var memberID = reader.GetInt32(memberIDOrdinal);
                             var firstName = reader.GetString(firstNameOrdinal);
                             var lastName = reader.GetString(lastNameOrdinal);
+                            var sex = reader.IsDBNull(sexOrdinal) ? "" : reader.GetString(sexOrdinal);
+                            var dateOfBirth = reader.GetDateTime(dateOfBirthOrdinal);
+                            var addressOne = reader.GetString(addressOneOrdinal);
+                            var addressTwo = reader.IsDBNull(addressTwoOrdinal) ? "" : reader.GetString(addressTwoOrdinal);
+                            var city = reader.GetString(cityOrdinal);
+                            var state = reader.GetString(stateOrdinal);
+                            var zip = reader.GetString(zipOrdinal);
                             var phone = reader.IsDBNull(phoneOrdinal) ? "" : reader.GetString(phoneOrdinal);
                             
 
-                            members.Add(new MemberDTO(memberID, firstName, lastName, phone));
+                            members.Add(new Member(memberID, firstName, lastName, sex, dateOfBirth, addressOne, addressTwo, city, state, zip, phone));
                         }
                     }
                 }

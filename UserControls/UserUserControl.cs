@@ -1,5 +1,4 @@
-﻿using RentMeApp.Controller;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,17 +10,13 @@ using System.Windows.Forms;
 
 namespace RentMeApp.UserControls
 {
-    public partial class CurrentUserUserControl : UserControl
+    public partial class UserUserControl : UserControl
     {
-        public CurrentUserUserControl()
-        {
-        }
-
-        public CurrentUserUserControl(string user)
+        public UserUserControl(string user, string name)
         {
             InitializeComponent();
-            this.NameLabel.Text = user;
-            this.UsernameLabel.Text = user;
+            nameLabel.Text = name; 
+            userLabel.Text = user;
         }
     }
 }

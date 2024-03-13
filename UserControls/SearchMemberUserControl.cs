@@ -16,9 +16,9 @@ namespace RentMeApp.UserControls
     {
         //private readonly MemberControllerX _memberControllerX;
         private readonly MemberController _memberController;
-        private readonly List<MemberDTO> _members;
-        private readonly List<MemberDTO> _allMembers;
-        private MemberDTO _selectedMember;
+        private readonly List<Member> _members;
+        private readonly List<Member> _allMembers;
+        private Member _selectedMember;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
@@ -45,7 +45,7 @@ namespace RentMeApp.UserControls
             this.RefreshListView(_members);
         }
 
-        private void RefreshListView(List<MemberDTO> members)
+        private void RefreshListView(List<Member> members)
         {
             
             
@@ -54,7 +54,7 @@ namespace RentMeApp.UserControls
 
             if (members.Count > 0)
             {
-                MemberDTO member;
+                Member member;
                 for (int i = 0; i < members.Count; i++)
                 {
                     member = members[i];
@@ -113,7 +113,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Member ID must be greater than 0");
             }
-            List<MemberDTO> members = _members.FindAll(e => e.MemberID == id);
+            List<Member> members = _members.FindAll(e => e.MemberID == id);
 
             if (members.Count == 0)
             {
@@ -128,7 +128,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Invalid name");
             }
-            List<MemberDTO> members = _members.FindAll(e => (e.FirstName + " " + e.LastName).Contains(name));
+            List<Member> members = _members.FindAll(e => (e.FirstName + " " + e.LastName).Contains(name));
 
             if (members.Count == 0)
             {
@@ -145,7 +145,7 @@ namespace RentMeApp.UserControls
                 throw new Exception("Invalid phone number format\n###-###-####");
             }
 
-            List<MemberDTO> members = _members.FindAll(e => e.Phone == phone);
+            List<Member> members = _members.FindAll(e => e.Phone == phone);
 
             if (members.Count == 0)
             {
@@ -207,19 +207,19 @@ namespace RentMeApp.UserControls
 
         private void AddMemberButton_Click(object sender, EventArgs e)
         {
-            using (Form addMember = new View.AddMemberDialog(this.user))
-            {
-                DialogResult result = addMember.ShowDialog();
+            //using (Form addMember = new View.AddMemberDialog(this.user))
+            //{
+            //    DialogResult result = addMember.ShowDialog();
 
-                if (result == DialogResult.OK)
-                {
-                    this.RefreshListView(_members);
-                }
-                else if (result == DialogResult.Cancel)
-                {
-                    addMember.Close();
-                }
-            }
+            //    if (result == DialogResult.OK)
+            //    {
+            //        this.RefreshListView(_members);
+            //    }
+            //    else if (result == DialogResult.Cancel)
+            //    {
+            //        addMember.Close();
+            //    }
+            //}
         }
 
 
@@ -243,25 +243,25 @@ namespace RentMeApp.UserControls
             ViewTransactions(_selectedMember);
         }
 
-        private void EditMember(MemberDTO member)
+        private void EditMember(Member member)
         {
             searchMessageLabel.Text = "Edit " + member.FirstName;
             searchMessageLabel.ForeColor = Color.Red;
         }
 
-        private void NewOrder(MemberDTO member)
+        private void NewOrder(Member member)
         {
             searchMessageLabel.Text = "New Order " + member.FirstName;
             searchMessageLabel.ForeColor = Color.Red;
         }
 
-        private void NewReturn(MemberDTO member)
+        private void NewReturn(Member member)
         {
             searchMessageLabel.Text = "New Return " + member.FirstName;
             searchMessageLabel.ForeColor = Color.Red;
         }
 
-        private void ViewTransactions(MemberDTO member)
+        private void ViewTransactions(Member member)
         {
             searchMessageLabel.Text = "View Transactions " + member.FirstName;
             searchMessageLabel.ForeColor = Color.Red;
@@ -272,7 +272,7 @@ namespace RentMeApp.UserControls
             if (memberListView.SelectedItems.Count > 0)
             {
                 EnableButtons();
-                _selectedMember = (MemberDTO)memberListView.SelectedItems[0].Tag;
+                _selectedMember = (Member)memberListView.SelectedItems[0].Tag;
             }
             else
             {

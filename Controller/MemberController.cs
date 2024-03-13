@@ -22,7 +22,7 @@ namespace RentMeApp.Controller
         /// Gets the member information x.
         /// </summary>
         /// <returns></returns>
-        public List<MemberDTO> GetMemberInfo()
+        public List<Member> GetMemberInfo()
         {
             return this._memberSource.GetMemberInfo();
         }

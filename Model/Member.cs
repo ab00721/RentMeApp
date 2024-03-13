@@ -5,16 +5,24 @@ namespace RentMeApp.Model
     /// <summary>
     /// Member DTO class
     /// </summary>
-    public class MemberDTO
+    public class Member
     {
         public int MemberID { get; }
         public string FirstName { get; }
         public string LastName { get; }
+        public string Sex { get; }
+        public DateTime DateOfBirth { get; }
+        public string AddressOne { get; }
+        public string AddressTwo { get; }
+        public string City { get; }
+        public string State { get; }
+        public string Zip { get; }
+
         public string Phone { get; }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemberDTO"/> class.
+        /// Initializes a new instance of the <see cref="Member"/> class.
         /// </summary>
         /// <param name="memberID">The member identifier.</param>
         /// <param name="firstName">The first name.</param>
@@ -26,9 +34,8 @@ namespace RentMeApp.Model
         /// Last Name - Last name cannot be null or empty
         /// </exception>
         /// <exception cref="System.ArgumentOutOfRangeException">Member ID - Member ID  has to be > 0</exception>
-        public MemberDTO(int memberID, string firstName, string lastName, string phone)
+        public Member(int memberID, string firstName, string lastName, string sex, DateTime dateOfBirth, string addressOne, string addressTwo, string city, string state, string zip, string phone)
         {
-
             if (string.IsNullOrEmpty(firstName))
             {
                 throw new ArgumentException("First Name", "First name cannot be null or empty");
@@ -47,6 +54,13 @@ namespace RentMeApp.Model
             this.MemberID = memberID;
             this.FirstName = firstName;
             this.LastName = lastName;
+            this.Sex = sex;
+            this.DateOfBirth = dateOfBirth;
+            this.AddressOne = addressOne;
+            this.AddressTwo = addressTwo;
+            this.City = city;
+            this.State = state;
+            this.Zip = zip;
             this.Phone = phone;
         }
     }

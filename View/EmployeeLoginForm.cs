@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using RentMeApp.Controller;
 using RentMeApp.View;
-using RentMeApp.Controller;
 
 namespace RentMeApp
 {
