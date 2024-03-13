@@ -47,6 +47,8 @@ namespace RentMeApp.UserControls
 
         private void RefreshListView(List<MemberDTO> members)
         {
+            
+            
             memberListView.Items.Clear();
             _selectedMember = null;
 
@@ -59,14 +61,18 @@ namespace RentMeApp.UserControls
                     memberListView.Items.Add(member.MemberID.ToString());
                     memberListView.Items[i].SubItems.Add(member.FirstName.ToString());
                     memberListView.Items[i].SubItems.Add(member.LastName.ToString());
+                    memberListView.Items[i].SubItems.Add(member.Sex.ToString());
+                    memberListView.Items[i].SubItems.Add(member.DateOfBirth.ToString());
+                    memberListView.Items[i].SubItems.Add(member.AddressOne.ToString());
+                    memberListView.Items[i].SubItems.Add(member.AddressTwo.ToString());
+                    memberListView.Items[i].SubItems.Add(member.City.ToString());
+                    memberListView.Items[i].SubItems.Add(member.State.ToString());
+                    memberListView.Items[i].SubItems.Add(member.Zip.ToString());
                     memberListView.Items[i].SubItems.Add(member.Phone.ToString());
+
                     memberListView.Items[i].Tag = member;
                 }
-            }
-            else
-            {
-                searchMessageLabel.Text = "No members match search.";
-                searchMessageLabel.ForeColor = Color.Red;
+
             }
         }
 
@@ -201,8 +207,19 @@ namespace RentMeApp.UserControls
 
         private void AddMemberButton_Click(object sender, EventArgs e)
         {
-            searchMessageLabel.Text = "Add New Member";
-            searchMessageLabel.ForeColor = Color.Red;
+            using (Form addMember = new View.AddMemberDialog(this.user))
+            {
+                DialogResult result = addMember.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    this.RefreshListView(_members);
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    addMember.Close();
+                }
+            }
         }
 
 

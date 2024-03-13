@@ -61,6 +61,13 @@
             this.memberIDColumn,
             this.firstNameColumn,
             this.lastNameColumn,
+            this.sexColumn,
+            this.dateOfBirthColumn,
+            this.address1Column,
+            this.address2Column,
+            this.cityColumn,
+            this.stateColumn,
+            this.zipColumn,
             this.phoneColumn});
             this.memberListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memberListView.FullRowSelect = true;
@@ -102,9 +109,9 @@
             this.memberTableLayoutPanel.Controls.Add(this.memberListView, 0, 1);
             this.memberTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memberTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
-            this.memberTableLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.memberTableLayoutPanel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.memberTableLayoutPanel.Name = "memberTableLayoutPanel";
-            this.memberTableLayoutPanel.Padding = new System.Windows.Forms.Padding(11, 12, 11, 12);
+            this.memberTableLayoutPanel.Padding = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.memberTableLayoutPanel.RowCount = 3;
             this.memberTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.memberTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.10219F));
@@ -218,6 +225,7 @@
             // 
             this.addMemberButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addMemberButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.addMemberButton.Location = new System.Drawing.Point(3, 100);
             this.addMemberButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addMemberButton.Name = "addMemberButton";
@@ -327,10 +335,10 @@
             // 
             // SearchMemberUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.memberTableLayoutPanel);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "SearchMemberUserControl";
             this.Size = new System.Drawing.Size(941, 582);
             this.Load += new System.EventHandler(this.SearchMemberUserControl_Load);
