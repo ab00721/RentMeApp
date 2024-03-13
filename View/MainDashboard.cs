@@ -1,4 +1,6 @@
-﻿using RentMeApp.UserControls;
+﻿using RentMeApp.Controller;
+using RentMeApp.Model;
+using RentMeApp.UserControls;
 using System;
 using System.Windows.Forms;
 
@@ -11,6 +13,8 @@ namespace RentMeApp.View
     public partial class MainDashboard : Form
     {
         private readonly LogoutUserControl _logoutUserControl;
+        private readonly EmployeeController _employeeController;
+        private readonly EmployeeDTO _employee;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainDashboard"/> class.
@@ -20,7 +24,10 @@ namespace RentMeApp.View
         public MainDashboard(EmployeeLoginForm loginForm, string user)
         {
             InitializeComponent();
-            _logoutUserControl = new LogoutUserControl(loginForm, user, this)
+            _employeeController = new EmployeeController();
+            _employee = _employeeController.GetEmployeeByUsername(user);
+            ViewReports();
+            _logoutUserControl = new LogoutUserControl(loginForm, _employee.Username, _employee.FirstName, this)
             {
                 Anchor = AnchorStyles.Top | AnchorStyles.Right,
                 Dock = DockStyle.Top
@@ -55,6 +62,14 @@ namespace RentMeApp.View
             if (mainTabControl.SelectedTab == mainTabControl.TabPages["reportTabPage"])
             {
 
+            }
+        }
+
+        private void ViewReports()
+        {
+            if (_employee.IsAdmin == 0)
+            {
+                mainTabControl.TabPages.Remove(reportTabPage);
             }
         }
     }

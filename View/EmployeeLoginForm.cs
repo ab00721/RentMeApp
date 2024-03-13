@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using RentMeApp.Controller;
 using RentMeApp.View;
+using RentMeApp.Controller;
 
 namespace RentMeApp
 {
@@ -13,7 +14,7 @@ namespace RentMeApp
     public partial class EmployeeLoginForm : Form
     {
         private MainDashboard _mainDashboard;
-        //private AuthenticateController _authenticateController;
+        private readonly AuthenticateController _authenticateController;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeLoginForm"/> class.
@@ -21,9 +22,8 @@ namespace RentMeApp
         public EmployeeLoginForm()
         {
             InitializeComponent();
-            _mainDashboard = new MainDashboard(this, usernameTextBox.Text);
             ClearMessageLabel();
-            //_authenticateController = new AuthenticateController();
+            _authenticateController = new AuthenticateController();
         }
 
         private void UsernameTextBox_TextChanged(object sender, EventArgs e)
@@ -46,10 +46,9 @@ namespace RentMeApp
             string username = usernameTextBox.Text;
             string password = passwordTextBox.Text;
 
-            //bool isAuthenticated = _authenticateController.Authenticate(username, password);
+            bool isAuthenticated = _authenticateController.Authenticate(username, password);
             
-            //if (isAuthenticated)
-            if (username == "jane" && password == "test1234")
+            if (isAuthenticated)
             {
                 using (_mainDashboard = new MainDashboard(this, username))
                 {

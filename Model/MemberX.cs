@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace RentMeApp.Model
 {
@@ -20,7 +20,6 @@ namespace RentMeApp.Model
         public string Phone { get; set; }
 
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberX"/> class.
         /// </summary>
@@ -32,18 +31,6 @@ namespace RentMeApp.Model
         /// <exception cref="System.ArgumentOutOfRangeException">Member ID - Member ID  has to be > 0</exception>
         public MemberX(int memberID, string firstName, string lastName, char sex, DateOnly DateOfBirth, string addressOne, string addressTwo, string city, string state, int zip, string phone)
         {
-
-            if (string.IsNullOrEmpty(lastName))
-            {
-                throw new ArgumentException("Last Name", "Last name cannot be null or empty");
-
-            }
-
-            if (memberID <= 0)
-            {
-                throw new ArgumentOutOfRangeException("Member ID", "Member ID  has to be > 0");
-            }
-
             this.MemberID = memberID;
             this.FirstName = firstName;
             this.LastName = lastName;

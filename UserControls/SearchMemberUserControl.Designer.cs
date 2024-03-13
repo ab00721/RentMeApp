@@ -34,29 +34,25 @@
             this.lastNameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.phoneColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.memberTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.searchTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.searchByLabel = new System.Windows.Forms.Label();
+            this.memberSearchComboBox = new System.Windows.Forms.ComboBox();
+            this.memberSearchTextBox = new System.Windows.Forms.TextBox();
+            this.searchLabel = new System.Windows.Forms.Label();
+            this.searchMessageLabel = new System.Windows.Forms.Label();
+            this.buttonTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.addMemberButton = new System.Windows.Forms.Button();
             this.viewTransactionsButton = new System.Windows.Forms.Button();
             this.newReturnButton = new System.Windows.Forms.Button();
             this.newOrderButton = new System.Windows.Forms.Button();
             this.editMemberButton = new System.Windows.Forms.Button();
-            this.searchTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.searchMessageLabel = new System.Windows.Forms.Label();
-            this.searchByLabel = new System.Windows.Forms.Label();
-            this.searchLabel = new System.Windows.Forms.Label();
-            this.memberSearchComboBox = new System.Windows.Forms.ComboBox();
-            this.memberSearchTextBox = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.clearButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
-            this.sexColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.dateOfBirthColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.address1Column = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.address2Column = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cityColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.stateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.zipColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.memberTableLayoutPanel.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.searchTableLayoutPanel.SuspendLayout();
+            this.buttonTableLayoutPanel.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // memberListView
@@ -76,10 +72,9 @@
             this.memberListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memberListView.FullRowSelect = true;
             this.memberListView.HideSelection = false;
-            this.memberListView.Location = new System.Drawing.Point(9, 83);
-            this.memberListView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.memberListView.Location = new System.Drawing.Point(14, 126);
             this.memberListView.Name = "memberListView";
-            this.memberListView.Size = new System.Drawing.Size(615, 197);
+            this.memberListView.Size = new System.Drawing.Size(913, 289);
             this.memberListView.TabIndex = 7;
             this.memberListView.UseCompatibleStateImageBehavior = false;
             this.memberListView.View = System.Windows.Forms.View.Details;
@@ -109,8 +104,8 @@
             // 
             this.memberTableLayoutPanel.ColumnCount = 1;
             this.memberTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.memberTableLayoutPanel.Controls.Add(this.tableLayoutPanel1, 0, 2);
             this.memberTableLayoutPanel.Controls.Add(this.searchTableLayoutPanel, 0, 0);
+            this.memberTableLayoutPanel.Controls.Add(this.buttonTableLayoutPanel, 0, 2);
             this.memberTableLayoutPanel.Controls.Add(this.memberListView, 0, 1);
             this.memberTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memberTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
@@ -119,44 +114,122 @@
             this.memberTableLayoutPanel.Padding = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.memberTableLayoutPanel.RowCount = 3;
             this.memberTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.memberTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.39469F));
-            this.memberTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.70481F));
-            this.memberTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.memberTableLayoutPanel.Size = new System.Drawing.Size(633, 386);
+            this.memberTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.10219F));
+            this.memberTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.0073F));
+            this.memberTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.memberTableLayoutPanel.Size = new System.Drawing.Size(941, 582);
             this.memberTableLayoutPanel.TabIndex = 2;
             // 
-            // tableLayoutPanel1
+            // searchTableLayoutPanel
             // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.93578F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.06422F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.addMemberButton, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.viewTransactionsButton, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.newReturnButton, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.newOrderButton, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.editMemberButton, 2, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 284);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 13F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(615, 92);
-            this.tableLayoutPanel1.TabIndex = 11;
+            this.searchTableLayoutPanel.ColumnCount = 3;
+            this.searchTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.51376F));
+            this.searchTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.37156F));
+            this.searchTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.searchTableLayoutPanel.Controls.Add(this.tableLayoutPanel1, 2, 1);
+            this.searchTableLayoutPanel.Controls.Add(this.searchByLabel, 0, 0);
+            this.searchTableLayoutPanel.Controls.Add(this.memberSearchComboBox, 1, 0);
+            this.searchTableLayoutPanel.Controls.Add(this.searchLabel, 0, 1);
+            this.searchTableLayoutPanel.Controls.Add(this.searchMessageLabel, 2, 0);
+            this.searchTableLayoutPanel.Controls.Add(this.memberSearchTextBox, 1, 1);
+            this.searchTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchTableLayoutPanel.Location = new System.Drawing.Point(14, 16);
+            this.searchTableLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.searchTableLayoutPanel.Name = "searchTableLayoutPanel";
+            this.searchTableLayoutPanel.RowCount = 2;
+            this.searchTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.searchTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.searchTableLayoutPanel.Size = new System.Drawing.Size(913, 103);
+            this.searchTableLayoutPanel.TabIndex = 7;
+            // 
+            // searchByLabel
+            // 
+            this.searchByLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.searchByLabel.AutoSize = true;
+            this.searchByLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchByLabel.Location = new System.Drawing.Point(3, 13);
+            this.searchByLabel.Name = "searchByLabel";
+            this.searchByLabel.Size = new System.Drawing.Size(127, 25);
+            this.searchByLabel.TabIndex = 6;
+            this.searchByLabel.Text = "Search By:";
+            // 
+            // memberSearchComboBox
+            // 
+            this.memberSearchComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.memberSearchComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.memberSearchComboBox.FormattingEnabled = true;
+            this.memberSearchComboBox.Location = new System.Drawing.Point(153, 9);
+            this.memberSearchComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.memberSearchComboBox.Name = "memberSearchComboBox";
+            this.memberSearchComboBox.Size = new System.Drawing.Size(299, 33);
+            this.memberSearchComboBox.TabIndex = 8;
+            this.memberSearchComboBox.SelectedIndexChanged += new System.EventHandler(this.MemberSearchComboBox_SelectedIndexChanged);
+            // 
+            // memberSearchTextBox
+            // 
+            this.memberSearchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.memberSearchTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.memberSearchTextBox.Location = new System.Drawing.Point(153, 58);
+            this.memberSearchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.memberSearchTextBox.Name = "memberSearchTextBox";
+            this.memberSearchTextBox.Size = new System.Drawing.Size(299, 31);
+            this.memberSearchTextBox.TabIndex = 9;
+            this.memberSearchTextBox.TextChanged += new System.EventHandler(this.MemberSearchTextBox_TextChanged);
+            // 
+            // searchLabel
+            // 
+            this.searchLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.searchLabel.AutoSize = true;
+            this.searchLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLabel.Location = new System.Drawing.Point(3, 64);
+            this.searchLabel.Name = "searchLabel";
+            this.searchLabel.Size = new System.Drawing.Size(93, 25);
+            this.searchLabel.TabIndex = 7;
+            this.searchLabel.Text = "Search:";
+            // 
+            // searchMessageLabel
+            // 
+            this.searchMessageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchMessageLabel.AutoSize = true;
+            this.searchMessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchMessageLabel.Location = new System.Drawing.Point(550, 16);
+            this.searchMessageLabel.Name = "searchMessageLabel";
+            this.searchMessageLabel.Size = new System.Drawing.Size(542, 30);
+            this.searchMessageLabel.TabIndex = 5;
+            this.searchMessageLabel.Text = "message";
+            // 
+            // buttonTableLayoutPanel
+            // 
+            this.buttonTableLayoutPanel.ColumnCount = 4;
+            this.buttonTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.buttonTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.93578F));
+            this.buttonTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.06422F));
+            this.buttonTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.buttonTableLayoutPanel.Controls.Add(this.addMemberButton, 0, 2);
+            this.buttonTableLayoutPanel.Controls.Add(this.viewTransactionsButton, 2, 2);
+            this.buttonTableLayoutPanel.Controls.Add(this.newReturnButton, 3, 2);
+            this.buttonTableLayoutPanel.Controls.Add(this.newOrderButton, 3, 1);
+            this.buttonTableLayoutPanel.Controls.Add(this.editMemberButton, 2, 1);
+            this.buttonTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonTableLayoutPanel.Location = new System.Drawing.Point(14, 421);
+            this.buttonTableLayoutPanel.Name = "buttonTableLayoutPanel";
+            this.buttonTableLayoutPanel.RowCount = 3;
+            this.buttonTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.buttonTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.buttonTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.buttonTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.buttonTableLayoutPanel.Size = new System.Drawing.Size(913, 146);
+            this.buttonTableLayoutPanel.TabIndex = 11;
             // 
             // addMemberButton
             // 
             this.addMemberButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addMemberButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addMemberButton.Location = new System.Drawing.Point(2, 63);
-            this.addMemberButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+
+            this.addMemberButton.Location = new System.Drawing.Point(3, 100);
+            this.addMemberButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addMemberButton.Name = "addMemberButton";
-            this.addMemberButton.Size = new System.Drawing.Size(149, 26);
+            this.addMemberButton.Size = new System.Drawing.Size(222, 42);
             this.addMemberButton.TabIndex = 1;
             this.addMemberButton.Text = "Add New Member";
             this.addMemberButton.UseVisualStyleBackColor = true;
@@ -167,10 +240,10 @@
             this.viewTransactionsButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.viewTransactionsButton.Enabled = false;
             this.viewTransactionsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.viewTransactionsButton.Location = new System.Drawing.Point(296, 63);
-            this.viewTransactionsButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.viewTransactionsButton.Location = new System.Drawing.Point(440, 100);
+            this.viewTransactionsButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.viewTransactionsButton.Name = "viewTransactionsButton";
-            this.viewTransactionsButton.Size = new System.Drawing.Size(162, 26);
+            this.viewTransactionsButton.Size = new System.Drawing.Size(241, 42);
             this.viewTransactionsButton.TabIndex = 2;
             this.viewTransactionsButton.Text = "View Transactions";
             this.viewTransactionsButton.UseVisualStyleBackColor = true;
@@ -181,10 +254,10 @@
             this.newReturnButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.newReturnButton.Enabled = false;
             this.newReturnButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newReturnButton.Location = new System.Drawing.Point(462, 63);
-            this.newReturnButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.newReturnButton.Location = new System.Drawing.Point(687, 100);
+            this.newReturnButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.newReturnButton.Name = "newReturnButton";
-            this.newReturnButton.Size = new System.Drawing.Size(151, 26);
+            this.newReturnButton.Size = new System.Drawing.Size(223, 42);
             this.newReturnButton.TabIndex = 3;
             this.newReturnButton.Text = "New Return";
             this.newReturnButton.UseVisualStyleBackColor = true;
@@ -195,10 +268,10 @@
             this.newOrderButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.newOrderButton.Enabled = false;
             this.newOrderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newOrderButton.Location = new System.Drawing.Point(462, 33);
-            this.newOrderButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.newOrderButton.Location = new System.Drawing.Point(687, 52);
+            this.newOrderButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.newOrderButton.Name = "newOrderButton";
-            this.newOrderButton.Size = new System.Drawing.Size(151, 24);
+            this.newOrderButton.Size = new System.Drawing.Size(223, 40);
             this.newOrderButton.TabIndex = 4;
             this.newOrderButton.Text = "New Order";
             this.newOrderButton.UseVisualStyleBackColor = true;
@@ -209,137 +282,56 @@
             this.editMemberButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.editMemberButton.Enabled = false;
             this.editMemberButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editMemberButton.Location = new System.Drawing.Point(296, 33);
-            this.editMemberButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.editMemberButton.Location = new System.Drawing.Point(440, 52);
+            this.editMemberButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.editMemberButton.Name = "editMemberButton";
-            this.editMemberButton.Size = new System.Drawing.Size(162, 24);
+            this.editMemberButton.Size = new System.Drawing.Size(241, 40);
             this.editMemberButton.TabIndex = 5;
             this.editMemberButton.Text = "Edit Member";
             this.editMemberButton.UseVisualStyleBackColor = true;
             this.editMemberButton.Click += new System.EventHandler(this.EditMemberButton_Click);
             // 
-            // searchTableLayoutPanel
+            // tableLayoutPanel1
             // 
-            this.searchTableLayoutPanel.ColumnCount = 5;
-            this.searchTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.searchTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
-            this.searchTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.searchTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
-            this.searchTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.searchTableLayoutPanel.Controls.Add(this.searchMessageLabel, 3, 1);
-            this.searchTableLayoutPanel.Controls.Add(this.searchByLabel, 0, 0);
-            this.searchTableLayoutPanel.Controls.Add(this.searchLabel, 2, 0);
-            this.searchTableLayoutPanel.Controls.Add(this.memberSearchComboBox, 1, 0);
-            this.searchTableLayoutPanel.Controls.Add(this.memberSearchTextBox, 3, 0);
-            this.searchTableLayoutPanel.Controls.Add(this.searchButton, 4, 0);
-            this.searchTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchTableLayoutPanel.Location = new System.Drawing.Point(9, 11);
-            this.searchTableLayoutPanel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.searchTableLayoutPanel.Name = "searchTableLayoutPanel";
-            this.searchTableLayoutPanel.RowCount = 2;
-            this.searchTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.searchTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.searchTableLayoutPanel.Size = new System.Drawing.Size(615, 67);
-            this.searchTableLayoutPanel.TabIndex = 6;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.clearButton, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.searchButton, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(458, 54);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(452, 46);
+            this.tableLayoutPanel1.TabIndex = 11;
             // 
-            // searchMessageLabel
+            // clearButton
             // 
-            this.searchMessageLabel.AutoSize = true;
-            this.searchMessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchMessageLabel.Location = new System.Drawing.Point(355, 40);
-            this.searchMessageLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.searchMessageLabel.Name = "searchMessageLabel";
-            this.searchMessageLabel.Size = new System.Drawing.Size(65, 17);
-            this.searchMessageLabel.TabIndex = 5;
-            this.searchMessageLabel.Text = "message";
-            // 
-            // searchByLabel
-            // 
-            this.searchByLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.searchByLabel.AutoSize = true;
-            this.searchByLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchByLabel.Location = new System.Drawing.Point(3, 11);
-            this.searchByLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.searchByLabel.Name = "searchByLabel";
-            this.searchByLabel.Size = new System.Drawing.Size(87, 17);
-            this.searchByLabel.TabIndex = 6;
-            this.searchByLabel.Text = "Search By:";
-            // 
-            // searchLabel
-            // 
-            this.searchLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.searchLabel.AutoSize = true;
-            this.searchLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchLabel.Location = new System.Drawing.Point(287, 11);
-            this.searchLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.searchLabel.Name = "searchLabel";
-            this.searchLabel.Size = new System.Drawing.Size(64, 17);
-            this.searchLabel.TabIndex = 7;
-            this.searchLabel.Text = "Search:";
-            // 
-            // memberSearchComboBox
-            // 
-            this.memberSearchComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.memberSearchComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.memberSearchComboBox.FormattingEnabled = true;
-            this.memberSearchComboBox.Location = new System.Drawing.Point(94, 7);
-            this.memberSearchComboBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.memberSearchComboBox.Name = "memberSearchComboBox";
-            this.memberSearchComboBox.Size = new System.Drawing.Size(155, 25);
-            this.memberSearchComboBox.TabIndex = 8;
-            this.memberSearchComboBox.SelectedIndexChanged += new System.EventHandler(this.MemberSearchComboBox_SelectedIndexChanged);
-            // 
-            // memberSearchTextBox
-            // 
-            this.memberSearchTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.memberSearchTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.memberSearchTextBox.Location = new System.Drawing.Point(355, 8);
-            this.memberSearchTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.memberSearchTextBox.Name = "memberSearchTextBox";
-            this.memberSearchTextBox.Size = new System.Drawing.Size(140, 23);
-            this.memberSearchTextBox.TabIndex = 9;
-            this.memberSearchTextBox.TextChanged += new System.EventHandler(this.MemberSearchTextBox_TextChanged);
+            this.clearButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearButton.Location = new System.Drawing.Point(229, 4);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(220, 38);
+            this.clearButton.TabIndex = 11;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // searchButton
             // 
-            this.searchButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.searchButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(529, 7);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.searchButton.Location = new System.Drawing.Point(3, 4);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(84, 25);
+            this.searchButton.Size = new System.Drawing.Size(220, 38);
             this.searchButton.TabIndex = 10;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
-            // 
-            // sexColumn
-            // 
-            this.sexColumn.Text = "Sex";
-            // 
-            // dateOfBirthColumn
-            // 
-            this.dateOfBirthColumn.Text = "Date of Birth";
-            // 
-            // address1Column
-            // 
-            this.address1Column.Text = "Address Line 1";
-            // 
-            // address2Column
-            // 
-            this.address2Column.Text = "Address Line 2";
-            // 
-            // cityColumn
-            // 
-            this.cityColumn.Text = "City";
-            // 
-            // stateColumn
-            // 
-            this.stateColumn.Text = "State";
-            // 
-            // zipColumn
-            // 
-            this.zipColumn.Text = "Zip";
             // 
             // SearchMemberUserControl
             // 
@@ -348,12 +340,13 @@
             this.Controls.Add(this.memberTableLayoutPanel);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "SearchMemberUserControl";
-            this.Size = new System.Drawing.Size(633, 386);
+            this.Size = new System.Drawing.Size(941, 582);
             this.Load += new System.EventHandler(this.SearchMemberUserControl_Load);
             this.memberTableLayoutPanel.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.searchTableLayoutPanel.ResumeLayout(false);
             this.searchTableLayoutPanel.PerformLayout();
+            this.buttonTableLayoutPanel.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -362,29 +355,24 @@
 
         private System.Windows.Forms.ListView memberListView;
         private System.Windows.Forms.TableLayoutPanel memberTableLayoutPanel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button addMemberButton;
+        private System.Windows.Forms.TableLayoutPanel buttonTableLayoutPanel;
         private System.Windows.Forms.Button viewTransactionsButton;
         private System.Windows.Forms.Button newReturnButton;
         private System.Windows.Forms.Button newOrderButton;
         private System.Windows.Forms.Button editMemberButton;
-        private System.Windows.Forms.TableLayoutPanel searchTableLayoutPanel;
-        private System.Windows.Forms.Label searchMessageLabel;
-        private System.Windows.Forms.Label searchByLabel;
-        private System.Windows.Forms.Label searchLabel;
-        private System.Windows.Forms.ComboBox memberSearchComboBox;
-        private System.Windows.Forms.TextBox memberSearchTextBox;
-        private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.ColumnHeader memberIDColumn;
         private System.Windows.Forms.ColumnHeader firstNameColumn;
         private System.Windows.Forms.ColumnHeader lastNameColumn;
         private System.Windows.Forms.ColumnHeader phoneColumn;
-        private System.Windows.Forms.ColumnHeader sexColumn;
-        private System.Windows.Forms.ColumnHeader dateOfBirthColumn;
-        private System.Windows.Forms.ColumnHeader address1Column;
-        private System.Windows.Forms.ColumnHeader address2Column;
-        private System.Windows.Forms.ColumnHeader cityColumn;
-        private System.Windows.Forms.ColumnHeader stateColumn;
-        private System.Windows.Forms.ColumnHeader zipColumn;
+        private System.Windows.Forms.TableLayoutPanel searchTableLayoutPanel;
+        private System.Windows.Forms.Label searchByLabel;
+        private System.Windows.Forms.ComboBox memberSearchComboBox;
+        private System.Windows.Forms.TextBox memberSearchTextBox;
+        private System.Windows.Forms.Label searchLabel;
+        private System.Windows.Forms.Label searchMessageLabel;
+        private System.Windows.Forms.Button addMemberButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button searchButton;
     }
 }

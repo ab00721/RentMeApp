@@ -63,10 +63,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\AuthenticateController.cs" />
+    <Compile Include="Controller\EmployeeController.cs" />
+    <Compile Include="Controller\MemberController.cs" />
     <Compile Include="Controller\MemberControllerX.cs" />
     <Compile Include="DAL\AuthenticateDAL.cs" />
+    <Compile Include="DAL\EmployeeDAL.cs" />
+    <Compile Include="DAL\MemberDAL.cs" />
     <Compile Include="DAL\MemberDALX.cs" />
     <Compile Include="DAL\RentMeDBConnection.cs" />
+    <Compile Include="Model\EmployeeDTO.cs" />
+    <Compile Include="Model\MemberDTO.cs" />
     <Compile Include="Model\MemberX.cs" />
     <Compile Include="UserControls\CurrentUserUserControl.cs">
       <SubType>UserControl</SubType>
@@ -174,6 +180,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Database\cs6232-g5_202403091557.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
