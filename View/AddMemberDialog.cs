@@ -120,8 +120,8 @@ namespace RentMeApp.View
                 member.LastName = lastName;
                 member.Sex = Convert.ToChar(SexComboBox.Text);
                 member.DateOfBirth = dob;
-                member.Address1 = add1;
-                member.Address2 = add2;
+                member.AddressOne = add1;
+                member.AddressTwo = add2;
                 member.City = city;
                 member.State = state;
                 member.Zip = zip;

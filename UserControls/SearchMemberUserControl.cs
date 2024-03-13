@@ -44,33 +44,32 @@ namespace RentMeApp.UserControls
 
         private void RefreshListView(List<MemberX> members)
         {
+            
+            
             memberListView.Items.Clear();
+            _selectedMember = null;
 
             if (members.Count > 0)
             {
-                ListViewItem item;
-
-                foreach (MemberX member in this._memberControllerX.GetMemberInfoX())
+                MemberX member;
+                for (int i = 0; i< members.Count; i++)
                 {
-                    item = new ListViewItem(member.MemberID.ToString());
-                    item.SubItems.Add(member.FirstName);
-                    item.SubItems.Add(member.LastName);
-                    item.SubItems.Add(member.Sex.ToString());
-                    item.SubItems.Add(member.DateOfBirth.ToString());
-                    item.SubItems.Add(member.Address1);
-                    item.SubItems.Add(member.Address2);
-                    item.SubItems.Add(member.City);
-                    item.SubItems.Add(member.State);
-                    item.SubItems.Add(member.Zip.ToString());
-                    item.SubItems.Add(member.Phone);
+                    member = members[i];
+                    memberListView.Items.Add(member.MemberID.ToString());
+                    memberListView.Items[i].SubItems.Add(member.FirstName.ToString());
+                    memberListView.Items[i].SubItems.Add(member.LastName.ToString());
+                    memberListView.Items[i].SubItems.Add(member.Sex.ToString());
+                    memberListView.Items[i].SubItems.Add(member.DateOfBirth.ToString());
+                    memberListView.Items[i].SubItems.Add(member.AddressOne.ToString());
+                    memberListView.Items[i].SubItems.Add(member.AddressTwo.ToString());
+                    memberListView.Items[i].SubItems.Add(member.City.ToString());
+                    memberListView.Items[i].SubItems.Add(member.State.ToString());
+                    memberListView.Items[i].SubItems.Add(member.Zip.ToString());
+                    memberListView.Items[i].SubItems.Add(member.Phone.ToString());
 
-                    this.memberListView.Items.Add(item);
+                    memberListView.Items[i].Tag = member;
                 }
-            }
-            else
-            {
-                searchMessageLabel.Text = "No members match search.";
-                searchMessageLabel.ForeColor = Color.Red;
+
             }
         }
 
@@ -243,6 +242,7 @@ namespace RentMeApp.UserControls
 
         private void EditMember(MemberX member)
         {
+            MessageBox.Show(member.FirstName);
             searchMessageLabel.Text = "Edit " + member.FirstName;
             searchMessageLabel.ForeColor = Color.Red;
         }
