@@ -64,6 +64,12 @@
     <Compile Include="UserControls\SearchMemberUserControl.Designer.cs">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\EditMemberDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EditMemberDialog.Designer.cs">
+      <DependentUpon>EditMemberDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeeLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
