@@ -1,7 +1,10 @@
 ﻿using RentMeApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace RentMeApp.DAL
 {
@@ -65,9 +68,10 @@ namespace RentMeApp.DAL
             return members;
         }
 
-        public void InsertNewMember(Member member)
+        public int InsertNewMember(Member member)
         {
-            string insertStatement = "INSERT INTO [dbo].[Member] ([LastName],[FirstName], [Sex], [DateOfBirth],[AddressLine1],[AddressLine2],[City], [State],[Zip] ,[Phone]) " +
+            int memberId;
+            string insertStatement = "INSERT INTO [dbo].[Member] ([LastName], [FirstName], [Sex], [DateOfBirth], [AddressLine1], [AddressLine2], [City], [State], [Zip], [Phone]) OUTPUT Inserted.MemberID " +
                 "VALUES (@LastName, @FirstName, @Sex, @DateOfBirth, @AddressLine1, @AddressLine2, @City, @State, @Zip, @Phone)";
 
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
@@ -97,18 +101,19 @@ namespace RentMeApp.DAL
                     insertCommand.Parameters.Add("@City", SqlDbType.VarChar);
                     insertCommand.Parameters["@City"].Value = member.City;
 
-                    insertCommand.Parameters.Add("@State", SqlDbType.VarChar);
+                    insertCommand.Parameters.Add("@State", SqlDbType.Char);
                     insertCommand.Parameters["@State"].Value = member.State;
 
-                    insertCommand.Parameters.Add("@Zip", SqlDbType.Int);
+                    insertCommand.Parameters.Add("@Zip", SqlDbType.VarChar);
                     insertCommand.Parameters["@Zip"].Value = member.Zip;
 
                     insertCommand.Parameters.Add("@Phone", SqlDbType.VarChar);
                     insertCommand.Parameters["@Phone"].Value = member.Phone;
 
-                    insertCommand.ExecuteNonQuery();
+                    memberId = (int)insertCommand.ExecuteScalar();
                 }
             }
+            return memberId;
         }
     }
 }

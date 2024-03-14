@@ -117,7 +117,6 @@ namespace RentMeApp.View
 
             if (!errorsExist)
             {
-                //member.MemberID = memberId;
                 member.FirstName = firstName;
                 member.LastName = lastName;
                 member.Sex = SexComboBox.Text;
@@ -128,9 +127,9 @@ namespace RentMeApp.View
                 member.State = state;
                 member.Zip = zip;
                 member.Phone = phone;
-                this._MemberController.InsertNewMember(member);
+                member.MemberID = this._MemberController.InsertNewMember(member);
 
-                using (Form success = new View.MemberCreatedSuccessfully(5))
+                using (Form success = new View.MemberCreatedSuccessfully(member.MemberID))
                 {
                     DialogResult result = success.ShowDialog();
 
