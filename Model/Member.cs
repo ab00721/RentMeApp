@@ -62,6 +62,9 @@ namespace RentMeApp.Model
             this.Phone = phone;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Member"/> class.
+        /// </summary>
         public Member() { }
     }
 }

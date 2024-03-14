@@ -27,6 +27,11 @@ namespace RentMeApp.Controller
             return this._memberSource.GetMemberInfo();
         }
 
+        /// <summary>
+        /// Inserts the new member.
+        /// </summary>
+        /// <param name="member">The member.</param>
+        /// <returns></returns>
         public int InsertNewMember(Member member)
         {
            return this._memberSource.InsertNewMember(member);

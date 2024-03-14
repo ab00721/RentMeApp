@@ -1,10 +1,7 @@
 ﻿using RentMeApp.Model;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace RentMeApp.DAL
 {
@@ -68,6 +65,11 @@ namespace RentMeApp.DAL
             return members;
         }
 
+        /// <summary>
+        /// Inserts the new member.
+        /// </summary>
+        /// <param name="member">The member.</param>
+        /// <returns></returns>
         public int InsertNewMember(Member member)
         {
             int memberId;
