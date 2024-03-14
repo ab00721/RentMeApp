@@ -63,6 +63,7 @@
             this.PhoneErrorLabel = new System.Windows.Forms.Label();
             this.FirstNameErrorLabel = new System.Windows.Forms.Label();
             this.CancelBtn = new System.Windows.Forms.Button();
+            this.userTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -516,11 +517,23 @@
             this.CancelBtn.UseVisualStyleBackColor = true;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
+            // userTableLayoutPanel
+            // 
+            this.userTableLayoutPanel.ColumnCount = 1;
+            this.userTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.userTableLayoutPanel.Location = new System.Drawing.Point(0, 1);
+            this.userTableLayoutPanel.Name = "userTableLayoutPanel";
+            this.userTableLayoutPanel.RowCount = 1;
+            this.userTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.63158F));
+            this.userTableLayoutPanel.Size = new System.Drawing.Size(868, 56);
+            this.userTableLayoutPanel.TabIndex = 5;
+            // 
             // AddMemberDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 460);
+            this.Controls.Add(this.userTableLayoutPanel);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.AddMemberBtn);
@@ -579,5 +592,6 @@
         private System.Windows.Forms.Label PhoneErrorLabel;
         private System.Windows.Forms.Label FirstNameErrorLabel;
         private System.Windows.Forms.Button CancelBtn;
+        private System.Windows.Forms.TableLayoutPanel userTableLayoutPanel;
     }
 }

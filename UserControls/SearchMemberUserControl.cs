@@ -19,6 +19,8 @@ namespace RentMeApp.UserControls
         private readonly List<Member> _members;
         private readonly List<Member> _allMembers;
         private Member _selectedMember;
+        private string _username;
+        private string _firstName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
@@ -207,19 +209,19 @@ namespace RentMeApp.UserControls
 
         private void AddMemberButton_Click(object sender, EventArgs e)
         {
-            //using (Form addMember = new View.AddMemberDialog(this.user))
-            //{
-            //    DialogResult result = addMember.ShowDialog();
+            using (Form addMember = new View.AddMemberDialog(this._username, this._firstName))
+            {
+                DialogResult result = addMember.ShowDialog();
 
-            //    if (result == DialogResult.OK)
-            //    {
-            //        this.RefreshListView(_members);
-            //    }
-            //    else if (result == DialogResult.Cancel)
-            //    {
-            //        addMember.Close();
-            //    }
-            //}
+                if (result == DialogResult.OK)
+                {
+                    this.RefreshListView(_members);
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    addMember.Close();
+                }
+            }
         }
 
 
@@ -285,6 +287,12 @@ namespace RentMeApp.UserControls
         {
             ClearAll();
             RefreshListView(_allMembers);
+        }
+
+        internal void DisplayUserDetails(string username, string firstName)
+        {
+            this._username = username;
+            this._firstName = firstName;
         }
     }
 }

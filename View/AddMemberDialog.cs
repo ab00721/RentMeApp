@@ -15,23 +15,18 @@ namespace RentMeApp.View
     {
         private readonly MemberControllerX _MemberControllerX;
         private MemberX member;
-        //private readonly CurrentUserUserControl _currentUserUserControl;
-        //private readonly LogoutUserControl _logoutUserControl;
+        private readonly UserUserControl _userUserControl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddMemberDialog"/> class.
         /// </summary>
-        public AddMemberDialog(string user)
+        public AddMemberDialog(string username, string firstName)
         {
             InitializeComponent();
             this._MemberControllerX = new MemberControllerX();
             member = new MemberX();
-            //_currentUserUserControl = new CurrentUserUserControl(user)
-            //{
-            //    Anchor = AnchorStyles.Top | AnchorStyles.Right,
-            //    Dock = DockStyle.Top
-            //};
-            //this.Controls.Add(_currentUserUserControl);
+            _userUserControl = new UserUserControl(username, firstName);
+            this.userTableLayoutPanel.Controls.Add(_userUserControl);
         }
 
         private void AddMemberBtn_Click(object sender, EventArgs e)
