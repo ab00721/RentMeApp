@@ -13,8 +13,8 @@ namespace RentMeApp.View
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class AddMemberDialog : Form
     {
-        private readonly MemberControllerX _MemberControllerX;
-        private MemberX member;
+        private readonly MemberController _MemberController;
+        private Member member;
         private readonly UserUserControl _userUserControl;
 
         /// <summary>
@@ -23,8 +23,8 @@ namespace RentMeApp.View
         public AddMemberDialog(string username, string firstName)
         {
             InitializeComponent();
-            this._MemberControllerX = new MemberControllerX();
-            member = new MemberX();
+            this._MemberController = new MemberController();
+            member = new Member();
             _userUserControl = new UserUserControl(username, firstName);
             this.userTableLayoutPanel.Controls.Add(_userUserControl);
         }
@@ -32,26 +32,32 @@ namespace RentMeApp.View
         private void AddMemberBtn_Click(object sender, EventArgs e)
         {
             Boolean errorsExist = false;
-            int memberId = 5;
+            //int memberId = 5;
             string firstName = FirstNameTextBox.Text;
             string lastName = LastNameTextBox.Text;
-            DateOnly dob = DateOnly.FromDateTime(DobDatePicker.Value);
+            DateTime dob = DobDatePicker.Value;
             string add1 = AddOneTextBox.Text;
             string add2 = AddTwoTextBox.Text;
             string city = CityTextBox.Text;
             string state = StateComboBox.SelectedItem.ToString();
-            int zip = 0;
+            string zip = ZipTextBox.Text;
             string phone = this.PhoneTextBox.Text;
 
 
-            int a;
-            if (!int.TryParse(ZipTextBox.Text,out a))
+            //int a;
+            //if (!int.TryParse(ZipTextBox.Text,out a))
+            //{
+            //    ZipErrorLabel.Text = "Invalid Zip.";
+            //    errorsExist = true;
+            //} else
+            //{
+            //    zip = int.Parse(ZipTextBox.Text);
+            //}
+
+            if (string.IsNullOrEmpty(zip))
             {
-                ZipErrorLabel.Text = "Invalid Zip.";
+                ZipErrorLabel.Text = "Zip cannot be null or empty.";
                 errorsExist = true;
-            } else
-            {
-                zip = int.Parse(ZipTextBox.Text);
             }
 
             if (string.IsNullOrEmpty(firstName))
@@ -111,10 +117,10 @@ namespace RentMeApp.View
 
             if (!errorsExist)
             {
-                member.MemberID = memberId;
+                //member.MemberID = memberId;
                 member.FirstName = firstName;
                 member.LastName = lastName;
-                member.Sex = Convert.ToChar(SexComboBox.Text);
+                member.Sex = SexComboBox.Text;
                 member.DateOfBirth = dob;
                 member.AddressOne = add1;
                 member.AddressTwo = add2;
@@ -122,9 +128,9 @@ namespace RentMeApp.View
                 member.State = state;
                 member.Zip = zip;
                 member.Phone = phone;
-                this._MemberControllerX.Register(member);
+                this._MemberController.InsertNewMember(member);
 
-                using (Form success = new View.MemberCreatedSuccessfully(memberId))
+                using (Form success = new View.MemberCreatedSuccessfully(5))
                 {
                     DialogResult result = success.ShowDialog();
 

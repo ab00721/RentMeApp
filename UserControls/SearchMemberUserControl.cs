@@ -215,7 +215,7 @@ namespace RentMeApp.UserControls
 
                 if (result == DialogResult.OK)
                 {
-                    this.RefreshListView(_members);
+                    this.RefreshListView(this._memberController.GetMemberInfo());
                 }
                 else if (result == DialogResult.Cancel)
                 {

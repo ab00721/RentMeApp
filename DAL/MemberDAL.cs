@@ -1,5 +1,6 @@
 ﻿using RentMeApp.Model;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace RentMeApp.DAL
@@ -62,6 +63,52 @@ namespace RentMeApp.DAL
                 }
             }
             return members;
+        }
+
+        public void InsertNewMember(Member member)
+        {
+            string insertStatement = "INSERT INTO [dbo].[Member] ([LastName],[FirstName], [Sex], [DateOfBirth],[AddressLine1],[AddressLine2],[City], [State],[Zip] ,[Phone]) " +
+                "VALUES (@LastName, @FirstName, @Sex, @DateOfBirth, @AddressLine1, @AddressLine2, @City, @State, @Zip, @Phone)";
+
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                connection.Open();
+
+                using (SqlCommand insertCommand = new SqlCommand(insertStatement, connection))
+                {
+                    insertCommand.Parameters.Add("@LastName", SqlDbType.VarChar);
+                    insertCommand.Parameters["@LastName"].Value = member.LastName;
+
+                    insertCommand.Parameters.Add("@FirstName", SqlDbType.VarChar);
+                    insertCommand.Parameters["@FirstName"].Value = member.FirstName;
+
+                    insertCommand.Parameters.Add("@Sex", SqlDbType.Char);
+                    insertCommand.Parameters["@Sex"].Value = member.Sex;
+
+                    insertCommand.Parameters.Add("@DateOfBirth", SqlDbType.Date);
+                    insertCommand.Parameters["@DateOfBirth"].Value = member.DateOfBirth;
+
+                    insertCommand.Parameters.Add("@AddressLine1", SqlDbType.VarChar);
+                    insertCommand.Parameters["@AddressLine1"].Value = member.AddressOne;
+
+                    insertCommand.Parameters.Add("@AddressLine2", SqlDbType.VarChar);
+                    insertCommand.Parameters["@AddressLine2"].Value = member.AddressTwo;
+
+                    insertCommand.Parameters.Add("@City", SqlDbType.VarChar);
+                    insertCommand.Parameters["@City"].Value = member.City;
+
+                    insertCommand.Parameters.Add("@State", SqlDbType.VarChar);
+                    insertCommand.Parameters["@State"].Value = member.State;
+
+                    insertCommand.Parameters.Add("@Zip", SqlDbType.Int);
+                    insertCommand.Parameters["@Zip"].Value = member.Zip;
+
+                    insertCommand.Parameters.Add("@Phone", SqlDbType.VarChar);
+                    insertCommand.Parameters["@Phone"].Value = member.Phone;
+
+                    insertCommand.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

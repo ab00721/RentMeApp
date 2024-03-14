@@ -7,17 +7,17 @@ namespace RentMeApp.Model
     /// </summary>
     public class Member
     {
-        public int MemberID { get; }
-        public string FirstName { get; }
-        public string LastName { get; }
-        public string Sex { get; }
-        public DateTime DateOfBirth { get; }
-        public string AddressOne { get; }
-        public string AddressTwo { get; }
-        public string City { get; }
-        public string State { get; }
-        public string Zip { get; }
-        public string Phone { get; }
+        public int MemberID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Sex { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string AddressOne { get; set; }
+        public string AddressTwo { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
+        public string Phone { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Member"/> class.
@@ -61,5 +61,7 @@ namespace RentMeApp.Model
             this.Zip = zip;
             this.Phone = phone;
         }
+
+        public Member() { }
     }
 }
