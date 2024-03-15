@@ -80,7 +80,7 @@ namespace RentMeApp.View
                 errorsExist = true;
             }
 
-            if (SexComboBox.Text == "-- Select --")
+            if (SexComboBox.ValueMember.Length > 1)
             {
                 SexErrorLabel.Text = "Select appropriate value for sex.";
                 errorsExist = true;
@@ -151,8 +151,8 @@ namespace RentMeApp.View
 
         private void EditMemberDialog_Load(object sender, EventArgs e)
         {
-            SexComboBox.SelectedItem = "-- Select --";
-            StateComboBox.SelectedItem = "AL";
+            SexComboBox.SelectedItem = member.Sex;
+            StateComboBox.SelectedItem = member.State;
         }
 
         private void FirstNameTextBox_TextChanged(object sender, EventArgs e)
