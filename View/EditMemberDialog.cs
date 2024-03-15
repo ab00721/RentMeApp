@@ -20,19 +20,38 @@ namespace RentMeApp.View
         /// <summary>
         /// Initializes a new instance of the <see cref="EditMemberDialog"/> class.
         /// </summary>
-        public EditMemberDialog(string username, string firstName)
+        public EditMemberDialog(string username, string firstName, Member selectedMember)
         {
             InitializeComponent();
-            this._MemberController = new MemberController();
-            member = new Member();
+
+            _MemberController = new MemberController();
+            member = selectedMember;
+            HydrateFormInputs();
+
             _userUserControl = new UserUserControl(username, firstName);
-            this.userTableLayoutPanel.Controls.Add(_userUserControl);
+            userTableLayoutPanel.Controls.Add(_userUserControl);
+        }
+
+        /// <summary>
+        /// Hydrates the form inputs with the data from the member property.
+        /// </summary>
+        private void HydrateFormInputs()
+        {
+            FirstNameTextBox.Text = member.FirstName;
+            LastNameTextBox.Text = member.LastName;
+            DobDatePicker.Value = member.DateOfBirth;
+            AddOneTextBox.Text = member.AddressOne;
+            AddTwoTextBox.Text = member.AddressTwo;
+            CityTextBox.Text = member.City;
+            StateComboBox.SelectedItem = member.State;
+            ZipTextBox.Text = member.Zip;
+            PhoneTextBox.Text = member.Phone;
+            SexComboBox.SelectedItem = member.Sex;
         }
 
         private void EditMemberBtn_Click(object sender, EventArgs e)
         {
-            Boolean errorsExist = false;
-            //int memberId = 5;
+            bool errorsExist = false;
             string firstName = FirstNameTextBox.Text;
             string lastName = LastNameTextBox.Text;
             DateTime dob = DobDatePicker.Value;
@@ -41,18 +60,7 @@ namespace RentMeApp.View
             string city = CityTextBox.Text;
             string state = StateComboBox.SelectedItem.ToString();
             string zip = ZipTextBox.Text;
-            string phone = this.PhoneTextBox.Text;
-
-
-            //int a;
-            //if (!int.TryParse(ZipTextBox.Text,out a))
-            //{
-            //    ZipErrorLabel.Text = "Invalid Zip.";
-            //    errorsExist = true;
-            //} else
-            //{
-            //    zip = int.Parse(ZipTextBox.Text);
-            //}
+            string phone = PhoneTextBox.Text;
 
             if (string.IsNullOrEmpty(zip))
             {
@@ -72,7 +80,7 @@ namespace RentMeApp.View
                 errorsExist = true;
             }
 
-            if (this.SexComboBox.Text == "-- Select --")
+            if (SexComboBox.Text == "-- Select --")
             {
                 SexErrorLabel.Text = "Select appropriate value for sex.";
                 errorsExist = true;
@@ -127,9 +135,9 @@ namespace RentMeApp.View
                 member.State = state;
                 member.Zip = zip;
                 member.Phone = phone;
-                member.MemberID = this._MemberController.InsertNewMember(member);
+                member.MemberID = _MemberController.UpdateExistingMember(member);
 
-                using (Form success = new View.MemberCreatedSuccessfully(member.MemberID))
+                using (Form success = new View.MemberUpdatedSuccessfully(member.MemberID))
                 {
                     DialogResult result = success.ShowDialog();
 
@@ -143,8 +151,8 @@ namespace RentMeApp.View
 
         private void EditMemberDialog_Load(object sender, EventArgs e)
         {
-            this.SexComboBox.SelectedItem = "-- Select --";
-            this.StateComboBox.SelectedItem = "AL";
+            SexComboBox.SelectedItem = "-- Select --";
+            StateComboBox.SelectedItem = "AL";
         }
 
         private void FirstNameTextBox_TextChanged(object sender, EventArgs e)

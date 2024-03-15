@@ -49,8 +49,6 @@ namespace RentMeApp.UserControls
 
         private void RefreshListView(List<Member> members)
         {
-            
-            
             memberListView.Items.Clear();
             _selectedMember = null;
 
@@ -158,7 +156,6 @@ namespace RentMeApp.UserControls
 
         }
 
-
         private void MemberSearchTextBox_TextChanged(object sender, EventArgs e)
         {
             ClearMessageLabel();
@@ -224,10 +221,30 @@ namespace RentMeApp.UserControls
             }
         }
 
-
         private void EditMemberButton_Click(object sender, EventArgs e)
         {
-            EditMember(_selectedMember);
+            if (memberListView.SelectedItems.Count > 0)
+            {
+                Member selectedMember = (Member)memberListView.SelectedItems[0].Tag;
+
+                using (Form editMember = new View.EditMemberDialog(this._username, this._firstName, selectedMember))
+                {
+                    DialogResult result = editMember.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        this.RefreshListView(this._memberController.GetMemberInfo());
+                    }
+                    else if (result == DialogResult.Cancel)
+                    {
+                        editMember.Close();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No member has been selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void NewOrderButton_Click(object sender, EventArgs e)
