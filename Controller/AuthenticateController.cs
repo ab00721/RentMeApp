@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using RentMeApp.DAL;
 
 namespace RentMeApp.Controller
@@ -31,9 +32,9 @@ namespace RentMeApp.Controller
             {
                 return this._authenticateSource.Authenticate(username, password);
             }
-            catch (Exception ex)
+            catch (SqlException exception)
             {
-                throw new Exception(ex.Message);
+                throw exception;
             }
         }
     }

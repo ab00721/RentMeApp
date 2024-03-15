@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using RentMeApp.Controller;
@@ -42,23 +43,26 @@ namespace RentMeApp
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            string username = usernameTextBox.Text;
-            string password = passwordTextBox.Text;
-
-            bool isAuthenticated = _authenticateController.Authenticate(username, password);
-            
-            if (isAuthenticated)
+            try 
             {
-                using (_mainDashboard = new MainDashboard(this, username))
+                string username = usernameTextBox.Text.Trim();
+                string password = passwordTextBox.Text;
+
+                if (_authenticateController.Authenticate(username, password)) {
+                    using (_mainDashboard = new MainDashboard(this, username))
+                    {
+                        this.Visible = false;
+                        this._mainDashboard.ShowDialog();
+                    }
+                }
+                else
                 {
-                    this.Visible = false;
-                    this._mainDashboard.ShowDialog();
+                    loginMessageLabel.Text = "Invalid username/password";
+                    loginMessageLabel.ForeColor = Color.Red;
                 }
             }
-            else
-            {
-                loginMessageLabel.Text = "Invalid username/password";
-                loginMessageLabel.ForeColor = Color.Red;
+            catch (SqlException exception) {
+                MessageBox.Show(exception.Message, "Error while authenticating", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
