@@ -64,7 +64,7 @@ namespace RentMeApp.UserControls
                     memberListView.Items[i].SubItems.Add(member.FirstName.ToString());
                     memberListView.Items[i].SubItems.Add(member.LastName.ToString());
                     memberListView.Items[i].SubItems.Add(member.Sex.ToString());
-                    memberListView.Items[i].SubItems.Add(member.DateOfBirth.ToString());
+                    memberListView.Items[i].SubItems.Add(member.DateOfBirth.ToShortDateString());
                     memberListView.Items[i].SubItems.Add(member.AddressOne.ToString());
                     memberListView.Items[i].SubItems.Add(member.AddressTwo.ToString());
                     memberListView.Items[i].SubItems.Add(member.City.ToString());
