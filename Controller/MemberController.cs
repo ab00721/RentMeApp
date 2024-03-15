@@ -37,5 +37,15 @@ namespace RentMeApp.Controller
            return this._memberSource.InsertNewMember(member);
         }
 
+        /// <summary>
+        /// Updates an existing member.
+        /// </summary>
+        /// <param name="member">The member.</param>
+        /// <returns></returns>
+        public int UpdateExistingMember(Member member)
+        {
+            return this._memberSource.UpdateExistingMember(member);
+        }
+
     }
 }

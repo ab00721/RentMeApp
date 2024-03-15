@@ -117,5 +117,60 @@ namespace RentMeApp.DAL
             }
             return memberId;
         }
+
+        /// <summary>
+        /// Updates the existing member.
+        /// </summary>
+        /// <param name="member">The member.</param>
+        /// <returns>The number of changed properties.</returns>
+        public int UpdateExistingMember(Member member)
+        {
+            int changedProperties;
+            string updateStatement = "UPDATE [dbo].[Member] SET [LastName] = @LastName, [FirstName] = @FirstName, [Sex] = @Sex, [DateOfBirth] = @DateOfBirth, [AddressLine1] = @AddressLine1, [AddressLine2] = @AddressLine2, [City] = @City, [State] = @State, [Zip] = @Zip, [Phone] = @Phone WHERE [MemberID] = @MemberID";
+
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                connection.Open();
+
+                using (SqlCommand updateCommand = new SqlCommand(updateStatement, connection))
+                {
+                    updateCommand.Parameters.Add("@LastName", SqlDbType.VarChar);
+                    updateCommand.Parameters["@LastName"].Value = member.LastName;
+
+                    updateCommand.Parameters.Add("@FirstName", SqlDbType.VarChar);
+                    updateCommand.Parameters["@FirstName"].Value = member.FirstName;
+
+                    updateCommand.Parameters.Add("@Sex", SqlDbType.Char);
+                    updateCommand.Parameters["@Sex"].Value = member.Sex;
+
+                    updateCommand.Parameters.Add("@DateOfBirth", SqlDbType.Date);
+                    updateCommand.Parameters["@DateOfBirth"].Value = member.DateOfBirth;
+
+                    updateCommand.Parameters.Add("@AddressLine1", SqlDbType.VarChar);
+                    updateCommand.Parameters["@AddressLine1"].Value = member.AddressOne;
+
+                    updateCommand.Parameters.Add("@AddressLine2", SqlDbType.VarChar);
+                    updateCommand.Parameters["@AddressLine2"].Value = member.AddressTwo;
+
+                    updateCommand.Parameters.Add("@City", SqlDbType.VarChar);
+                    updateCommand.Parameters["@City"].Value = member.City;
+
+                    updateCommand.Parameters.Add("@State", SqlDbType.Char);
+                    updateCommand.Parameters["@State"].Value = member.State;
+
+                    updateCommand.Parameters.Add("@Zip", SqlDbType.VarChar);
+                    updateCommand.Parameters["@Zip"].Value = member.Zip;
+
+                    updateCommand.Parameters.Add("@Phone", SqlDbType.VarChar);
+                    updateCommand.Parameters["@Phone"].Value = member.Phone;
+
+                    updateCommand.Parameters.Add("@MemberID", SqlDbType.Int);
+                    updateCommand.Parameters["@MemberID"].Value = member.MemberID;
+
+                    changedProperties = updateCommand.ExecuteNonQuery();
+                }
+            }
+            return changedProperties;
+        }
     }
 }
