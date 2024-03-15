@@ -86,6 +86,12 @@
     <Compile Include="UserControls\UserUserControl.Designer.cs">
       <DependentUpon>UserUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\EditMemberDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EditMemberDialog.Designer.cs">
+      <DependentUpon>EditMemberDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\AddMemberDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UserUserControl.resx">
       <DependentUpon>UserUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EditMemberDialog.resx">
+      <DependentUpon>EditMemberDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\AddMemberDialog.resx">
       <DependentUpon>AddMemberDialog.cs</DependentUpon>
