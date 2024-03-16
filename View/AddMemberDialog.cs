@@ -46,17 +46,6 @@ namespace RentMeApp.View
             string zip = ZipTextBox.Text;
             string phone = this.PhoneTextBox.Text;
 
-
-            //int a;
-            //if (!int.TryParse(ZipTextBox.Text,out a))
-            //{
-            //    ZipErrorLabel.Text = "Invalid Zip.";
-            //    errorsExist = true;
-            //} else
-            //{
-            //    zip = int.Parse(ZipTextBox.Text);
-            //}
-
             if (string.IsNullOrEmpty(zip))
             {
                 ZipErrorLabel.Text = "Zip cannot be null or empty.";
@@ -133,15 +122,8 @@ namespace RentMeApp.View
                 member.MemberID = this._MemberController.InsertNewMember(member);
                 this._searchMemberUserControl.RefreshListView();
 
-                using (Form success = new View.MemberCreatedSuccessfully(member.MemberID))
-                {
-                    DialogResult result = success.ShowDialog();
-
-                    if (result == DialogResult.OK)
-                    {
-                        DialogResult = DialogResult.OK;
-                    }
-                }
+                MessageBox.Show($"Member created successfully. Member ID: {member.MemberID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
             }
         }
 
