@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using RentMeApp.Controller;
 using RentMeApp.View;
 
 namespace RentMeApp
@@ -12,7 +14,7 @@ namespace RentMeApp
     public partial class EmployeeLoginForm : Form
     {
         private MainDashboard _mainDashboard;
-        //private AuthenticateController _authenticateController;
+        private readonly AuthenticateController _authenticateController;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeLoginForm"/> class.
@@ -20,9 +22,8 @@ namespace RentMeApp
         public EmployeeLoginForm()
         {
             InitializeComponent();
-            _mainDashboard = new MainDashboard(this, usernameTextBox.Text);
             ClearMessageLabel();
-            //_authenticateController = new AuthenticateController();
+            _authenticateController = new AuthenticateController();
         }
 
         private void UsernameTextBox_TextChanged(object sender, EventArgs e)
@@ -42,24 +43,26 @@ namespace RentMeApp
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            string username = usernameTextBox.Text;
-            string password = passwordTextBox.Text;
-
-            //bool isAuthenticated = _authenticateController.Authenticate(username, password);
-            
-            //if (isAuthenticated)
-            if (username == "jane" && password == "test1234")
+            try 
             {
-                using (_mainDashboard = new MainDashboard(this, username))
+                string username = usernameTextBox.Text.Trim();
+                string password = passwordTextBox.Text;
+
+                if (_authenticateController.Authenticate(username, password)) {
+                    using (_mainDashboard = new MainDashboard(this, username))
+                    {
+                        this.Visible = false;
+                        this._mainDashboard.ShowDialog();
+                    }
+                }
+                else
                 {
-                    this.Visible = false;
-                    this._mainDashboard.ShowDialog();
+                    loginMessageLabel.Text = "Invalid username/password";
+                    loginMessageLabel.ForeColor = Color.Red;
                 }
             }
-            else
-            {
-                loginMessageLabel.Text = "Invalid username/password";
-                loginMessageLabel.ForeColor = Color.Red;
+            catch (SqlException exception) {
+                MessageBox.Show(exception.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

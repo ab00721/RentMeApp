@@ -33,8 +33,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Portable.System.DateTimeOnly, Version=8.0.0.3, Culture=neutral, PublicKeyToken=16fb7a27ac3b9689, processorArchitecture=MSIL">
+      <HintPath>packages\Portable.System.DateTimeOnly.8.0.0\lib\net462\Portable.System.DateTimeOnly.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,22 +63,41 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\AuthenticateController.cs" />
+    <Compile Include="Controller\EmployeeController.cs" />
+    <Compile Include="Controller\MemberController.cs" />
     <Compile Include="Controller\MemberControllerX.cs" />
     <Compile Include="DAL\AuthenticateDAL.cs" />
+    <Compile Include="DAL\EmployeeDAL.cs" />
+    <Compile Include="DAL\MemberDAL.cs" />
     <Compile Include="DAL\MemberDALX.cs" />
     <Compile Include="DAL\RentMeDBConnection.cs" />
+    <Compile Include="Extension\USState.cs" />
+    <Compile Include="Model\EmployeeDTO.cs" />
+    <Compile Include="Model\Member.cs" />
     <Compile Include="Model\MemberX.cs" />
-    <Compile Include="UserControls\LogoutUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\LogoutUserControl.Designer.cs">
-      <DependentUpon>LogoutUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\SearchMemberUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\SearchMemberUserControl.Designer.cs">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UserUserControl.Designer.cs">
+      <DependentUpon>UserUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditMemberDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EditMemberDialog.Designer.cs">
+      <DependentUpon>EditMemberDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddMemberDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddMemberDialog.Designer.cs">
+      <DependentUpon>AddMemberDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="View\EmployeeLoginForm.cs">
       <SubType>Form</SubType>
@@ -84,17 +119,29 @@
     <Compile Include="View\MainDashboard.Designer.cs">
       <DependentUpon>MainDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\MemberCreatedSuccessfully.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MemberCreatedSuccessfully.Designer.cs">
+      <DependentUpon>MemberCreatedSuccessfully.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\SearchMemberDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\SearchMemberDialog.Designer.cs">
       <DependentUpon>SearchMemberDialog.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControls\LogoutUserControl.resx">
-      <DependentUpon>LogoutUserControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchMemberUserControl.resx">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UserUserControl.resx">
+      <DependentUpon>UserUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EditMemberDialog.resx">
+      <DependentUpon>EditMemberDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AddMemberDialog.resx">
+      <DependentUpon>AddMemberDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\EmployeeLoginForm.resx">
       <DependentUpon>EmployeeLoginForm.cs</DependentUpon>
@@ -114,15 +161,13 @@
     <EmbeddedResource Include="View\MainDashboard.resx">
       <DependentUpon>MainDashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\MemberCreatedSuccessfully.resx">
+      <DependentUpon>MemberCreatedSuccessfully.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\SearchMemberDialog.resx">
       <DependentUpon>SearchMemberDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Database\category.csv" />
-    <None Include="Database\employee.csv" />
-    <None Include="Database\furniture.csv" />
-    <None Include="Database\login.csv" />
-    <None Include="Database\member.csv" />
-    <None Include="Database\style.csv" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -137,8 +182,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\cs6232-g5_202403091557.sql" />
-    <Content Include="Database\cs6232-g5_202403111159.sql" />
+    <Folder Include="Database\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
