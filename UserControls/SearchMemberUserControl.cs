@@ -16,8 +16,7 @@ namespace RentMeApp.UserControls
     {
         //private readonly MemberControllerX _memberControllerX;
         private readonly MemberController _memberController;
-        private readonly List<Member> _members;
-        private readonly List<Member> _allMembers;
+        private List<Member> _members;
         private Member _selectedMember;
         private string _username;
         private string _firstName;
@@ -30,10 +29,8 @@ namespace RentMeApp.UserControls
             InitializeComponent();
             ClearMessageLabel();
             PopulateSearchByComboBox();
-            //_memberControllerX = new MemberControllerX();
             _memberController = new MemberController();
-            _allMembers = this._memberController.GetMemberInfo();
-            _members = _allMembers;
+            _members = this._memberController.GetMemberInfo();
         }
 
         /// <summary>
@@ -44,9 +41,14 @@ namespace RentMeApp.UserControls
         public void SearchMemberUserControl_Load(object sender, EventArgs e)
         {
             ClearAll();
-            this.RefreshListView(_members);
+            this.RefreshListView();
         }
 
+        public void RefreshListView()
+        {
+            this._members = this._memberController.GetMemberInfo();
+            this.RefreshListView(this._members);
+        }
         private void RefreshListView(List<Member> members)
         {
             memberListView.Items.Clear();
@@ -206,7 +208,8 @@ namespace RentMeApp.UserControls
 
         private void AddMemberButton_Click(object sender, EventArgs e)
         {
-            using (Form addMember = new View.AddMemberDialog(this._username, this._firstName))
+            this.ClearMessageLabel();
+            using (Form addMember = new View.AddMemberDialog(this, this._username, this._firstName))
             {
                 DialogResult result = addMember.ShowDialog();
 
@@ -223,6 +226,7 @@ namespace RentMeApp.UserControls
 
         private void EditMemberButton_Click(object sender, EventArgs e)
         {
+            this.ClearMessageLabel();
             if (memberListView.SelectedItems.Count > 0)
             {
                 Member selectedMember = (Member)memberListView.SelectedItems[0].Tag;
@@ -262,12 +266,6 @@ namespace RentMeApp.UserControls
             ViewTransactions(_selectedMember);
         }
 
-        private void EditMember(Member member)
-        {
-            searchMessageLabel.Text = "Edit " + member.FirstName;
-            searchMessageLabel.ForeColor = Color.Red;
-        }
-
         private void NewOrder(Member member)
         {
             searchMessageLabel.Text = "New Order " + member.FirstName;
@@ -303,7 +301,7 @@ namespace RentMeApp.UserControls
         private void ClearButton_Click(object sender, EventArgs e)
         {
             ClearAll();
-            RefreshListView(_allMembers);
+            RefreshListView();
         }
 
         internal void DisplayUserDetails(string username, string firstName)

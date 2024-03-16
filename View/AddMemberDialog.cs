@@ -4,6 +4,7 @@ using RentMeApp.UserControls;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using RentMeApp.UserControls;
 
 namespace RentMeApp.View
 {
@@ -14,19 +15,21 @@ namespace RentMeApp.View
     public partial class AddMemberDialog : Form
     {
         private readonly MemberController _MemberController;
+        private readonly SearchMemberUserControl _searchMemberUserControl;
         private Member member;
         private readonly UserUserControl _userUserControl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddMemberDialog"/> class.
         /// </summary>
-        public AddMemberDialog(string username, string firstName)
+        public AddMemberDialog(SearchMemberUserControl searchMemberUserController, string username, string firstName)
         {
             InitializeComponent();
             this._MemberController = new MemberController();
             member = new Member();
             _userUserControl = new UserUserControl(username, firstName);
             this.userTableLayoutPanel.Controls.Add(_userUserControl);
+            this._searchMemberUserControl = searchMemberUserController;
         }
 
         private void AddMemberBtn_Click(object sender, EventArgs e)
@@ -128,6 +131,7 @@ namespace RentMeApp.View
                 member.Zip = zip;
                 member.Phone = phone;
                 member.MemberID = this._MemberController.InsertNewMember(member);
+                this._searchMemberUserControl.RefreshListView();
 
                 using (Form success = new View.MemberCreatedSuccessfully(member.MemberID))
                 {
