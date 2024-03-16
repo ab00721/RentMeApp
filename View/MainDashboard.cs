@@ -31,6 +31,7 @@ namespace RentMeApp.View
             ViewReports();
             _userUserControl = new UserUserControl(_employee.Username, _employee.FirstName);
             this.userTableLayoutPanel.Controls.Add(_userUserControl);
+            this.mainSearchMemberUserControl.DisplayUserDetails(_employee.Username, _employee.FirstName);
         }
 
         private void MainDashboard_FormClosed(object sender, FormClosedEventArgs e)

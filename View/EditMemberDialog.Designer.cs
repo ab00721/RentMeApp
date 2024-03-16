@@ -1,6 +1,6 @@
 ﻿namespace RentMeApp.View
 {
-    partial class AddMemberDialog
+    partial class EditMemberDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -50,7 +50,7 @@
             this.ZipTextBox = new System.Windows.Forms.TextBox();
             this.PhoneTextBox = new System.Windows.Forms.TextBox();
             this.DobDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.AddMemberBtn = new System.Windows.Forms.Button();
+            this.EditMemberBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.LastNameErrorLabel = new System.Windows.Forms.Label();
             this.SexErrorLabel = new System.Windows.Forms.Label();
@@ -250,9 +250,9 @@
             this.SexComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SexComboBox.FormattingEnabled = true;
             this.SexComboBox.Items.AddRange(new object[] {
-            "-- Select --",
-            "M",
-            "F"});
+                "-- Select --",
+                "M",
+                "F"});
             this.SexComboBox.Location = new System.Drawing.Point(3, 67);
             this.SexComboBox.Name = "SexComboBox";
             this.SexComboBox.Size = new System.Drawing.Size(121, 21);
@@ -286,57 +286,6 @@
             // 
             this.StateComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StateComboBox.FormattingEnabled = true;
-            this.StateComboBox.Items.AddRange(new object[] {
-            "AL",
-            "AK",
-            "AZ",
-            "AR",
-            "CA",
-            "CO",
-            "CT",
-            "DE",
-            "FL",
-            "GA",
-            "HI",
-            "ID",
-            "IL",
-            "IN",
-            "IA",
-            "KS",
-            "KY",
-            "LA",
-            "ME",
-            "MD",
-            "MA",
-            "MI",
-            "MN",
-            "MS",
-            "MO",
-            "MT",
-            "NE",
-            "NV",
-            "NH",
-            "NJ",
-            "NM",
-            "NY",
-            "NC",
-            "ND",
-            "OH",
-            "OK",
-            "OR",
-            "PA",
-            "RI",
-            "SC",
-            "SD",
-            "TN",
-            "TX",
-            "UT",
-            "VT",
-            "VA",
-            "WA",
-            "WV",
-            "WI",
-            "WY"});
             this.StateComboBox.Location = new System.Drawing.Point(3, 227);
             this.StateComboBox.Name = "StateComboBox";
             this.StateComboBox.Size = new System.Drawing.Size(121, 21);
@@ -365,16 +314,16 @@
             this.DobDatePicker.Size = new System.Drawing.Size(194, 20);
             this.DobDatePicker.TabIndex = 10;
             // 
-            // AddMemberBtn
+            // EditMemberBtn
             // 
-            this.AddMemberBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddMemberBtn.Location = new System.Drawing.Point(525, 392);
-            this.AddMemberBtn.Name = "AddMemberBtn";
-            this.AddMemberBtn.Size = new System.Drawing.Size(75, 23);
-            this.AddMemberBtn.TabIndex = 2;
-            this.AddMemberBtn.Text = "Create";
-            this.AddMemberBtn.UseVisualStyleBackColor = true;
-            this.AddMemberBtn.Click += new System.EventHandler(this.AddMemberBtn_Click);
+            this.EditMemberBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditMemberBtn.Location = new System.Drawing.Point(525, 392);
+            this.EditMemberBtn.Name = "EditMemberBtn";
+            this.EditMemberBtn.Size = new System.Drawing.Size(75, 23);
+            this.EditMemberBtn.TabIndex = 2;
+            this.EditMemberBtn.Text = "Save";
+            this.EditMemberBtn.UseVisualStyleBackColor = true;
+            this.EditMemberBtn.Click += new System.EventHandler(this.EditMemberBtn_Click);
             // 
             // tableLayoutPanel3
             // 
@@ -528,7 +477,7 @@
             this.userTableLayoutPanel.Size = new System.Drawing.Size(868, 56);
             this.userTableLayoutPanel.TabIndex = 5;
             // 
-            // AddMemberDialog
+            // EditMemberDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -536,15 +485,15 @@
             this.Controls.Add(this.userTableLayoutPanel);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.tableLayoutPanel3);
-            this.Controls.Add(this.AddMemberBtn);
+            this.Controls.Add(this.EditMemberBtn);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "AddMemberDialog";
+            this.Name = "EditMemberDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Member";
-            this.Load += new System.EventHandler(this.AddMemberDialog_Load);
+            this.Text = "Edit Member";
+            this.Load += new System.EventHandler(this.EditMemberDialog_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -579,7 +528,7 @@
         private System.Windows.Forms.TextBox ZipTextBox;
         private System.Windows.Forms.TextBox PhoneTextBox;
         private System.Windows.Forms.DateTimePicker DobDatePicker;
-        private System.Windows.Forms.Button AddMemberBtn;
+        private System.Windows.Forms.Button EditMemberBtn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label LastNameErrorLabel;
         private System.Windows.Forms.Label SexErrorLabel;

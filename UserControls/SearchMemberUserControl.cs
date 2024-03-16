@@ -19,6 +19,8 @@ namespace RentMeApp.UserControls
         private readonly List<Member> _members;
         private readonly List<Member> _allMembers;
         private Member _selectedMember;
+        private string _username;
+        private string _firstName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
@@ -47,8 +49,6 @@ namespace RentMeApp.UserControls
 
         private void RefreshListView(List<Member> members)
         {
-            
-            
             memberListView.Items.Clear();
             _selectedMember = null;
 
@@ -62,7 +62,7 @@ namespace RentMeApp.UserControls
                     memberListView.Items[i].SubItems.Add(member.FirstName.ToString());
                     memberListView.Items[i].SubItems.Add(member.LastName.ToString());
                     memberListView.Items[i].SubItems.Add(member.Sex.ToString());
-                    memberListView.Items[i].SubItems.Add(member.DateOfBirth.ToString());
+                    memberListView.Items[i].SubItems.Add(member.DateOfBirth.ToShortDateString());
                     memberListView.Items[i].SubItems.Add(member.AddressOne.ToString());
                     memberListView.Items[i].SubItems.Add(member.AddressTwo.ToString());
                     memberListView.Items[i].SubItems.Add(member.City.ToString());
@@ -156,7 +156,6 @@ namespace RentMeApp.UserControls
 
         }
 
-
         private void MemberSearchTextBox_TextChanged(object sender, EventArgs e)
         {
             ClearMessageLabel();
@@ -207,25 +206,45 @@ namespace RentMeApp.UserControls
 
         private void AddMemberButton_Click(object sender, EventArgs e)
         {
-            //using (Form addMember = new View.AddMemberDialog(this.user))
-            //{
-            //    DialogResult result = addMember.ShowDialog();
+            using (Form addMember = new View.AddMemberDialog(this._username, this._firstName))
+            {
+                DialogResult result = addMember.ShowDialog();
 
-            //    if (result == DialogResult.OK)
-            //    {
-            //        this.RefreshListView(_members);
-            //    }
-            //    else if (result == DialogResult.Cancel)
-            //    {
-            //        addMember.Close();
-            //    }
-            //}
+                if (result == DialogResult.OK)
+                {
+                    this.RefreshListView(this._memberController.GetMemberInfo());
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    addMember.Close();
+                }
+            }
         }
-
 
         private void EditMemberButton_Click(object sender, EventArgs e)
         {
-            EditMember(_selectedMember);
+            if (memberListView.SelectedItems.Count > 0)
+            {
+                Member selectedMember = (Member)memberListView.SelectedItems[0].Tag;
+
+                using (Form editMember = new View.EditMemberDialog(this._username, this._firstName, selectedMember))
+                {
+                    DialogResult result = editMember.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        this.RefreshListView(this._memberController.GetMemberInfo());
+                    }
+                    else if (result == DialogResult.Cancel)
+                    {
+                        editMember.Close();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No member has been selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void NewOrderButton_Click(object sender, EventArgs e)
@@ -285,6 +304,12 @@ namespace RentMeApp.UserControls
         {
             ClearAll();
             RefreshListView(_allMembers);
+        }
+
+        internal void DisplayUserDetails(string username, string firstName)
+        {
+            this._username = username;
+            this._firstName = firstName;
         }
     }
 }
