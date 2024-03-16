@@ -90,7 +90,7 @@ namespace RentMeApp.DAL
                     insertCommand.Parameters["@FirstName"].Value = member.FirstName;
 
                     insertCommand.Parameters.Add("@Sex", SqlDbType.Char);
-                    insertCommand.Parameters["@Sex"].Value = member.Sex;
+                    insertCommand.Parameters["@Sex"].Value = member.Sex == "-- Select --" ? DBNull.Value : (object)member.Sex;
 
                     insertCommand.Parameters.Add("@DateOfBirth", SqlDbType.Date);
                     insertCommand.Parameters["@DateOfBirth"].Value = member.DateOfBirth;
@@ -99,7 +99,7 @@ namespace RentMeApp.DAL
                     insertCommand.Parameters["@AddressLine1"].Value = member.AddressOne;
 
                     insertCommand.Parameters.Add("@AddressLine2", SqlDbType.VarChar);
-                    insertCommand.Parameters["@AddressLine2"].Value = member.AddressTwo;
+                    insertCommand.Parameters["@AddressLine2"].Value = string.IsNullOrEmpty(member.AddressTwo) ? DBNull.Value : (object)member.AddressTwo;
 
                     insertCommand.Parameters.Add("@City", SqlDbType.VarChar);
                     insertCommand.Parameters["@City"].Value = member.City;
@@ -111,7 +111,7 @@ namespace RentMeApp.DAL
                     insertCommand.Parameters["@Zip"].Value = member.Zip;
 
                     insertCommand.Parameters.Add("@Phone", SqlDbType.VarChar);
-                    insertCommand.Parameters["@Phone"].Value = member.Phone;
+                    insertCommand.Parameters["@Phone"].Value = string.IsNullOrEmpty(member.Phone) ? DBNull.Value : (object)member.Phone;
 
                     memberId = (int)insertCommand.ExecuteScalar();
                 }

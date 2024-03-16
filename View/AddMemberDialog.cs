@@ -4,7 +4,7 @@ using RentMeApp.UserControls;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using RentMeApp.UserControls;
+using RentMeApp.Extension;
 
 namespace RentMeApp.View
 {
@@ -35,7 +35,6 @@ namespace RentMeApp.View
         private void AddMemberBtn_Click(object sender, EventArgs e)
         {
             Boolean errorsExist = false;
-            //int memberId = 5;
             string firstName = FirstNameTextBox.Text;
             string lastName = LastNameTextBox.Text;
             DateTime dob = DobDatePicker.Value;
@@ -44,7 +43,7 @@ namespace RentMeApp.View
             string city = CityTextBox.Text;
             string state = StateComboBox.SelectedItem.ToString();
             string zip = ZipTextBox.Text;
-            string phone = this.PhoneTextBox.Text;
+            string phone = PhoneTextBox.Text;
 
             if (string.IsNullOrEmpty(zip))
             {
@@ -64,7 +63,7 @@ namespace RentMeApp.View
                 errorsExist = true;
             }
 
-            if (this.SexComboBox.Text == "-- Select --")
+            if (SexComboBox.ValueMember.Length > 1)
             {
                 SexErrorLabel.Text = "Select appropriate value for sex.";
                 errorsExist = true;
@@ -82,30 +81,17 @@ namespace RentMeApp.View
                 errorsExist = true;
             }
 
-            if (string.IsNullOrEmpty(state))
+            if (string.IsNullOrEmpty(state) || state == "-- Select --")
             {
                 StateErrorLabel.Text = "State cannot be null or empty.";
                 errorsExist = true;
             }
 
-            if (string.IsNullOrEmpty(phone))
-            {
-                PhoneErrorLabel.Text = "Phone cannot be null or empty.";
-                errorsExist = true;
-            }
-
-            if (string.IsNullOrEmpty(phone))
-            {
-                PhoneErrorLabel.Text = "Phone cannot be null or empty.";
-                errorsExist = true;
-            }
-
-            if (!Regex.IsMatch(phone, @"^\d{3}-\d{3}-\d{4}$"))
+            if (!string.IsNullOrEmpty(phone) && !Regex.IsMatch(phone, @"^\d{3}-\d{3}-\d{4}$"))
             {
                 PhoneErrorLabel.Text = "Invalid phone number format\n###-###-####";
                 errorsExist = true;
             }
-
 
             if (!errorsExist)
             {
@@ -119,7 +105,7 @@ namespace RentMeApp.View
                 member.State = state;
                 member.Zip = zip;
                 member.Phone = phone;
-                member.MemberID = this._MemberController.InsertNewMember(member);
+                member.MemberID = _MemberController.InsertNewMember(member);
                 this._searchMemberUserControl.RefreshListView();
 
                 MessageBox.Show($"Member created successfully. Member ID: {member.MemberID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -129,8 +115,15 @@ namespace RentMeApp.View
 
         private void AddMemberDialog_Load(object sender, EventArgs e)
         {
-            this.SexComboBox.SelectedItem = "-- Select --";
-            this.StateComboBox.SelectedItem = "AL";
+            SexComboBox.SelectedItem = string.IsNullOrEmpty(member.Sex) ? "-- Select --" : (object)member.Sex;
+
+            StateComboBox.Items.Add("-- Select --");
+            foreach (USState state in Enum.GetValues(typeof(USState)))
+            {
+                StateComboBox.Items.Add(state);
+            }
+
+            StateComboBox.SelectedItem = string.IsNullOrEmpty(member.State) ? "-- Select --" : Enum.Parse(typeof(USState), member.State);
         }
 
         private void FirstNameTextBox_TextChanged(object sender, EventArgs e)
@@ -171,6 +164,11 @@ namespace RentMeApp.View
         private void CancelBtn_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void StateComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            StateErrorLabel.Text = "";
         }
     }
 }

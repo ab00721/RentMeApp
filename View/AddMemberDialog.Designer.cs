@@ -341,6 +341,7 @@
             this.StateComboBox.Name = "StateComboBox";
             this.StateComboBox.Size = new System.Drawing.Size(121, 21);
             this.StateComboBox.TabIndex = 7;
+            this.StateComboBox.SelectedIndexChanged += new System.EventHandler(this.StateComboBox_SelectedIndexChanged);
             // 
             // ZipTextBox
             // 
