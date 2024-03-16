@@ -1,4 +1,5 @@
 ﻿using RentMeApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -141,7 +142,7 @@ namespace RentMeApp.DAL
                     updateCommand.Parameters["@FirstName"].Value = member.FirstName;
 
                     updateCommand.Parameters.Add("@Sex", SqlDbType.Char);
-                    updateCommand.Parameters["@Sex"].Value = member.Sex;
+                    updateCommand.Parameters["@Sex"].Value = member.Sex == "-- Select --" ? DBNull.Value : (object)member.Sex;
 
                     updateCommand.Parameters.Add("@DateOfBirth", SqlDbType.Date);
                     updateCommand.Parameters["@DateOfBirth"].Value = member.DateOfBirth;
@@ -150,7 +151,7 @@ namespace RentMeApp.DAL
                     updateCommand.Parameters["@AddressLine1"].Value = member.AddressOne;
 
                     updateCommand.Parameters.Add("@AddressLine2", SqlDbType.VarChar);
-                    updateCommand.Parameters["@AddressLine2"].Value = member.AddressTwo;
+                    updateCommand.Parameters["@AddressLine2"].Value = string.IsNullOrEmpty(member.AddressTwo) ? DBNull.Value : (object)member.AddressTwo;
 
                     updateCommand.Parameters.Add("@City", SqlDbType.VarChar);
                     updateCommand.Parameters["@City"].Value = member.City;
@@ -162,7 +163,7 @@ namespace RentMeApp.DAL
                     updateCommand.Parameters["@Zip"].Value = member.Zip;
 
                     updateCommand.Parameters.Add("@Phone", SqlDbType.VarChar);
-                    updateCommand.Parameters["@Phone"].Value = member.Phone;
+                    updateCommand.Parameters["@Phone"].Value = string.IsNullOrEmpty(member.Phone) ? DBNull.Value : (object)member.Phone;
 
                     updateCommand.Parameters.Add("@MemberID", SqlDbType.Int);
                     updateCommand.Parameters["@MemberID"].Value = member.MemberID;

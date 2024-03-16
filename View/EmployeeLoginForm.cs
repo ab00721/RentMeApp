@@ -62,7 +62,7 @@ namespace RentMeApp
                 }
             }
             catch (SqlException exception) {
-                MessageBox.Show(exception.Message, "Error while authenticating", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(exception.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

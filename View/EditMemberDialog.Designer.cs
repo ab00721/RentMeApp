@@ -250,9 +250,9 @@
             this.SexComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SexComboBox.FormattingEnabled = true;
             this.SexComboBox.Items.AddRange(new object[] {
-            "-- Select --",
-            "M",
-            "F"});
+                "-- Select --",
+                "M",
+                "F"});
             this.SexComboBox.Location = new System.Drawing.Point(3, 67);
             this.SexComboBox.Name = "SexComboBox";
             this.SexComboBox.Size = new System.Drawing.Size(121, 21);

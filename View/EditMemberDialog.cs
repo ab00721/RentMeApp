@@ -132,13 +132,14 @@ namespace RentMeApp.View
 
         private void EditMemberDialog_Load(object sender, EventArgs e)
         {
-            SexComboBox.SelectedItem = member.Sex;
+            SexComboBox.SelectedItem = string.IsNullOrEmpty(member.Sex) ? "-- Select --" : (object)member.Sex;
 
             foreach (USState state in Enum.GetValues(typeof(USState)))
             {
                 StateComboBox.Items.Add(state);
             }
-            StateComboBox.SelectedItem = Enum.Parse(typeof(USState), member.State);
+
+            StateComboBox.SelectedItem = string.IsNullOrEmpty(member.State) ? "-- Select --" : Enum.Parse(typeof(USState), member.State);
         }
 
         private void FirstNameTextBox_TextChanged(object sender, EventArgs e)
