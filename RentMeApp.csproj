@@ -118,12 +118,6 @@
     <Compile Include="View\MainDashboard.Designer.cs">
       <DependentUpon>MainDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\MemberUpdatedSuccessfully.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\MemberUpdatedSuccessfully.Designer.cs">
-      <DependentUpon>MemberUpdatedSuccessfully.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\MemberCreatedSuccessfully.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,9 +159,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainDashboard.resx">
       <DependentUpon>MainDashboard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\MemberUpdatedSuccessfully.resx">
-      <DependentUpon>MemberUpdatedSuccessfully.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MemberCreatedSuccessfully.resx">
       <DependentUpon>MemberCreatedSuccessfully.cs</DependentUpon>

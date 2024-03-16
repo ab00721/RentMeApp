@@ -372,7 +372,7 @@
             this.EditMemberBtn.Name = "EditMemberBtn";
             this.EditMemberBtn.Size = new System.Drawing.Size(75, 23);
             this.EditMemberBtn.TabIndex = 2;
-            this.EditMemberBtn.Text = "Create";
+            this.EditMemberBtn.Text = "Save";
             this.EditMemberBtn.UseVisualStyleBackColor = true;
             this.EditMemberBtn.Click += new System.EventHandler(this.EditMemberBtn_Click);
             // 

@@ -104,24 +104,11 @@ namespace RentMeApp.View
                 errorsExist = true;
             }
 
-            if (string.IsNullOrEmpty(phone))
-            {
-                PhoneErrorLabel.Text = "Phone cannot be null or empty.";
-                errorsExist = true;
-            }
-
-            if (string.IsNullOrEmpty(phone))
-            {
-                PhoneErrorLabel.Text = "Phone cannot be null or empty.";
-                errorsExist = true;
-            }
-
-            if (!Regex.IsMatch(phone, @"^\d{3}-\d{3}-\d{4}$"))
+            if (!string.IsNullOrEmpty(phone) && !Regex.IsMatch(phone, @"^\d{3}-\d{3}-\d{4}$"))
             {
                 PhoneErrorLabel.Text = "Invalid phone number format\n###-###-####";
                 errorsExist = true;
             }
-
 
             if (!errorsExist)
             {
@@ -137,15 +124,8 @@ namespace RentMeApp.View
                 member.Phone = phone;
                 member.MemberID = _MemberController.UpdateExistingMember(member);
 
-                using (Form success = new View.MemberUpdatedSuccessfully(member.MemberID))
-                {
-                    DialogResult result = success.ShowDialog();
-
-                    if (result == DialogResult.OK)
-                    {
-                        DialogResult = DialogResult.OK;
-                    }
-                }
+                MessageBox.Show($"Member updated successfully. Member ID: {member.MemberID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
             }
         }
 

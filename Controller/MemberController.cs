@@ -11,7 +11,7 @@ namespace RentMeApp.Controller
         private readonly MemberDAL _memberSource;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemberControllerX"/> class.
+        /// Initializes a new instance of the <see cref="MemberController"/> class.
         /// </summary>
         public MemberController()
         {
@@ -19,7 +19,7 @@ namespace RentMeApp.Controller
         }
 
         /// <summary>
-        /// Gets the member information x.
+        /// Gets the member information.
         /// </summary>
         /// <returns></returns>
         public List<Member> GetMemberInfo()
