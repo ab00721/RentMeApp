@@ -172,5 +172,8 @@
   <ItemGroup>
     <Folder Include="Database\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="read_me.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
