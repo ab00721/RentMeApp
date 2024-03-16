@@ -71,6 +71,7 @@
     <Compile Include="DAL\MemberDAL.cs" />
     <Compile Include="DAL\MemberDALX.cs" />
     <Compile Include="DAL\RentMeDBConnection.cs" />
+    <Compile Include="Extension\USState.cs" />
     <Compile Include="Model\EmployeeDTO.cs" />
     <Compile Include="Model\Member.cs" />
     <Compile Include="Model\MemberX.cs" />

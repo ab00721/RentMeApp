@@ -1,4 +1,5 @@
 ﻿using RentMeApp.Controller;
+using RentMeApp.Extension;
 using RentMeApp.Model;
 using RentMeApp.UserControls;
 using System;
@@ -132,7 +133,12 @@ namespace RentMeApp.View
         private void EditMemberDialog_Load(object sender, EventArgs e)
         {
             SexComboBox.SelectedItem = member.Sex;
-            StateComboBox.SelectedItem = member.State;
+
+            foreach (USState state in Enum.GetValues(typeof(USState)))
+            {
+                StateComboBox.Items.Add(state);
+            }
+            StateComboBox.SelectedItem = Enum.Parse(typeof(USState), member.State);
         }
 
         private void FirstNameTextBox_TextChanged(object sender, EventArgs e)
