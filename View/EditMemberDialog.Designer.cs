@@ -312,7 +312,7 @@
             this.DobDatePicker.Location = new System.Drawing.Point(3, 99);
             this.DobDatePicker.Name = "DobDatePicker";
             this.DobDatePicker.Size = new System.Drawing.Size(194, 20);
-            this.DobDatePicker.TabIndex = 10;
+            this.DobDatePicker.TabIndex = 3;
             // 
             // EditMemberBtn
             // 

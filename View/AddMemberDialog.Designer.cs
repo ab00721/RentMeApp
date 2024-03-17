@@ -286,57 +286,6 @@
             // 
             this.StateComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StateComboBox.FormattingEnabled = true;
-            this.StateComboBox.Items.AddRange(new object[] {
-            "AL",
-            "AK",
-            "AZ",
-            "AR",
-            "CA",
-            "CO",
-            "CT",
-            "DE",
-            "FL",
-            "GA",
-            "HI",
-            "ID",
-            "IL",
-            "IN",
-            "IA",
-            "KS",
-            "KY",
-            "LA",
-            "ME",
-            "MD",
-            "MA",
-            "MI",
-            "MN",
-            "MS",
-            "MO",
-            "MT",
-            "NE",
-            "NV",
-            "NH",
-            "NJ",
-            "NM",
-            "NY",
-            "NC",
-            "ND",
-            "OH",
-            "OK",
-            "OR",
-            "PA",
-            "RI",
-            "SC",
-            "SD",
-            "TN",
-            "TX",
-            "UT",
-            "VT",
-            "VA",
-            "WA",
-            "WV",
-            "WI",
-            "WY"});
             this.StateComboBox.Location = new System.Drawing.Point(3, 227);
             this.StateComboBox.Name = "StateComboBox";
             this.StateComboBox.Size = new System.Drawing.Size(121, 21);
@@ -364,7 +313,7 @@
             this.DobDatePicker.Location = new System.Drawing.Point(3, 99);
             this.DobDatePicker.Name = "DobDatePicker";
             this.DobDatePicker.Size = new System.Drawing.Size(194, 20);
-            this.DobDatePicker.TabIndex = 10;
+            this.DobDatePicker.TabIndex = 3;
             // 
             // AddMemberBtn
             // 

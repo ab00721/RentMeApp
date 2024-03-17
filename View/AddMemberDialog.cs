@@ -106,7 +106,6 @@ namespace RentMeApp.View
                 member.Zip = zip;
                 member.Phone = phone;
                 member.MemberID = _MemberController.InsertNewMember(member);
-                this._searchMemberUserControl.RefreshListView();
 
                 MessageBox.Show($"Member created successfully. Member ID: {member.MemberID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
