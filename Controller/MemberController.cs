@@ -41,7 +41,7 @@ namespace RentMeApp.Controller
         /// Updates an existing member.
         /// </summary>
         /// <param name="member">The member.</param>
-        /// <returns></returns>
+        /// <returns>The number of rows affected by the update</returns>
         public int UpdateExistingMember(Member member)
         {
             return this._memberSource.UpdateExistingMember(member);

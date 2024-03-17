@@ -123,10 +123,10 @@ namespace RentMeApp.DAL
         /// Updates the existing member.
         /// </summary>
         /// <param name="member">The member.</param>
-        /// <returns>The number of changed properties.</returns>
+        /// <returns>The number of rows affected.</returns>
         public int UpdateExistingMember(Member member)
         {
-            int changedProperties;
+            int rowsAffected;
             string updateStatement = "UPDATE [dbo].[Member] SET [LastName] = @LastName, [FirstName] = @FirstName, [Sex] = @Sex, [DateOfBirth] = @DateOfBirth, [AddressLine1] = @AddressLine1, [AddressLine2] = @AddressLine2, [City] = @City, [State] = @State, [Zip] = @Zip, [Phone] = @Phone WHERE [MemberID] = @MemberID";
 
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
@@ -168,10 +168,10 @@ namespace RentMeApp.DAL
                     updateCommand.Parameters.Add("@MemberID", SqlDbType.Int);
                     updateCommand.Parameters["@MemberID"].Value = member.MemberID;
 
-                    changedProperties = updateCommand.ExecuteNonQuery();
+                    rowsAffected = updateCommand.ExecuteNonQuery();
                 }
             }
-            return changedProperties;
+            return rowsAffected;
         }
     }
 }

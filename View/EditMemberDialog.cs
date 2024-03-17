@@ -123,9 +123,10 @@ namespace RentMeApp.View
                 member.State = state;
                 member.Zip = zip;
                 member.Phone = phone;
-                member.MemberID = _MemberController.UpdateExistingMember(member);
 
-                MessageBox.Show($"Member updated successfully. Member ID: {member.MemberID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                int rowsAffected = _MemberController.UpdateExistingMember(member);
+
+                MessageBox.Show($"Member ID: {member.MemberID}\nMember updated successfully.\n{rowsAffected} row(s) affected.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
             }
         }
