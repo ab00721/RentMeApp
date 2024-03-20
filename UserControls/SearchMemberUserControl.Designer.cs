@@ -193,7 +193,7 @@
             this.butttonsTableLayoutPanel.Name = "butttonsTableLayoutPanel";
             this.butttonsTableLayoutPanel.RowCount = 1;
             this.butttonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.butttonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this.butttonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.butttonsTableLayoutPanel.Size = new System.Drawing.Size(483, 48);
             this.butttonsTableLayoutPanel.TabIndex = 11;
             // 
@@ -240,6 +240,7 @@
             // memberSearchComboBox
             // 
             this.memberSearchComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.memberSearchComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.memberSearchComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.memberSearchComboBox.FormattingEnabled = true;
             this.memberSearchComboBox.Location = new System.Drawing.Point(165, 18);

@@ -28,9 +28,9 @@ namespace RentMeApp.UserControls
         {
             InitializeComponent();
             ClearMessageLabel();
-            PopulateSearchByComboBox();
             _memberController = new MemberController();
             _members = this._memberController.GetMemberInfo();
+            PopulateSearchByComboBox();
         }
 
         /// <summary>
@@ -165,7 +165,8 @@ namespace RentMeApp.UserControls
 
         private void MemberSearchComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ClearMessageLabel();
+            ClearAll();
+            RefreshListView();
         }
 
         private void PopulateSearchByComboBox()
@@ -184,7 +185,7 @@ namespace RentMeApp.UserControls
 
         private void ClearAll()
         {
-            memberSearchComboBox.SelectedIndex = 0;
+            //memberSearchComboBox.SelectedIndex = 0;
             memberSearchTextBox.Text = string.Empty;
             searchMessageLabel.Text = string.Empty;
             DisableButtons();
