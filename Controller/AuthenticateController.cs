@@ -28,14 +28,7 @@ namespace RentMeApp.Controller
         /// <exception cref="System.Exception"></exception>
         public bool Authenticate(string username, string password)
         {
-            try
-            {
-                return this._authenticateSource.Authenticate(username, password);
-            }
-            catch (SqlException exception)
-            {
-                throw exception;
-            }
+            return this._authenticateSource.Authenticate(username, password);
         }
     }
 }

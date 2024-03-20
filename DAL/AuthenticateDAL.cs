@@ -16,32 +16,25 @@ namespace RentMeApp.DAL
         /// <returns></returns>
         public bool Authenticate(string username, string password)
         {
-            try
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
             {
-                using (SqlConnection connection = RentMeDBConnection.GetConnection())
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
                 {
-                    connection.Open();
-                    using (SqlCommand command = connection.CreateCommand())
-                    {
-                        command.CommandText =
-                            "SELECT COUNT(*) FROM Login " +
-                            "WHERE Username = @username and Password = @password";
+                    command.CommandText =
+                        "SELECT COUNT(*) FROM Login " +
+                        "WHERE Username = @username and Password = @password";
 
-                        command.Parameters.Add("@username", System.Data.SqlDbType.VarChar);
-                        command.Parameters["@username"].Value = username;
+                    command.Parameters.Add("@username", System.Data.SqlDbType.VarChar);
+                    command.Parameters["@username"].Value = username;
 
-                        command.Parameters.Add("@password", System.Data.SqlDbType.VarChar);
-                        command.Parameters["@password"].Value = password;
+                    command.Parameters.Add("@password", System.Data.SqlDbType.VarChar);
+                    command.Parameters["@password"].Value = password;
 
-                        int count = Convert.ToInt32(command.ExecuteScalar());
+                    int count = Convert.ToInt32(command.ExecuteScalar());
 
-                        return count == 1;
-                    }
+                    return count == 1;
                 }
-            }
-            catch (SqlException exception)
-            {
-                throw exception;
             }
         }
 
