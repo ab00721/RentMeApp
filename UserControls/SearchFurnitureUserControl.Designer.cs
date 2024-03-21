@@ -49,24 +49,26 @@
             // 
             this.furnitureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.furnitureDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.furnitureDataGridView.Location = new System.Drawing.Point(14, 135);
+            this.furnitureDataGridView.Location = new System.Drawing.Point(14, 180);
             this.furnitureDataGridView.Name = "furnitureDataGridView";
             this.furnitureDataGridView.RowHeadersWidth = 62;
             this.furnitureDataGridView.RowTemplate.Height = 24;
-            this.furnitureDataGridView.Size = new System.Drawing.Size(1015, 454);
+            this.furnitureDataGridView.Size = new System.Drawing.Size(1015, 409);
             this.furnitureDataGridView.TabIndex = 12;
+            this.furnitureDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FurnitureDataGridView_CellContentClick);
             // 
             // searchButton
             // 
             this.searchButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(122, 6);
+            this.searchButton.Location = new System.Drawing.Point(122, 18);
             this.searchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(126, 37);
             this.searchButton.TabIndex = 10;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // furnitureSearchTableLayoutPanel
             // 
@@ -76,32 +78,33 @@
             this.furnitureSearchTableLayoutPanel.Controls.Add(this.clearButton, 1, 0);
             this.furnitureSearchTableLayoutPanel.Controls.Add(this.searchButton, 0, 0);
             this.furnitureSearchTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.furnitureSearchTableLayoutPanel.Location = new System.Drawing.Point(509, 59);
+            this.furnitureSearchTableLayoutPanel.Location = new System.Drawing.Point(509, 81);
             this.furnitureSearchTableLayoutPanel.Name = "furnitureSearchTableLayoutPanel";
             this.furnitureSearchTableLayoutPanel.RowCount = 1;
             this.furnitureSearchTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.furnitureSearchTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.furnitureSearchTableLayoutPanel.Size = new System.Drawing.Size(503, 50);
+            this.furnitureSearchTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73F));
+            this.furnitureSearchTableLayoutPanel.Size = new System.Drawing.Size(503, 73);
             this.furnitureSearchTableLayoutPanel.TabIndex = 10;
             // 
             // clearButton
             // 
             this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearButton.Location = new System.Drawing.Point(349, 8);
+            this.clearButton.Location = new System.Drawing.Point(349, 19);
             this.clearButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(151, 34);
             this.clearButton.TabIndex = 11;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // searchByLabel
             // 
             this.searchByLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.searchByLabel.AutoSize = true;
             this.searchByLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchByLabel.Location = new System.Drawing.Point(3, 15);
+            this.searchByLabel.Location = new System.Drawing.Point(3, 26);
             this.searchByLabel.Name = "searchByLabel";
             this.searchByLabel.Size = new System.Drawing.Size(127, 25);
             this.searchByLabel.TabIndex = 6;
@@ -110,30 +113,33 @@
             // furnitureSearchComboBox
             // 
             this.furnitureSearchComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.furnitureSearchComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.furnitureSearchComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.furnitureSearchComboBox.FormattingEnabled = true;
-            this.furnitureSearchComboBox.Location = new System.Drawing.Point(170, 11);
+            this.furnitureSearchComboBox.Location = new System.Drawing.Point(170, 22);
             this.furnitureSearchComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.furnitureSearchComboBox.Name = "furnitureSearchComboBox";
             this.furnitureSearchComboBox.Size = new System.Drawing.Size(333, 33);
             this.furnitureSearchComboBox.TabIndex = 8;
+            this.furnitureSearchComboBox.SelectedIndexChanged += new System.EventHandler(this.FurnitureSearchComboBox_SelectedIndexChanged);
             // 
             // furnitureSearchTextBox
             // 
             this.furnitureSearchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.furnitureSearchTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.furnitureSearchTextBox.Location = new System.Drawing.Point(170, 68);
+            this.furnitureSearchTextBox.Location = new System.Drawing.Point(170, 102);
             this.furnitureSearchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.furnitureSearchTextBox.Name = "furnitureSearchTextBox";
             this.furnitureSearchTextBox.Size = new System.Drawing.Size(333, 31);
             this.furnitureSearchTextBox.TabIndex = 9;
+            this.furnitureSearchTextBox.TextChanged += new System.EventHandler(this.FurnitureSearchTextBox_TextChanged);
             // 
             // searchLabel
             // 
             this.searchLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.searchLabel.AutoSize = true;
             this.searchLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchLabel.Location = new System.Drawing.Point(3, 71);
+            this.searchLabel.Location = new System.Drawing.Point(3, 105);
             this.searchLabel.Name = "searchLabel";
             this.searchLabel.Size = new System.Drawing.Size(93, 25);
             this.searchLabel.TabIndex = 7;
@@ -144,7 +150,7 @@
             this.searchMessageLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.searchMessageLabel.AutoSize = true;
             this.searchMessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchMessageLabel.Location = new System.Drawing.Point(509, 15);
+            this.searchMessageLabel.Location = new System.Drawing.Point(509, 26);
             this.searchMessageLabel.Name = "searchMessageLabel";
             this.searchMessageLabel.Size = new System.Drawing.Size(99, 25);
             this.searchMessageLabel.TabIndex = 5;
@@ -169,7 +175,7 @@
             this.searchTableLayoutPanel.RowCount = 2;
             this.searchTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.searchTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.searchTableLayoutPanel.Size = new System.Drawing.Size(1015, 112);
+            this.searchTableLayoutPanel.Size = new System.Drawing.Size(1015, 157);
             this.searchTableLayoutPanel.TabIndex = 6;
             // 
             // furnitureTableLayoutPanel
@@ -184,8 +190,8 @@
             this.furnitureTableLayoutPanel.Name = "furnitureTableLayoutPanel";
             this.furnitureTableLayoutPanel.Padding = new System.Windows.Forms.Padding(11, 12, 11, 12);
             this.furnitureTableLayoutPanel.RowCount = 3;
-            this.furnitureTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.furnitureTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 76.32058F));
+            this.furnitureTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.31788F));
+            this.furnitureTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.70861F));
             this.furnitureTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.825137F));
             this.furnitureTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.furnitureTableLayoutPanel.Size = new System.Drawing.Size(1043, 628);

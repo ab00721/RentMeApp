@@ -2,12 +2,7 @@
 using RentMeApp.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RentMeApp.UserControls
@@ -16,8 +11,6 @@ namespace RentMeApp.UserControls
     {
         private readonly FurnitureController _furnitureController;
         private readonly List<Furniture> _furniture;
-        private string _username;
-        private string _firstName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
@@ -29,6 +22,7 @@ namespace RentMeApp.UserControls
             _furnitureController = new FurnitureController();
             _furniture = this._furnitureController.GetFurniture();
             PopulateSearchByComboBox();
+            AddButtonColumn();
         }
 
         /// <summary>
@@ -50,6 +44,26 @@ namespace RentMeApp.UserControls
         {
             furnitureDataGridView.DataSource = null;
             furnitureDataGridView.DataSource = furniture;
+        }
+
+        private void AddButtonColumn()
+        {
+            DataGridViewButtonColumn addButtonColumn = new DataGridViewButtonColumn();
+            addButtonColumn.Name = "AddButtonColumn";
+            addButtonColumn.HeaderText = "Add To Cart";
+            addButtonColumn.Text = "Add";
+            addButtonColumn.UseColumnTextForButtonValue = true;
+            furnitureDataGridView.Columns.Add(addButtonColumn);
+        }
+
+        private void FurnitureDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == furnitureDataGridView.Columns["AddButtonColumn"].Index)
+            {
+                Furniture furniture = _furniture[e.RowIndex];
+                searchMessageLabel.Text = "Added one " + furniture.Name + " to cart.";
+                searchMessageLabel.ForeColor = Color.Red;
+            }
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -103,7 +117,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Invalid category");
             }
-            List<Furniture> furniture = _furniture.FindAll(e => (e.Category).Contains(category));
+            List<Furniture> furniture = _furniture.FindAll(e => e.Category.Contains(category));
 
             if (furniture.Count == 0)
             {
@@ -119,7 +133,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Invalid style");
             }
-            List<Furniture> furniture = _furniture.FindAll(e => (e.Style).Contains(style));
+            List<Furniture> furniture = _furniture.FindAll(e => e.Style.Contains(style));
 
             if (furniture.Count == 0)
             {
@@ -166,10 +180,6 @@ namespace RentMeApp.UserControls
             RefreshDataGridView();
         }
 
-        internal void DisplayUserDetails(string username, string firstName)
-        {
-            this._username = username;
-            this._firstName = firstName;
-        }
+        
     }
 }
