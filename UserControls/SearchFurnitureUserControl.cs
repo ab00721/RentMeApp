@@ -10,7 +10,7 @@ namespace RentMeApp.UserControls
     public partial class SearchFurnitureUserControl : UserControl
     {
         private readonly FurnitureController _furnitureController;
-        private readonly List<Furniture> _furniture;
+        private List<Furniture> _furniture;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
@@ -37,13 +37,13 @@ namespace RentMeApp.UserControls
 
         public void RefreshDataGridView()
         {
-            List<Furniture> searchResults = _furnitureController.GetFurniture();
-            RefreshDataGridView(searchResults);
+            RefreshDataGridView(this._furnitureController.GetFurniture());
         }
         private void RefreshDataGridView(List<Furniture> furniture)
         {
+            _furniture = furniture;
             furnitureDataGridView.DataSource = null;
-            furnitureDataGridView.DataSource = furniture;
+            furnitureDataGridView.DataSource = _furniture;
         }
 
         private void AddButtonColumn()
@@ -102,7 +102,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Furniture ID must be greater than 0");
             }
-            List<Furniture> furniture = _furniture.FindAll(e => e.FurnitureID == id);
+            List<Furniture> furniture = this._furnitureController.GetFurniture("searchID", furnitureID);
 
             if (furniture.Count == 0)
             {
@@ -117,7 +117,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Invalid category");
             }
-            List<Furniture> furniture = _furniture.FindAll(e => e.Category.Contains(category));
+            List<Furniture> furniture = this._furnitureController.GetFurniture("searchCategory", category);
 
             if (furniture.Count == 0)
             {
@@ -133,7 +133,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Invalid style");
             }
-            List<Furniture> furniture = _furniture.FindAll(e => e.Style.Contains(style));
+            List<Furniture> furniture = this._furnitureController.GetFurniture("searchStyle", style);
 
             if (furniture.Count == 0)
             {

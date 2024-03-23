@@ -27,5 +27,16 @@ namespace RentMeApp.Controller
         {
             return this._furnitureSource.GetFurniture();
         }
+
+        /// <summary>
+        /// Gets the furniture.
+        /// </summary>
+        /// <param name="searchBy">The search by.</param>
+        /// <param name="searchCriteria">The search criteria.</param>
+        /// <returns></returns>
+        public List<Furniture> GetFurniture(string searchBy, string searchCriteria)
+        {
+            return this._furnitureSource.GetFurniture(searchBy, searchCriteria);
+        }
     }
 }
