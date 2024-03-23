@@ -11,6 +11,7 @@ namespace RentMeApp.UserControls
     {
         private readonly FurnitureController _furnitureController;
         private List<Furniture> _furniture;
+        DataGridViewButtonColumn _addButtonColumn;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchMemberUserControl"/> class.
@@ -21,8 +22,10 @@ namespace RentMeApp.UserControls
             ClearMessageLabel();
             _furnitureController = new FurnitureController();
             _furniture = this._furnitureController.GetFurniture();
+            _addButtonColumn = new DataGridViewButtonColumn();
             PopulateSearchByComboBox();
             AddButtonColumn();
+            TurnOffAddButtonColumn();
         }
 
         /// <summary>
@@ -32,9 +35,13 @@ namespace RentMeApp.UserControls
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         public void SearchFurnitureUserControl_Load(object sender, EventArgs e)
         {
+            TurnOffAddButtonColumn();
             RefreshDataGridView();
         }
 
+        /// <summary>
+        /// Refreshes the data grid view.
+        /// </summary>
         public void RefreshDataGridView()
         {
             RefreshDataGridView(this._furnitureController.GetFurniture());
@@ -48,12 +55,25 @@ namespace RentMeApp.UserControls
 
         private void AddButtonColumn()
         {
-            DataGridViewButtonColumn addButtonColumn = new DataGridViewButtonColumn();
-            addButtonColumn.Name = "AddButtonColumn";
-            addButtonColumn.HeaderText = "Add To Cart";
-            addButtonColumn.Text = "Add";
-            addButtonColumn.UseColumnTextForButtonValue = true;
-            furnitureDataGridView.Columns.Add(addButtonColumn);
+            _addButtonColumn = new DataGridViewButtonColumn();
+            _addButtonColumn.Name = "AddButtonColumn";
+            _addButtonColumn.HeaderText = "Add To Cart";
+            _addButtonColumn.Text = "Add";
+            _addButtonColumn.UseColumnTextForButtonValue = true;
+            furnitureDataGridView.Columns.Add(_addButtonColumn);
+        }
+
+        private void TurnOffAddButtonColumn()
+        {
+            _addButtonColumn.Visible = false;
+        }
+
+        /// <summary>
+        /// Turns the on add button column.
+        /// </summary>
+        public void TurnOnAddButtonColumn()
+        {
+            _addButtonColumn.Visible = true;
         }
 
         private void FurnitureDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)

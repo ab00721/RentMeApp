@@ -268,8 +268,23 @@ namespace RentMeApp.UserControls
 
         private void NewOrder(Member member)
         {
-            searchMessageLabel.Text = "New Order " + member.FirstName;
-            searchMessageLabel.ForeColor = Color.Red;
+            this.ClearMessageLabel();
+
+            Member selectedMember = (Member)memberListView.SelectedItems[0].Tag;
+
+            using (Form newOrder = new View.RentalDialog(this._username, this._firstName, selectedMember))
+            {
+                DialogResult result = newOrder.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    this.RefreshListView();
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    newOrder.Close();
+                }
+            }
         }
 
         private void NewReturn(Member member)

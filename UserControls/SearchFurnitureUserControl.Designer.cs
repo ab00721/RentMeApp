@@ -47,10 +47,12 @@
             // 
             // furnitureDataGridView
             // 
+            this.furnitureDataGridView.AllowUserToDeleteRows = false;
             this.furnitureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.furnitureDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.furnitureDataGridView.Location = new System.Drawing.Point(14, 180);
             this.furnitureDataGridView.Name = "furnitureDataGridView";
+            this.furnitureDataGridView.ReadOnly = true;
             this.furnitureDataGridView.RowHeadersWidth = 62;
             this.furnitureDataGridView.RowTemplate.Height = 24;
             this.furnitureDataGridView.Size = new System.Drawing.Size(1015, 409);
