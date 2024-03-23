@@ -16,7 +16,6 @@ namespace RentMeApp.UserControls
     {
         //private readonly MemberControllerX _memberControllerX;
         private readonly MemberController _memberController;
-        private List<Member> _members;
         private Member _selectedMember;
         private string _username;
         private string _firstName;
@@ -29,7 +28,6 @@ namespace RentMeApp.UserControls
             InitializeComponent();
             ClearMessageLabel();
             _memberController = new MemberController();
-            _members = this._memberController.GetMemberInfo();
             PopulateSearchByComboBox();
         }
 
@@ -44,10 +42,12 @@ namespace RentMeApp.UserControls
             this.RefreshListView();
         }
 
+        /// <summary>
+        /// Refreshes the ListView.
+        /// </summary>
         public void RefreshListView()
         {
-            this._members = this._memberController.GetMemberInfo();
-            this.RefreshListView(this._members);
+            this.RefreshListView(this._memberController.GetMemberInfo());
         }
         private void RefreshListView(List<Member> members)
         {
@@ -115,7 +115,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Member ID must be greater than 0");
             }
-            List<Member> members = _members.FindAll(e => e.MemberID == id);
+            List<Member> members = this._memberController.GetMemberInfo("searchID", memberID);
 
             if (members.Count == 0)
             {
@@ -130,7 +130,7 @@ namespace RentMeApp.UserControls
             {
                 throw new Exception("Invalid name");
             }
-            List<Member> members = _members.FindAll(e => (e.FirstName + " " + e.LastName).Contains(name));
+            List<Member> members = this._memberController.GetMemberInfo("searchName", name);
 
             if (members.Count == 0)
             {
@@ -147,7 +147,7 @@ namespace RentMeApp.UserControls
                 throw new Exception("Invalid phone number format\n###-###-####");
             }
 
-            List<Member> members = _members.FindAll(e => e.Phone == phone);
+            List<Member> members = this._memberController.GetMemberInfo("searchPhone", phone);
 
             if (members.Count == 0)
             {
@@ -185,7 +185,6 @@ namespace RentMeApp.UserControls
 
         private void ClearAll()
         {
-            //memberSearchComboBox.SelectedIndex = 0;
             memberSearchTextBox.Text = string.Empty;
             searchMessageLabel.Text = string.Empty;
             DisableButtons();
