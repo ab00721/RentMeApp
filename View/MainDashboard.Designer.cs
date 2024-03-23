@@ -82,8 +82,11 @@
             // 
             // rentalTabPage
             // 
+            this.rentalTabPage.Controls.Add(this.addRentalUserControl);
             this.rentalTabPage.Location = new System.Drawing.Point(4, 34);
+            this.rentalTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rentalTabPage.Name = "rentalTabPage";
+            this.rentalTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rentalTabPage.Size = new System.Drawing.Size(1218, 614);
             this.rentalTabPage.TabIndex = 1;
             this.rentalTabPage.Text = "Rental";
@@ -117,7 +120,7 @@
             this.logoutLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutLinkLabel.Location = new System.Drawing.Point(1125, 0);
             this.logoutLinkLabel.Name = "logoutLinkLabel";
-            this.logoutLinkLabel.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.logoutLinkLabel.Padding = new System.Windows.Forms.Padding(10);
             this.logoutLinkLabel.Size = new System.Drawing.Size(98, 45);
             this.logoutLinkLabel.TabIndex = 1;
             this.logoutLinkLabel.TabStop = true;
@@ -164,7 +167,6 @@
             this.ClientSize = new System.Drawing.Size(1232, 742);
             this.Controls.Add(this.mainTableLayoutPanel);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -172,6 +174,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainDashboard_FormClosed);
             this.mainTabControl.ResumeLayout(false);
             this.membersTabPage.ResumeLayout(false);
+            this.rentalTabPage.ResumeLayout(false);
             this.userTableLayoutPanel.ResumeLayout(false);
             this.userTableLayoutPanel.PerformLayout();
             this.mainTableLayoutPanel.ResumeLayout(false);

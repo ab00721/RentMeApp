@@ -1,10 +1,9 @@
 ﻿using RentMeApp.Controller;
 using RentMeApp.Model;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using RentMeApp.Extension;
 
 namespace RentMeApp.UserControls
 {
@@ -30,6 +29,8 @@ namespace RentMeApp.UserControls
             PopulateSearchByComboBox();
             _memberController = new MemberController();
             _members = this._memberController.GetMemberInfo();
+
+            Resize += AddRentalUserControl_Resize;
         }
 
         /// <summary>
@@ -39,10 +40,19 @@ namespace RentMeApp.UserControls
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         public void AddRentalUserControl_Load(object sender, EventArgs e)
         {
+            furnitureListView = ListViewColumnWidthService.Distribute(furnitureListView);
+            shoppingCartListView = ListViewColumnWidthService.Distribute(shoppingCartListView);
+
             /*
             ClearAll();
             this.RefreshListView();
             */
+        }
+
+        private void AddRentalUserControl_Resize(object sender, EventArgs e)
+        {
+            furnitureListView = ListViewColumnWidthService.Distribute(furnitureListView);
+            shoppingCartListView = ListViewColumnWidthService.Distribute(shoppingCartListView);
         }
 
         public void RefreshListView()

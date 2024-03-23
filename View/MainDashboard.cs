@@ -16,7 +16,6 @@ namespace RentMeApp.View
         private readonly UserUserControl _userUserControl;
         private readonly EmployeeController _employeeController;
         private readonly EmployeeDTO _employee;
-        private readonly AddRentalUserControl _addRentalUserControl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainDashboard"/> class.
@@ -29,15 +28,13 @@ namespace RentMeApp.View
             _employeeController = new EmployeeController();
             _employee = _employeeController.GetEmployeeByUsername(user);
             _loginForm = loginForm;
+            
             ViewReports();
 
             _userUserControl = new UserUserControl(_employee.Username, _employee.FirstName);
             userTableLayoutPanel.Controls.Add(_userUserControl);
 
             mainSearchMemberUserControl.DisplayUserDetails(_employee.Username, _employee.FirstName);
-
-            _addRentalUserControl = new AddRentalUserControl();
-            mainTabControl.TabPages["rentalTabPage"].Controls.Add(_addRentalUserControl);
         }
 
         private void MainDashboard_FormClosed(object sender, FormClosedEventArgs e)
@@ -54,6 +51,7 @@ namespace RentMeApp.View
             if (mainTabControl.SelectedTab == mainTabControl.TabPages["rentalTabPage"])
             {
                 addRentalUserControl.AddRentalUserControl_Load(sender, e);
+                mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             }
             if (mainTabControl.SelectedTab == mainTabControl.TabPages["returnTabPage"])
             {

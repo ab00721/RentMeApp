@@ -69,6 +69,7 @@
     <Compile Include="DAL\EmployeeDAL.cs" />
     <Compile Include="DAL\MemberDAL.cs" />
     <Compile Include="DAL\RentMeDBConnection.cs" />
+    <Compile Include="Extension\ListViewColumnWidthService.cs" />
     <Compile Include="Extension\USState.cs" />
     <Compile Include="Model\EmployeeDTO.cs" />
     <Compile Include="Model\Member.cs" />
