@@ -30,13 +30,16 @@
         {
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.membersTabPage = new System.Windows.Forms.TabPage();
+            this.mainSearchMemberUserControl = new RentMeApp.UserControls.SearchMemberUserControl();
+            this.rentalTabPage = new System.Windows.Forms.TabPage();
+            this.addRentalUserControl = new RentMeApp.UserControls.AddRentalUserControl();
             this.reportTabPage = new System.Windows.Forms.TabPage();
             this.logoutLinkLabel = new System.Windows.Forms.LinkLabel();
             this.userTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.mainSearchMemberUserControl = new RentMeApp.UserControls.SearchMemberUserControl();
             this.mainTabControl.SuspendLayout();
             this.membersTabPage.SuspendLayout();
+            this.rentalTabPage.SuspendLayout();
             this.userTableLayoutPanel.SuspendLayout();
             this.mainTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -44,46 +47,78 @@
             // mainTabControl
             // 
             this.mainTabControl.Controls.Add(this.membersTabPage);
+            this.mainTabControl.Controls.Add(this.rentalTabPage);
             this.mainTabControl.Controls.Add(this.reportTabPage);
             this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainTabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mainTabControl.Location = new System.Drawing.Point(3, 68);
+            this.mainTabControl.Location = new System.Drawing.Point(3, 86);
+            this.mainTabControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
-            this.mainTabControl.Size = new System.Drawing.Size(1089, 523);
+            this.mainTabControl.Size = new System.Drawing.Size(1226, 652);
             this.mainTabControl.TabIndex = 0;
             this.mainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
             // membersTabPage
             // 
             this.membersTabPage.Controls.Add(this.mainSearchMemberUserControl);
-            this.membersTabPage.Location = new System.Drawing.Point(4, 29);
+            this.membersTabPage.Location = new System.Drawing.Point(4, 34);
+            this.membersTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.membersTabPage.Name = "membersTabPage";
-            this.membersTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.membersTabPage.Size = new System.Drawing.Size(1081, 490);
+            this.membersTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.membersTabPage.Size = new System.Drawing.Size(1218, 614);
             this.membersTabPage.TabIndex = 0;
             this.membersTabPage.Text = "Members";
             this.membersTabPage.UseVisualStyleBackColor = true;
             // 
+            // mainSearchMemberUserControl
+            // 
+            this.mainSearchMemberUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainSearchMemberUserControl.Location = new System.Drawing.Point(3, 4);
+            this.mainSearchMemberUserControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.mainSearchMemberUserControl.Name = "mainSearchMemberUserControl";
+            this.mainSearchMemberUserControl.Size = new System.Drawing.Size(1212, 606);
+            this.mainSearchMemberUserControl.TabIndex = 0;
+            // 
+            // rentalTabPage
+            // 
+            this.rentalTabPage.Location = new System.Drawing.Point(4, 34);
+            this.rentalTabPage.Name = "rentalTabPage";
+            this.rentalTabPage.Size = new System.Drawing.Size(1218, 614);
+            this.rentalTabPage.TabIndex = 1;
+            this.rentalTabPage.Text = "Rental";
+            this.rentalTabPage.UseVisualStyleBackColor = true;
+            // 
+            // addRentalUserControl
+            // 
+            this.addRentalUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addRentalUserControl.Location = new System.Drawing.Point(3, 4);
+            this.addRentalUserControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.addRentalUserControl.Name = "addRentalUserControl";
+            this.addRentalUserControl.Size = new System.Drawing.Size(1212, 606);
+            this.addRentalUserControl.TabIndex = 0;
+            // 
             // reportTabPage
             // 
-            this.reportTabPage.Location = new System.Drawing.Point(4, 29);
+            this.reportTabPage.Location = new System.Drawing.Point(4, 34);
+            this.reportTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.reportTabPage.Name = "reportTabPage";
-            this.reportTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.reportTabPage.Size = new System.Drawing.Size(1081, 500);
+            this.reportTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.reportTabPage.Size = new System.Drawing.Size(1218, 614);
             this.reportTabPage.TabIndex = 4;
             this.reportTabPage.Text = "Reports";
             this.reportTabPage.UseVisualStyleBackColor = true;
+            this.reportTabPage.Click += new System.EventHandler(this.reportTabPage_Click);
             // 
             // logoutLinkLabel
             // 
             this.logoutLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.logoutLinkLabel.AutoSize = true;
             this.logoutLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logoutLinkLabel.Location = new System.Drawing.Point(1002, 0);
+            this.logoutLinkLabel.Location = new System.Drawing.Point(1125, 0);
             this.logoutLinkLabel.Name = "logoutLinkLabel";
-            this.logoutLinkLabel.Padding = new System.Windows.Forms.Padding(9, 8, 9, 8);
-            this.logoutLinkLabel.Size = new System.Drawing.Size(84, 36);
+            this.logoutLinkLabel.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.logoutLinkLabel.Size = new System.Drawing.Size(98, 45);
             this.logoutLinkLabel.TabIndex = 1;
             this.logoutLinkLabel.TabStop = true;
             this.logoutLinkLabel.Text = "Logout";
@@ -102,7 +137,7 @@
             this.userTableLayoutPanel.Name = "userTableLayoutPanel";
             this.userTableLayoutPanel.RowCount = 1;
             this.userTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.userTableLayoutPanel.Size = new System.Drawing.Size(1089, 61);
+            this.userTableLayoutPanel.Size = new System.Drawing.Size(1226, 78);
             this.userTableLayoutPanel.TabIndex = 2;
             // 
             // mainTableLayoutPanel
@@ -118,25 +153,17 @@
             this.mainTableLayoutPanel.RowCount = 2;
             this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.88889F));
-            this.mainTableLayoutPanel.Size = new System.Drawing.Size(1095, 594);
+            this.mainTableLayoutPanel.Size = new System.Drawing.Size(1232, 742);
             this.mainTableLayoutPanel.TabIndex = 3;
-            // 
-            // mainSearchMemberUserControl
-            // 
-            this.mainSearchMemberUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainSearchMemberUserControl.Location = new System.Drawing.Point(3, 3);
-            this.mainSearchMemberUserControl.Margin = new System.Windows.Forms.Padding(4);
-            this.mainSearchMemberUserControl.Name = "mainSearchMemberUserControl";
-            this.mainSearchMemberUserControl.Size = new System.Drawing.Size(1075, 484);
-            this.mainSearchMemberUserControl.TabIndex = 0;
             // 
             // MainDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1095, 594);
+            this.ClientSize = new System.Drawing.Size(1232, 742);
             this.Controls.Add(this.mainTableLayoutPanel);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainDashboard";
@@ -159,8 +186,10 @@
         private System.Windows.Forms.TabPage membersTabPage;
         private System.Windows.Forms.TabPage reportTabPage;
         private UserControls.SearchMemberUserControl mainSearchMemberUserControl;
+        private UserControls.AddRentalUserControl addRentalUserControl;
         private System.Windows.Forms.LinkLabel logoutLinkLabel;
         private System.Windows.Forms.TableLayoutPanel userTableLayoutPanel;
         private System.Windows.Forms.TableLayoutPanel mainTableLayoutPanel;
+        private System.Windows.Forms.TabPage rentalTabPage;
     }
 }

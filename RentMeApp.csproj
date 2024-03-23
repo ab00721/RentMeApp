@@ -72,6 +72,12 @@
     <Compile Include="Extension\USState.cs" />
     <Compile Include="Model\EmployeeDTO.cs" />
     <Compile Include="Model\Member.cs" />
+    <Compile Include="UserControls\AddRentalUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AddRentalUserControl.Designer.cs">
+      <DependentUpon>AddRentalUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchMemberUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     <Compile Include="View\SearchMemberDialog.Designer.cs">
       <DependentUpon>SearchMemberDialog.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\AddRentalUserControl.resx">
+      <DependentUpon>AddRentalUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchMemberUserControl.resx">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
     </EmbeddedResource>
