@@ -1,5 +1,5 @@
 ﻿using RentMeApp.DAL;
-using RentMeApp.Models;
+using RentMeApp.Model;
 using System.Collections.Generic;
 
 namespace RentMeApp.Controllers

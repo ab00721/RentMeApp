@@ -1,4 +1,4 @@
-﻿using RentMeApp.Models;
+﻿using RentMeApp.Model;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 

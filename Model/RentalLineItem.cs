@@ -1,4 +1,4 @@
-﻿namespace RentMeApp.Models
+﻿namespace RentMeApp.Model
 {
     public class RentalLineItem
     {

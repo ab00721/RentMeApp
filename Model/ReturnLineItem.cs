@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RentMeApp.Models
+namespace RentMeApp.Model
 {
     public class ReturnLineItem
     {
