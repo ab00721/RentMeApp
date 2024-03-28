@@ -1,11 +1,17 @@
-﻿using RentMeConsole.Models;
+﻿using RentMeApp.Models;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace RentMeConsole.DAL
+namespace RentMeApp.DAL
 {
+    /// <summary>
+    /// Employee Data Access Layer  
+    /// </summary>
     public class CategoryDAL
     {
+        /// <summary>
+        /// Gets all categories.
+        /// </summary>
         public List<Category> GetAllCategories()
         {
             List<Category> categories = new List<Category>();

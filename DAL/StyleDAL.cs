@@ -1,9 +1,9 @@
-﻿using RentMeConsole.Models;
+﻿using RentMeApp.Models;
 using System.Collections.Generic;
 
 using System.Data.SqlClient;
 
-namespace RentMeConsole.DAL
+namespace RentMeApp.DAL
 {
 	public class StyleDAL
 	{

@@ -1,8 +1,8 @@
-﻿using RentMeConsole.DAL;
-using RentMeConsole.Models;
+﻿using RentMeApp.DAL;
+using RentMeApp.Models;
 using System.Collections.Generic;
 
-namespace RentMeConsole.Controllers
+namespace RentMeApp.Controllers
 {
     /// <summary>
     /// The controller class that mediates b/w the RentalLineItemDAL and the view.

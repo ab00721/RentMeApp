@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RentMeConsole.Models
+namespace RentMeApp.Models
 {
     public class ReturnTransaction
     {
