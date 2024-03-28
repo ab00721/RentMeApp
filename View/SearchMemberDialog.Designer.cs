@@ -40,11 +40,11 @@
             this.memberSearchComboBox = new System.Windows.Forms.ComboBox();
             this.memberSearchTextBox = new System.Windows.Forms.TextBox();
             this.searchLabel = new System.Windows.Forms.Label();
-            this.searchButton = new System.Windows.Forms.Button();
             this.searchMessageLabel = new System.Windows.Forms.Label();
-            this.memberListView = new System.Windows.Forms.ListView();
-            this.clearButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.memberListView = new System.Windows.Forms.ListView();
             this.memberTableLayoutPanel.SuspendLayout();
             this.buttonTableLayoutPanel.SuspendLayout();
             this.searchTableLayoutPanel.SuspendLayout();
@@ -219,18 +219,6 @@
             this.searchLabel.TabIndex = 7;
             this.searchLabel.Text = "Search:";
             // 
-            // searchButton
-            // 
-            this.searchButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(96, 7);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(126, 37);
-            this.searchButton.TabIndex = 10;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
-            // 
             // searchMessageLabel
             // 
             this.searchMessageLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -241,28 +229,6 @@
             this.searchMessageLabel.Size = new System.Drawing.Size(99, 25);
             this.searchMessageLabel.TabIndex = 5;
             this.searchMessageLabel.Text = "message";
-            // 
-            // memberListView
-            // 
-            this.memberListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.memberListView.HideSelection = false;
-            this.memberListView.Location = new System.Drawing.Point(14, 138);
-            this.memberListView.Name = "memberListView";
-            this.memberListView.Size = new System.Drawing.Size(909, 329);
-            this.memberListView.TabIndex = 7;
-            this.memberListView.UseCompatibleStateImageBehavior = false;
-            // 
-            // clearButton
-            // 
-            this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearButton.Location = new System.Drawing.Point(296, 9);
-            this.clearButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(151, 34);
-            this.clearButton.TabIndex = 11;
-            this.clearButton.Text = "Clear";
-            this.clearButton.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -276,9 +242,43 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(450, 52);
             this.tableLayoutPanel1.TabIndex = 10;
+            // 
+            // clearButton
+            // 
+            this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearButton.Location = new System.Drawing.Point(296, 9);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(151, 34);
+            this.clearButton.TabIndex = 11;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            // 
+            // searchButton
+            // 
+            this.searchButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchButton.Location = new System.Drawing.Point(96, 7);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(126, 37);
+            this.searchButton.TabIndex = 10;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            // 
+            // memberListView
+            // 
+            this.memberListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.memberListView.HideSelection = false;
+            this.memberListView.Location = new System.Drawing.Point(14, 138);
+            this.memberListView.Name = "memberListView";
+            this.memberListView.Size = new System.Drawing.Size(909, 329);
+            this.memberListView.TabIndex = 7;
+            this.memberListView.UseCompatibleStateImageBehavior = false;
             // 
             // SearchMemberDialog
             // 

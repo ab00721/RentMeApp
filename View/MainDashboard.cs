@@ -45,17 +45,9 @@ namespace RentMeApp.View
             {
                 this.mainSearchMemberUserControl.SearchMemberUserControl_Load(sender, e);
             }
-            if (mainTabControl.SelectedTab == mainTabControl.TabPages["rentalTabPage"])
+            if (mainTabControl.SelectedTab == mainTabControl.TabPages["furnitureTabPage"])
             {
-
-            }
-            if (mainTabControl.SelectedTab == mainTabControl.TabPages["returnTabPage"])
-            {
-
-            }
-            if (mainTabControl.SelectedTab == mainTabControl.TabPages["transactionTabPage"])
-            {
-
+                this.mainSearchFurnitureUserControl.SearchFurnitureUserControl_Load(sender, e);
             }
             if (mainTabControl.SelectedTab == mainTabControl.TabPages["reportTabPage"])
             {

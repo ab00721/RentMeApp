@@ -93,6 +93,18 @@
     <Compile Include="Model\ReturnLineItem.cs" />
     <Compile Include="Model\ReturnTransaction.cs" />
     <Compile Include="Model\Style.cs" />
+    <Compile Include="UserControls\MemberUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MemberUserControl.Designer.cs">
+      <DependentUpon>MemberUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchFurnitureUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchFurnitureUserControl.Designer.cs">
+      <DependentUpon>SearchFurnitureUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchMemberUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -137,12 +149,30 @@
     <Compile Include="View\MainDashboard.Designer.cs">
       <DependentUpon>MainDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\RentalDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\RentalDialog.Designer.cs">
+      <DependentUpon>RentalDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SearchFurnitureDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SearchFurnitureDialog.Designer.cs">
+      <DependentUpon>SearchFurnitureDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\SearchMemberDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\SearchMemberDialog.Designer.cs">
       <DependentUpon>SearchMemberDialog.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\MemberUserControl.resx">
+      <DependentUpon>MemberUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchFurnitureUserControl.resx">
+      <DependentUpon>SearchFurnitureUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchMemberUserControl.resx">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,6 +202,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainDashboard.resx">
       <DependentUpon>MainDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\RentalDialog.resx">
+      <DependentUpon>RentalDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SearchFurnitureDialog.resx">
+      <DependentUpon>SearchFurnitureDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SearchMemberDialog.resx">
       <DependentUpon>SearchMemberDialog.cs</DependentUpon>

@@ -3,6 +3,9 @@ using RentMeApp.Model;
 
 namespace RentMeApp.Controller
 {
+    /// <summary>
+    /// Controller class for Employees
+    /// </summary>
     public class EmployeeController
     {
         private readonly EmployeeDAL _employeeSource;

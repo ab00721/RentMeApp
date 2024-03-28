@@ -67,6 +67,86 @@ namespace RentMeApp.DAL
         }
 
         /// <summary>
+        /// Gets the member information.
+        /// </summary>
+        /// <param name="searchBy">The search by.</param>
+        /// <param name="searchCriteria">The search criteria.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">Invalid search</exception>
+        public List<Member> GetMemberInfo(string searchBy, string searchCriteria)
+        {
+            var members = new List<Member>();
+
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    string search = "";
+                    switch (searchBy)
+                    {
+                        case "searchID":
+                            search = "M.MemberID = @SearchID";
+                            break;
+                        case "searchName":
+                            search = "LOWER(M.FirstName + ' ' + M.LastName) LIKE LOWER(@SearchName)";
+                            break;
+                        case "searchPhone":
+                            search = "M.Phone LIKE @SearchPhone";
+                            break;
+                        default:
+                            throw new ArgumentException("Invalid search");
+                    }
+                    command.CommandText =
+                        "SELECT M.MemberID, M.FirstName, M.LastName, M.Sex, M.DateOfBirth, M.AddressLine1, M.AddressLine2, M.City, M.State, M.Zip, M.Phone " +
+                        "FROM Member M " +
+                        "WHERE " + search;
+                    command.Parameters.Add("@SearchID", SqlDbType.VarChar);
+                    command.Parameters["@SearchID"].Value = searchCriteria;
+                    command.Parameters.Add("@SearchName", SqlDbType.VarChar);
+                    command.Parameters["@SearchName"].Value = "%" + searchCriteria + "%";
+                    command.Parameters.Add("@SearchPhone", SqlDbType.VarChar);
+                    command.Parameters["@SearchPhone"].Value = "%" + searchCriteria + "%";
+                    command.Connection = connection;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        int memberIDOrdinal = reader.GetOrdinal("MemberID");
+                        int firstNameOrdinal = reader.GetOrdinal("FirstName");
+                        int lastNameOrdinal = reader.GetOrdinal("LastName");
+                        int sexOrdinal = reader.GetOrdinal("Sex");
+                        int dateOfBirthOrdinal = reader.GetOrdinal("DateOfBirth");
+                        int addressOneOrdinal = reader.GetOrdinal("AddressLine1");
+                        int addressTwoOrdinal = reader.GetOrdinal("AddressLine2");
+                        int cityOrdinal = reader.GetOrdinal("City");
+                        int stateOrdinal = reader.GetOrdinal("State");
+                        int zipOrdinal = reader.GetOrdinal("Zip");
+                        int phoneOrdinal = reader.GetOrdinal("Phone");
+
+                        while (reader.Read())
+                        {
+                            var memberID = reader.GetInt32(memberIDOrdinal);
+                            var firstName = reader.GetString(firstNameOrdinal);
+                            var lastName = reader.GetString(lastNameOrdinal);
+                            var sex = reader.IsDBNull(sexOrdinal) ? "" : reader.GetString(sexOrdinal);
+                            var dateOfBirth = reader.GetDateTime(dateOfBirthOrdinal);
+                            var addressOne = reader.GetString(addressOneOrdinal);
+                            var addressTwo = reader.IsDBNull(addressTwoOrdinal) ? "" : reader.GetString(addressTwoOrdinal);
+                            var city = reader.GetString(cityOrdinal);
+                            var state = reader.GetString(stateOrdinal);
+                            var zip = reader.GetString(zipOrdinal);
+                            var phone = reader.IsDBNull(phoneOrdinal) ? "" : reader.GetString(phoneOrdinal);
+
+
+                            members.Add(new Member(memberID, firstName, lastName, sex, dateOfBirth, addressOne, addressTwo, city, state, zip, phone));
+                        }
+                    }
+                }
+            }
+            return members;
+        }
+
+        /// <summary>
         /// Inserts the new member.
         /// </summary>
         /// <param name="member">The member.</param>
