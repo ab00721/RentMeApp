@@ -2,7 +2,7 @@
 using RentMeApp.Model;
 using System.Collections.Generic;
 
-namespace RentMeApp.Controllers
+namespace RentMeApp.Controller
 {
     /// <summary>
     /// The controller class that mediates b/w the ReturnLineItemDAL and the view.

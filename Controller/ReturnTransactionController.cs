@@ -3,7 +3,7 @@ using RentMeApp.Model;
 using System;
 using System.Collections.Generic;
 
-namespace RentMeApp.Controllers
+namespace RentMeApp.Controller
 {
     /// <summary>
     /// The controller class that mediates b/w the ReturnTransactionDAL and the view.

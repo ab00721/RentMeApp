@@ -2,7 +2,7 @@
 using RentMeApp.Model;
 using System.Collections.Generic;
 
-namespace RentMeApp.Controllers
+namespace RentMeApp.Controller
 {
     /// <summary>
     /// The controller class that mediates b/w the FurnitureDAL and the view.
@@ -20,15 +20,11 @@ namespace RentMeApp.Controllers
         }
 
         /// <summary>
-        /// Returns a list of all furniture items.
+        /// Gets all the furniture.
         /// </summary>
-        public List<Furniture> GetAllFurniture()
+        public List<Furniture> GetFurniture()
         {
-            List<Furniture> items = new List<Furniture>();
-
-            foreach (Furniture item in _furnitureSource.GetAllFurniture())
-        {
-                items.Add(item);
+            return this._furnitureSource.GetFurniture();
         }
 
         /// <summary>
@@ -36,12 +32,9 @@ namespace RentMeApp.Controllers
         /// </summary>
         /// <param name="searchBy">The search by.</param>
         /// <param name="searchCriteria">The search criteria.</param>
-        /// <returns></returns>
         public List<Furniture> GetFurniture(string searchBy, string searchCriteria)
         {
             return this._furnitureSource.GetFurniture(searchBy, searchCriteria);
-        }
-
         }
     }
 }
