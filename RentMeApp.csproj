@@ -63,15 +63,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\AuthenticateController.cs" />
+    <Compile Include="Controller\CategoryController.cs" />
     <Compile Include="Controller\EmployeeController.cs" />
+    <Compile Include="Controller\FurnitureController.cs" />
     <Compile Include="Controller\MemberController.cs" />
+    <Compile Include="Controller\RentalLineItemController.cs" />
+    <Compile Include="Controller\RentalTransactionController.cs" />
+    <Compile Include="Controller\ReturnLineItemController.cs" />
+    <Compile Include="Controller\ReturnTransactionController.cs" />
+    <Compile Include="Controller\StyleController.cs" />
     <Compile Include="DAL\AuthenticateDAL.cs" />
+    <Compile Include="DAL\CategoryDAL.cs" />
     <Compile Include="DAL\EmployeeDAL.cs" />
+    <Compile Include="DAL\FurnitureDAL.cs" />
     <Compile Include="DAL\MemberDAL.cs" />
+    <Compile Include="DAL\RentalLineItemDAL.cs" />
+    <Compile Include="DAL\RentalTransactionDAL.cs" />
     <Compile Include="DAL\RentMeDBConnection.cs" />
+    <Compile Include="DAL\ReturnLineItemDAL.cs" />
+    <Compile Include="DAL\ReturnTransactionDAL.cs" />
+    <Compile Include="DAL\StyleDAL.cs" />
     <Compile Include="Extension\USState.cs" />
+    <Compile Include="Model\Category.cs" />
     <Compile Include="Model\EmployeeDTO.cs" />
+    <Compile Include="Model\Furniture.cs" />
     <Compile Include="Model\Member.cs" />
+    <Compile Include="Model\RentalLineItem.cs" />
+    <Compile Include="Model\RentalTransaction.cs" />
+    <Compile Include="Model\ReturnLineItem.cs" />
+    <Compile Include="Model\ReturnTransaction.cs" />
+    <Compile Include="Model\Style.cs" />
     <Compile Include="UserControls\SearchMemberUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
