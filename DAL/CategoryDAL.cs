@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 namespace RentMeApp.DAL
 {
     /// <summary>
-    /// Employee Data Access Layer  
+    /// The Data Access Layer for the Category entity 
     /// </summary>
     public class CategoryDAL
     {

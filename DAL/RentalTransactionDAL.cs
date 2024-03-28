@@ -6,8 +6,15 @@ using System.Data.SqlClient;
 
 namespace RentMeApp.DAL
 {
+    /// <summary>
+    /// The Data Access Layer for the RentalTransaction entity 
+    /// </summary>
     public class RentalTransactionDAL
     {
+        /// <summary>
+        /// Adds a rental transaction to the data.
+        /// </summary>
+        /// <param name="rentalTransaction">The rental transaction to be added.</param>
         public void InsertRentalTransaction(RentalTransaction rentalTransaction)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
@@ -38,6 +45,9 @@ namespace RentMeApp.DAL
             }
         }
 
+        /// <summary>
+        /// Returns a list of all rental transactions.
+        /// </summary
         public List<RentalTransaction> GetAllRentalTransactions()
         {
             List<RentalTransaction> rentalTransactions = new List<RentalTransaction>();
@@ -66,6 +76,10 @@ namespace RentMeApp.DAL
             return rentalTransactions;
         }
 
+        /// <summary>
+        /// Returns a rental transaction.
+        /// </summary>
+        /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
         public RentalTransaction GetRentalTransactionByRentalTransactionId(int rentalTransactionID)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())

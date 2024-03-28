@@ -6,9 +6,15 @@ using System.Data.SqlClient;
 
 namespace RentMeApp.DAL
 {
+    /// <summary>
+    /// The Data Access Layer for the ReturnTransaction entity 
+    /// </summary>
     public class ReturnTransactionDAL
     {
-
+        /// <summary>
+        /// Adds a return transaction to the data.
+        /// </summary>
+        /// <param name="returnTransaction">The return transaction to add.</param>
         public void InsertReturnTransaction(ReturnTransaction returnTransaction)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
@@ -36,6 +42,9 @@ namespace RentMeApp.DAL
             }
         }
 
+        /// <summary>
+        /// Returns a list of all return transactions.
+        /// </summary
         public List<ReturnTransaction> GetAllReturnTransactions()
         {
             List<ReturnTransaction> returnTransactions = new List<ReturnTransaction>();
@@ -63,6 +72,10 @@ namespace RentMeApp.DAL
             return returnTransactions;
         }
 
+        /// <summary>
+        /// Returns a return transaction.
+        /// </summary>
+        /// <param name="returnTransactionID">The ID of the return transaction.</param>
         public ReturnTransaction GetReturnTransactionByReturnTransactionId(int returnTransactionId)
         {
             ReturnTransaction returnTransaction = null;

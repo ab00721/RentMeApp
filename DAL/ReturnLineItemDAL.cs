@@ -6,8 +6,15 @@ using System.Data.SqlClient;
 
 namespace RentMeApp.DAL
 {
+    /// <summary>
+    /// The Data Access Layer for the ReturnLineItem entity 
+    /// </summary>
     public class ReturnLineItemDAL
     {
+        /// <summary>
+        /// Adds a return line item to the data.
+        /// </summary>
+        /// <param name="returnLineItem">The rental line item to add.</param>
         public void InsertReturnLineItem(ReturnLineItem returnLineItem)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
@@ -35,6 +42,9 @@ namespace RentMeApp.DAL
             }
         }
 
+        /// <summary>
+        /// Returns a list of all return line items.
+        /// </summary>
         public List<ReturnLineItem> GetAllReturnLineItems()
         {
             List<ReturnLineItem> returnLineItems = new List<ReturnLineItem>();
@@ -62,6 +72,10 @@ namespace RentMeApp.DAL
             return returnLineItems;
         }
 
+        /// <summary>
+        /// Returns a list of return line items by return transaction ID.
+        /// </summary>
+        /// <param name="returnTransactionID">The ID of the return transaction.</param>
         public List<ReturnLineItem> GetReturnLineItemsByReturnTransactionId(int returnTransactionID)
         {
             List<ReturnLineItem> returnLineItems = new List<ReturnLineItem>();
@@ -92,6 +106,10 @@ namespace RentMeApp.DAL
             return returnLineItems;
         }
 
+        /// <summary>
+        /// Returns a list of return line items by rental line item ID.
+        /// </summary>
+        /// <param name="rentalLineItemID">The ID of the rental line item.</param>
         public List<ReturnLineItem> GetReturnLineItemsByRentalLineItemID(int rentalLineItemID)
         {
             List<ReturnLineItem> returnLineItems = new List<ReturnLineItem>();

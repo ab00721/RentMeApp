@@ -5,9 +5,15 @@ using System.Data.SqlClient;
 
 namespace RentMeApp.DAL
 {
-	public class StyleDAL
+    /// <summary>
+    /// The Data Access Layer for the Style entity 
+    /// </summary>
+    public class StyleDAL
 	{
-		public List<Style> GetAllStyles()
+        /// <summary>
+        /// Gets all styles.
+        /// </summary>
+        public List<Style> GetAllStyles()
 		{
 			List<Style> styles = new List<Style>();
 
