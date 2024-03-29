@@ -23,7 +23,7 @@ namespace RentMeApp.DAL
                 {
                     command.CommandText =
                         "SELECT COUNT(*) FROM Login " +
-                        "WHERE Username = @username and Password = @password";
+                        "WHERE Username = @username and Password = HASHBYTES('MD5', @password)";
 
                     command.Parameters.Add("@username", System.Data.SqlDbType.VarChar);
                     command.Parameters["@username"].Value = username;
