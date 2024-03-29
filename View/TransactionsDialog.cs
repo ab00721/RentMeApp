@@ -32,19 +32,19 @@ namespace RentMeApp.View
             this._searchMemberUserControl = searchMemberUserController;
             this.member = selectedMember;
             this._rentalTransactionController = new RentalTransactionController();
-            this.RefreshDataGridView();
+            this.RefreshRentalTransactionDataGridView();
             _addButtonColumn = new DataGridViewButtonColumn();
             AddButtonColumn();
             MemberUserControl memberUserControl = new MemberUserControl(selectedMember);
             this.TransactionTableLayout.Controls.Add(memberUserControl);
         }
 
-        public void RefreshDataGridView()
+        public void RefreshRentalTransactionDataGridView()
         {
-            RefreshDataGridView(this._rentalTransactionController.GetAllRentalTransactionsByMemberId(this.member.MemberID));
+            RefreshRentalTransactionDataGridView(this._rentalTransactionController.GetAllRentalTransactionsByMemberId(this.member.MemberID));
         }
 
-        private void RefreshDataGridView(List<RentalTransaction> transactions)
+        private void RefreshRentalTransactionDataGridView(List<RentalTransaction> transactions)
         {
             rentalTransactions = transactions;
             RentalTransactionDataGridView.DataSource = null;
@@ -59,6 +59,18 @@ namespace RentMeApp.View
             _addButtonColumn.Text = "View Details";
             _addButtonColumn.UseColumnTextForButtonValue = true;
             this.RentalTransactionDataGridView.Columns.Add(_addButtonColumn);
+        }
+
+        private void RentalTransactionDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == RentalTransactionDataGridView.Columns["AddButtonColumn"].Index)
+            {
+                MessageBox.Show(e.RowIndex.ToString());
+
+                rentalTransactions = this._rentalTransactionController.GetAllRentalTransactionsByMemberId(this.member.MemberID);
+                DetailsDataGridView.DataSource = null;
+                DetailsDataGridView.DataSource = rentalTransactions;
+            }
         }
     }
 }

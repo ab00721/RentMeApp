@@ -33,9 +33,14 @@
             this.RentalTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.RentalLabel = new System.Windows.Forms.Label();
             this.RentalTransactionDataGridView = new System.Windows.Forms.DataGridView();
+            this.DetailsLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.DetailsDataGridView = new System.Windows.Forms.DataGridView();
             this.TransactionTableLayout.SuspendLayout();
             this.RentalTableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RentalTransactionDataGridView)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DetailsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // userTableLayoutPanel
@@ -54,6 +59,7 @@
             this.TransactionTableLayout.ColumnCount = 1;
             this.TransactionTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TransactionTableLayout.Controls.Add(this.RentalTableLayout, 0, 1);
+            this.TransactionTableLayout.Controls.Add(this.tableLayoutPanel1, 0, 3);
             this.TransactionTableLayout.Location = new System.Drawing.Point(2, 65);
             this.TransactionTableLayout.Name = "TransactionTableLayout";
             this.TransactionTableLayout.RowCount = 4;
@@ -75,6 +81,7 @@
             this.RentalTableLayout.RowCount = 2;
             this.RentalTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.064516F));
             this.RentalTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.93549F));
+            this.RentalTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.RentalTableLayout.Size = new System.Drawing.Size(773, 223);
             this.RentalTableLayout.TabIndex = 0;
             // 
@@ -101,6 +108,45 @@
             this.RentalTransactionDataGridView.RowTemplate.Height = 24;
             this.RentalTransactionDataGridView.Size = new System.Drawing.Size(769, 202);
             this.RentalTransactionDataGridView.TabIndex = 13;
+            this.RentalTransactionDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RentalTransactionDataGridView_CellContentClick);
+            // 
+            // DetailsLabel
+            // 
+            this.DetailsLabel.AutoSize = true;
+            this.DetailsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+            this.DetailsLabel.Location = new System.Drawing.Point(3, 0);
+            this.DetailsLabel.Name = "DetailsLabel";
+            this.DetailsLabel.Size = new System.Drawing.Size(58, 17);
+            this.DetailsLabel.TabIndex = 1;
+            this.DetailsLabel.Text = "Details";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.DetailsDataGridView, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.DetailsLabel, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 537);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 224);
+            this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // DetailsDataGridView
+            // 
+            this.DetailsDataGridView.AllowUserToDeleteRows = false;
+            this.DetailsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DetailsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DetailsDataGridView.Location = new System.Drawing.Point(2, 24);
+            this.DetailsDataGridView.Margin = new System.Windows.Forms.Padding(2);
+            this.DetailsDataGridView.Name = "DetailsDataGridView";
+            this.DetailsDataGridView.ReadOnly = true;
+            this.DetailsDataGridView.RowHeadersWidth = 62;
+            this.DetailsDataGridView.RowTemplate.Height = 24;
+            this.DetailsDataGridView.Size = new System.Drawing.Size(769, 198);
+            this.DetailsDataGridView.TabIndex = 14;
             // 
             // TransactionsDialog
             // 
@@ -118,6 +164,9 @@
             this.RentalTableLayout.ResumeLayout(false);
             this.RentalTableLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RentalTransactionDataGridView)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DetailsDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -129,5 +178,8 @@
         private System.Windows.Forms.TableLayoutPanel RentalTableLayout;
         private System.Windows.Forms.Label RentalLabel;
         private System.Windows.Forms.DataGridView RentalTransactionDataGridView;
+        private System.Windows.Forms.Label DetailsLabel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.DataGridView DetailsDataGridView;
     }
 }
