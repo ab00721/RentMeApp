@@ -265,7 +265,8 @@ namespace RentMeApp.UserControls
         {
             ViewTransactions(_selectedMember);
             this.ClearMessageLabel();
-            using (Form viewTransactions = new View.TransactionsDialog(this, this._username, this._firstName))
+            Member selectedMember = (Member)memberListView.SelectedItems[0].Tag;
+            using (Form viewTransactions = new View.TransactionsDialog(this, this._username, this._firstName, selectedMember))
             {
                 DialogResult result = viewTransactions.ShowDialog();
 

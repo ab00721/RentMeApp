@@ -50,5 +50,16 @@ namespace RentMeApp.Controller
         {
             return _rentalTransactionSource.GetRentalTransactionByRentalTransactionId(rentalTransactionID);
         }
+
+        /// <summary>
+        /// Gets all rental transactions by member identifier.
+        /// </summary>
+        /// <param name="memberID">The member identifier.</param>
+        /// <returns></returns>
+        public List<RentalTransaction> GetAllRentalTransactionsByMemberId(int memberID)
+        {
+            return _rentalTransactionSource.GetAllRentalTransactionsByMemberId(memberID);
+        }
+
     }
 }
