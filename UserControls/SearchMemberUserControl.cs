@@ -264,6 +264,20 @@ namespace RentMeApp.UserControls
         private void ViewTransactionsButton_Click(object sender, EventArgs e)
         {
             ViewTransactions(_selectedMember);
+            this.ClearMessageLabel();
+            using (Form viewTransactions = new View.TransactionsDialog(this, this._username, this._firstName))
+            {
+                DialogResult result = viewTransactions.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    this.RefreshListView();
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    viewTransactions.Close();
+                }
+            }
         }
 
         private void NewOrder(Member member)

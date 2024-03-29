@@ -149,6 +149,12 @@
     <Compile Include="View\SearchMemberDialog.Designer.cs">
       <DependentUpon>SearchMemberDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\TransactionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TransactionsDialog.Designer.cs">
+      <DependentUpon>TransactionsDialog.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="UserControls\MemberUserControl.resx">
       <DependentUpon>MemberUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\SearchMemberDialog.resx">
       <DependentUpon>SearchMemberDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TransactionsDialog.resx">
+      <DependentUpon>TransactionsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
