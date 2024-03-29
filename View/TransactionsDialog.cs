@@ -32,17 +32,11 @@ namespace RentMeApp.View
             this._searchMemberUserControl = searchMemberUserController;
             this.member = selectedMember;
             this._rentalTransactionController = new RentalTransactionController();
-            this.SetMemberInfoTableLayout(this.member);
             this.RefreshDataGridView();
             _addButtonColumn = new DataGridViewButtonColumn();
             AddButtonColumn();
-        }
-
-        private void SetMemberInfoTableLayout(Member selectedMember)
-        {
-            this.MemberIdInfoLabel.Text = selectedMember.MemberID.ToString();
-            this.MemberNameInfoLabel.Text = selectedMember.FirstName.ToString() + " " + selectedMember.LastName.ToString();
-            this.MemberInfoTabelLayout.BorderStyle = BorderStyle.FixedSingle;
+            MemberUserControl memberUserControl = new MemberUserControl(selectedMember);
+            this.TransactionTableLayout.Controls.Add(memberUserControl);
         }
 
         public void RefreshDataGridView()
