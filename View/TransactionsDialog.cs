@@ -21,6 +21,8 @@ namespace RentMeApp.View
         private readonly RentalTransactionController _rentalTransactionController;
         private List<RentalTransaction> rentalTransactions;
         private Member member;
+        DataGridViewButtonColumn _addButtonColumn;
+
 
         public TransactionsDialog(SearchMemberUserControl searchMemberUserController, string username, string firstName, Member selectedMember)
         {
@@ -32,6 +34,8 @@ namespace RentMeApp.View
             this._rentalTransactionController = new RentalTransactionController();
             this.SetMemberInfoTableLayout(this.member);
             this.RefreshDataGridView();
+            _addButtonColumn = new DataGridViewButtonColumn();
+            AddButtonColumn();
         }
 
         private void SetMemberInfoTableLayout(Member selectedMember)
@@ -51,6 +55,16 @@ namespace RentMeApp.View
             rentalTransactions = transactions;
             RentalTransactionDataGridView.DataSource = null;
             RentalTransactionDataGridView.DataSource = rentalTransactions;
+        }
+
+        private void AddButtonColumn()
+        {
+            _addButtonColumn = new DataGridViewButtonColumn();
+            _addButtonColumn.Name = "AddButtonColumn";
+            _addButtonColumn.HeaderText = "";
+            _addButtonColumn.Text = "View Details";
+            _addButtonColumn.UseColumnTextForButtonValue = true;
+            this.RentalTransactionDataGridView.Columns.Add(_addButtonColumn);
         }
     }
 }
