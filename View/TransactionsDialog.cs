@@ -1,19 +1,15 @@
 ﻿using RentMeApp.Controller;
 using RentMeApp.Model;
 using RentMeApp.UserControls;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Common;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RentMeApp.View
 {
+    /// <summary>
+    /// Dialog to View Transaction Details 
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class TransactionsDialog : Form
     {
         private readonly SearchMemberUserControl _searchMemberUserControl;
@@ -25,7 +21,13 @@ namespace RentMeApp.View
         private Member _member;
         DataGridViewButtonColumn _addButtonColumn;
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransactionsDialog"/> class.
+        /// </summary>
+        /// <param name="searchMemberUserController">The search member user controller.</param>
+        /// <param name="username">The username.</param>
+        /// <param name="firstName">The first name.</param>
+        /// <param name="selectedMember">The selected member.</param>
         public TransactionsDialog(SearchMemberUserControl searchMemberUserController, string username, string firstName, Member selectedMember)
         {
             InitializeComponent();
@@ -46,6 +48,9 @@ namespace RentMeApp.View
             this.TransactionTableLayout.Controls.Add(memberUserControl);
         }
 
+        /// <summary>
+        /// Refreshes the rental transaction data grid view.
+        /// </summary>
         public void RefreshRentalTransactionDataGridView()
         {
             RefreshRentalTransactionDataGridView(this._rentalTransactionController.GetAllRentalTransactionsByMemberId(this._member.MemberID));
