@@ -45,6 +45,7 @@ namespace RentMeConsole.Views
 
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Record a rental transaction", subMenu.Show)
+                .Add("Display a rental transaction confirmation", () => PrintRentalTransactionDetails())
                 .Add("Go back to main menu", ConsoleMenu.Close)
                 .Add("Exit", () => Environment.Exit(0))
                 .Configure(config =>
@@ -175,32 +176,6 @@ namespace RentMeConsole.Views
             NavigationService.PressAnyKey();
         }
 
-        private string GetMemberUsernameFromUserInput()
-        {
-            string username = string.Empty;
-            bool isValid = false;
-
-            while (!isValid)
-            {
-                Console.WriteLine(StyleService.PromptFormat("Enter the member username"));
-                string input = Console.ReadLine();
-
-                if (!string.IsNullOrEmpty(input))
-                {
-                    username = input;
-                    isValid = true;
-                }
-                else
-                {
-                    string message = "Invalid input. Please enter a non-empty username.";
-                    Console.WriteLine(StyleService.WarningFormat(message));
-                    NavigationService.PressAnyKey();
-                }
-            }
-
-            return username;
-        }
-
         private Member GetMemberFromUserInput()
         {
             int memberID = GetMemberIDFromUserInput();
@@ -328,6 +303,70 @@ namespace RentMeConsole.Views
             _rentalPointOfSaleService.SaveRentalTransaction(rentalTransaction, lineItems);
 
             ClearRentalCart();
+        }
+
+        private void PrintRentalTransactionDetails()
+        {
+            int rentalTransactionID = GetRentalTransactionIDFromUserInput();
+            Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> rentalTransactionDetails = _rentalPointOfSaleService.GetRentalTransactionDetails(rentalTransactionID);
+
+            if (rentalTransactionDetails.Count == 0)
+            {
+                Console.WriteLine($"{StyleService.WarningFormat("Rental transaction not found")}");
+                NavigationService.PressAnyKey();
+                return;
+            }
+
+            foreach (var keyValuePair in rentalTransactionDetails)
+            {
+                RentalTransaction rentalTransaction = keyValuePair.Key;
+                List<Tuple<RentalLineItem, Furniture>> lineItems = keyValuePair.Value;
+
+                Console.WriteLine($"{StyleService.HeadingFormat("Rental Transaction Details")}");
+                Console.WriteLine($"{StyleService.Left("Trans ID", 15)} {StyleService.Left("Emp ID", 15)} {StyleService.Left("Mem ID", 15)} {StyleService.Left("Rnt Date", 15)} {StyleService.Left("Due Date", 15)} {StyleService.Left("Total Cost", 15)}");
+
+                Console.WriteLine($"{StyleService.Left(rentalTransaction.RentalTransactionID.ToString(), 15)} {StyleService.Left(rentalTransaction.EmployeeID.ToString(), 15)} {StyleService.Left(rentalTransaction.MemberID.ToString(), 15)} {StyleService.Left(rentalTransaction.RentalDate.ToString("MM/dd/yyyy"), 15)} {StyleService.Left(rentalTransaction.DueDate.ToString("MM/dd/yyyy"), 15)} {StyleService.Left(rentalTransaction.TotalCost.ToString("C"), 15)}");
+
+                Console.WriteLine($"{StyleService.HeadingFormat("Rental Line Items")}");
+                Console.WriteLine($"{StyleService.Left("Furn ID", 15)} {StyleService.Left("Furn Name", 15)} {StyleService.Left("Qty", 15)} {StyleService.Left("Qty Rtr", 15)} {StyleService.Left("Daily Cost", 15)}");
+
+                foreach (var tuple in lineItems)
+                {
+                    RentalLineItem lineItem = tuple.Item1;
+                    Furniture furniture = tuple.Item2;
+
+                    Console.WriteLine($"{StyleService.Left(lineItem.FurnitureID.ToString(), 15)} {StyleService.Left(furniture.Name, 15)} {StyleService.Left(lineItem.Quantity.ToString(), 15)} {StyleService.Left(lineItem.QuantityReturned.ToString(), 15)} {StyleService.Left(lineItem.DailyCost.ToString("C"), 15)}");
+                }
+            }
+
+            NavigationService.PressAnyKey();
+        }
+
+        private int GetRentalTransactionIDFromUserInput()
+        {
+            int rentalTransactionID = -1;
+            bool isValid = false;
+
+            while (!isValid)
+            {
+                Console.WriteLine(StyleService.PromptFormat("Enter the rental transaction ID"));
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int parsedInt) && parsedInt >= 0 && parsedInt <= 99999)
+                {
+                    rentalTransactionID = parsedInt;
+                    isValid = true;
+                }
+                else
+                {
+                    string message = "Invalid input. " +
+                        "Please enter a number between 0 and 99999 containing only numbers.";
+                    Console.WriteLine(StyleService.WarningFormat(message));
+                    NavigationService.PressAnyKey();
+                }
+            }
+
+            return rentalTransactionID;
         }
     }
 }

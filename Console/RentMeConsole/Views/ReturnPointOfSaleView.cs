@@ -45,6 +45,7 @@ namespace RentMeConsole.Views
 
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Record a return transaction", subMenu.Show)
+                .Add("Display a return transaction confirmation", () => PrintReturnTransactionDetails())
                 .Add("Go back to main menu", ConsoleMenu.Close)
                 .Add("Exit", () => Environment.Exit(0))
                 .Configure(config =>
@@ -326,6 +327,70 @@ namespace RentMeConsole.Views
             _returnPointOfSaleService.SaveReturnTransaction(returnTransaction, lineItems);
 
             ClearReturnCart();
+        }
+
+        private void PrintReturnTransactionDetails()
+        {
+            int returnTransactionID = GetReturnTransactionIDFromUserInput();
+            Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> returnTransactionDetails = _returnPointOfSaleService.GetReturnTransactionDetails(returnTransactionID);
+
+            if (returnTransactionDetails.Count == 0)
+            {
+                Console.WriteLine($"{StyleService.WarningFormat("Return transaction not found")}");
+                NavigationService.PressAnyKey();
+                return;
+            }
+
+            foreach (var kvp in returnTransactionDetails)
+            {
+                ReturnTransaction returnTransaction = kvp.Key;
+                List<Tuple<ReturnLineItem, RentalLineItem, Furniture>> returnLineItems = kvp.Value;
+
+                Console.WriteLine($"{StyleService.HeadingFormat("Return Transaction")}");
+                Console.WriteLine($"{StyleService.Left("Trans ID", 15)} {StyleService.Left("Emp ID", 15)} {StyleService.Left("Mem ID", 15)} {StyleService.Left("Rtr Date", 15)} {StyleService.Left("Amt Due", 15)}");
+                Console.WriteLine($"{StyleService.Left(returnTransaction.ReturnTransactionID.ToString(), 15)} {StyleService.Left(returnTransaction.EmployeeID.ToString(), 15)} {StyleService.Left(returnTransaction.MemberID.ToString(), 15)} {StyleService.Left(returnTransaction.ReturnDate.ToString("MM/dd/yyyy"), 15)} {StyleService.Left(returnTransaction.TotalCost.ToString("C"), 15)}");
+
+                Console.WriteLine($"{StyleService.HeadingFormat("Return Line Items")}");
+                Console.WriteLine($"{StyleService.Left("Line ID", 15)} {StyleService.Left("Rtr Trans ID", 15)} {StyleService.Left("Qty", 15)} {StyleService.Left("Daily Cost", 15)} {StyleService.Left("Rnt ID", 15)} {StyleService.Left("Furn ID", 15)} {StyleService.Left("Furn Name", 15)}");
+
+                foreach (var tuple in returnLineItems)
+                {
+                    ReturnLineItem returnLineItem = tuple.Item1;
+                    RentalLineItem rentalLineItem = tuple.Item2;
+                    Furniture furniture = tuple.Item3;
+
+                    Console.WriteLine($"{StyleService.Left(returnLineItem.RentalLineItemID.ToString(), 15)} {StyleService.Left(returnLineItem.ReturnTransactionID.ToString(), 15)} {StyleService.Left(returnLineItem.Quantity.ToString(), 15)} {StyleService.Left(returnLineItem.DailyCost.ToString("C"), 15)} {StyleService.Left(rentalLineItem.RentalTransactionID.ToString(), 15)} {StyleService.Left(furniture.FurnitureID.ToString(), 15)} {StyleService.Left(furniture.Name, 15)}");
+                }
+            }
+
+            NavigationService.PressAnyKey();
+        }
+
+        private int GetReturnTransactionIDFromUserInput()
+        {
+            int returnTransactionID = -1;
+            bool isValid = false;
+
+            while (!isValid)
+            {
+                Console.WriteLine(StyleService.PromptFormat("Enter the return transaction ID"));
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int parsedInt) && parsedInt >= 0 && parsedInt <= 99999)
+                {
+                    returnTransactionID = parsedInt;
+                    isValid = true;
+                }
+                else
+                {
+                    string message = "Invalid input. " +
+                        "Please enter a number between 0 and 99999 containing only numbers.";
+                    Console.WriteLine(StyleService.WarningFormat(message));
+                    NavigationService.PressAnyKey();
+                }
+            }
+
+            return returnTransactionID;
         }
     }
 }

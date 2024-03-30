@@ -266,9 +266,11 @@
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\copilot-chat\d4218876\V0_b6fdca8a-87a9-4152-93cf-4b37397bec20_Default" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\0aacb50a-1380-4a8a-9dfc-8b589dd9910f.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\156ada13-369e-4a97-a270-36b3fe906421.vsidx" />
+    <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\23ac477c-23fb-490a-a6f6-85846ede731b.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\28536381-a1fa-4206-916e-d31db210e324.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\3e6b79c7-7897-47ee-a4de-d8a14fcce3a3.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\44ced87a-a7d7-4d4d-9146-1c3c6360a62a.vsidx" />
+    <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\48b12024-158a-4da2-90d5-9e33f92a6b8d.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\52c0615c-5739-4931-bcb8-0afebe36e184.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\64f60871-acbf-4734-8fdc-96a3de82b6fa.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\688bdc15-a299-45ba-aba4-ee8e34237d23.vsidx" />
@@ -278,16 +280,31 @@
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\81e512d3-613d-4c3a-a147-cf0aef8ec49b.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\84deeb50-4211-457e-8062-49f431048afe.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\b789e98a-b554-4341-a9bd-9c0586356e35.vsidx" />
+    <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\b86a4ebf-9459-4e68-b892-b845f41e9d05.vsidx" />
+    <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\ccff5568-d891-4510-9ebb-6fecf9243d2c.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\d5e71736-2bfa-445a-83cb-85cd57fe4c3f.vsidx" />
+    <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\e2b5ee49-775d-49f1-95fe-d3652f7eaa9f.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\f10f389b-c134-4d4b-a7d8-56217a83db39.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\v17\.suo" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\v17\DocumentLayout.json" />
     <None Include="Console\RentMeConsole\App.config" />
+    <None Include="Console\RentMeConsole\bin\Debug\app.publish\Application Files\RentMeConsole_1_0_0_0\ConsoleMenu.dll.deploy" />
+    <None Include="Console\RentMeConsole\bin\Debug\app.publish\Application Files\RentMeConsole_1_0_0_0\Database\cs6232-g5.sql.deploy" />
+    <None Include="Console\RentMeConsole\bin\Debug\app.publish\Application Files\RentMeConsole_1_0_0_0\Database\cs6232-g5_202403300645.sql.deploy" />
+    <None Include="Console\RentMeConsole\bin\Debug\app.publish\Application Files\RentMeConsole_1_0_0_0\RentMeConsole.exe.config.deploy" />
+    <None Include="Console\RentMeConsole\bin\Debug\app.publish\Application Files\RentMeConsole_1_0_0_0\RentMeConsole.exe.deploy" />
+    <None Include="Console\RentMeConsole\bin\Debug\app.publish\Application Files\RentMeConsole_1_0_0_0\RentMeConsole.exe.manifest" />
+    <None Include="Console\RentMeConsole\bin\Debug\app.publish\Application Files\RentMeConsole_1_0_0_0\System.Diagnostics.DiagnosticSource.dll.deploy" />
+    <None Include="Console\RentMeConsole\bin\Debug\app.publish\RentMeConsole.application" />
+    <None Include="Console\RentMeConsole\bin\Debug\RentMeConsole.application" />
     <None Include="Console\RentMeConsole\bin\Debug\RentMeConsole.exe.config" />
+    <None Include="Console\RentMeConsole\bin\Debug\RentMeConsole.exe.manifest" />
     <None Include="Console\RentMeConsole\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="Console\RentMeConsole\obj\Debug\RentMeCo.7BB39FC8.Up2Date" />
+    <None Include="Console\RentMeConsole\obj\Debug\RentMeConsole.application" />
     <None Include="Console\RentMeConsole\obj\Debug\RentMeConsole.csproj.AssemblyReference.cache" />
     <None Include="Console\RentMeConsole\obj\Debug\RentMeConsole.csproj.CoreCompileInputs.cache" />
+    <None Include="Console\RentMeConsole\obj\Debug\RentMeConsole.exe.manifest" />
     <None Include="Console\RentMeConsole\packages.config" />
     <None Include="Console\RentMeConsole\packages\ConsoleMenu-simple.2.6.1\.signature.p7s" />
     <None Include="Console\RentMeConsole\packages\ConsoleMenu-simple.2.6.1\ConsoleMenu-simple.2.6.1.nupkg" />
@@ -1182,6 +1199,7 @@
     <None Include="Console\RentMeConsole\packages\System.Xml.XDocument.4.3.0\ref\xamarinwatchos10\_._" />
     <None Include="Console\RentMeConsole\packages\System.Xml.XDocument.4.3.0\System.Xml.XDocument.4.3.0.nupkg" />
     <None Include="Console\RentMeConsole\RentMeConsole.csproj" />
+    <None Include="Console\RentMeConsole\RentMeConsole_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1203,6 +1221,8 @@
   <ItemGroup>
     <Content Include="Console\RentMeConsole\.gitattributes" />
     <Content Include="Console\RentMeConsole\.gitignore" />
+    <Content Include="Console\RentMeConsole\bin\Debug\app.publish\RentMeConsole.exe" />
+    <Content Include="Console\RentMeConsole\bin\Debug\app.publish\setup.exe" />
     <Content Include="Console\RentMeConsole\bin\Debug\ConsoleMenu.dll" />
     <Content Include="Console\RentMeConsole\bin\Debug\RentMeConsole.exe" />
     <Content Include="Console\RentMeConsole\bin\Debug\RentMeConsole.pdb" />
@@ -2615,6 +2635,7 @@
     <Content Include="Console\RentMeConsole\packages\System.Xml.XDocument.4.3.0\ref\netstandard1.3\zh-hans\System.Xml.XDocument.xml" />
     <Content Include="Console\RentMeConsole\packages\System.Xml.XDocument.4.3.0\ref\netstandard1.3\zh-hant\System.Xml.XDocument.xml" />
     <Content Include="Console\RentMeConsole\packages\System.Xml.XDocument.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="Console\RentMeConsole\RentMeConsole.csproj.user" />
     <Content Include="Console\RentMeConsole\RentMeConsole.sln" />
     <Content Include="Database\cs6232-g5.sql" />
     <Content Include="read_me.txt" />

@@ -192,6 +192,33 @@ public class ReturnPointOfSaleService
         }
     }
 
+    /// <summary>
+    /// Retrieves the details of a return transaction including associated rental line items and furniture.
+    /// </summary>
+    /// <param name="returnTransactionID">The ID of the return transaction.</param>
+    /// <returns>A dictionary containing the return transaction, its associated return line items, rental line items, and furniture.</returns>
+    public Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> GetReturnTransactionDetails(int returnTransactionID)
+    {
+        Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> returnTransactionDetails = new Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>>();
+
+        ReturnTransaction returnTransaction = _returnTransactionController.GetReturnTransactionByReturnTransactionID(returnTransactionID);
+        List<ReturnLineItem> returnLineItems = _returnLineItemController.GetReturnLineItemsByReturnTransactionID(returnTransactionID);
+
+        List<Tuple<ReturnLineItem, RentalLineItem, Furniture>> details = new List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>();
+
+        foreach (var returnLineItem in returnLineItems)
+        {
+            RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(returnLineItem.RentalLineItemID);
+            Furniture furniture = _furnitureController.GetFurnitureByID(rentalLineItem.FurnitureID);
+
+            Tuple<ReturnLineItem, RentalLineItem, Furniture> detail = new Tuple<ReturnLineItem, RentalLineItem, Furniture>(returnLineItem, rentalLineItem, furniture);
+            details.Add(detail);
+        }
+
+        returnTransactionDetails.Add(returnTransaction, details);
+        return returnTransactionDetails;
+    }
+
     public void ShowMenu()
     {
         ReturnPointOfSaleView view = new ReturnPointOfSaleView(_session);

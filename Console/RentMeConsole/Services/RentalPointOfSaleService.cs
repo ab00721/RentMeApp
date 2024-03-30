@@ -140,6 +140,31 @@ public class RentalPointOfSaleService
         }
     }
 
+    /// <summary>
+    /// Gets the details of a rental transaction including the associated rental line items.
+    /// </summary>
+    /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
+    /// <returns>A dictionary containing the rental transaction and its associated rental line items.</returns>
+    public Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> GetRentalTransactionDetails(int rentalTransactionID)
+    {
+        Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> rentalTransactionDetails = new Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>>();
+
+        RentalTransaction rentalTransaction = _rentalTransactionController.GetRentalTransactionByRentalTransactionId(rentalTransactionID);
+        List<RentalLineItem> lineItems = _rentalLineItemController.GetRentalLineItemsByRentalTransactionID(rentalTransactionID);
+
+        List<Tuple<RentalLineItem, Furniture>> lineItemsWithFurniture = new List<Tuple<RentalLineItem, Furniture>>();
+
+        foreach (var lineItem in lineItems)
+        {
+            Furniture furniture = _furnitureController.GetFurnitureByID(lineItem.FurnitureID);
+            lineItemsWithFurniture.Add(new Tuple<RentalLineItem, Furniture>(lineItem, furniture));
+        }
+
+        rentalTransactionDetails.Add(rentalTransaction, lineItemsWithFurniture);
+
+        return rentalTransactionDetails;
+    }
+
     public void ShowMenu()
     {
         RentalPointOfSaleView view = new RentalPointOfSaleView(_session);

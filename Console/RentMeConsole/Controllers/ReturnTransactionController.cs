@@ -27,7 +27,7 @@ namespace RentMeConsole.Controllers
             return _returnTransactionSource.GetAllReturnTransactions();
         }
 
-        public ReturnTransaction GetReturnTransactionByReturnTransactionId(int returnTransactionId)
+        public ReturnTransaction GetReturnTransactionByReturnTransactionID(int returnTransactionId)
         {
             return _returnTransactionSource.GetReturnTransactionByReturnTransactionId(returnTransactionId);
         }
