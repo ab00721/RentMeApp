@@ -20,9 +20,9 @@ namespace RentMeApp.View
         private readonly UserUserControl _userUserControl;
         private readonly RentalTransactionController _rentalTransactionController;
         private readonly RentalLineItemController _rentalLineItemController;
-        private List<RentalTransaction> rentalTransactions;
-        private List<RentalLineItem> rentalLineItems;
-        private Member member;
+        private List<RentalTransaction> _rentalTransactions;
+        private List<RentalLineItem> _rentalLineItems;
+        private Member _member;
         DataGridViewButtonColumn _addButtonColumn;
 
 
@@ -31,27 +31,31 @@ namespace RentMeApp.View
             InitializeComponent();
             _userUserControl = new UserUserControl(username, firstName);
             this.userTableLayoutPanel.Controls.Add(_userUserControl);
+
+            this._member = selectedMember;
             this._searchMemberUserControl = searchMemberUserController;
-            this.member = selectedMember;
             this._rentalTransactionController = new RentalTransactionController();
             this._rentalLineItemController = new RentalLineItemController();
+
             this.RefreshRentalTransactionDataGridView();
+
             _addButtonColumn = new DataGridViewButtonColumn();
             AddButtonColumn();
+
             MemberUserControl memberUserControl = new MemberUserControl(selectedMember);
             this.TransactionTableLayout.Controls.Add(memberUserControl);
         }
 
         public void RefreshRentalTransactionDataGridView()
         {
-            RefreshRentalTransactionDataGridView(this._rentalTransactionController.GetAllRentalTransactionsByMemberId(this.member.MemberID));
+            RefreshRentalTransactionDataGridView(this._rentalTransactionController.GetAllRentalTransactionsByMemberId(this._member.MemberID));
         }
 
         private void RefreshRentalTransactionDataGridView(List<RentalTransaction> transactions)
         {
-            rentalTransactions = transactions;
+            _rentalTransactions = transactions;
             RentalTransactionDataGridView.DataSource = null;
-            RentalTransactionDataGridView.DataSource = rentalTransactions;
+            RentalTransactionDataGridView.DataSource = _rentalTransactions;
         }
 
         private void AddButtonColumn()
@@ -70,11 +74,11 @@ namespace RentMeApp.View
             {
                 RentalTransaction transaction = new RentalTransaction();
 
-                transaction = rentalTransactions[e.RowIndex];
+                transaction = _rentalTransactions[e.RowIndex];
 
-                rentalLineItems = this._rentalLineItemController.GetRentalLineItemsByRentalTransactionId(transaction.RentalTransactionID);
+                _rentalLineItems = this._rentalLineItemController.GetRentalLineItemsByRentalTransactionId(transaction.RentalTransactionID);
                 DetailsDataGridView.DataSource = null;
-                DetailsDataGridView.DataSource = rentalLineItems;
+                DetailsDataGridView.DataSource = _rentalLineItems;
             }
         }
     }

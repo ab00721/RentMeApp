@@ -31,11 +31,11 @@
             this.userTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.TransactionTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.RentalTableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.RentalLabel = new System.Windows.Forms.Label();
             this.RentalTransactionDataGridView = new System.Windows.Forms.DataGridView();
-            this.DetailsLabel = new System.Windows.Forms.Label();
+            this.RentalLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.DetailsDataGridView = new System.Windows.Forms.DataGridView();
+            this.DetailsLabel = new System.Windows.Forms.Label();
             this.TransactionTableLayout.SuspendLayout();
             this.RentalTableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RentalTransactionDataGridView)).BeginInit();
@@ -85,19 +85,10 @@
             this.RentalTableLayout.Size = new System.Drawing.Size(773, 223);
             this.RentalTableLayout.TabIndex = 0;
             // 
-            // RentalLabel
-            // 
-            this.RentalLabel.AutoSize = true;
-            this.RentalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.RentalLabel.Location = new System.Drawing.Point(3, 0);
-            this.RentalLabel.Name = "RentalLabel";
-            this.RentalLabel.Size = new System.Drawing.Size(146, 17);
-            this.RentalLabel.TabIndex = 0;
-            this.RentalLabel.Text = "Rental Transations";
-            // 
             // RentalTransactionDataGridView
             // 
             this.RentalTransactionDataGridView.AllowUserToDeleteRows = false;
+            this.RentalTransactionDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.RentalTransactionDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.RentalTransactionDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RentalTransactionDataGridView.Location = new System.Drawing.Point(2, 19);
@@ -110,15 +101,15 @@
             this.RentalTransactionDataGridView.TabIndex = 13;
             this.RentalTransactionDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RentalTransactionDataGridView_CellContentClick);
             // 
-            // DetailsLabel
+            // RentalLabel
             // 
-            this.DetailsLabel.AutoSize = true;
-            this.DetailsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.DetailsLabel.Location = new System.Drawing.Point(3, 0);
-            this.DetailsLabel.Name = "DetailsLabel";
-            this.DetailsLabel.Size = new System.Drawing.Size(58, 17);
-            this.DetailsLabel.TabIndex = 1;
-            this.DetailsLabel.Text = "Details";
+            this.RentalLabel.AutoSize = true;
+            this.RentalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+            this.RentalLabel.Location = new System.Drawing.Point(3, 0);
+            this.RentalLabel.Name = "RentalLabel";
+            this.RentalLabel.Size = new System.Drawing.Size(146, 17);
+            this.RentalLabel.TabIndex = 0;
+            this.RentalLabel.Text = "Rental Transations";
             // 
             // tableLayoutPanel1
             // 
@@ -137,6 +128,7 @@
             // DetailsDataGridView
             // 
             this.DetailsDataGridView.AllowUserToDeleteRows = false;
+            this.DetailsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DetailsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DetailsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DetailsDataGridView.Location = new System.Drawing.Point(2, 24);
@@ -147,6 +139,16 @@
             this.DetailsDataGridView.RowTemplate.Height = 24;
             this.DetailsDataGridView.Size = new System.Drawing.Size(769, 198);
             this.DetailsDataGridView.TabIndex = 14;
+            // 
+            // DetailsLabel
+            // 
+            this.DetailsLabel.AutoSize = true;
+            this.DetailsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+            this.DetailsLabel.Location = new System.Drawing.Point(3, 0);
+            this.DetailsLabel.Name = "DetailsLabel";
+            this.DetailsLabel.Size = new System.Drawing.Size(58, 17);
+            this.DetailsLabel.TabIndex = 1;
+            this.DetailsLabel.Text = "Details";
             // 
             // TransactionsDialog
             // 
