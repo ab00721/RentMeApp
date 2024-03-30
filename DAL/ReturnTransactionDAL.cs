@@ -11,18 +11,16 @@ namespace RentMeApp.DAL
     /// </summary>
     public class ReturnTransactionDAL
     {
-        /// <summary>
-        /// Adds a return transaction to the data.
-        /// </summary>
-        /// <param name="returnTransaction">The return transaction to add.</param>
-        public void InsertReturnTransaction(ReturnTransaction returnTransaction)
+        public int InsertReturnTransaction(ReturnTransaction returnTransaction)
         {
+            int returnTransactionID = 0;
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     command.CommandText = "INSERT INTO ReturnTransaction (EmployeeID, MemberID, ReturnDate, TotalCost) " +
-                                          "VALUES (@EmployeeID, @MemberID, @ReturnDate, @TotalCost)";
+                                  "VALUES (@EmployeeID, @MemberID, @ReturnDate, @TotalCost); " +
+                                  "SELECT SCOPE_IDENTITY();";
 
                     command.Parameters.Add("@EmployeeID", SqlDbType.Int);
                     command.Parameters["@EmployeeID"].Value = returnTransaction.EmployeeID;
@@ -37,14 +35,12 @@ namespace RentMeApp.DAL
                     command.Parameters["@TotalCost"].Value = returnTransaction.TotalCost;
 
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    returnTransactionID = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
+            return returnTransactionID;
         }
 
-        /// <summary>
-        /// Returns a list of all return transactions.
-        /// </summary
         public List<ReturnTransaction> GetAllReturnTransactions()
         {
             List<ReturnTransaction> returnTransactions = new List<ReturnTransaction>();
@@ -72,10 +68,6 @@ namespace RentMeApp.DAL
             return returnTransactions;
         }
 
-        /// <summary>
-        /// Returns a return transaction.
-        /// </summary>
-        /// <param name="returnTransactionID">The ID of the return transaction.</param>
         public ReturnTransaction GetReturnTransactionByReturnTransactionId(int returnTransactionId)
         {
             ReturnTransaction returnTransaction = null;

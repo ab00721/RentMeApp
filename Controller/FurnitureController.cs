@@ -36,5 +36,25 @@ namespace RentMeApp.Controller
         {
             return this._furnitureSource.GetFurniture(searchBy, searchCriteria);
         }
+
+        /// <summary>
+        /// Gets the furniture by ID.
+        /// </summary>
+        /// <param name="furnitureID">The ID of the furniture.</param>
+        /// <returns>The furniture with the specified ID.</returns>
+        public Furniture GetFurnitureByID(int furnitureID)
+        {
+            return _furnitureSource.GetFurnitureByFurnitureID(furnitureID);
+        }
+
+        public void DecreaseFurnitureInStockQuantity(int furnitureID, int decreaseBy)
+        {
+            _furnitureSource.DecreaseFurnitureInStockQuantity(furnitureID, decreaseBy);
+        }
+
+        public void IncreaseFurnitureInStockQuantity(int furnitureID, int increaseBy)
+        {
+            _furnitureSource.IncreaseFurnitureInStockQuantity(furnitureID, increaseBy);
+        }
     }
 }

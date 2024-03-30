@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data.SqlClient;
-using RentMeApp.DAL;
+﻿using RentMeApp.DAL;
 
 namespace RentMeApp.Controller
 {
@@ -16,7 +14,7 @@ namespace RentMeApp.Controller
         /// </summary>
         public AuthenticateController()
         {
-            this._authenticateSource = new AuthenticateDAL();
+            _authenticateSource = new AuthenticateDAL();
         }
 
         /// <summary>
@@ -24,11 +22,10 @@ namespace RentMeApp.Controller
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
-        /// <returns></returns>
-        /// <exception cref="System.Exception"></exception>
+        /// <returns>True if the authentication is successful; otherwise, false.<
         public bool Authenticate(string username, string password)
         {
-            return this._authenticateSource.Authenticate(username, password);
+            return _authenticateSource.Authenticate(username, password);
         }
 
         /// <summary>
@@ -38,7 +35,7 @@ namespace RentMeApp.Controller
         /// <param name="password">The password, which will be hashed.</param>
         public void AddLogin(string username, string password)
         {
-            this._authenticateSource.AddLogin(username, password);
+            _authenticateSource.AddLogin(username, password);
         }
     }
 }

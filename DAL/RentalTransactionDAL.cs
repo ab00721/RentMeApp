@@ -11,18 +11,16 @@ namespace RentMeApp.DAL
     /// </summary>
     public class RentalTransactionDAL
     {
-        /// <summary>
-        /// Adds a rental transaction to the data.
-        /// </summary>
-        /// <param name="rentalTransaction">The rental transaction to be added.</param>
-        public void InsertRentalTransaction(RentalTransaction rentalTransaction)
+        public int InsertRentalTransaction(RentalTransaction rentalTransaction)
         {
+            int rentalTransactionID = 0;
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     command.CommandText = "INSERT INTO RentalTransaction (EmployeeID, MemberID, RentalDate, DueDate, TotalCost) " +
-                                          "VALUES (@EmployeeID, @MemberID, @RentalDate, @DueDate, @TotalCost)";
+                                          "VALUES (@EmployeeID, @MemberID, @RentalDate, @DueDate, @TotalCost);" +
+                                          "SELECT SCOPE_IDENTITY();";
 
                     command.Parameters.Add("@EmployeeID", SqlDbType.Int);
                     command.Parameters["@EmployeeID"].Value = rentalTransaction.EmployeeID;
@@ -40,14 +38,12 @@ namespace RentMeApp.DAL
                     command.Parameters["@TotalCost"].Value = rentalTransaction.TotalCost;
 
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    rentalTransactionID = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
+            return rentalTransactionID;
         }
 
-        /// <summary>
-        /// Returns a list of all rental transactions.
-        /// </summary
         public List<RentalTransaction> GetAllRentalTransactions()
         {
             List<RentalTransaction> rentalTransactions = new List<RentalTransaction>();
@@ -68,6 +64,7 @@ namespace RentMeApp.DAL
                                 Convert.ToDateTime(reader["DueDate"]),
                                 Convert.ToDecimal(reader["TotalCost"])
                             );
+                            transaction.RentalTransactionID = Convert.ToInt32(reader["RentalTransactionID"]);
                             rentalTransactions.Add(transaction);
                         }
                     }
@@ -76,10 +73,6 @@ namespace RentMeApp.DAL
             return rentalTransactions;
         }
 
-        /// <summary>
-        /// Returns a rental transaction.
-        /// </summary>
-        /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
         public RentalTransaction GetRentalTransactionByRentalTransactionId(int rentalTransactionID)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
@@ -110,6 +103,38 @@ namespace RentMeApp.DAL
                 }
             }
             return null;
+        }
+
+        public RentalTransaction GetRentalTransactionByRentalLineItemID(int rentalLineItemID)
+        {
+            RentalTransaction rentalTransaction = null;
+
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                using (SqlCommand command = new SqlCommand("SELECT * FROM RentalTransaction WHERE RentalTransactionID IN (SELECT RentalTransactionID FROM RentalLineItem WHERE RentalLineItemID = @RentalLineItemID)", connection))
+                {
+                    command.Parameters.Add("@RentalLineItemID", SqlDbType.Int);
+                    command.Parameters["@RentalLineItemID"].Value = rentalLineItemID;
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            rentalTransaction = new RentalTransaction(
+                                Convert.ToInt32(reader["EmployeeID"]),
+                                Convert.ToInt32(reader["MemberID"]),
+                                Convert.ToDateTime(reader["RentalDate"]),
+                                Convert.ToDateTime(reader["DueDate"]),
+                                Convert.ToDecimal(reader["TotalCost"])
+                            );
+
+                            rentalTransaction.RentalTransactionID = Convert.ToInt32(reader["RentalTransactionID"]);
+                        }
+                    }
+                }
+            }
+            return rentalTransaction;
         }
     }
 }

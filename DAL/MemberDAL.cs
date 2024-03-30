@@ -253,5 +253,63 @@ namespace RentMeApp.DAL
             }
             return rowsAffected;
         }
+
+        /// <summary>
+        /// Gets the member by ID.
+        /// </summary>
+        /// <param name="memberID">The member ID.</param>
+        /// <returns>The member information.</returns>
+        public Member GetMemberByID(int memberID)
+        {
+            Member member = null;
+
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText =
+                        "SELECT M.MemberID, M.FirstName, M.LastName, M.Sex, M.DateOfBirth, M.AddressLine1, M.AddressLine2, M.City, M.State, M.Zip, M.Phone " +
+                        "FROM Member M " +
+                        "WHERE M.MemberID = @MemberID";
+                    command.Parameters.AddWithValue("@MemberID", memberID);
+                    command.Connection = connection;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int memberIDOrdinal = reader.GetOrdinal("MemberID");
+                            int firstNameOrdinal = reader.GetOrdinal("FirstName");
+                            int lastNameOrdinal = reader.GetOrdinal("LastName");
+                            int sexOrdinal = reader.GetOrdinal("Sex");
+                            int dateOfBirthOrdinal = reader.GetOrdinal("DateOfBirth");
+                            int addressOneOrdinal = reader.GetOrdinal("AddressLine1");
+                            int addressTwoOrdinal = reader.GetOrdinal("AddressLine2");
+                            int cityOrdinal = reader.GetOrdinal("City");
+                            int stateOrdinal = reader.GetOrdinal("State");
+                            int zipOrdinal = reader.GetOrdinal("Zip");
+                            int phoneOrdinal = reader.GetOrdinal("Phone");
+
+                            var memberIDValue = reader.GetInt32(memberIDOrdinal);
+                            var firstNameValue = reader.GetString(firstNameOrdinal);
+                            var lastNameValue = reader.GetString(lastNameOrdinal);
+                            var sexValue = reader.IsDBNull(sexOrdinal) ? "" : reader.GetString(sexOrdinal);
+                            var dateOfBirthValue = reader.GetDateTime(dateOfBirthOrdinal);
+                            var addressOneValue = reader.GetString(addressOneOrdinal);
+                            var addressTwoValue = reader.IsDBNull(addressTwoOrdinal) ? "" : reader.GetString(addressTwoOrdinal);
+                            var cityValue = reader.GetString(cityOrdinal);
+                            var stateValue = reader.GetString(stateOrdinal);
+                            var zipValue = reader.GetString(zipOrdinal);
+                            var phoneValue = reader.IsDBNull(phoneOrdinal) ? "" : reader.GetString(phoneOrdinal);
+
+                            member = new Member(memberIDValue, firstNameValue, lastNameValue, sexValue, dateOfBirthValue, addressOneValue, addressTwoValue, cityValue, stateValue, zipValue, phoneValue);
+                        }
+                    }
+                }
+            }
+
+            return member;
+        }
     }
 }

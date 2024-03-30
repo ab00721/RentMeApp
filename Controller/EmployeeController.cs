@@ -15,7 +15,7 @@ namespace RentMeApp.Controller
         /// </summary>
         public EmployeeController()
         {
-            this._employeeSource = new EmployeeDAL();
+            _employeeSource = new EmployeeDAL();
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace RentMeApp.Controller
         /// <returns></returns>
         public EmployeeDTO GetEmployeeByUsername(string username)
         {
-            return this._employeeSource.GetEmployeeByUsername(username);
+            return _employeeSource.GetEmployeeByUsername(username);
         }
 
     }

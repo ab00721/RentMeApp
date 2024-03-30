@@ -7,42 +7,51 @@ namespace RentMeApp.Model
     /// </summary>
     public class EmployeeDTO
     {
+        public int EmployeeID { get; set; }
+        public string LastName { get; set; }
         public string FirstName { get; set; }
-        public string Username { get; set; }
+        public string Sex { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
+        public string Phone { get; set; }
         public int IsAdmin { get; set; }
+        public string Username { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeDTO"/> class.
         /// </summary>
+        /// <param name="employeeID">The employee ID.</param>
+        /// <param name="lastName">The last name.</param>
         /// <param name="firstName">The first name.</param>
-        /// <param name="username">The username.</param>
+        /// <param name="sex">The sex.</param>
+        /// <param name="dateOfBirth">The date of birth.</param>
+        /// <param name="addressLine1">The address line 1.</param>
+        /// <param name="addressLine2">The address line 2.</param>
+        /// <param name="city">The city.</param>
+        /// <param name="state">The state.</param>
+        /// <param name="zip">The zip.</param>
+        /// <param name="phone">The phone.</param>
         /// <param name="isAdmin">The is admin.</param>
-        /// <exception cref="System.ArgumentException">
-        /// First Name - First name cannot be null or empty
-        /// or
-        /// Username - Username cannot be null or empty
-        /// </exception>
-        /// <exception cref="System.ArgumentOutOfRangeException">Admin - Admin should be 0 or 1</exception>
-        public EmployeeDTO(string firstName, string username, int isAdmin)
+        /// <param name="username">The username.</param>
+        public EmployeeDTO(int employeeID, string lastName, string firstName, string sex, DateTime dateOfBirth, string addressLine1, string addressLine2, string city, string state, string zip, string phone, int isAdmin, string username)
         {
-            if (string.IsNullOrEmpty(firstName))
-            {
-                throw new ArgumentException("First Name", "First name cannot be null or empty");
-            }
-
-            if (string.IsNullOrEmpty(username))
-            {
-                throw new ArgumentException("Username", "Username cannot be null or empty");
-            }
-
-            if (isAdmin < 0 || isAdmin > 1)
-            {
-                throw new ArgumentOutOfRangeException("Admin", "Admin should be 0 or 1");
-            }
-
+            this.EmployeeID = employeeID;
+            this.LastName = lastName;
             this.FirstName = firstName;
-            this.Username = username;
+            this.Sex = sex;
+            this.DateOfBirth = dateOfBirth;
+            this.AddressLine1 = addressLine1;
+            this.AddressLine2 = addressLine2;
+            this.City = city;
+            this.State = state;
+            this.Zip = zip;
+            this.Phone = phone;
             this.IsAdmin = isAdmin;
+            this.Username = username;
         }
     }
 }

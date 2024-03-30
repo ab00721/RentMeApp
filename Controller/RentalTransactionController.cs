@@ -1,6 +1,5 @@
 ﻿using RentMeApp.DAL;
 using RentMeApp.Model;
-using System;
 using System.Collections.Generic;
 
 namespace RentMeApp.Controller
@@ -20,35 +19,24 @@ namespace RentMeApp.Controller
             _rentalTransactionSource = new RentalTransactionDAL();
         }
 
-        /// <summary>
-        /// Adds a rental transaction to the data.
-        /// </summary>
-        /// <param name="employeeID">The ID of the employee associated with the rental transaction.</param>
-        /// <param name="memberID">The ID of the member associated with the rental transaction.</param>
-        /// <param name="rentalDate">The date of the rental transaction.</param>
-        /// <param name="dueDate">The due date of the rental transaction.</param>
-        /// <param name="totalCost">The total cost of the rental transaction.</param>
-        public void AddRentalTransaction(int employeeID, int memberID, DateTime rentalDate, DateTime dueDate, decimal totalCost)
+        public int AddRentalTransaction(RentalTransaction rentalTransaction)
         {
-            RentalTransaction rentalTransaction = new RentalTransaction(employeeID, memberID, rentalDate, dueDate, totalCost);
-            _rentalTransactionSource.InsertRentalTransaction(rentalTransaction);
+            return _rentalTransactionSource.InsertRentalTransaction(rentalTransaction);
         }
 
-        /// <summary>
-        /// Returns a list of all rental transactions.
-        /// </summary
         public List<RentalTransaction> GetAllRentalTransactions()
         {
             return _rentalTransactionSource.GetAllRentalTransactions();
         }
 
-        /// <summary>
-        /// Returns a rental transaction.
-        /// </summary>
-        /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
         public RentalTransaction GetRentalTransactionByRentalTransactionId(int rentalTransactionID)
         {
             return _rentalTransactionSource.GetRentalTransactionByRentalTransactionId(rentalTransactionID);
+        }
+
+        public RentalTransaction GetRentalTransactionByRentalLineItemID(int rentalLineItemID)
+        {
+            return _rentalTransactionSource.GetRentalTransactionByRentalLineItemID(rentalLineItemID);
         }
     }
 }
