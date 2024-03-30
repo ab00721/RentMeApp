@@ -9,10 +9,10 @@ public static class DurationService
     /// Calculates the number of days between two dates.
     /// </summary>
     /// <returns>The number of days between two dates.</returns>
-    public static int DurationInDays(DateTime rentalDate, DateTime dueDate)
+    public static int DurationInDays(DateTime startDate, DateTime endDate)
     {
-        TimeSpan rentalPeriod = dueDate - rentalDate;
-        int transactionDurationInDays = rentalPeriod.Days;
+        TimeSpan rentalPeriod = endDate - startDate;
+        int transactionDurationInDays = (int)Math.Ceiling(rentalPeriod.TotalDays);
         return transactionDurationInDays;
     }
 }

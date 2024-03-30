@@ -64,8 +64,10 @@ public class ReturnPointOfSaleService
     /// <returns>The line item's cost over the rental period (per the database).</returns>
     public decimal RetrieveLineItemCostPerDay(ReturnLineItem lineItem)
     {
+        // Note: This method was rewritten to get cost from Furniture rather than RentalLineItem
         RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(lineItem.RentalLineItemID);
-        return rentalLineItem.DailyCost;
+        Furniture furnitureItem = _furnitureController.GetFurnitureByID(rentalLineItem.FurnitureID);
+        return furnitureItem.DailyRate;
     }
 
     /// <summary>
@@ -77,7 +79,17 @@ public class ReturnPointOfSaleService
         decimal expectedCost = 0;
 
         RentalTransaction rentalTransaction = _rentalTransactionController.GetRentalTransactionByRentalLineItemID(returnLineItem.RentalLineItemID);
-        expectedCost += RetrieveLineItemCostPerDay(returnLineItem) * DurationService.DurationInDays(rentalTransaction.RentalDate, rentalTransaction.DueDate);
+
+        decimal costPerDay = RetrieveLineItemCostPerDay(returnLineItem);
+        Console.WriteLine("Cost Per Day: " + costPerDay);
+
+        int duration = DurationService.DurationInDays(rentalTransaction.RentalDate, rentalTransaction.DueDate);
+        Console.WriteLine("Rental Date: " + rentalTransaction.RentalDate);
+        Console.WriteLine("Due Date: " + rentalTransaction.DueDate);
+        Console.WriteLine("Duration: " + duration);
+
+        expectedCost += costPerDay * duration;
+        Console.WriteLine("Expected Cost: " + expectedCost);
 
         return expectedCost;
     }
@@ -110,10 +122,12 @@ public class ReturnPointOfSaleService
         foreach (var lineItem in _returnLineItems)
         {
             decimal expectedCost = CalculateExpectedLineItemCostForDuration(lineItem);
+            Console.WriteLine("Expected Cost: " + expectedCost);
 
             decimal actualCost = CalculateActualLineItemCostForDuration(lineItem, _returnDate);
+            Console.WriteLine("Actual Cost: " + actualCost);
 
-            amountDue += expectedCost - actualCost;
+            amountDue += actualCost - expectedCost;
         }
 
         return amountDue;
@@ -144,6 +158,8 @@ public class ReturnPointOfSaleService
             {
                 // Save return transaction to the database and retrieve the ReturnTransactionID
                 int returnTransactionID = _returnTransactionController.AddReturnTransaction(returnTransaction);
+
+                Console.WriteLine("Return Transaction ID: " + returnTransactionID);
 
                 // Save return line items to the database
                 foreach (var returnLineItem in returnLineItems)

@@ -16,7 +16,8 @@ namespace RentMeConsole.DAL
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     command.CommandText = "INSERT INTO ReturnTransaction (EmployeeID, MemberID, ReturnDate, TotalCost) " +
-                                          "VALUES (@EmployeeID, @MemberID, @ReturnDate, @TotalCost)";
+                                  "VALUES (@EmployeeID, @MemberID, @ReturnDate, @TotalCost); " +
+                                  "SELECT SCOPE_IDENTITY();";
 
                     command.Parameters.Add("@EmployeeID", SqlDbType.Int);
                     command.Parameters["@EmployeeID"].Value = returnTransaction.EmployeeID;
