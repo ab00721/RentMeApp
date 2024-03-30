@@ -30,5 +30,15 @@ namespace RentMeApp.Controller
         {
             return this._authenticateSource.Authenticate(username, password);
         }
+
+        /// <summary>
+        /// Adds a new login with the given username and password.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password, which will be hashed.</param>
+        public void AddLogin(string username, string password)
+        {
+            this._authenticateSource.AddLogin(username, password);
+        }
     }
 }

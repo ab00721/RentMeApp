@@ -38,5 +38,31 @@ namespace RentMeApp.DAL
             }
         }
 
+        /// <summary>
+        /// Adds a new login entry to the database.
+        /// </summary>
+        /// <param name="username">The username of the login.</param>
+        /// <param name="password">The password of the login.</param>
+        public void AddLogin(string username, string password)
+        {
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText =
+                        "INSERT INTO Login (Username, Password) " +
+                        "VALUES (@username, HASHBYTES('MD5', @password)";
+
+                    command.Parameters.Add("@username", System.Data.SqlDbType.VarChar);
+                    command.Parameters["@username"].Value = username;
+
+                    command.Parameters.Add("@password", System.Data.SqlDbType.VarChar);
+                    command.Parameters["@password"].Value = password;
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
