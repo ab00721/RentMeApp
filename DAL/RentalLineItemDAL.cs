@@ -72,6 +72,7 @@ namespace RentMeApp.DAL
                                 Convert.ToInt32(reader["QuantityReturned"]),
                                 Convert.ToDecimal(reader["DailyCost"])
                             );
+                            item.RentalLineItemID = Convert.ToInt32(reader["RentalLineItemID"]);
                             rentalLineItems.Add(item);
                         }
                     }
