@@ -36,11 +36,16 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.DetailsDataGridView = new System.Windows.Forms.DataGridView();
             this.DetailsLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.ReturnLabel = new System.Windows.Forms.Label();
+            this.ReturnTransactionDataGridView = new System.Windows.Forms.DataGridView();
             this.TransactionTableLayout.SuspendLayout();
             this.RentalTableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RentalTransactionDataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DetailsDataGridView)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ReturnTransactionDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // userTableLayoutPanel
@@ -60,6 +65,7 @@
             this.TransactionTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TransactionTableLayout.Controls.Add(this.RentalTableLayout, 0, 1);
             this.TransactionTableLayout.Controls.Add(this.tableLayoutPanel1, 0, 3);
+            this.TransactionTableLayout.Controls.Add(this.tableLayoutPanel2, 0, 2);
             this.TransactionTableLayout.Location = new System.Drawing.Point(2, 65);
             this.TransactionTableLayout.Name = "TransactionTableLayout";
             this.TransactionTableLayout.RowCount = 4;
@@ -150,6 +156,45 @@
             this.DetailsLabel.TabIndex = 1;
             this.DetailsLabel.Text = "Details";
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.ReturnTransactionDataGridView, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.ReturnLabel, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 308);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(773, 223);
+            this.tableLayoutPanel2.TabIndex = 3;
+            // 
+            // ReturnLabel
+            // 
+            this.ReturnLabel.AutoSize = true;
+            this.ReturnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+            this.ReturnLabel.Location = new System.Drawing.Point(3, 0);
+            this.ReturnLabel.Name = "ReturnLabel";
+            this.ReturnLabel.Size = new System.Drawing.Size(148, 17);
+            this.ReturnLabel.TabIndex = 1;
+            this.ReturnLabel.Text = "Return Transations";
+            // 
+            // ReturnTransactionDataGridView
+            // 
+            this.ReturnTransactionDataGridView.AllowUserToDeleteRows = false;
+            this.ReturnTransactionDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ReturnTransactionDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ReturnTransactionDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ReturnTransactionDataGridView.Location = new System.Drawing.Point(2, 24);
+            this.ReturnTransactionDataGridView.Margin = new System.Windows.Forms.Padding(2);
+            this.ReturnTransactionDataGridView.Name = "ReturnTransactionDataGridView";
+            this.ReturnTransactionDataGridView.ReadOnly = true;
+            this.ReturnTransactionDataGridView.RowHeadersWidth = 62;
+            this.ReturnTransactionDataGridView.RowTemplate.Height = 24;
+            this.ReturnTransactionDataGridView.Size = new System.Drawing.Size(769, 197);
+            this.ReturnTransactionDataGridView.TabIndex = 14;
+            // 
             // TransactionsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -169,6 +214,9 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DetailsDataGridView)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ReturnTransactionDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -183,5 +231,8 @@
         private System.Windows.Forms.Label DetailsLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView DetailsDataGridView;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.DataGridView ReturnTransactionDataGridView;
+        private System.Windows.Forms.Label ReturnLabel;
     }
 }
