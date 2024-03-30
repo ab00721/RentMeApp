@@ -91,5 +91,19 @@ namespace RentMeConsole.DAL
                 }
             }
         }
+
+        public void IncreaseFurnitureInStockQuantity(int furnitureID, int increaseBy)
+        {
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                using (SqlCommand command = new SqlCommand("UPDATE Furniture SET InStockQuantity = InStockQuantity + @IncreaseBy WHERE FurnitureID = @FurnitureID", connection))
+                {
+                    command.Parameters.AddWithValue("@IncreaseBy", increaseBy);
+                    command.Parameters.AddWithValue("@FurnitureID", furnitureID);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

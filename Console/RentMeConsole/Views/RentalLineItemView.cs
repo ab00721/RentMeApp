@@ -41,7 +41,7 @@ namespace RentMeConsole.Views
         {
             int rentalTransactionID = GetRentalTransactionIdFromUserInput();
 
-            List<RentalLineItem> rentalLineItems = _rentalLineItemController.GetRentalLineItemsByRentalTransactionId(rentalTransactionID);
+            List<RentalLineItem> rentalLineItems = _rentalLineItemController.GetRentalLineItemsByRentalTransactionID(rentalTransactionID);
             if (rentalLineItems.Count == 0)
             {
                 Console.WriteLine($"{StyleService.WarningFormat("No rental line items found")}");
@@ -50,7 +50,7 @@ namespace RentMeConsole.Views
             }
 
             Console.WriteLine($"{StyleService.HeadingFormat("Rental line items")}");
-            Console.WriteLine($"{StyleService.Left("Line ID", 10)} {StyleService.Left("Trans ID", 10)} {StyleService.Left("Furn ID", 10)} {StyleService.Left("Qty", 10)} {StyleService.Left("Qty Rtn", 10)} {StyleService.Left("Daily Cost", 10)}");
+            Console.WriteLine($"{StyleService.Left("Line ID", 10)} {StyleService.Left("Trans ID", 10)} {StyleService.Left("Furn ID", 10)} {StyleService.Left("Qty", 10)} {StyleService.Left("Qty Rtr", 10)} {StyleService.Left("Daily Cost", 10)}");
 
             foreach (RentalLineItem rentalLineItem in rentalLineItems)
             {

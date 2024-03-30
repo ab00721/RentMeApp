@@ -42,7 +42,7 @@ namespace RentMeConsole.Views
         {
             int returnTransactionID = GetReturnTransactionIdFromUserInput();
 
-            List<ReturnLineItem> returnLineItems = _returnLineItemController.GetReturnLineItemsByReturnTransactionId(returnTransactionID);
+            List<ReturnLineItem> returnLineItems = _returnLineItemController.GetReturnLineItemsByReturnTransactionID(returnTransactionID);
             if (returnLineItems.Count == 0)
             {
                 Console.WriteLine($"{StyleService.WarningFormat("No return line items found")}");
@@ -51,7 +51,7 @@ namespace RentMeConsole.Views
             }
 
             Console.WriteLine($"{StyleService.HeadingFormat("Return line items")}");
-            Console.WriteLine($"{StyleService.Left("Return Line ID", 15)} {StyleService.Left("Rental Line ID", 15)} {StyleService.Left("Return Trans ID", 15)} {StyleService.Left("Qty", 15)} {StyleService.Left("Daily Cost", 15)}");
+            Console.WriteLine($"{StyleService.Left("Rnt Line ID", 15)} {StyleService.Left("Rtr ID", 15)} {StyleService.Left("Rtr Trans ID", 15)} {StyleService.Left("Qty", 15)} {StyleService.Left("Daily Cost", 15)}");
 
             foreach (ReturnLineItem returnLineItem in returnLineItems)
             {
@@ -92,7 +92,7 @@ namespace RentMeConsole.Views
         {
             int rentalLineItemID = GetRentalLineItemIdFromUserInput();
 
-            List<ReturnLineItem> returnLineItems = _returnLineItemController.GetReturnLineItemsByRentalLineItemId(rentalLineItemID);
+            List<ReturnLineItem> returnLineItems = _returnLineItemController.GetReturnLineItemsByRentalLineItemID(rentalLineItemID);
             if (returnLineItems.Count == 0)
             {
                 Console.WriteLine($"{StyleService.WarningFormat("No return line items found")}");

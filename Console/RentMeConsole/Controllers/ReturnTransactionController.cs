@@ -17,10 +17,9 @@ namespace RentMeConsole.Controllers
             _returnTransactionSource = new ReturnTransactionDAL();
         }
 
-        public void AddReturnTransaction(int employeeID, int memberID, DateTime returnDate, decimal totalCost)
+        public int AddReturnTransaction(ReturnTransaction returnTransaction)
         {
-            ReturnTransaction returnTransaction = new ReturnTransaction(employeeID, memberID, returnDate, totalCost);
-            _returnTransactionSource.InsertReturnTransaction(returnTransaction);
+            return _returnTransactionSource.InsertReturnTransaction(returnTransaction);
         }
 
         public List<ReturnTransaction> GetAllReturnTransactions()

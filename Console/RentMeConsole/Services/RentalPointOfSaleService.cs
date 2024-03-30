@@ -49,21 +49,10 @@ public class RentalPointOfSaleService
     }
 
     /// <summary>
-    /// Calculates the number of days of the transaction rental period.
+    /// Calculates the cost of the a line item over the rental period.
     /// </summary>
-    /// <returns>The number of days of the transaction rental period.</returns>
-    public int CalculateTransactionNumberOfDays(DateTime rentalDate, DateTime dueDate)
-    {
-        TimeSpan rentalPeriod = dueDate - rentalDate;
-        int transactionNumberOfDays = rentalPeriod.Days;
-        return transactionNumberOfDays;
-    }
-
-    /// <summary>
-    /// Calculates the expected cost of the a line item over the rental period.
-    /// </summary>
-    /// <returns>The line item's expeted cost over the rental period.</returns>
-    public decimal CalculateLineCost(RentalLineItem lineItem)
+    /// <returns>The line item's cost over the rental period.</returns>
+    public decimal CalculateLineCostPerDay(RentalLineItem lineItem)
     {
         decimal lineCost = 0;
 
@@ -74,16 +63,29 @@ public class RentalPointOfSaleService
     }
 
     /// <summary>
+    /// Calculates the expected cost of the line item over the rental period.
+    /// </summary>
+    /// <returns>The line item's expected cost over the rental period.</returns>
+    public decimal CalculateExpectedLineCostForDuration(RentalLineItem rentalLineItem, DateTime rentalDate, DateTime dueDate)
+    {
+        decimal expectedCost = 0;
+
+        expectedCost += CalculateLineCostPerDay(rentalLineItem) * DurationService.DurationInDays(rentalDate, dueDate);
+
+        return expectedCost;
+    }
+
+    /// <summary>
     /// Calculates the expected cost of the transaction over the rental period.
     /// </summary>
     /// <returns>The transaction's expeted cost over the rental period.</returns>
-    public decimal CalculateTransactionCost()
+    public decimal CalculateExpectedTransactionCostForDuration(List<RentalLineItem> rentalLineItems, DateTime rentalDate, DateTime dueDate)
     {
         decimal transactionCost = 0;
 
-        foreach (var lineItem in _lineItems)
+        foreach (var lineItem in rentalLineItems)
         {
-            transactionCost += CalculateLineCost(lineItem);
+            transactionCost += CalculateExpectedLineCostForDuration(lineItem, rentalDate, dueDate);
         }
 
         return transactionCost;
@@ -95,11 +97,10 @@ public class RentalPointOfSaleService
     /// <param name="employee">The employee performing the transaction.</param>
     /// <param name="member">The member renting the items.</param>
     /// <param name="dueDate">The due date for returning the items.</param>
-    /// <param name="lineItems">The list of rental line items.</param>
     /// <returns>The created rental transaction.</returns>
     public RentalTransaction CreateRentalTransaction(EmployeeDTO employee, Member member, DateTime dueDate)
     {
-        RentalTransaction rentalTransaction = new RentalTransaction(employee.EmployeeID, member.MemberID, DateTime.Now, dueDate, CalculateTransactionCost());
+        RentalTransaction rentalTransaction = new RentalTransaction(employee.EmployeeID, member.MemberID, DateTime.Now, dueDate, CalculateExpectedTransactionCostForDuration(GetRentalLineItems(), DateTime.Now, dueDate));
         return rentalTransaction;
     }
 

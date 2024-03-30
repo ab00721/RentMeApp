@@ -35,6 +35,36 @@ namespace RentMeConsole.DAL
             }
         }
 
+        public ReturnLineItem GetReturnLineItemByID(int returnLineItemID)
+        {
+            ReturnLineItem returnLineItem = null;
+
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                using (SqlCommand command = new SqlCommand("SELECT * FROM ReturnLineItem WHERE ReturnLineItemID = @ReturnLineItemID", connection))
+                {
+                    command.Parameters.Add("@ReturnLineItemID", SqlDbType.Int);
+                    command.Parameters["@ReturnLineItemID"].Value = returnLineItemID;
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            returnLineItem = new ReturnLineItem(
+                                Convert.ToInt32(reader["RentalLineItemID"]),
+                                Convert.ToInt32(reader["Quantity"]),
+                                Convert.ToDecimal(reader["DailyCost"])
+                            );
+                            returnLineItem.ReturnLineItemID = Convert.ToInt32(reader["ReturnLineItemID"]);
+                            returnLineItem.ReturnTransactionID = Convert.ToInt32(reader["ReturnTransactionID"]);
+                        }
+                    }
+                }
+            }
+            return returnLineItem;
+        }
+
         public List<ReturnLineItem> GetAllReturnLineItems()
         {
             List<ReturnLineItem> returnLineItems = new List<ReturnLineItem>();
@@ -63,7 +93,7 @@ namespace RentMeConsole.DAL
             return returnLineItems;
         }
 
-        public List<ReturnLineItem> GetReturnLineItemsByReturnTransactionId(int returnTransactionID)
+        public List<ReturnLineItem> GetReturnLineItemsByReturnTransactionID(int returnTransactionID)
         {
             List<ReturnLineItem> returnLineItems = new List<ReturnLineItem>();
 

@@ -1,5 +1,6 @@
 ﻿using RentMeConsole.DAL;
 using RentMeConsole.Models;
+using RentMeConsole.Views;
 using System.Collections.Generic;
 
 namespace RentMeConsole.Controllers
@@ -9,13 +10,15 @@ namespace RentMeConsole.Controllers
     /// </summary>
     public class MemberController
     {
+        private readonly AppSession _session;
         private readonly MemberDAL _memberSource;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberController"/> class.
         /// </summary>
-        public MemberController()
+        public MemberController(AppSession session)
         {
+            _session = session;
             this._memberSource = new MemberDAL();
         }
 
@@ -56,6 +59,21 @@ namespace RentMeConsole.Controllers
         public Member GetMemberByID(int id)
         {
             return this._memberSource.GetMemberByID(id);
+        }
+
+        /// <summary>
+        /// Gets all members.
+        /// </summary>
+        /// <returns>A list of all members</returns>
+        public List<Member> GetAllMembers()
+        {
+            return this._memberSource.GetMemberInfo();
+        }
+
+        public void ShowMenu()
+        {
+            MemberView view = new MemberView(_session);
+            view.ShowMenu(_session.GetValues());
         }
     }
 }

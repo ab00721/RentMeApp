@@ -48,7 +48,7 @@ namespace RentMeConsole.Views
             }
 
             Console.WriteLine($"{StyleService.HeadingFormat("Return transactions")}");
-            Console.WriteLine($"{StyleService.Left("Trans ID", 10)} {StyleService.Left("Employee ID", 10)} {StyleService.Left("Member ID", 10)} {StyleService.Left("Return Date", 20)} {StyleService.Left("Total Cost", 15)}");
+            Console.WriteLine($"{StyleService.Left("Trans ID", 10)} {StyleService.Left("Emp ID", 10)} {StyleService.Left("Mem ID", 10)} {StyleService.Left("Rtr Date", 20)} {StyleService.Left("Total Cost", 15)}");
 
             foreach (var returnTransaction in returnTransactions)
             {

@@ -21,9 +21,19 @@ namespace RentMeConsole.Controllers
             _rentalLineItemSource.InsertRentalLineItem(rentalLineItem);
         }
 
-        public List<RentalLineItem> GetRentalLineItemsByRentalTransactionId(int rentalTransactionID)
+        public void UpdateRentalLineItem(RentalLineItem rentalLineItem)
         {
-            return _rentalLineItemSource.GetRentalLineItemsByRentalTransactionId(rentalTransactionID);
+            _rentalLineItemSource.UpdateRentalLineItem(rentalLineItem);
+        }
+
+        public RentalLineItem GetRentalLineItemByID(int rentalLineItemID)
+        {
+            return _rentalLineItemSource.GetRentalLineItemByID(rentalLineItemID);
+        }
+
+        public List<RentalLineItem> GetRentalLineItemsByRentalTransactionID(int rentalTransactionID)
+        {
+            return _rentalLineItemSource.GetRentalLineItemsByRentalTransactionID(rentalTransactionID);
         }
 
         public void ShowMenu()

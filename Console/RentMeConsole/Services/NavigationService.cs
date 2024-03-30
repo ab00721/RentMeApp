@@ -15,6 +15,16 @@ namespace RentMeConsole.Services
                     _mainController.MainMenu();
                     break;
 
+                case "employee":
+                    EmployeeController _employeeController = new EmployeeController(_session);
+                    _employeeController.ShowMenu();
+                    break;
+
+                case "member":
+                    MemberController _memberController = new MemberController(_session);
+                    _memberController.ShowMenu();
+                    break;
+
                 case "rental_transaction":
                     RentalTransactionController _rentalTransactionController = new RentalTransactionController(_session);
                     _rentalTransactionController.ShowMenu();
@@ -43,6 +53,16 @@ namespace RentMeConsole.Services
                 case "rental_pos":
                     RentalPointOfSaleService _rentalPointOfSaleService = new RentalPointOfSaleService(_session);
                     _rentalPointOfSaleService.ShowMenu();
+                    break;
+
+                case "return_pos":
+                    ReturnPointOfSaleService _returnPointOfSaleService = new ReturnPointOfSaleService(_session);
+                    _returnPointOfSaleService.ShowMenu();
+                    break;
+
+                case "database":
+                    DatabaseController _databaseController = new DatabaseController(_session);
+                    _databaseController.ShowMenu();
                     break;
 
                 default:

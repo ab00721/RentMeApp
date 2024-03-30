@@ -230,7 +230,5 @@ namespace RentMeConsole.DAL
 
             return member;
         }
-
-
     }
 }

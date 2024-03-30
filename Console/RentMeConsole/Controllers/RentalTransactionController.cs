@@ -31,6 +31,11 @@ namespace RentMeConsole.Controllers
             return _rentalTransactionSource.GetRentalTransactionByRentalTransactionId(rentalTransactionID);
         }
 
+        public RentalTransaction GetRentalTransactionByRentalLineItemID(int rentalLineItemID)
+        {
+            return _rentalTransactionSource.GetRentalTransactionByRentalLineItemID(rentalLineItemID);
+        }
+
         public void ShowMenu()
         {
             RentalTransactionView view = new RentalTransactionView(_session);

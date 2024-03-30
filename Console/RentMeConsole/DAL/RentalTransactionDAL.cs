@@ -101,5 +101,37 @@ namespace RentMeConsole.DAL
             }
             return null;
         }
+
+        public RentalTransaction GetRentalTransactionByRentalLineItemID(int rentalLineItemID)
+        {
+            RentalTransaction rentalTransaction = null;
+
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                using (SqlCommand command = new SqlCommand("SELECT * FROM RentalTransaction WHERE RentalTransactionID IN (SELECT RentalTransactionID FROM RentalLineItem WHERE RentalLineItemID = @RentalLineItemID)", connection))
+                {
+                    command.Parameters.Add("@RentalLineItemID", SqlDbType.Int);
+                    command.Parameters["@RentalLineItemID"].Value = rentalLineItemID;
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            rentalTransaction = new RentalTransaction(
+                                Convert.ToInt32(reader["EmployeeID"]),
+                                Convert.ToInt32(reader["MemberID"]),
+                                Convert.ToDateTime(reader["RentalDate"]),
+                                Convert.ToDateTime(reader["DueDate"]),
+                                Convert.ToDecimal(reader["TotalCost"])
+                            );
+
+                            rentalTransaction.RentalTransactionID = Convert.ToInt32(reader["RentalTransactionID"]);
+                        }
+                    }
+                }
+            }
+            return rentalTransaction;
+        }
     }
 }

@@ -8,9 +8,9 @@ namespace RentMeConsole.DAL
 {
     public class ReturnTransactionDAL
     {
-
-        public void InsertReturnTransaction(ReturnTransaction returnTransaction)
+        public int InsertReturnTransaction(ReturnTransaction returnTransaction)
         {
+            int returnTransactionID = 0;
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
             {
                 using (SqlCommand command = connection.CreateCommand())
@@ -31,9 +31,10 @@ namespace RentMeConsole.DAL
                     command.Parameters["@TotalCost"].Value = returnTransaction.TotalCost;
 
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    returnTransactionID = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
+            return returnTransactionID;
         }
 
         public List<ReturnTransaction> GetAllReturnTransactions()

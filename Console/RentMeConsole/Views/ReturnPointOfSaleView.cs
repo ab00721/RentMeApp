@@ -8,18 +8,18 @@ using System.Globalization;
 
 namespace RentMeConsole.Views
 {
-    public class RentalPointOfSaleView
+    public class ReturnPointOfSaleView
     {
         private readonly AppSession _session;
-        private RentalPointOfSaleService _rentalPointOfSaleService;
+        private ReturnPointOfSaleService _returnPointOfSaleService;
         private readonly FurnitureController _furnitureController;
         private readonly EmployeeController _employeeController;
         private readonly MemberController _memberController;
 
-        public RentalPointOfSaleView(AppSession session)
+        public ReturnPointOfSaleView(AppSession session)
         {
             _session = session;
-            _rentalPointOfSaleService = new RentalPointOfSaleService(_session);
+            _returnPointOfSaleService = new ReturnPointOfSaleService(_session);
             _furnitureController = new FurnitureController(_session);
             _employeeController = new EmployeeController(_session);
             _memberController = new MemberController(_session);
@@ -28,30 +28,30 @@ namespace RentMeConsole.Views
         public void ShowMenu(string[] args)
         {
             var subMenu = new ConsoleMenu(args, level: 1)
-                .Add("Add rental line items", () => GetRentalLineItemsFromUserInput())
-                .Add("See rental line items", () => SeeRentalLineItems())
-                .Add("Clear rental cart", () => ClearRentalCart())
-                .Add("Finalize rental cart", () => FinalizeRentalCart())
+                .Add("Add return line items", () => GetReturnLineItemsFromUserInput())
+                .Add("See return line items", () => SeeReturnLineItems())
+                .Add("Clear return cart", () => ClearReturnCart())
+                .Add("Finalize return cart", () => FinalizeReturnCart())
                 .Add("Go back to main menu", ConsoleMenu.Close)
                 .Configure(config =>
                 {
                     config.Selector = " -> ";
                     config.EnableFilter = true;
-                    config.Title = $"{StyleService.HeadingFormat("Rental POS submenu")}";
+                    config.Title = $"{StyleService.HeadingFormat("Return POS submenu")}";
                     config.EnableWriteTitle = true;
                     config.EnableBreadcrumb = false;
                     config.FilterPrompt = $"{StyleService.PromptFormat("Type here")}";
                 });
 
             var menu = new ConsoleMenu(args, level: 0)
-                .Add("Record a rental transaction", subMenu.Show)
+                .Add("Record a return transaction", subMenu.Show)
                 .Add("Go back to main menu", ConsoleMenu.Close)
                 .Add("Exit", () => Environment.Exit(0))
                 .Configure(config =>
                 {
                     config.Selector = " -> ";
                     config.EnableFilter = true;
-                    config.Title = $"{StyleService.HeadingFormat("Rental POS menu")}";
+                    config.Title = $"{StyleService.HeadingFormat("Return POS menu")}";
                     config.EnableWriteTitle = true;
                     config.EnableBreadcrumb = false;
                     config.FilterPrompt = $"{StyleService.PromptFormat("Type here")}";
@@ -60,16 +60,15 @@ namespace RentMeConsole.Views
             menu.Show();
         }
 
-        private void GetRentalLineItemsFromUserInput()
+        private void GetReturnLineItemsFromUserInput()
         {
             bool done;
             do
             {
-                int furnitureID = GetFurnitureIdFromUserInput();
+                int rentalLineItemID = GetRentalLineItemIDFromUserInput();
                 int quantity = GetQuantityFromUserInput();
 
-                Furniture furniture = _furnitureController.GetFurnitureByID(furnitureID);
-                _rentalPointOfSaleService.AddRentalLineItem(furniture, quantity);
+                _returnPointOfSaleService.AddReturnLineItem(rentalLineItemID, quantity);
 
                 NavigationService.PressAnyKey();
 
@@ -78,19 +77,19 @@ namespace RentMeConsole.Views
             } while (!done);
         }
 
-        private int GetFurnitureIdFromUserInput()
+        private int GetRentalLineItemIDFromUserInput()
         {
-            int furnitureID = -1;
+            int rentalLineItemID = -1;
             bool isValid = false;
 
             while (!isValid)
             {
-                Console.WriteLine(StyleService.PromptFormat("Enter the furniture ID"));
+                Console.WriteLine(StyleService.PromptFormat("Enter the rental line item ID"));
                 string input = Console.ReadLine();
 
                 if (int.TryParse(input, out int parsedInt) && parsedInt >= 0 && parsedInt <= 99999)
                 {
-                    furnitureID = parsedInt;
+                    rentalLineItemID = parsedInt;
                     isValid = true;
                 }
                 else
@@ -102,7 +101,7 @@ namespace RentMeConsole.Views
                 }
             }
 
-            return furnitureID;
+            return rentalLineItemID;
         }
 
         private int GetQuantityFromUserInput()
@@ -154,22 +153,22 @@ namespace RentMeConsole.Views
             }
         }
 
-        private void SeeRentalLineItems()
+        private void SeeReturnLineItems()
         {
-            List<RentalLineItem> items = _rentalPointOfSaleService.GetRentalLineItems();
+            List<ReturnLineItem> items = _returnPointOfSaleService.GetReturnLineItems();
             if (items.Count == 0)
             {
-                Console.WriteLine($"{StyleService.WarningFormat("No rental line items found")}");
+                Console.WriteLine($"{StyleService.WarningFormat("No return line items found")}");
                 NavigationService.PressAnyKey();
                 return;
             }
 
-            Console.WriteLine($"{StyleService.HeadingFormat("Rental Line Items")}");
-            Console.WriteLine($"{StyleService.Left("Furn ID", 15)} {StyleService.Left("Qty", 15)} {StyleService.Left("Qty Rnt", 15)} {StyleService.Left("Daily Cost", 15)}");
+            Console.WriteLine($"{StyleService.HeadingFormat("Return Line Items")}");
+            Console.WriteLine($"{StyleService.Left("Rnt Ln ID", 15)} {StyleService.Left("Qty", 15)} {StyleService.Left("Daily Cost", 15)}");
 
-           foreach (var item in items)
+            foreach (var item in items)
             {
-                Console.WriteLine($"{StyleService.Left(item.FurnitureID.ToString(), 15)} {StyleService.Left(item.Quantity.ToString(), 15)} {StyleService.Left(item.QuantityReturned.ToString(), 15)} {StyleService.Left(item.DailyCost.ToString("C"), 15)}");
+                Console.WriteLine($"{StyleService.Left(item.RentalLineItemID.ToString(), 15)} {StyleService.Left(item.Quantity.ToString(), 15)} {StyleService.Left(item.DailyCost.ToString("C"), 15)}");
             }
 
             NavigationService.PressAnyKey();
@@ -308,26 +307,25 @@ namespace RentMeConsole.Views
             return dueDate;
         }
 
-        private void ClearRentalCart()
+        private void ClearReturnCart()
         {
-            _rentalPointOfSaleService = new RentalPointOfSaleService(_session);
-            Console.WriteLine("Rental cart cleared");
+            _returnPointOfSaleService = new ReturnPointOfSaleService(_session);
+            Console.WriteLine("Return cart cleared");
             NavigationService.PressAnyKey();
         }
 
-        private void FinalizeRentalCart()
+        private void FinalizeReturnCart()
         {
             EmployeeDTO employee = GetEmployeeFromUserInput();
             Member member = GetMemberFromUserInput();
-            DateTime dueDate = GetDueDateFromUserInput();
 
-            RentalTransaction rentalTransaction = _rentalPointOfSaleService.CreateRentalTransaction(employee, member, dueDate);
+            ReturnTransaction returnTransaction = _returnPointOfSaleService.CreateReturnTransaction(employee, member);
 
-            List<RentalLineItem> lineItems = _rentalPointOfSaleService.GetRentalLineItems();
+            List<ReturnLineItem> lineItems = _returnPointOfSaleService.GetReturnLineItems();
 
-            _rentalPointOfSaleService.SaveRentalTransaction(rentalTransaction, lineItems);
+            _returnPointOfSaleService.SaveReturnTransaction(returnTransaction, lineItems);
 
-            ClearRentalCart();
+            ClearReturnCart();
         }
     }
 }

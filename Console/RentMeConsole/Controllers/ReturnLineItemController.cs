@@ -16,10 +16,14 @@ namespace RentMeConsole.Controllers
             _returnLineItemSource = new ReturnLineItemDAL();
         }
 
-        public void AddReturnLineItem(int rentalLineItemID, int returnTransactionID, int quantity, decimal dailyCost)
+        public void AddReturnLineItem(ReturnLineItem returnLineItem)
         {
-            // ReturnLineItem returnLineItem = new ReturnLineItem(rentalLineItemID, returnTransactionID, quantity, dailyCost);
-            // _returnLineItemSource.InsertReturnLineItem(returnLineItem);
+            _returnLineItemSource.InsertReturnLineItem(returnLineItem);
+        }
+
+        public ReturnLineItem GetReturnLineItemByID(int returnLineItemID)
+        {
+            return _returnLineItemSource.GetReturnLineItemByID(returnLineItemID);
         }
 
         public List<ReturnLineItem> GetAllReturnLineItems()
@@ -27,12 +31,12 @@ namespace RentMeConsole.Controllers
             return _returnLineItemSource.GetAllReturnLineItems();
         }
 
-        public List<ReturnLineItem> GetReturnLineItemsByReturnTransactionId(int returnTransactionID)
+        public List<ReturnLineItem> GetReturnLineItemsByReturnTransactionID(int returnTransactionID)
         {
-            return _returnLineItemSource.GetReturnLineItemsByReturnTransactionId(returnTransactionID);
+            return _returnLineItemSource.GetReturnLineItemsByReturnTransactionID(returnTransactionID);
         }
 
-        public List<ReturnLineItem> GetReturnLineItemsByRentalLineItemId(int rentalLineItemID)
+        public List<ReturnLineItem> GetReturnLineItemsByRentalLineItemID(int rentalLineItemID)
         {
             return _returnLineItemSource.GetReturnLineItemsByRentalLineItemID(rentalLineItemID);
         }

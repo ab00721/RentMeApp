@@ -17,12 +17,16 @@ namespace RentMeConsole.Views
         public void ShowMenu(string[] args)
         {
             var menu = new ConsoleMenu(args, level: 0)
+                .Add("See employees", () => EmployeeContext())
+                .Add("See members", () => MemberContext())
                 .Add("See rental transactions", () => RentalTransactionContext())
                 .Add("See rental line items", () => RentalLineItemContext())
                 .Add("See return transactions", () => ReturnTransactionContext())
                 .Add("See return line items", () => ReturnLineItemContext())
                 .Add("See furniture", () => FurnitureContext())
                 .Add("Use rental point of service", () => RentalPOSContext())
+                .Add("Use return point of service", () => ReturnPOSContext())
+                .Add("Manage database", () => DatabaseContext())
                 .Add("Go back to start menu", ConsoleMenu.Close)
                 .Add("Exit", () => Environment.Exit(0))
                 .Configure(config =>
@@ -36,6 +40,18 @@ namespace RentMeConsole.Views
                 });
 
             menu.Show();
+        }
+
+        private void EmployeeContext()
+        {
+            _session.SetContext("employee");
+            NavigationService.Navigate(_session);
+        }
+
+        private void MemberContext()
+        {
+            _session.SetContext("member");
+            NavigationService.Navigate(_session);
         }
 
         private void RentalTransactionContext()
@@ -71,6 +87,18 @@ namespace RentMeConsole.Views
         private void RentalPOSContext()
         {
             _session.SetContext("rental_pos");
+            NavigationService.Navigate(_session);
+        }
+
+        private void ReturnPOSContext()
+        {
+            _session.SetContext("return_pos");
+            NavigationService.Navigate(_session);
+        }
+
+        private void DatabaseContext()
+        {
+            _session.SetContext("database");
             NavigationService.Navigate(_session);
         }
     }

@@ -38,6 +38,11 @@ namespace RentMeConsole.Controllers
             _furnitureSource.DecreaseFurnitureInStockQuantity(furnitureID, decreaseBy);
         }
 
+        public void IncreaseFurnitureInStockQuantity(int furnitureID, int increaseBy)
+        {
+            _furnitureSource.IncreaseFurnitureInStockQuantity(furnitureID, increaseBy);
+        }
+
         public void ShowMenu()
         {
             FurnitureView view = new FurnitureView(_session);

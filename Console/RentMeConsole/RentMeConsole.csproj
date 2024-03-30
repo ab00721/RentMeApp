@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\DatabaseController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\FurnitureController.cs" />
     <Compile Include="Controllers\MainController.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Controllers\ReturnTransactionController.cs" />
     <Compile Include="Controllers\StyleController.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
+    <Compile Include="DAL\DatabaseDAL.cs" />
     <Compile Include="DAL\EmployeeDAL.cs" />
     <Compile Include="DAL\FurnitureDAL.cs" />
     <Compile Include="DAL\MemberDAL.cs" />
@@ -196,6 +198,7 @@
     <Compile Include="DAL\RentMeDBConnection.cs" />
     <Compile Include="DAL\ReturnLineItemDAL.cs" />
     <Compile Include="DAL\ReturnTransactionDAL.cs" />
+    <Content Include="Database\cs6232-g5.sql" />
     <Compile Include="Models\AppSession.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\EmployeeDTO.cs" />
@@ -208,16 +211,21 @@
     <Compile Include="Models\Style.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DurationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\RentalPointOfSaleService.cs" />
     <Compile Include="Services\ReturnPointOfSaleService.cs" />
     <Compile Include="Services\StyleService.cs" />
+    <Compile Include="Views\DatabaseView.cs" />
+    <Compile Include="Views\EmployeeView.cs" />
     <Compile Include="Views\FurnitureView.cs" />
     <Compile Include="Views\MainView.cs" />
+    <Compile Include="Views\MemberView.cs" />
     <Compile Include="Views\RentalLineItemView.cs" />
     <Compile Include="Views\RentalPointOfSaleView.cs" />
     <Compile Include="Views\RentalTransactionView.cs" />
     <Compile Include="Views\ReturnLineItemView.cs" />
+    <Compile Include="Views\ReturnPointOfSaleView.cs" />
     <Compile Include="Views\ReturnTransactionView.cs" />
   </ItemGroup>
   <ItemGroup>
