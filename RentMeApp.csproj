@@ -241,9 +241,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Database\cs6232-g5_202403300645.sql" />
-    <Content Include="Database\cs6232-g5_202403301020.sql" />
-    <Content Include="Database\cs6232-g5_202404011200.sql" />
     <Content Include="Database\cs6232-g5_202404011300.sql" />
     <Content Include="read_me.txt" />
   </ItemGroup>
