@@ -242,6 +242,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Database\cs6232-g5_202404011300.sql" />
+    <Content Include="Database\cs6232-g5_202404011342.sql" />
     <Content Include="read_me.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
