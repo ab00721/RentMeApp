@@ -41,7 +41,7 @@ public class RentalPointOfSaleService
     /// <param name="quantity">The quantity of the furniture to add.</param>
     public void AddRentalLineItem(Furniture furniture, int quantity)
     {
-        RentalLineItem item = new RentalLineItem(furniture.FurnitureID, quantity, 0, furniture.DailyRate * quantity);
+        RentalLineItem item = new RentalLineItem(furniture.FurnitureID, quantity, 0, furniture.DailyRate);
         _lineItems.Add(item);
     }
 
@@ -112,17 +112,14 @@ public class RentalPointOfSaleService
         {
             try
             {
-                // Save rental transaction to the database and retrieve the RentalTransactionID
                 int rentalTransactionID = _rentalTransactionController.AddRentalTransaction(rentalTransaction);
 
-                // Save rental line items to the database
                 foreach (var lineItem in lineItems)
                 {
                     lineItem.RentalTransactionID = rentalTransactionID;
                     _rentalLineItemController.AddRentalLineItem(lineItem);
                 }
 
-                // Save adjustments to furniture data to the database
                 foreach (var lineItem in lineItems)
                 {
                     _furnitureController.DecreaseFurnitureInStockQuantity(lineItem.FurnitureID, lineItem.Quantity);
@@ -132,33 +129,50 @@ public class RentalPointOfSaleService
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
+                Console.WriteLine("Error while saving rental transaction: " + ex.Message);
             }
         }
     }
 
     /// <summary>
-    /// Gets the details of a rental transaction including the associated rental line items.
+    /// Takes a rental transaction ID and gets the details of the rental transaction and associated rental line items and furniture.
     /// </summary>
-    /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
-    /// <returns>A dictionary containing the rental transaction and its associated rental line items.</returns>
+    /// <param name="rentalTransactionID">A rental transaction ID</param>
+    /// <returns>A dictionary for a rental transaction and its associated data.</returns>
     public Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> GetRentalTransactionDetails(int rentalTransactionID)
     {
-        Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> rentalTransactionDetails = new Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>>();
-
-        RentalTransaction rentalTransaction = _rentalTransactionController.GetRentalTransactionByRentalTransactionId(rentalTransactionID);
+        RentalTransaction rentalTransaction = _rentalTransactionController.GetRentalTransactionByRentalTransactionID(rentalTransactionID);
         List<RentalLineItem> lineItems = _rentalLineItemController.GetRentalLineItemsByRentalTransactionID(rentalTransactionID);
-
-        List<Tuple<RentalLineItem, Furniture>> lineItemsWithFurniture = new List<Tuple<RentalLineItem, Furniture>>();
-
-        foreach (var lineItem in lineItems)
-        {
-            Furniture furniture = _furnitureController.GetFurnitureByID(lineItem.FurnitureID);
-            lineItemsWithFurniture.Add(new Tuple<RentalLineItem, Furniture>(lineItem, furniture));
-        }
-
-        rentalTransactionDetails.Add(rentalTransaction, lineItemsWithFurniture);
-
+        List<Tuple<RentalLineItem, Furniture>> lineItemsWithFurniture = GetFurnitureItemsPerRentalLineItems(lineItems);
+        Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> rentalTransactionDetails = GetRentalTransactionWithRentalLineItemsAndFurniture(rentalTransaction, lineItemsWithFurniture);
         return rentalTransactionDetails;
+    }
+
+    /// <summary>
+    /// Returns a dictionary that maps a rental transaction to its details.
+    /// </summary>
+    /// <param name=rentalTransaction">The return transaction.</param>
+    /// <returns>A dictionary for a rental transaction and its associated data.</returns>
+    private Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> GetRentalTransactionWithRentalLineItemsAndFurniture(RentalTransaction rentalTransaction, List<Tuple<RentalLineItem, Furniture>> lineItemsWithFurniture)
+    {
+        Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> rentalTransactionDetails = new Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>>();
+        rentalTransactionDetails.Add(rentalTransaction, lineItemsWithFurniture);
+        return rentalTransactionDetails;
+    }
+
+    /// <summary>
+    /// Gets the furniture items and rental line items for the given rental line items.
+    /// </summary>
+    /// <param name="rentalLineItems">A list of rental line items.</param>
+    /// <returns>A list of the rental lines item and furniture.</returns>
+    private List<Tuple<RentalLineItem, Furniture>> GetFurnitureItemsPerRentalLineItems(List<RentalLineItem> rentalLineItems)
+    {
+        List<Tuple<RentalLineItem, Furniture>> lineItemsWithFurniture = new List<Tuple<RentalLineItem, Furniture>>();
+        foreach (var rentalLineItem in rentalLineItems)
+        {
+            Furniture furniture = _furnitureController.GetFurnitureByID(rentalLineItem.FurnitureID);
+            lineItemsWithFurniture.Add(new Tuple<RentalLineItem, Furniture>(rentalLineItem, furniture));
+        }
+        return lineItemsWithFurniture;
     }
 }

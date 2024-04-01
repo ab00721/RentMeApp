@@ -38,6 +38,11 @@ namespace RentMeApp.DAL
             }
         }
 
+        /// <summary>
+        /// Gets a return line item.
+        /// </summary>
+        /// <param name="returnLineItemID">A return line item ID.</param>
+        /// <returns>The return line item with the given ID.</returns>
         public ReturnLineItem GetReturnLineItemByID(int returnLineItemID)
         {
             ReturnLineItem returnLineItem = null;
@@ -68,6 +73,10 @@ namespace RentMeApp.DAL
             return returnLineItem;
         }
 
+        /// <summary>
+        /// Gets all return line items.
+        /// </summary>
+        /// <returns>A list of return line items.</returns>
         public List<ReturnLineItem> GetAllReturnLineItems()
         {
             List<ReturnLineItem> returnLineItems = new List<ReturnLineItem>();
@@ -96,6 +105,11 @@ namespace RentMeApp.DAL
             return returnLineItems;
         }
 
+        /// <summary>
+        /// Gets the return line items by return transaction ID.
+        /// </summary>
+        /// <param name="returnTransactionID">A return transaction ID.</param>
+        /// <returns>A list of the return line items for the given return transaction.</returns>
         public List<ReturnLineItem> GetReturnLineItemsByReturnTransactionID(int returnTransactionID)
         {
             List<ReturnLineItem> returnLineItems = new List<ReturnLineItem>();
@@ -127,6 +141,11 @@ namespace RentMeApp.DAL
             return returnLineItems;
         }
 
+        /// <summary>
+        /// Gets the return line items by rental line item ID.
+        /// </summary>
+        /// <param name="rentalLineItemID">A rental line item ID.</param>
+        /// <returns>A list of the return line items for the given rental line item.</returns>
         public List<ReturnLineItem> GetReturnLineItemsByRentalLineItemID(int rentalLineItemID)
         {
             List<ReturnLineItem> returnLineItems = new List<ReturnLineItem>();

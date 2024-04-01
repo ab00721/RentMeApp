@@ -40,18 +40,28 @@ namespace RentMeApp.Controller
         /// <summary>
         /// Gets the furniture by ID.
         /// </summary>
-        /// <param name="furnitureID">The ID of the furniture.</param>
-        /// <returns>The furniture with the specified ID.</returns>
+        /// <param name="furnitureID">A furniture ID.</param>
+        /// <returns>The furniture with the given ID.</returns>
         public Furniture GetFurnitureByID(int furnitureID)
         {
             return _furnitureSource.GetFurnitureByFurnitureID(furnitureID);
         }
 
+        /// <summary>
+        /// Decreases the quantity of furniture in stock by the given amount.
+        /// </summary>
+        /// <param name="furnitureID">A furniture ID.</param>
+        /// <param name="decreaseBy">The amount to decrease the quantity by.</param>
         public void DecreaseFurnitureInStockQuantity(int furnitureID, int decreaseBy)
         {
             _furnitureSource.DecreaseFurnitureInStockQuantity(furnitureID, decreaseBy);
         }
 
+        /// <summary>
+        /// Increases the quantity of furniture in stock by the given amount.
+        /// </summary>
+        /// <param name="furnitureID">A furniture ID.</param>
+        /// <param name="increaseBy">The amount to increase the quantity by.</param>
         public void IncreaseFurnitureInStockQuantity(int furnitureID, int increaseBy)
         {
             _furnitureSource.IncreaseFurnitureInStockQuantity(furnitureID, increaseBy);

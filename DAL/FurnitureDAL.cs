@@ -133,6 +133,12 @@ namespace RentMeApp.DAL
             return furniture;
         }
 
+
+        /// <summary>
+        /// Gets a furniture item by ID.
+        /// </summary>
+        /// <param name="furnitureID">A furniture item's ID.</param>
+        /// <returns>The furniture item with the given ID.</returns>
         public Furniture GetFurnitureByFurnitureID(int furnitureID)
         {
             Furniture furniture = null;
@@ -168,12 +174,11 @@ namespace RentMeApp.DAL
             return furniture;
         }
 
-
         /// <summary>
-        /// Decreases the in-stock quantity of a furniture item by a specified amount.
+        /// Decreases the in-stock quantity of a furniture item by the given number.
         /// </summary>
         /// <param name="furnitureID">The ID of the furniture item.</param>
-        /// <param name="decreaseBy">The amount to decrease the in-stock quantity by.</param>
+        /// <param name="decreaseBy">The number to decrease the in-stock quantity by.</param>
         public void DecreaseFurnitureInStockQuantity(int furnitureID, int decreaseBy)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
@@ -189,10 +194,10 @@ namespace RentMeApp.DAL
         }
 
         /// <summary>
-        /// Increases the in-stock quantity of a furniture item by a specified amount.
+        /// Increases the in-stock quantity of a furniture item by the given number.
         /// </summary>
         /// <param name="furnitureID">The ID of the furniture item.</param>
-        /// <param name="increaseBy">The amount to increase the in-stock quantity by.</param>
+        /// <param name="increaseBy">The number to increase the in-stock quantity by.</param>
         public void IncreaseFurnitureInStockQuantity(int furnitureID, int increaseBy)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())

@@ -11,6 +11,11 @@ namespace RentMeApp.DAL
     /// </summary>
     public class ReturnTransactionDAL
     {
+        /// <summary>
+        /// Adds a new return transaction.
+        /// </summary>
+        /// <param name="returnTransaction">The return transaction being added.</param>
+        /// <returns>The ID of the just-added return transaction.</returns>
         public int InsertReturnTransaction(ReturnTransaction returnTransaction)
         {
             int returnTransactionID = 0;
@@ -41,6 +46,10 @@ namespace RentMeApp.DAL
             return returnTransactionID;
         }
 
+        /// <summary>
+        /// Gets all return transactions.
+        /// </summary>
+        /// <returns>A list of all the return transactions.</returns>
         public List<ReturnTransaction> GetAllReturnTransactions()
         {
             List<ReturnTransaction> returnTransactions = new List<ReturnTransaction>();
@@ -68,16 +77,21 @@ namespace RentMeApp.DAL
             return returnTransactions;
         }
 
-        public ReturnTransaction GetReturnTransactionByReturnTransactionId(int returnTransactionId)
+        /// <summary>
+        /// Gets a return transaction.
+        /// </summary>
+        /// <param name="returnTransactionId">A return transaction ID.</param>
+        /// <returns>The return transaction with the given ID.</returns>
+        public ReturnTransaction GetReturnTransactionByReturnTransactionID(int returnTransactionID)
         {
             ReturnTransaction returnTransaction = null;
 
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
             {
-                using (SqlCommand command = new SqlCommand("SELECT * FROM ReturnTransaction WHERE ReturnTransactionId = @ReturnTransactionId", connection))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM ReturnTransaction WHERE ReturnTransactionID = @ReturnTransactionID", connection))
                 {
-                    command.Parameters.Add("@ReturnTransactionId", SqlDbType.Int);
-                    command.Parameters["@ReturnTransactionId"].Value = returnTransactionId;
+                    command.Parameters.Add("@ReturnTransactionID", SqlDbType.Int);
+                    command.Parameters["@ReturnTransactionID"].Value = returnTransactionID;
 
                     connection.Open();
                     using (SqlDataReader reader = command.ExecuteReader())

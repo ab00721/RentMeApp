@@ -44,6 +44,10 @@ namespace RentMeApp.DAL
             }
         }
 
+        /// <summary>
+        /// Updates a rental line item.
+        /// </summary>
+        /// <param name="rentalLineItem">The rental line item being updated.</param>
         public void UpdateRentalLineItem(RentalLineItem rentalLineItem)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
@@ -73,6 +77,11 @@ namespace RentMeApp.DAL
             }
         }
 
+        /// <summary>
+        /// Gets a rental line item.
+        /// </summary>
+        /// <param name="rentalLineItemID">A rental line item ID.</param>
+        /// <returns>The rental line item with the given ID; otherwise, null.</returns>
         public RentalLineItem GetRentalLineItemByID(int rentalLineItemID)
         {
             RentalLineItem rentalLineItem = null;
@@ -105,6 +114,11 @@ namespace RentMeApp.DAL
             return rentalLineItem;
         }
 
+        /// <summary>
+        /// Gets a list of rental line items by rental transaction ID.
+        /// </summary>
+        /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
+        /// <returns>A list of rental line items.</returns>
         public List<RentalLineItem> GetRentalLineItemsByRentalTransactionID(int rentalTransactionID)
         {
             List<RentalLineItem> rentalLineItems = new List<RentalLineItem>();

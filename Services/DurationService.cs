@@ -6,9 +6,9 @@
 public static class DurationService
 {
     /// <summary>
-    /// Calculates the number of days between two dates.
+    /// Calculates the number of days between two dates, rounding up.
     /// </summary>
-    /// <returns>The number of days between two dates.</returns>
+    /// <returns>The number of days between two dates, rounding up.</returns>
     public static int DurationInDays(DateTime startDate, DateTime endDate)
     {
         TimeSpan rentalPeriod = endDate - startDate;

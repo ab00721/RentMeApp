@@ -44,6 +44,10 @@ namespace RentMeApp.DAL
             return rentalTransactionID;
         }
 
+        /// <summary>
+        /// Gets all rental transactions.
+        /// </summary>
+        /// <returns>A list of all the rental transactions.</returns>
         public List<RentalTransaction> GetAllRentalTransactions()
         {
             List<RentalTransaction> rentalTransactions = new List<RentalTransaction>();
@@ -73,7 +77,12 @@ namespace RentMeApp.DAL
             return rentalTransactions;
         }
 
-        public RentalTransaction GetRentalTransactionByRentalTransactionId(int rentalTransactionID)
+        /// <summary>
+        /// Gets a rental transaction.
+        /// </summary>
+        /// <param name="rentalTransactionID">A rental transaction ID.</param>
+        /// <returns>The rental transaction with the given ID.</returns>
+        public RentalTransaction GetRentalTransactionByRentalTransactionID(int rentalTransactionID)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
             {
@@ -105,6 +114,11 @@ namespace RentMeApp.DAL
             return null;
         }
 
+        /// <summary>
+        /// Gets the rental transaction that is associated with a given rental line item ID.
+        /// </summary>
+        /// <param name="rentalLineItemID">The rental line item ID to use for finding a rental transaction.</param>
+        /// <returns>The rental transaction with the given rental line item ID.</returns>
         public RentalTransaction GetRentalTransactionByRentalLineItemID(int rentalLineItemID)
         {
             RentalTransaction rentalTransaction = null;
