@@ -9,7 +9,6 @@ using System.Transactions;
 /// </summary>
 public class ReturnPointOfSaleService
 {
-    private readonly DateTime _returnDate;
     private readonly List<ReturnLineItem> _returnLineItems;
     private readonly FurnitureController _furnitureController;
     private readonly RentalLineItemController _rentalLineItemController;
@@ -22,7 +21,6 @@ public class ReturnPointOfSaleService
     /// </summary>
     public ReturnPointOfSaleService()
     {
-        _returnDate = DateTime.Now;
         _returnLineItems = new List<ReturnLineItem>();
         _furnitureController = new FurnitureController();
         _rentalLineItemController = new RentalLineItemController();
@@ -59,10 +57,10 @@ public class ReturnPointOfSaleService
     /// which was calculated when the rental transaction was created.
     /// </summary>
     /// <returns>The line item's cost over the rental period (per the database).</returns>
-    public decimal RetrieveLineItemCostPerDay(ReturnLineItem lineItem)
+    public decimal RetrieveLineItemCostPerDay(ReturnLineItem returnLineItem)
     {
-        RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(lineItem.RentalLineItemID);
-        return rentalLineItem.DailyCost;
+        RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(returnLineItem.RentalLineItemID);
+        return rentalLineItem.DailyCost * returnLineItem.Quantity;
     }
 
     /// <summary>
@@ -76,15 +74,10 @@ public class ReturnPointOfSaleService
         RentalTransaction rentalTransaction = _rentalTransactionController.GetRentalTransactionByRentalLineItemID(returnLineItem.RentalLineItemID);
 
         decimal costPerDay = RetrieveLineItemCostPerDay(returnLineItem);
-        Console.WriteLine("Cost Per Day: " + costPerDay);
 
         int duration = DurationService.DurationInDays(rentalTransaction.RentalDate, rentalTransaction.DueDate);
-        Console.WriteLine("Rental Date: " + rentalTransaction.RentalDate);
-        Console.WriteLine("Due Date: " + rentalTransaction.DueDate);
-        Console.WriteLine("Duration: " + duration);
 
         expectedCost += costPerDay * duration;
-        Console.WriteLine("Expected Cost: " + expectedCost);
 
         return expectedCost;
     }
@@ -109,18 +102,17 @@ public class ReturnPointOfSaleService
     /// might be a positive or negative number. A positive number indicates
     /// additional charges, while a negative number indicates a refund.
     /// </summary>
+    /// <param name="returnDate">The date the items are returned.</param>
     /// <returns>The line item's expeted cost over the rental period.</returns>
-    public decimal CalculateAmountDue()
+    public decimal CalculateAmountDue(DateTime returnDate)
     {
         decimal amountDue = 0;
 
         foreach (var lineItem in _returnLineItems)
         {
             decimal expectedCost = CalculateExpectedLineItemCostForDuration(lineItem);
-            Console.WriteLine("Expected Cost: " + expectedCost);
 
-            decimal actualCost = CalculateActualLineItemCostForDuration(lineItem, _returnDate);
-            Console.WriteLine("Actual Cost: " + actualCost);
+            decimal actualCost = CalculateActualLineItemCostForDuration(lineItem, returnDate);
 
             amountDue += actualCost - expectedCost;
         }
@@ -136,10 +128,10 @@ public class ReturnPointOfSaleService
     /// <returns>The created return transaction.</returns>
     public ReturnTransaction CreateReturnTransaction(EmployeeDTO employee, Member member)
     {
-        ReturnTransaction returnTransaction = new ReturnTransaction(employee.EmployeeID, member.MemberID, _returnDate, CalculateAmountDue());
+        ReturnTransaction returnTransaction = new ReturnTransaction(employee.EmployeeID, member.MemberID, DateTime.Now, CalculateAmountDue(DateTime.Now));
         return returnTransaction;
     }
-    
+
     /// <summary>
     /// Saves a return transaction and associated return line items to the database.
     /// </summary>
@@ -153,8 +145,6 @@ public class ReturnPointOfSaleService
             {
                 // Save return transaction to the database and retrieve the ReturnTransactionID
                 int returnTransactionID = _returnTransactionController.AddReturnTransaction(returnTransaction);
-
-                Console.WriteLine("Return Transaction ID: " + returnTransactionID);
 
                 foreach (var returnLineItem in returnLineItems)
                 {
