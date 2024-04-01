@@ -15,14 +15,12 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="RentalLineItem"/> class.
         /// </summary>
-        /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
-        /// <param name="furnitureID">The ID of the furniture.</param>
-        /// <param name="quantity">The quantity of the furniture.</param>
-        /// <param name="quantityReturned">The quantity of the furniture returned.</param>
-        /// <param name="dailyCost">The daily cost of renting the furniture.</param>
-        public RentalLineItem(int rentalTransactionID, int furnitureID, int quantity, int quantityReturned, decimal dailyCost)
+        /// <param name="furnitureID">The furniture item's ID.</param>
+        /// <param name="quantity">The number of furniture items rented.</param>
+        /// <param name="quantityReturned">The number of furniture items returned so far.</param>
+        /// <param name="dailyCost">The individual daily cost of renting the furniture item.</param>
+        public RentalLineItem(int furnitureID, int quantity, int quantityReturned, decimal dailyCost)
         {
-            RentalTransactionID = rentalTransactionID;
             FurnitureID = furnitureID;
             Quantity = quantity;
             QuantityReturned = quantityReturned;

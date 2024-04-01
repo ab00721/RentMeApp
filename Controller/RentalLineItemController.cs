@@ -20,27 +20,41 @@ namespace RentMeApp.Controller
         }
 
         /// <summary>
-        /// Adds a rental line item to the data.
+        /// Adds a rental line item.
         /// </summary>
-        /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
-        /// <param name="furnitureID">The ID of the furniture.</param>
-        /// <param name="quantity">The quantity of the furniture.</param>
-        /// <param name="quantityReturned">The quantity of the furniture returned.</param>
-        /// <param name="dailyCost">The daily cost of renting the furniture.</param>
-        public void AddRentalLineItem(int rentalTransactionID, int furnitureID, int quantity, int quantityReturned, decimal dailyCost)
+        /// <param name="rentalLineItem">A rental line item to be added.</param>
+        public void AddRentalLineItem(RentalLineItem rentalLineItem)
         {
-            RentalLineItem rentalLineItem = new RentalLineItem(rentalTransactionID, furnitureID, quantity, quantityReturned, dailyCost);
-
             _rentalLineItemSource.InsertRentalLineItem(rentalLineItem);
         }
 
         /// <summary>
-        /// Returns a list of rental line items by rental transaction ID.
+        /// Updates a rental line item.
+        /// </summary>
+        /// <param name="rentalLineItem">The rental line item being updated.</param>
+        public void UpdateRentalLineItem(RentalLineItem rentalLineItem)
+        {
+            _rentalLineItemSource.UpdateRentalLineItem(rentalLineItem);
+        }
+
+        /// <summary>
+        /// Gets a rental line item.
+        /// </summary>
+        /// <param name="rentalLineItemID">A rental line item ID.</param>
+        /// <returns>The rental line item with the given ID.</returns>
+        public RentalLineItem GetRentalLineItemByID(int rentalLineItemID)
+        {
+            return _rentalLineItemSource.GetRentalLineItemByID(rentalLineItemID);
+        }
+
+        /// <summary>
+        /// Gets a list of rental line items by rental transaction ID.
         /// </summary>
         /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
-        public List<RentalLineItem> GetRentalLineItemsByRentalTransactionId(int rentalTransactionID)
+        /// <returns>A list of rental line items associated with the given rental transaction ID.</returns>
+        public List<RentalLineItem> GetRentalLineItemsByRentalTransactionID(int rentalTransactionID)
         {
-            return _rentalLineItemSource.GetRentalLineItemsByRentalTransactionId(rentalTransactionID);
+            return _rentalLineItemSource.GetRentalLineItemsByRentalTransactionID(rentalTransactionID);
         }
     }
 }
