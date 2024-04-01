@@ -175,32 +175,6 @@ namespace RentMeConsole.Views
             NavigationService.PressAnyKey();
         }
 
-        private string GetMemberUsernameFromUserInput()
-        {
-            string username = string.Empty;
-            bool isValid = false;
-
-            while (!isValid)
-            {
-                Console.WriteLine(StyleService.PromptFormat("Enter the member username"));
-                string input = Console.ReadLine();
-
-                if (!string.IsNullOrEmpty(input))
-                {
-                    username = input;
-                    isValid = true;
-                }
-                else
-                {
-                    string message = "Invalid input. Please enter a non-empty username.";
-                    Console.WriteLine(StyleService.WarningFormat(message));
-                    NavigationService.PressAnyKey();
-                }
-            }
-
-            return username;
-        }
-
         private Member GetMemberFromUserInput()
         {
             int memberID = GetMemberIDFromUserInput();
@@ -280,32 +254,6 @@ namespace RentMeConsole.Views
             }
 
             return username;
-        }
-
-        private DateTime GetDueDateFromUserInput()
-        {
-            DateTime dueDate = DateTime.MinValue;
-            bool isValid = false;
-
-            while (!isValid)
-            {
-                Console.WriteLine(StyleService.PromptFormat("Enter the due date (MM/dd/yyyy)"));
-                string input = Console.ReadLine();
-
-                if (DateTime.TryParseExact(input, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
-                {
-                    dueDate = parsedDate;
-                    isValid = true;
-                }
-                else
-                {
-                    string message = "Invalid input. Please enter a valid date in the format MM/dd/yyyy.";
-                    Console.WriteLine(StyleService.WarningFormat(message));
-                    NavigationService.PressAnyKey();
-                }
-            }
-
-            return dueDate;
         }
 
         private void ClearReturnCart()

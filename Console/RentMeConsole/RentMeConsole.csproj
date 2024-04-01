@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -205,6 +205,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AuthenticateController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\DatabaseController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Controllers\ReturnLineItemController.cs" />
     <Compile Include="Controllers\ReturnTransactionController.cs" />
     <Compile Include="Controllers\StyleController.cs" />
+    <Compile Include="DAL\AuthenticateDAL.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
     <Compile Include="DAL\DatabaseDAL.cs" />
     <Compile Include="DAL\EmployeeDAL.cs" />
@@ -244,6 +246,7 @@
     <Compile Include="Services\RentalPointOfSaleService.cs" />
     <Compile Include="Services\ReturnPointOfSaleService.cs" />
     <Compile Include="Services\StyleService.cs" />
+    <Compile Include="Views\AuthenticateView.cs" />
     <Compile Include="Views\DatabaseView.cs" />
     <Compile Include="Views\EmployeeView.cs" />
     <Compile Include="Views\FurnitureView.cs" />
@@ -256,6 +259,8 @@
     <Compile Include="Views\ReturnPointOfSaleView.cs" />
     <Compile Include="Views\ReturnTransactionView.cs" />
     <Content Include="Database\cs6232-g5_202403300645.sql" />
+    <Content Include="Database\cs6232-g5_202403301020.sql" />
+    <Content Include="Database\cs6232-g5_202404011200.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

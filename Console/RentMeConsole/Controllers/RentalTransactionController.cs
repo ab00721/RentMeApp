@@ -26,9 +26,9 @@ namespace RentMeConsole.Controllers
             return _rentalTransactionSource.GetAllRentalTransactions();
         }
 
-        public RentalTransaction GetRentalTransactionByRentalTransactionId(int rentalTransactionID)
+        public RentalTransaction GetRentalTransactionByRentalTransactionID(int rentalTransactionID)
         {
-            return _rentalTransactionSource.GetRentalTransactionByRentalTransactionId(rentalTransactionID);
+            return _rentalTransactionSource.GetRentalTransactionByRentalTransactionID(rentalTransactionID);
         }
 
         public RentalTransaction GetRentalTransactionByRentalLineItemID(int rentalLineItemID)

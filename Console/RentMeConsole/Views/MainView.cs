@@ -1,7 +1,10 @@
 ﻿using ConsoleTools;
+using RentMeConsole.Controllers;
 using RentMeConsole.Models;
 using RentMeConsole.Services;
 using System;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace RentMeConsole.Views
 {
@@ -27,6 +30,8 @@ namespace RentMeConsole.Views
                 .Add("Use rental point of service", () => RentalPOSContext())
                 .Add("Use return point of service", () => ReturnPOSContext())
                 .Add("Manage database", () => DatabaseContext())
+                .Add("Add a login", () => AuthenticateContext())
+                .Add("See a hash value", () => GetHashValue())
                 .Add("Go back to start menu", ConsoleMenu.Close)
                 .Add("Exit", () => Environment.Exit(0))
                 .Configure(config =>
@@ -40,6 +45,54 @@ namespace RentMeConsole.Views
                 });
 
             menu.Show();
+        }
+
+        private void GetHashValue()
+        {
+            string input = GetStringFromUserInput();
+            string hash = string.Empty;
+
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("x2"));
+                }
+                hash = sb.ToString();
+            }
+
+            Console.WriteLine(StyleService.SuccessFormat($"The hash value of '{input}' is:\n{hash}"));
+            NavigationService.PressAnyKey();
+        }
+
+        private string GetStringFromUserInput()
+        {
+            string str = string.Empty;
+            bool isValid = false;
+
+            while (!isValid)
+            {
+                Console.WriteLine(StyleService.PromptFormat("Enter the string to hash"));
+                string input = Console.ReadLine();
+
+                if (!string.IsNullOrEmpty(input))
+                {
+                    str = input;
+                    isValid = true;
+                }
+                else
+                {
+                    string message = "Invalid input. Please enter a non-empty string.";
+                    Console.WriteLine(StyleService.WarningFormat(message));
+                    NavigationService.PressAnyKey();
+                }
+            }
+
+            return str;
         }
 
         private void EmployeeContext()
@@ -99,6 +152,12 @@ namespace RentMeConsole.Views
         private void DatabaseContext()
         {
             _session.SetContext("database");
+            NavigationService.Navigate(_session);
+        }
+
+        private void AuthenticateContext()
+        {
+            _session.SetContext("authenticate");
             NavigationService.Navigate(_session);
         }
     }

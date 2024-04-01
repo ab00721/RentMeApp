@@ -70,7 +70,7 @@ namespace RentMeConsole.DAL
             return rentalTransactions;
         }
 
-        public RentalTransaction GetRentalTransactionByRentalTransactionId(int rentalTransactionID)
+        public RentalTransaction GetRentalTransactionByRentalTransactionID(int rentalTransactionID)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
             {

@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Console\RentMeConsole\Controllers\AuthenticateController.cs" />
     <Compile Include="Console\RentMeConsole\Controllers\CategoryController.cs" />
     <Compile Include="Console\RentMeConsole\Controllers\DatabaseController.cs" />
     <Compile Include="Console\RentMeConsole\Controllers\EmployeeController.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Console\RentMeConsole\Controllers\ReturnLineItemController.cs" />
     <Compile Include="Console\RentMeConsole\Controllers\ReturnTransactionController.cs" />
     <Compile Include="Console\RentMeConsole\Controllers\StyleController.cs" />
+    <Compile Include="Console\RentMeConsole\DAL\AuthenticateDAL.cs" />
     <Compile Include="Console\RentMeConsole\DAL\CategoryDAL.cs" />
     <Compile Include="Console\RentMeConsole\DAL\DatabaseDAL.cs" />
     <Compile Include="Console\RentMeConsole\DAL\EmployeeDAL.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Console\RentMeConsole\Services\RentalPointOfSaleService.cs" />
     <Compile Include="Console\RentMeConsole\Services\ReturnPointOfSaleService.cs" />
     <Compile Include="Console\RentMeConsole\Services\StyleService.cs" />
+    <Compile Include="Console\RentMeConsole\Views\AuthenticateView.cs" />
     <Compile Include="Console\RentMeConsole\Views\DatabaseView.cs" />
     <Compile Include="Console\RentMeConsole\Views\EmployeeView.cs" />
     <Compile Include="Console\RentMeConsole\Views\FurnitureView.cs" />
@@ -263,6 +266,7 @@
     <EmbeddedResource Include="View\SearchMemberDialog.resx">
       <DependentUpon>SearchMemberDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Console\RentMeConsole\.vs\RentMeConsole.csproj.dtbcache.json" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\copilot-chat\d4218876\V0_b6fdca8a-87a9-4152-93cf-4b37397bec20_Default" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\0aacb50a-1380-4a8a-9dfc-8b589dd9910f.vsidx" />
     <None Include="Console\RentMeConsole\.vs\RentMeConsole\FileContentIndex\156ada13-369e-4a97-a270-36b3fe906421.vsidx" />
@@ -1230,6 +1234,8 @@
     <Content Include="Console\RentMeConsole\bin\Debug\System.Diagnostics.DiagnosticSource.xml" />
     <Content Include="Console\RentMeConsole\Database\cs6232-g5.sql" />
     <Content Include="Console\RentMeConsole\Database\cs6232-g5_202403300645.sql" />
+    <Content Include="Console\RentMeConsole\Database\cs6232-g5_202403301020.sql" />
+    <Content Include="Console\RentMeConsole\Database\cs6232-g5_202404011200.sql" />
     <Content Include="Console\RentMeConsole\Database\dummy-data-worksheet.txt" />
     <Content Include="Console\RentMeConsole\obj\Debug\RentMeConsole.csproj.FileListAbsolute.txt" />
     <Content Include="Console\RentMeConsole\obj\Debug\RentMeConsole.exe" />

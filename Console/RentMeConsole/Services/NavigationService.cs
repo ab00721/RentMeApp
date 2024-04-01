@@ -65,6 +65,11 @@ namespace RentMeConsole.Services
                     _databaseController.ShowMenu();
                     break;
 
+                case "authenticate":
+                    AuthenticateController _authenticateController = new AuthenticateController(_session);
+                    _authenticateController.ShowMenu();
+                    break;
+
                 default:
                     _session.SetContext("main");
                     Navigate(_session);

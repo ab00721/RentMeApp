@@ -1,7 +1,7 @@
-﻿using RentMeConsole.Models;
+﻿using RentMeConsole.Controllers;
+using RentMeConsole.Models;
 using System.Collections.Generic;
 using System;
-using RentMeConsole.Controllers;
 using System.Transactions;
 using RentMeConsole.Views;
 
@@ -11,7 +11,6 @@ using RentMeConsole.Views;
 public class ReturnPointOfSaleService
 {
     private readonly AppSession _session;
-    private readonly DateTime _returnDate;
     private readonly List<ReturnLineItem> _returnLineItems;
     private readonly FurnitureController _furnitureController;
     private readonly RentalLineItemController _rentalLineItemController;
@@ -25,13 +24,12 @@ public class ReturnPointOfSaleService
     public ReturnPointOfSaleService(AppSession session)
     {
         _session = session;
-        _returnDate = DateTime.Now;
         _returnLineItems = new List<ReturnLineItem>();
-        _furnitureController = new FurnitureController(session);
-        _rentalLineItemController = new RentalLineItemController(session);
-        _rentalTransactionController = new RentalTransactionController(session);
-        _returnLineItemController = new ReturnLineItemController(session);
-        _returnTransactionController = new ReturnTransactionController(session);
+        _furnitureController = new FurnitureController(_session);
+        _rentalLineItemController = new RentalLineItemController(_session);
+        _rentalTransactionController = new RentalTransactionController(_session);
+        _returnLineItemController = new ReturnLineItemController(_session);
+        _returnTransactionController = new ReturnTransactionController(_session);
     }
 
     /// <summary>
@@ -62,12 +60,10 @@ public class ReturnPointOfSaleService
     /// which was calculated when the rental transaction was created.
     /// </summary>
     /// <returns>The line item's cost over the rental period (per the database).</returns>
-    public decimal RetrieveLineItemCostPerDay(ReturnLineItem lineItem)
+    public decimal RetrieveLineItemCostPerDay(ReturnLineItem returnLineItem)
     {
-        // Note: This method was rewritten to get cost from Furniture rather than RentalLineItem
-        RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(lineItem.RentalLineItemID);
-        Furniture furnitureItem = _furnitureController.GetFurnitureByID(rentalLineItem.FurnitureID);
-        return furnitureItem.DailyRate;
+        RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(returnLineItem.RentalLineItemID);
+        return rentalLineItem.DailyCost * returnLineItem.Quantity;
     }
 
     /// <summary>
@@ -114,8 +110,9 @@ public class ReturnPointOfSaleService
     /// might be a positive or negative number. A positive number indicates
     /// additional charges, while a negative number indicates a refund.
     /// </summary>
+    /// <param name="returnDate">The date the items are returned.</param>
     /// <returns>The line item's expeted cost over the rental period.</returns>
-    public decimal CalculateAmountDue()
+    public decimal CalculateAmountDue(DateTime returnDate)
     {
         decimal amountDue = 0;
 
@@ -124,7 +121,7 @@ public class ReturnPointOfSaleService
             decimal expectedCost = CalculateExpectedLineItemCostForDuration(lineItem);
             Console.WriteLine("Expected Cost: " + expectedCost);
 
-            decimal actualCost = CalculateActualLineItemCostForDuration(lineItem, _returnDate);
+            decimal actualCost = CalculateActualLineItemCostForDuration(lineItem, returnDate);
             Console.WriteLine("Actual Cost: " + actualCost);
 
             amountDue += actualCost - expectedCost;
@@ -141,7 +138,7 @@ public class ReturnPointOfSaleService
     /// <returns>The created return transaction.</returns>
     public ReturnTransaction CreateReturnTransaction(EmployeeDTO employee, Member member)
     {
-        ReturnTransaction returnTransaction = new ReturnTransaction(employee.EmployeeID, member.MemberID, _returnDate, CalculateAmountDue());
+        ReturnTransaction returnTransaction = new ReturnTransaction(employee.EmployeeID, member.MemberID, DateTime.Now, CalculateAmountDue(DateTime.Now));
         return returnTransaction;
     }
     
@@ -161,14 +158,12 @@ public class ReturnPointOfSaleService
 
                 Console.WriteLine("Return Transaction ID: " + returnTransactionID);
 
-                // Save return line items to the database
                 foreach (var returnLineItem in returnLineItems)
                 {
                     returnLineItem.ReturnTransactionID = returnTransactionID;
                     _returnLineItemController.AddReturnLineItem(returnLineItem);
                 }
 
-                // Save adjustments to rental line items data to the database
                 foreach (var returnLineItem in returnLineItems)
                 {
                     RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(returnLineItem.RentalLineItemID);
@@ -176,7 +171,6 @@ public class ReturnPointOfSaleService
                     _rentalLineItemController.UpdateRentalLineItem(rentalLineItem);
                 }
 
-                // Save adjustments to furniture data to the database
                 foreach (var returnLineItem in returnLineItems)
                 {
                     RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(returnLineItem.RentalLineItemID);
@@ -187,25 +181,47 @@ public class ReturnPointOfSaleService
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
+                Console.WriteLine("Error while saving return transaction: " + ex.Message);
             }
         }
     }
 
     /// <summary>
-    /// Retrieves the details of a return transaction including associated rental line items and furniture.
+    /// Takes a return transaction ID and gets the details of the return transaction and associated line items and furniture.
     /// </summary>
-    /// <param name="returnTransactionID">The ID of the return transaction.</param>
-    /// <returns>A dictionary containing the return transaction, its associated return line items, rental line items, and furniture.</returns>
+    /// <param name="returnTransactionID">A return transaction ID</param>
+    /// <returns>A dictionary for a return transaction and its associated data.</returns>
     public Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> GetReturnTransactionDetails(int returnTransactionID)
     {
-        Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> returnTransactionDetails = new Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>>();
-
         ReturnTransaction returnTransaction = _returnTransactionController.GetReturnTransactionByReturnTransactionID(returnTransactionID);
         List<ReturnLineItem> returnLineItems = _returnLineItemController.GetReturnLineItemsByReturnTransactionID(returnTransactionID);
+        List<Tuple<ReturnLineItem, RentalLineItem, Furniture>> details = GetFurnitureItemsAndRentalLineItemsPerReturnLineItems(returnLineItems);
+        Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> returnTransactionDetails = GetReturnTransactionWithAllLineItemsAndFurniture(returnTransaction, details);
 
+        return returnTransactionDetails;
+    }
+
+    /// <summary>
+    /// Returns a dictionary that maps a return transaction to its details.
+    /// </summary>
+    /// <param name="returnTransaction">The return transaction.</param>
+    /// <param name="details">A list of tuples for line items, rental line items, and furniture.</param>
+    /// <returns>A dictionary for a return transaction and its associated data.</returns>
+    private Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> GetReturnTransactionWithAllLineItemsAndFurniture(ReturnTransaction returnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>> details)
+    {
+        Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> returnTransactionDetails = new Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>>();
+        returnTransactionDetails.Add(returnTransaction, details);
+        return returnTransactionDetails;
+    }
+
+    /// <summary>
+    /// Gets the furniture items and rental line items for the given return line items.
+    /// </summary>
+    /// <param name="returnLineItems">A list of return line items.</param>
+    /// <returns>A list of the return line items, rental line items, and furniture.</returns>
+    private List<Tuple<ReturnLineItem, RentalLineItem, Furniture>> GetFurnitureItemsAndRentalLineItemsPerReturnLineItems(List<ReturnLineItem> returnLineItems)
+    {
         List<Tuple<ReturnLineItem, RentalLineItem, Furniture>> details = new List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>();
-
         foreach (var returnLineItem in returnLineItems)
         {
             RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(returnLineItem.RentalLineItemID);
@@ -214,11 +230,12 @@ public class ReturnPointOfSaleService
             Tuple<ReturnLineItem, RentalLineItem, Furniture> detail = new Tuple<ReturnLineItem, RentalLineItem, Furniture>(returnLineItem, rentalLineItem, furniture);
             details.Add(detail);
         }
-
-        returnTransactionDetails.Add(returnTransaction, details);
-        return returnTransactionDetails;
+        return details;
     }
 
+    /// <summary>
+    /// Shows the menu for the return point of sale operations.
+    /// </summary>
     public void ShowMenu()
     {
         ReturnPointOfSaleView view = new ReturnPointOfSaleView(_session);
