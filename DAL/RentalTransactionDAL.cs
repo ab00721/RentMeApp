@@ -1,4 +1,4 @@
-﻿using RentMeApp.Model;
+using RentMeApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -113,8 +113,7 @@ namespace RentMeApp.DAL
             }
             return null;
         }
-
-        /// <summary>
+      
         /// Gets the rental transaction that is associated with a given rental line item ID.
         /// </summary>
         /// <param name="rentalLineItemID">The rental line item ID to use for finding a rental transaction.</param>
