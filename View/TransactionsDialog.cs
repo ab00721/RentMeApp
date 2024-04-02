@@ -81,7 +81,7 @@ namespace RentMeApp.View
 
                 transaction = _rentalTransactions[e.RowIndex];
 
-                _rentalLineItems = this._rentalLineItemController.GetRentalLineItemsByRentalTransactionId(transaction.RentalTransactionID);
+                _rentalLineItems = this._rentalLineItemController.GetRentalLineItemsByRentalTransactionID(transaction.RentalTransactionID);
                 DetailsDataGridView.DataSource = null;
                 DetailsDataGridView.DataSource = _rentalLineItems;
             }

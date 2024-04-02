@@ -143,6 +143,8 @@ namespace RentMeApp.DAL
                             );
 
                             item.RentalLineItemID = Convert.ToInt32(reader["RentalLineItemID"]);
+
+                            item.RentalLineItemID = Convert.ToInt32(reader["RentalLineItemID"]);
                             item.RentalTransactionID = Convert.ToInt32(reader["RentalTransactionID"]);
 
                             rentalLineItems.Add(item);
