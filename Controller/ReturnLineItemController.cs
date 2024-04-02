@@ -20,40 +20,49 @@ namespace RentMeApp.Controller
         }
 
         /// <summary>
-        /// Adds a return line item to the data.
+        /// Adds a return line item.
         /// </summary>
-        /// <param name="rentalLineItemID">The ID of the rental line item.</param>
-        /// <param name="returnTransactionID">The ID of the return transaction.</param>
-        /// <param name="quantity">The quantity of the return line item.</param>
-        /// <param name="dailyCost">The daily cost of the return line item.</param>
-        public void AddReturnLineItem(int rentalLineItemID, int returnTransactionID, int quantity, decimal dailyCost)
+        /// <param name="returnLineItem">The return line item to be added.</param>
+        public void AddReturnLineItem(ReturnLineItem returnLineItem)
         {
-            ReturnLineItem returnLineItem = new ReturnLineItem(rentalLineItemID, returnTransactionID, quantity, dailyCost);
             _returnLineItemSource.InsertReturnLineItem(returnLineItem);
         }
 
         /// <summary>
-        /// Returns a list of all return line items.
+        /// Gets a return line item.
         /// </summary>
+        /// <param name="returnLineItemID">A return line item ID.</param>
+        /// <returns>The return line item with the given ID.</returns>
+        public ReturnLineItem GetReturnLineItemByID(int returnLineItemID)
+        {
+            return _returnLineItemSource.GetReturnLineItemByID(returnLineItemID);
+        }
+
+        /// <summary>
+        /// Gets all return line items.
+        /// </summary>
+        /// <returns>A list of return line items.</returns>
         public List<ReturnLineItem> GetAllReturnLineItems()
         {
             return _returnLineItemSource.GetAllReturnLineItems();
         }
 
         /// <summary>
-        /// Returns a list of return line items by return transaction ID.
+        /// Gets the return line items by return transaction ID.
         /// </summary>
-        /// <param name="returnTransactionID">The ID of the return transaction.</param>
-        public List<ReturnLineItem> GetReturnLineItemsByReturnTransactionId(int returnTransactionID)
+        /// <param name="returnTransactionID">A return transaction ID.</param>
+        /// <returns>A list of the return line items for the given return transaction.</returns>
+        public List<ReturnLineItem> GetReturnLineItemsByReturnTransactionID(int returnTransactionID)
         {
-            return _returnLineItemSource.GetReturnLineItemsByReturnTransactionId(returnTransactionID);
+            return _returnLineItemSource.GetReturnLineItemsByReturnTransactionID(returnTransactionID);
         }
 
         /// <summary>
-        /// Returns a list of return line items by rental line item ID.
+        /// Gets the return line items by rental line item ID.
         /// </summary>
-        /// <param name="rentalLineItemID">The ID of the rental line item.</param>
-        public List<ReturnLineItem> GetReturnLineItemsByRentalLineItemId(int rentalLineItemID)
+        /// <param name="rentalLineItemID">A rental line item ID.</param>
+        /// <returns>A list of the return line items for the given rental line item.</returns>
+        public List<ReturnLineItem> GetReturnLineItemsByRentalLineItemID(int rentalLineItemID)
         {
             return _returnLineItemSource.GetReturnLineItemsByRentalLineItemID(rentalLineItemID);
         }

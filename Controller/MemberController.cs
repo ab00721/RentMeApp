@@ -57,5 +57,14 @@ namespace RentMeApp.Controller
             return this._memberSource.UpdateExistingMember(member);
         }
 
+        /// <summary>
+        /// Gets a member by ID.
+        /// </summary>
+        /// <param name="id">The ID of the member.</param>
+        /// <returns>The member with the given ID.</returns>
+        public Member GetMemberByID(int id)
+        {
+            return this._memberSource.GetMemberByID(id);
+        }
     }
 }
