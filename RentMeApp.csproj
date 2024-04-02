@@ -80,6 +80,7 @@
     <Compile Include="DAL\RentalLineItemDAL.cs" />
     <Compile Include="DAL\RentalTransactionDAL.cs" />
     <Compile Include="DAL\RentMeDBConnection.cs" />
+    <Compile Include="DAL\ReportDAL.cs" />
     <Compile Include="DAL\ReturnLineItemDAL.cs" />
     <Compile Include="DAL\ReturnTransactionDAL.cs" />
     <Compile Include="DAL\StyleDAL.cs" />
