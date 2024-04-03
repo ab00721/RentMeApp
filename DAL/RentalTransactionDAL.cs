@@ -1,4 +1,4 @@
-﻿using RentMeApp.Model;
+using RentMeApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -113,8 +113,7 @@ namespace RentMeApp.DAL
             }
             return null;
         }
-
-        /// <summary>
+      
         /// Gets the rental transaction that is associated with a given rental line item ID.
         /// </summary>
         /// <param name="rentalLineItemID">The rental line item ID to use for finding a rental transaction.</param>
@@ -150,5 +149,48 @@ namespace RentMeApp.DAL
             }
             return rentalTransaction;
         }
+
+        /// <summary>
+        /// Gets all rental transactions by member identifier.
+        /// </summary>
+        /// <param name="memberID">The member identifier.</param>
+        /// <returns></returns>
+        public List<RentalTransaction> GetAllRentalTransactionsByMemberId(int memberID)
+        {
+            List<RentalTransaction> rentalTransactions = new List<RentalTransaction>();
+
+            string selectStatement = "SELECT * FROM RentalTransaction WHERE MemberID = @MemberID";
+
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(selectStatement, connection))
+                {
+                    command.Parameters.Add("@MemberID", SqlDbType.Int);
+                    command.Parameters["@MemberID"].Value = memberID;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            RentalTransaction transaction = new RentalTransaction();
+
+                            transaction.RentalTransactionID = (int)reader["RentalTransactionID"];
+                            transaction.EmployeeID = (int)reader["EmployeeID"];
+                            transaction.MemberID = (int)reader["MemberID"];
+                            transaction.MemberID = (int)reader["MemberID"];
+                            transaction.RentalDate = (DateTime)reader["RentalDate"];
+                            transaction.DueDate = (DateTime)reader["DueDate"];
+                            transaction.TotalCost = (decimal)reader["TotalCost"];
+
+                            rentalTransactions.Add(transaction);
+                        }
+                    }
+                }
+            }
+            return rentalTransactions;
+        }
+
     }
 }

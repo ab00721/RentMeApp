@@ -30,5 +30,7 @@ namespace RentMeApp.Model
             DueDate = dueDate;
             TotalCost = totalCost;
         }
+
+        public RentalTransaction() { }
     }
 }
