@@ -37,8 +37,8 @@
             this.DetailsDataGridView = new System.Windows.Forms.DataGridView();
             this.DetailsLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.ReturnLabel = new System.Windows.Forms.Label();
             this.ReturnTransactionDataGridView = new System.Windows.Forms.DataGridView();
+            this.ReturnLabel = new System.Windows.Forms.Label();
             this.TransactionTableLayout.SuspendLayout();
             this.RentalTableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RentalTransactionDataGridView)).BeginInit();
@@ -170,16 +170,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(773, 223);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
-            // ReturnLabel
-            // 
-            this.ReturnLabel.AutoSize = true;
-            this.ReturnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.ReturnLabel.Location = new System.Drawing.Point(3, 0);
-            this.ReturnLabel.Name = "ReturnLabel";
-            this.ReturnLabel.Size = new System.Drawing.Size(148, 17);
-            this.ReturnLabel.TabIndex = 1;
-            this.ReturnLabel.Text = "Return Transations";
-            // 
             // ReturnTransactionDataGridView
             // 
             this.ReturnTransactionDataGridView.AllowUserToDeleteRows = false;
@@ -194,6 +184,16 @@
             this.ReturnTransactionDataGridView.RowTemplate.Height = 24;
             this.ReturnTransactionDataGridView.Size = new System.Drawing.Size(769, 197);
             this.ReturnTransactionDataGridView.TabIndex = 14;
+            // 
+            // ReturnLabel
+            // 
+            this.ReturnLabel.AutoSize = true;
+            this.ReturnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+            this.ReturnLabel.Location = new System.Drawing.Point(3, 0);
+            this.ReturnLabel.Name = "ReturnLabel";
+            this.ReturnLabel.Size = new System.Drawing.Size(148, 17);
+            this.ReturnLabel.TabIndex = 1;
+            this.ReturnLabel.Text = "Return Transations";
             // 
             // TransactionsDialog
             // 

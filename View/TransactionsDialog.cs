@@ -61,6 +61,12 @@ namespace RentMeApp.View
             _rentalTransactions = transactions;
             RentalTransactionDataGridView.DataSource = null;
             RentalTransactionDataGridView.DataSource = _rentalTransactions;
+            RentalTransactionDataGridView.Columns[0].HeaderText = "Rental Transaction ID";
+            RentalTransactionDataGridView.Columns[1].HeaderText = "Employee ID";
+            RentalTransactionDataGridView.Columns[2].HeaderText = "Member ID";
+            RentalTransactionDataGridView.Columns[3].HeaderText = "Rental Date";
+            RentalTransactionDataGridView.Columns[4].HeaderText = "Due Date";
+            RentalTransactionDataGridView.Columns[5].HeaderText = "Total Cost";
         }
 
         private void AddButtonColumn()
@@ -84,6 +90,12 @@ namespace RentMeApp.View
                 _rentalLineItems = this._rentalLineItemController.GetRentalLineItemsByRentalTransactionID(transaction.RentalTransactionID);
                 DetailsDataGridView.DataSource = null;
                 DetailsDataGridView.DataSource = _rentalLineItems;
+                DetailsDataGridView.Columns[0].HeaderText = "Rental Line Item ID";
+                DetailsDataGridView.Columns[1].HeaderText = "Rental Transaction ID";
+                DetailsDataGridView.Columns[2].HeaderText = "Furniture ID";
+                DetailsDataGridView.Columns[3].HeaderText = "Quantity";
+                DetailsDataGridView.Columns[4].HeaderText = "Quantity Returned";
+                DetailsDataGridView.Columns[5].HeaderText = "Daily Cost";
             }
         }
     }
