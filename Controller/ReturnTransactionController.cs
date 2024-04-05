@@ -1,6 +1,7 @@
 ﻿using RentMeApp.DAL;
 using RentMeApp.Model;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace RentMeApp.Controller
 {
@@ -10,6 +11,11 @@ namespace RentMeApp.Controller
     public class ReturnTransactionController
     {
         private readonly ReturnTransactionDAL _returnTransactionSource;
+
+        public ReturnTransactionController()
+        {
+            _returnTransactionSource = new ReturnTransactionDAL();
+        }
 
         /// <summary>
         /// Adds a new return transaction.
@@ -38,6 +44,16 @@ namespace RentMeApp.Controller
         public ReturnTransaction GetReturnTransactionByReturnTransactionID(int returnTransactionId)
         {
             return _returnTransactionSource.GetReturnTransactionByReturnTransactionID(returnTransactionId);
+        }
+
+        /// <summary>
+        /// Gets all return transactions by member identifier.
+        /// </summary>
+        /// <param name="memberId">The member identifier.</param>
+        /// <returns></returns>
+        public List<ReturnTransaction> GetAllReturnTransactionsByMemberId(int memberId)
+        {
+            return _returnTransactionSource.GetAllReturnTransactionsByMemberId(memberId);
         }
     }
 }

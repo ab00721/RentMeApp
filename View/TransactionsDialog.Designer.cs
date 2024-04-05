@@ -184,6 +184,7 @@
             this.ReturnTransactionDataGridView.RowTemplate.Height = 24;
             this.ReturnTransactionDataGridView.Size = new System.Drawing.Size(769, 197);
             this.ReturnTransactionDataGridView.TabIndex = 14;
+            this.ReturnTransactionDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ReturnTransactionDataGridView_CellContentClick);
             // 
             // ReturnLabel
             // 

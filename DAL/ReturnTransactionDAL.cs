@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace RentMeApp.DAL
 {
@@ -110,5 +111,46 @@ namespace RentMeApp.DAL
             }
             return returnTransaction;
         }
+
+        /// <summary>
+        /// Gets all return transactions by member identifier.
+        /// </summary>
+        /// <param name="memberID">The member identifier.</param>
+        /// <returns></returns>
+        public List<ReturnTransaction> GetAllReturnTransactionsByMemberId(int memberID)
+        {
+            List<ReturnTransaction> returnTransactions = new List<ReturnTransaction>();
+
+            string selectStatement = "SELECT * FROM ReturnTransaction WHERE MemberID = @MemberID";
+
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(selectStatement, connection))
+                {
+                    command.Parameters.Add("@MemberID", SqlDbType.Int);
+                    command.Parameters["@MemberID"].Value = memberID;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ReturnTransaction transaction = new ReturnTransaction();
+
+                            transaction.ReturnTransactionID = (int)reader["ReturnTransactionID"];
+                            transaction.EmployeeID = (int)reader["EmployeeID"];
+                            transaction.MemberID = (int)reader["MemberID"];
+                            transaction.ReturnDate = (DateTime)reader["ReturnDate"];
+                            transaction.TotalCost = (decimal)reader["TotalCost"];
+
+                            returnTransactions.Add(transaction);
+                        }
+                    }
+                }
+            }
+            return returnTransactions;
+        }
+
     }
 }
