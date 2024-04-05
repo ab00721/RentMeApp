@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace RentMeApp.DAL
 {
@@ -111,7 +112,11 @@ namespace RentMeApp.DAL
             return returnTransaction;
         }
 
-        
+        /// <summary>
+        /// Gets all return transactions by member identifier.
+        /// </summary>
+        /// <param name="memberID">The member identifier.</param>
+        /// <returns></returns>
         public List<ReturnTransaction> GetAllReturnTransactionsByMemberId(int memberID)
         {
             List<ReturnTransaction> returnTransactions = new List<ReturnTransaction>();

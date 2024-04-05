@@ -16,8 +16,10 @@ namespace RentMeApp.View
         private readonly UserUserControl _userUserControl;
         private readonly RentalTransactionController _rentalTransactionController;
         private readonly RentalLineItemController _rentalLineItemController;
+        private readonly ReturnTransactionController _returnTransactionController;
         private List<RentalTransaction> _rentalTransactions;
         private List<RentalLineItem> _rentalLineItems;
+        private List<ReturnTransaction> _returnTransactions;
         private Member _member;
         DataGridViewButtonColumn _addButtonColumn;
 
@@ -38,8 +40,10 @@ namespace RentMeApp.View
             this._searchMemberUserControl = searchMemberUserController;
             this._rentalTransactionController = new RentalTransactionController();
             this._rentalLineItemController = new RentalLineItemController();
+            this._returnTransactionController = new ReturnTransactionController();
 
             this.RefreshRentalTransactionDataGridView();
+            this.RefreshReturnTransactionDataGridView();
 
             _addButtonColumn = new DataGridViewButtonColumn();
             AddButtonColumn();
@@ -67,6 +71,28 @@ namespace RentMeApp.View
             RentalTransactionDataGridView.Columns[3].HeaderText = "Rental Date";
             RentalTransactionDataGridView.Columns[4].HeaderText = "Due Date";
             RentalTransactionDataGridView.Columns[5].HeaderText = "Total Cost";
+        }
+
+        /// <summary>
+        /// Refreshes the return transaction data grid view.
+        /// </summary>
+        public void RefreshReturnTransactionDataGridView()
+        {
+            RefreshReturnTransactionDataGridView(this._returnTransactionController.GetAllReturnTransactionsByMemberId(this._member.MemberID));
+        }
+
+        private void RefreshReturnTransactionDataGridView(List<ReturnTransaction> transactions)
+        {
+            MessageBox.Show(transactions.Count.ToString());
+            _returnTransactions = transactions;
+            ReturnTransactionDataGridView.DataSource = null;
+            ReturnTransactionDataGridView.DataSource = _returnTransactions;
+            //RentalTransactionDataGridView.Columns[0].HeaderText = "Rental Transaction ID";
+            //RentalTransactionDataGridView.Columns[1].HeaderText = "Employee ID";
+            //RentalTransactionDataGridView.Columns[2].HeaderText = "Member ID";
+            //RentalTransactionDataGridView.Columns[3].HeaderText = "Rental Date";
+            //RentalTransactionDataGridView.Columns[4].HeaderText = "Due Date";
+            //RentalTransactionDataGridView.Columns[5].HeaderText = "Total Cost";
         }
 
         private void AddButtonColumn()
