@@ -27,5 +27,7 @@ namespace RentMeApp.Model
             ReturnDate = returnDate;
             TotalCost = totalCost;
         }
+
+        public ReturnTransaction() { }
     }
 }
