@@ -10,6 +10,7 @@ using System.Transactions;
 public class RentalPointOfSaleService
 {
     private readonly List<RentalLineItem> _lineItems;
+    private readonly EmployeeController _employeeController;
     private readonly FurnitureController _furnitureController;
     private readonly RentalLineItemController _rentalLineItemController;
     private readonly RentalTransactionController _rentalTransactionController;
@@ -23,6 +24,7 @@ public class RentalPointOfSaleService
     public RentalPointOfSaleService()
     {
         _lineItems = new List<RentalLineItem>();
+        _employeeController = new EmployeeController();
         _furnitureController = new FurnitureController();
         _rentalLineItemController = new RentalLineItemController();
         _rentalTransactionController = new RentalTransactionController();
@@ -189,15 +191,24 @@ public class RentalPointOfSaleService
     }
 
     /// <summary>
+    /// Gets the employee with the given username.
+    /// </summary>
+    /// <param name="username">The username of the employee.</param>
+    /// <returns>The employee with the given username.</returns>
+    public EmployeeDTO GetTransactionCashier(string username)
+    {
+        return _employeeController.GetEmployeeByUsername(username);
+    }
+
+    /// <summary>
     /// Creates a rental transaction.
     /// </summary>
     /// <param name="employee">The employee performing the transaction.</param>
     /// <param name="member">The member renting the items.</param>
-    /// <param name="dueDate">The due date for returning the items.</param>
     /// <returns>The created rental transaction.</returns>
-    public RentalTransaction CreateRentalTransaction(EmployeeDTO employee, Member member, DateTime dueDate)
+    public RentalTransaction CreateRentalTransaction(EmployeeDTO employee, Member member)
     {
-        RentalTransaction rentalTransaction = new RentalTransaction(employee.EmployeeID, member.MemberID, DateTime.Now, dueDate, CalculateExpectedTransactionCostForDuration(DateTime.Now, dueDate));
+        RentalTransaction rentalTransaction = new RentalTransaction(employee.EmployeeID, member.MemberID, DateTime.Now, _dueDate, CalculateExpectedTransactionCostForDuration(DateTime.Now, _dueDate));
         return rentalTransaction;
     }
 

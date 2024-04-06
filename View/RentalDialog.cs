@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 using RentMeApp.Model;
 using RentMeApp.UserControls;
@@ -25,6 +24,9 @@ namespace RentMeApp.View
             this.rentalTableLayoutPanel.Controls.Add(userUserControl);
             MemberUserControl memberUserControl = new MemberUserControl(selectedMember);
             this.rentalTableLayoutPanel.Controls.Add(memberUserControl);
+
+            this.rentalShoppingCartUserControl.Username = username;
+            this.rentalShoppingCartUserControl.Member = selectedMember;
         }
 
         private void RentalDialog_Load(object sender, EventArgs e)

@@ -9,6 +9,9 @@ namespace RentMeApp.UserControls
     /// </summary>
     public partial class ShoppingCartUserControl : UserControl
     {
+        public string Username { get; set; }
+        public Member Member { get; set; }
+
         internal RentalPointOfSaleService _rentalPointOfSaleService;
         DataGridViewButtonColumn _removeButtonColumn;
 
@@ -93,10 +96,17 @@ namespace RentMeApp.UserControls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void emptyButton_Click(object sender, EventArgs e)
+        private void EmptyButton_Click(object sender, EventArgs e)
         {
             _rentalPointOfSaleService = new RentalPointOfSaleService();
             RefreshCartAndTotals();
+        }
+
+        private void CheckoutButton_Click(object sender, EventArgs e)
+        {
+            EmployeeDTO employee = _rentalPointOfSaleService.GetTransactionCashier(Username);
+            RentalTransaction transaction = _rentalPointOfSaleService.CreateRentalTransaction(employee, Member);
+            _rentalPointOfSaleService.SaveRentalTransaction(transaction, _rentalPointOfSaleService.GetRentalLineItems());
         }
 
         /// <summary>

@@ -210,6 +210,7 @@ namespace RentMeApp.UserControls
             this.checkoutButton.TabIndex = 6;
             this.checkoutButton.Text = "Checkout";
             this.checkoutButton.UseVisualStyleBackColor = true;
+            this.checkoutButton.Click += new System.EventHandler(this.CheckoutButton_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -236,7 +237,7 @@ namespace RentMeApp.UserControls
             this.emptyButton.TabIndex = 0;
             this.emptyButton.Text = "Empty";
             this.emptyButton.UseVisualStyleBackColor = true;
-            this.emptyButton.Click += new System.EventHandler(this.emptyButton_Click);
+            this.emptyButton.Click += new System.EventHandler(this.EmptyButton_Click);
             // 
             // ShoppingCartUserControl
             // 
