@@ -10,7 +10,7 @@ namespace RentMeApp.UserControls
     public partial class SearchFurnitureUserControl : UserControl
     {
         private readonly FurnitureController _furnitureController;
-        private List<Furniture> _furniture;
+        public List<Furniture> _furniture;
         DataGridViewButtonColumn _addButtonColumn;
 
         /// <summary>
@@ -51,6 +51,7 @@ namespace RentMeApp.UserControls
             _furniture = furniture;
             furnitureDataGridView.DataSource = null;
             furnitureDataGridView.DataSource = _furniture;
+            furnitureDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void AddButtonColumn()
@@ -199,7 +200,5 @@ namespace RentMeApp.UserControls
             ClearAll();
             RefreshDataGridView();
         }
-
-        
     }
 }

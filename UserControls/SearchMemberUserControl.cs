@@ -74,7 +74,6 @@ namespace RentMeApp.UserControls
 
                     memberListView.Items[i].Tag = member;
                 }
-
             }
         }
 

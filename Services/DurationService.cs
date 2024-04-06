@@ -6,13 +6,13 @@
 public static class DurationService
 {
     /// <summary>
-    /// Calculates the number of days between two dates, rounding up.
+    /// Calculates the number of days between two dates, rounding up and including partial days.
     /// </summary>
-    /// <returns>The number of days between two dates, rounding up.</returns>
+    /// <returns>The number of days between two dates, rounding up and including partial days.</returns>
     public static int DurationInDays(DateTime startDate, DateTime endDate)
     {
         TimeSpan rentalPeriod = endDate - startDate;
-        int transactionDurationInDays = (int)Math.Ceiling(rentalPeriod.TotalDays);
+        int transactionDurationInDays = (int)Math.Ceiling(rentalPeriod.TotalDays) + 1;
         return transactionDurationInDays;
     }
 }

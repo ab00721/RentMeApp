@@ -14,6 +14,9 @@ public class RentalPointOfSaleService
     private readonly RentalLineItemController _rentalLineItemController;
     private readonly RentalTransactionController _rentalTransactionController;
 
+    private DateTime _rentalDate;
+    private DateTime _dueDate;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RentalPointOfSaleService"/> class.
     /// </summary>
@@ -23,6 +26,27 @@ public class RentalPointOfSaleService
         _furnitureController = new FurnitureController();
         _rentalLineItemController = new RentalLineItemController();
         _rentalTransactionController = new RentalTransactionController();
+
+        _rentalDate = DateTime.Now;
+        _dueDate = DateTime.Now;
+    }
+
+    /// <summary>
+    /// Sets the due date for returning the rental items.
+    /// </summary>
+    /// <param name="dueDate">The due date for returning the items.</param>
+    public void SetDueDate(DateTime dueDate)
+    {
+        _dueDate = dueDate;
+    }
+
+    /// <summary>
+    /// Gets the due date for returning the rental items.
+    /// </summary>
+    /// <returns>The due date for returning the items.</returns>
+    public DateTime GetDueDate()
+    {
+        return _dueDate;
     }
 
     /// <summary>
@@ -35,14 +59,76 @@ public class RentalPointOfSaleService
     }
 
     /// <summary>
+    /// Gets the list of rental cart items.
+    /// </summary>
+    /// <returns>The list of rental cart items.</returns>
+    public List<RentalCartItem> GetRentalCartItems()
+    {
+        var _cartItems = new List<RentalCartItem>();
+        foreach (var lineItem in _lineItems)
+        {
+            Furniture furniture = _furnitureController.GetFurnitureByID(lineItem.FurnitureID);
+            _cartItems.Add(new RentalCartItem(furniture, lineItem.Quantity, CalculateLineCostPerDay(lineItem)));
+        }
+        return _cartItems;
+    }
+
+    /// <summary>
+    /// Gets the furniture based on the FurnitureID of the RentalCartItem.
+    /// </summary>
+    /// <param name="rentalCartItem">The rental cart item.</param>
+    /// <returns>The furniture associated with the rental cart item.</returns>
+    public Furniture GetFurnitureByRentalCartItem(RentalCartItem rentalCartItem)
+    {
+        Furniture furniture = _furnitureController.GetFurnitureByID(rentalCartItem.FurnitureID);
+        return furniture;
+    }
+
+    /// <summary>
     /// Adds a rental line item to the list of items.
     /// </summary>
     /// <param name="furniture">The furniture to add as a rental line item.</param>
     /// <param name="quantity">The quantity of the furniture to add.</param>
     public void AddRentalLineItem(Furniture furniture, int quantity)
     {
-        RentalLineItem item = new RentalLineItem(furniture.FurnitureID, quantity, 0, furniture.DailyRate);
-        _lineItems.Add(item);
+        RentalLineItem existingItem = _lineItems.Find(item => item.FurnitureID == furniture.FurnitureID);
+        if (existingItem != null)
+        {
+            existingItem.Quantity += quantity;
+        }
+        else
+        {
+            RentalLineItem newItem = new RentalLineItem(furniture.FurnitureID, quantity, 0, furniture.DailyRate);
+            _lineItems.Add(newItem);
+        }
+    }
+
+    /// <summary>
+    /// Updates a rental line item with the given furniture and quantity.
+    /// </summary>
+    /// <param name="furniture">The furniture to update.</param>
+    /// <param name="quantity">The new quantity.</param>
+    public void UpdateRentalLineItem(Furniture furniture, int quantity)
+    {
+        RentalLineItem existingItem = _lineItems.Find(item => item.FurnitureID == furniture.FurnitureID);
+        if (existingItem != null)
+        {
+            existingItem.Quantity = quantity;
+        }
+        else
+        {
+            RentalLineItem newItem = new RentalLineItem(furniture.FurnitureID, quantity, 0, furniture.DailyRate);
+            _lineItems.Add(newItem);
+        }
+    }
+
+    /// <summary>
+    /// Removes rental line items from the list that have the given furniture.
+    /// </summary>
+    /// <param name="furniture">The furniture to remove from rental line items.</param>
+    public void RemoveRentalLineItem(Furniture furniture)
+    {
+        _lineItems.RemoveAll(item => item.FurnitureID == furniture.FurnitureID);
     }
 
     /// <summary>
@@ -62,6 +148,9 @@ public class RentalPointOfSaleService
     /// <summary>
     /// Calculates the expected cost of the line item over the rental period.
     /// </summary>
+    /// <param name="rentalLineItem">The rental line item.</param>
+    /// <param name="rentalDate">The rental date (optional, default: _rentalDate).</param>
+    /// <param name="dueDate">The due date (optional, default: _dueDate).</param>
     /// <returns>The line item's expected cost over the rental period.</returns>
     public decimal CalculateExpectedLineCostForDuration(RentalLineItem rentalLineItem, DateTime rentalDate, DateTime dueDate)
     {
@@ -75,12 +164,23 @@ public class RentalPointOfSaleService
     /// <summary>
     /// Calculates the expected cost of the transaction over the rental period.
     /// </summary>
-    /// <returns>The transaction's expeted cost over the rental period.</returns>
-    public decimal CalculateExpectedTransactionCostForDuration(List<RentalLineItem> rentalLineItems, DateTime rentalDate, DateTime dueDate)
+    /// <param name="rentalLineItems">The list of rental line items.</param>
+    /// <param name="rentalDate">The rental date (optional, default: _rentalDate).</param>
+    /// <param name="dueDate">The due date (optional, default: _dueDate).</param>
+    /// <returns>The transaction's expected cost over the rental period.</returns>
+    public decimal CalculateExpectedTransactionCostForDuration(DateTime rentalDate = default, DateTime dueDate = default)
     {
+        rentalDate = rentalDate == default ? _rentalDate : rentalDate;
+        dueDate = dueDate == default ? _dueDate : dueDate;
+
+        if (_lineItems == null)
+        {
+            return 0;
+        }
+
         decimal transactionCost = 0;
 
-        foreach (var lineItem in rentalLineItems)
+        foreach (var lineItem in _lineItems)
         {
             transactionCost += CalculateExpectedLineCostForDuration(lineItem, rentalDate, dueDate);
         }
@@ -97,7 +197,7 @@ public class RentalPointOfSaleService
     /// <returns>The created rental transaction.</returns>
     public RentalTransaction CreateRentalTransaction(EmployeeDTO employee, Member member, DateTime dueDate)
     {
-        RentalTransaction rentalTransaction = new RentalTransaction(employee.EmployeeID, member.MemberID, DateTime.Now, dueDate, CalculateExpectedTransactionCostForDuration(GetRentalLineItems(), DateTime.Now, dueDate));
+        RentalTransaction rentalTransaction = new RentalTransaction(employee.EmployeeID, member.MemberID, DateTime.Now, dueDate, CalculateExpectedTransactionCostForDuration(DateTime.Now, dueDate));
         return rentalTransaction;
     }
 

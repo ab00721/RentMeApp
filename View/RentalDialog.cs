@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using RentMeApp.Model;
 using RentMeApp.UserControls;
@@ -30,6 +31,18 @@ namespace RentMeApp.View
         {
             this.rentalSearchFurnitureUserControl.SearchFurnitureUserControl_Load(sender, e);
             this.rentalSearchFurnitureUserControl.TurnOnAddButtonColumn();
+            this.rentalSearchFurnitureUserControl.furnitureDataGridView.CellClick += FurnitureDataGridView_CellClick;
+        }
+
+        private void FurnitureDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.rentalSearchFurnitureUserControl.furnitureDataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+            {
+                Furniture furniture = this.rentalSearchFurnitureUserControl._furniture[e.RowIndex];
+
+                this.rentalShoppingCartUserControl.AddRentalLineItem(furniture, 1);
+                this.rentalShoppingCartUserControl.RefreshCartAndTotals();
+            }
         }
 
         private void RentalDialog_FormClosing(object sender, FormClosingEventArgs e)

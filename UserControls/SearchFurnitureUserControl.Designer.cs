@@ -217,7 +217,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView furnitureDataGridView;
+        public System.Windows.Forms.DataGridView furnitureDataGridView;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TableLayoutPanel furnitureSearchTableLayoutPanel;
         private System.Windows.Forms.Button clearButton;

@@ -89,6 +89,7 @@
     <Compile Include="Model\EmployeeDTO.cs" />
     <Compile Include="Model\Furniture.cs" />
     <Compile Include="Model\Member.cs" />
+    <Compile Include="Model\RentalCartItem.cs" />
     <Compile Include="Model\RentalLineItem.cs" />
     <Compile Include="Model\RentalTransaction.cs" />
     <Compile Include="Model\ReturnLineItem.cs" />
@@ -114,6 +115,12 @@
     </Compile>
     <Compile Include="UserControls\SearchMemberUserControl.Designer.cs">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ShoppingCartUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ShoppingCartUserControl.Designer.cs">
+      <DependentUpon>ShoppingCartUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UserUserControl.cs">
       <SubType>UserControl</SubType>
@@ -185,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchMemberUserControl.resx">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ShoppingCartUserControl.resx">
+      <DependentUpon>ShoppingCartUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UserUserControl.resx">
       <DependentUpon>UserUserControl.cs</DependentUpon>
