@@ -52,6 +52,30 @@ namespace RentMeApp.UserControls
         }
 
         /// <summary>
+        /// Handles the CellValueChanged event of the shoppingCartDataGridView.
+        /// Updates the rental line items in the pos service when the user changes the quantity column.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DataGridViewCellEventArgs"/> instance containing the event data.</param>
+        public void ShoppingCartDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == shoppingCartDataGridView.Columns["Quantity"].Index && e.RowIndex >= 0)
+            {
+                int newQuantity = Convert.ToInt32(shoppingCartDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+                if (newQuantity < 1)
+                {
+                    MessageBox.Show("The quantity cannot be less than 1.\nUse the \"Remove\" button if you intend to delete the line item.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    newQuantity = 1;
+                }
+
+                RentalCartItem cartItem = (RentalCartItem)shoppingCartDataGridView.Rows[e.RowIndex].DataBoundItem;
+                Furniture furniture = _rentalPointOfSaleService.GetFurnitureByRentalCartItem(cartItem);
+                _rentalPointOfSaleService.UpdateRentalLineItem(furniture, newQuantity);
+                RefreshCartAndTotals();
+            }
+        }
+
+        /// <summary>
         /// Sets the due date in the rentalPointOfSaleService when rentalDateTimePicker value changes.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
