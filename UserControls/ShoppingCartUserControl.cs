@@ -139,23 +139,27 @@ namespace RentMeApp.UserControls
 
         private void CheckoutButton_Click(object sender, EventArgs e)
         {
-            try
+            DialogResult result = MessageBox.Show("Are you sure you want to proceed with checkout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                EmployeeDTO employee = _rentalPointOfSaleService.GetEmployee();
-                Member member = _rentalPointOfSaleService.GetMember();
+                try
+                {
+                    EmployeeDTO employee = _rentalPointOfSaleService.GetEmployee();
+                    Member member = _rentalPointOfSaleService.GetMember();
 
-                RentalTransaction emptyTransaction = _rentalPointOfSaleService.CreateRentalTransaction();
-                List<RentalLineItem> lineItems = _rentalPointOfSaleService.GetRentalLineItems();
-                int transactionID = _rentalPointOfSaleService.SaveRentalTransaction(emptyTransaction, lineItems);
+                    RentalTransaction emptyTransaction = _rentalPointOfSaleService.CreateRentalTransaction();
+                    List<RentalLineItem> lineItems = _rentalPointOfSaleService.GetRentalLineItems();
+                    int transactionID = _rentalPointOfSaleService.SaveRentalTransaction(emptyTransaction, lineItems);
 
-                RentalTransactionSaved?.Invoke(this, EventArgs.Empty);
+                    RentalTransactionSaved?.Invoke(this, EventArgs.Empty);
 
-                _rentalSummaryDialog = new RentalSummaryDialog(employee, member, transactionID);
-                _rentalSummaryDialog.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _rentalSummaryDialog = new RentalSummaryDialog(employee, member, transactionID);
+                    _rentalSummaryDialog.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
