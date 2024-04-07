@@ -260,7 +260,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Database\cs6232-g5_202404030830.sql" />
+    <Content Include="Database\cs6232-g5_202404030830-UPDATED.sql" />
     <Content Include="read_me.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
