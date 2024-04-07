@@ -68,10 +68,12 @@
             this.rentalShoppingCartUserControl.BackColor = System.Drawing.SystemColors.Control;
             this.rentalShoppingCartUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rentalShoppingCartUserControl.Location = new System.Drawing.Point(3, 703);
+            this.rentalShoppingCartUserControl.Member = null;
             this.rentalShoppingCartUserControl.Name = "rentalShoppingCartUserControl";
             this.rentalShoppingCartUserControl.Padding = new System.Windows.Forms.Padding(25, 0, 40, 0);
             this.rentalShoppingCartUserControl.Size = new System.Drawing.Size(1212, 514);
             this.rentalShoppingCartUserControl.TabIndex = 0;
+            this.rentalShoppingCartUserControl.Username = null;
             // 
             // RentalDialog
             // 

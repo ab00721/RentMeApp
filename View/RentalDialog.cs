@@ -11,6 +11,8 @@ namespace RentMeApp.View
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class RentalDialog : Form
     {
+        private bool transactionSaved = false;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RentalDialog"/> class.
         /// </summary>
@@ -29,6 +31,12 @@ namespace RentMeApp.View
 
             rentalShoppingCartUserControl.Username = username;
             rentalShoppingCartUserControl.Member = selectedMember;
+
+            rentalShoppingCartUserControl.RentalTransactionSaved += (sender, e) =>
+            {
+                transactionSaved = true;
+                Close();
+            };
         }
 
         private void RentalDialog_Load(object sender, EventArgs e)
@@ -51,12 +59,14 @@ namespace RentMeApp.View
 
         private void RentalDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit? Your cart will not be saved.", "Confirmation", MessageBoxButtons.YesNo);
-            if (result == DialogResult.No)
+            if (e.CloseReason == CloseReason.UserClosing && !transactionSaved)
             {
-                e.Cancel = true;
+                DialogResult result = MessageBox.Show("Are you sure you want to exit? Your cart will not be saved.", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
             }
         }
-        
     }
 }

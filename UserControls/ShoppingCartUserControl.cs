@@ -1,5 +1,7 @@
 ﻿using RentMeApp.Model;
+using RentMeApp.View;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace RentMeApp.UserControls
@@ -9,6 +11,10 @@ namespace RentMeApp.UserControls
     /// </summary>
     public partial class ShoppingCartUserControl : UserControl
     {
+        public event EventHandler RentalTransactionSaved;
+
+        private RentalSummaryDialog _rentalSummaryDialog;
+
         public string Username { get; set; }
         public Member Member { get; set; }
 
@@ -133,8 +139,17 @@ namespace RentMeApp.UserControls
 
         private void CheckoutButton_Click(object sender, EventArgs e)
         {
-            RentalTransaction transaction = _rentalPointOfSaleService.CreateRentalTransaction();
-            _rentalPointOfSaleService.SaveRentalTransaction(transaction, _rentalPointOfSaleService.GetRentalLineItems());
+            EmployeeDTO employee = _rentalPointOfSaleService.GetEmployee();
+            Member member = _rentalPointOfSaleService.GetMember();
+
+            RentalTransaction emptyTransaction = _rentalPointOfSaleService.CreateRentalTransaction();
+            List<RentalLineItem> lineItems = _rentalPointOfSaleService.GetRentalLineItems();
+            int transactionID = _rentalPointOfSaleService.SaveRentalTransaction(emptyTransaction, lineItems);
+            
+            _rentalSummaryDialog = new RentalSummaryDialog(employee, member, transactionID);
+            _rentalSummaryDialog.ShowDialog();
+
+            RentalTransactionSaved?.Invoke(this, EventArgs.Empty);
         }
 
         private void StyleDataGridView()

@@ -46,6 +46,15 @@ public class RentalPointOfSaleService
     }
 
     /// <summary>
+    /// Gets the member renting the items.
+    /// </summary>
+    /// <returns>The member renting the items.</returns>
+    public Member GetMember()
+    {
+        return _member;
+    }
+
+    /// <summary>
     /// Sets the employee for renting the items.
     /// </summary>
     /// <param name="username">The username of the employee for renting the items.</param>
@@ -53,11 +62,20 @@ public class RentalPointOfSaleService
     {
         try
         {
-            _employee = _employeeController.GetEmployeeByUsername(_username);
+            _employee = _employeeController.GetEmployeeByUsername(username);
         } catch (Exception ex)
         {
             Console.WriteLine("Error while setting employee: " + ex.Message);
         }
+    }
+
+    /// <summary>
+    /// Gets the employee for renting the items.
+    /// </summary>
+    /// <returns>The employee for renting the items.</returns>
+    public EmployeeDTO GetEmployee()
+    {
+        return _employee;
     }
 
     /// <summary>
@@ -233,7 +251,8 @@ public class RentalPointOfSaleService
     /// </summary>
     /// <param name="rentalTransaction">The rental transaction to save.</param>
     /// <param name="lineItems">The list of rental line items to save.</param>
-    public void SaveRentalTransaction(RentalTransaction rentalTransaction, List<RentalLineItem> lineItems)
+    /// <returns>The rental transaction ID.</returns>
+    public int SaveRentalTransaction(RentalTransaction rentalTransaction, List<RentalLineItem> lineItems)
     {
         using (var scope = new TransactionScope())
         {
@@ -253,10 +272,12 @@ public class RentalPointOfSaleService
                 }
 
                 scope.Complete();
+                return rentalTransactionID;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error while saving rental transaction: " + ex.Message);
+                return -1;
             }
         }
     }
@@ -334,5 +355,15 @@ public class RentalPointOfSaleService
         }
 
         return lineItemsWithFurniture;
+    }
+
+    /// <summary>
+    /// Gets the rental transaction by the given rental transaction ID.
+    /// </summary>
+    /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
+    /// <returns>The rental transaction.</returns>
+    public RentalTransaction GetRentalTransaction(int rentalTransactionID)
+    {
+        return _rentalTransactionController.GetRentalTransactionByRentalTransactionID(rentalTransactionID);
     }
 }
