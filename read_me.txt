@@ -11,4 +11,8 @@ Iteration 1:
 	- User can add a new member.
 	- User can select a member from list view and edit that member's details.
 	- New Rental, New Return, Transactions, and Reports do not work.
-	
+
+Iteration 2:
+	- User can create a new rental and view rental and return transactions
+	- New return dialog does not work
+	- Reports tab does not work
