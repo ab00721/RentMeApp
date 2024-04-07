@@ -4,6 +4,7 @@ using System;
 using RentMeApp.Controller;
 using System.Transactions;
 using System.Linq;
+using System.Runtime.Serialization;
 
 /// <summary>
 /// Service for rental point of sale operations.
@@ -258,6 +259,8 @@ public class RentalPointOfSaleService
         {
             try
             {
+                CheckInStockQuantities(lineItems);
+
                 int rentalTransactionID = _rentalTransactionController.AddRentalTransaction(rentalTransaction);
 
                 foreach (var lineItem in lineItems)
@@ -274,10 +277,30 @@ public class RentalPointOfSaleService
                 scope.Complete();
                 return rentalTransactionID;
             }
+            catch (InsufficentStockException ise)
+            {
+                throw new InsufficentStockException(ise.Message);
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("Error while saving rental transaction: " + ex.Message);
-                return -1;
+                throw new Exception("Error while saving rental transaction: " + ex.Message);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Checks the stock quantities for the given rental line items.
+    /// Throws an exception if the stock quantity is insufficient.
+    /// </summary>
+    /// <param name="rentalLineItems">The list of rental line items.</param>
+    public void CheckInStockQuantities(List<RentalLineItem> rentalLineItems)
+    {
+        foreach (var lineItem in rentalLineItems)
+        {
+            Furniture furniture = _furnitureController.GetFurnitureByID(lineItem.FurnitureID);
+            if (furniture.InStockQuantity < lineItem.Quantity)
+            {
+                throw new InsufficentStockException("Insufficient stock quantity for item: " + furniture.Name);
             }
         }
     }
@@ -365,5 +388,16 @@ public class RentalPointOfSaleService
     public RentalTransaction GetRentalTransaction(int rentalTransactionID)
     {
         return _rentalTransactionController.GetRentalTransactionByRentalTransactionID(rentalTransactionID);
+    }
+}
+
+/// <summary>
+/// Exception thrown when there is insufficient stock quantity for a rental item.
+/// </summary>
+[Serializable]
+internal class InsufficentStockException : Exception
+{
+    public InsufficentStockException(string message) : base(message)
+    {
     }
 }

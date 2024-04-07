@@ -23,10 +23,10 @@ namespace RentMeApp.View
             _transaction = _rentalPointOfSaleService.GetRentalTransaction(transactionID);
 
             UserUserControl userUserControl = new UserUserControl(employee.Username, employee.FirstName);
-            this.rentalSummaryTableLayoutPanel.Controls.Add(userUserControl);
+            rentalSummaryTableLayoutPanel.Controls.Add(userUserControl);
 
             MemberUserControl memberUserControl = new MemberUserControl(member);
-            this.rentalSummaryTableLayoutPanel.Controls.Add(memberUserControl);
+            rentalSummaryTableLayoutPanel.Controls.Add(memberUserControl);
 
             RefreshDataGridView();
             StyleDataGridView();
@@ -47,6 +47,7 @@ namespace RentMeApp.View
             rentalSummaryDataGridView.Columns["DailyRate"].ReadOnly = true;
             rentalSummaryDataGridView.Columns["Quantity"].ReadOnly = true;
             rentalSummaryDataGridView.Columns["Price"].ReadOnly = true;
+            rentalSummaryDataGridView.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
 
         private void AssignLabelValues()
@@ -58,7 +59,7 @@ namespace RentMeApp.View
 
         private void CloseButton_Click(object sender, System.EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

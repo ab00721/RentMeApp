@@ -38,18 +38,17 @@
             // 
             this.rentalTableLayoutPanel.AutoScroll = true;
             this.rentalTableLayoutPanel.ColumnCount = 1;
-            this.rentalTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.rentalTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.rentalTableLayoutPanel.Controls.Add(this.rentalSearchFurnitureUserControl, 0, 2);
             this.rentalTableLayoutPanel.Controls.Add(this.rentalShoppingCartUserControl, 0, 3);
             this.rentalTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rentalTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.rentalTableLayoutPanel.Name = "rentalTableLayoutPanel";
-            this.rentalTableLayoutPanel.RowCount = 5;
+            this.rentalTableLayoutPanel.RowCount = 4;
             this.rentalTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.rentalTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.rentalTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 500F));
             this.rentalTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 520F));
-            this.rentalTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.rentalTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.rentalTableLayoutPanel.Size = new System.Drawing.Size(1218, 1244);
             this.rentalTableLayoutPanel.TabIndex = 0;
@@ -71,7 +70,7 @@
             this.rentalShoppingCartUserControl.Member = null;
             this.rentalShoppingCartUserControl.Name = "rentalShoppingCartUserControl";
             this.rentalShoppingCartUserControl.Padding = new System.Windows.Forms.Padding(25, 0, 40, 0);
-            this.rentalShoppingCartUserControl.Size = new System.Drawing.Size(1212, 514);
+            this.rentalShoppingCartUserControl.Size = new System.Drawing.Size(1212, 538);
             this.rentalShoppingCartUserControl.TabIndex = 0;
             this.rentalShoppingCartUserControl.Username = null;
             // 

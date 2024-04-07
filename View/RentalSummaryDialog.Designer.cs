@@ -87,11 +87,12 @@
             this.orderSummaryLabel.AutoSize = true;
             this.orderSummaryLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.orderSummaryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.orderSummaryLabel.ForeColor = System.Drawing.Color.Green;
             this.orderSummaryLabel.Location = new System.Drawing.Point(61, 0);
             this.orderSummaryLabel.Name = "orderSummaryLabel";
-            this.orderSummaryLabel.Size = new System.Drawing.Size(175, 70);
+            this.orderSummaryLabel.Size = new System.Drawing.Size(220, 70);
             this.orderSummaryLabel.TabIndex = 0;
-            this.orderSummaryLabel.Text = "Order Summary";
+            this.orderSummaryLabel.Text = "Rental Confirmation";
             this.orderSummaryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // rentalSummaryDataGridView
