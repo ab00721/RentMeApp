@@ -97,6 +97,7 @@ namespace RentMeApp.UserControls
             this.shoppingCartDataGridView.TabIndex = 1;
             this.shoppingCartDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShoppingCartDataGridView_CellClick);
             this.shoppingCartDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShoppingCartDataGridView_CellValueChanged);
+            this.shoppingCartDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.ShoppingCartDataGridView_DataError);
             // 
             // rentalTotalsLayoutPanel
             // 
