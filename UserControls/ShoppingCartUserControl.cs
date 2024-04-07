@@ -23,90 +23,8 @@ namespace RentMeApp.UserControls
             InitializeComponent();
             _rentalPointOfSaleService = new RentalPointOfSaleService();
             AddRemoveButtonColumn();
+            SetDatePickerMinDateToToday();
             RefreshCartAndTotals();
-        }
-
-        /// <summary>
-        /// Handles the Load event of the ShoppingCartUserControl control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        public void ShoppingCartUserControl_Load(object sender, EventArgs e)
-        {
-            RefreshCartAndTotals();
-        }
-
-        /// <summary>
-        /// Handles the click event of the RemoveButton in the shoppingCartDataGridView.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DataGridViewCellEventArgs"/> instance containing the event data.</param>
-        public void ShoppingCartDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == shoppingCartDataGridView.Columns["RemoveButtonColumn"].Index && e.RowIndex >= 0)
-            {
-                RentalCartItem cartItem = (RentalCartItem)shoppingCartDataGridView.Rows[e.RowIndex].DataBoundItem;
-                Furniture furniture = _rentalPointOfSaleService.GetFurnitureByRentalCartItem(cartItem);
-
-                RemoveRentalLineItem(furniture);
-
-                RefreshCartAndTotals();
-            }
-        }
-
-        /// <summary>
-        /// Handles the CellValueChanged event of the shoppingCartDataGridView.
-        /// Updates the rental line items in the pos service when the user changes the quantity column.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DataGridViewCellEventArgs"/> instance containing the event data.</param>
-        public void ShoppingCartDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == shoppingCartDataGridView.Columns["Quantity"].Index && e.RowIndex >= 0)
-            {
-                int newQuantity = Convert.ToInt32(shoppingCartDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-                if (newQuantity < 1)
-                {
-                    MessageBox.Show("The quantity cannot be less than 1.\nUse the \"Remove\" button if you intend to delete the line item.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    newQuantity = 1;
-                }
-
-                RentalCartItem cartItem = (RentalCartItem)shoppingCartDataGridView.Rows[e.RowIndex].DataBoundItem;
-                Furniture furniture = _rentalPointOfSaleService.GetFurnitureByRentalCartItem(cartItem);
-                _rentalPointOfSaleService.UpdateRentalLineItem(furniture, newQuantity);
-                RefreshCartAndTotals();
-            }
-        }
-
-        /// <summary>
-        /// Sets the due date in the rentalPointOfSaleService when rentalDateTimePicker value changes.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        public void RentalDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            DateTime dueDate = rentalDateTimePicker.Value;
-            _rentalPointOfSaleService.SetDueDate(dueDate);
-            RefreshCartAndTotals();
-        }
-
-        /// <summary>
-        /// Handles the click event of the emptyButton.
-        /// Clears the rental point of sale service and refreshes the cart and totals.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void EmptyButton_Click(object sender, EventArgs e)
-        {
-            _rentalPointOfSaleService = new RentalPointOfSaleService();
-            RefreshCartAndTotals();
-        }
-
-        private void CheckoutButton_Click(object sender, EventArgs e)
-        {
-            EmployeeDTO employee = _rentalPointOfSaleService.GetTransactionCashier(Username);
-            RentalTransaction transaction = _rentalPointOfSaleService.CreateRentalTransaction(employee, Member);
-            _rentalPointOfSaleService.SaveRentalTransaction(transaction, _rentalPointOfSaleService.GetRentalLineItems());
         }
 
         /// <summary>
@@ -118,35 +36,6 @@ namespace RentMeApp.UserControls
             StyleDataGridView();
             RefreshDuration();
             RefreshTotal();
-        }
-
-        private void StyleDataGridView()
-        {
-            this.shoppingCartDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            this.shoppingCartDataGridView.Columns["FurnitureID"].ReadOnly = true;
-            this.shoppingCartDataGridView.Columns["Name"].ReadOnly = true;
-            this.shoppingCartDataGridView.Columns["DailyRate"].ReadOnly = true;
-            this.shoppingCartDataGridView.Columns["Quantity"].ReadOnly = false;
-            this.shoppingCartDataGridView.Columns["Quantity"].DefaultCellStyle.BackColor = System.Drawing.SystemColors.Info;
-            this.shoppingCartDataGridView.Columns["Price"].ReadOnly = true;
-        }
-
-        private void RefreshDataGridView()
-        {
-            shoppingCartDataGridView.DataSource = null;
-            shoppingCartDataGridView.DataSource = _rentalPointOfSaleService.GetRentalCartItems();
-        }
-
-        private void RefreshDuration()
-        {
-            int duration = DurationService.DurationInDays(DateTime.Now, _rentalPointOfSaleService.GetDueDate());
-            daysRentedValueLabel.Text = $"{duration}";
-        }
-
-        private void RefreshTotal()
-        {
-            decimal total = _rentalPointOfSaleService.CalculateExpectedTransactionCostForDuration();
-            rentalTotalValueLabel.Text = $"{total:C}";
         }
 
         /// <summary>
@@ -168,6 +57,110 @@ namespace RentMeApp.UserControls
         {
             _rentalPointOfSaleService.RemoveRentalLineItem(furniture);
             RefreshCartAndTotals();
+        }
+
+        private void ShoppingCartDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == shoppingCartDataGridView.Columns["RemoveButtonColumn"].Index && e.RowIndex >= 0)
+            {
+                RentalCartItem cartItem = (RentalCartItem)shoppingCartDataGridView.Rows[e.RowIndex].DataBoundItem;
+                Furniture furniture = _rentalPointOfSaleService.GetFurnitureByRentalCartItem(cartItem);
+                RemoveRentalLineItem(furniture);
+                RefreshCartAndTotals();
+            }
+        }
+
+        private void ShoppingCartDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == shoppingCartDataGridView.Columns["Quantity"].Index && e.RowIndex >= 0)
+            {
+                DataGridViewCell cell = shoppingCartDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (cell.Value != null && int.TryParse(cell.Value.ToString(), out int newQuantity) && newQuantity > 0)
+                {
+                    RentalCartItem cartItem = (RentalCartItem)shoppingCartDataGridView.Rows[e.RowIndex].DataBoundItem;
+                    Furniture furniture = _rentalPointOfSaleService.GetFurnitureByRentalCartItem(cartItem);
+
+                    _rentalPointOfSaleService.UpdateRentalLineItem(furniture, newQuantity);
+                    RefreshCartAndTotals();
+                }
+                else
+                {
+                    cell.Style.BackColor = System.Drawing.Color.LightPink;
+                    cell.ErrorText = "Invalid quantity";
+
+                    MessageBox.Show("The quantity must be greater than 0.\n\nUse the \"Remove\" button if you intend to delete the line item.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void ShoppingCartDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("The quantity must be an integer.", "Data Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void RentalDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime dueDate = rentalDateTimePicker.Value;
+            _rentalPointOfSaleService.SetDueDate(dueDate);
+            RefreshCartAndTotals();
+        }
+
+        private void EmptyButton_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to empty your cart?", "Empty Cart", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                _rentalPointOfSaleService = new RentalPointOfSaleService();
+                RefreshCartAndTotals();
+                SetDatePickerValueToToday();
+            }
+        }
+
+        private void CheckoutButton_Click(object sender, EventArgs e)
+        {
+            EmployeeDTO employee = _rentalPointOfSaleService.GetTransactionCashier(Username);
+            RentalTransaction transaction = _rentalPointOfSaleService.CreateRentalTransaction(employee, Member);
+            _rentalPointOfSaleService.SaveRentalTransaction(transaction, _rentalPointOfSaleService.GetRentalLineItems());
+        }
+
+        private void StyleDataGridView()
+        {
+            shoppingCartDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            shoppingCartDataGridView.Columns["FurnitureID"].ReadOnly = true;
+            shoppingCartDataGridView.Columns["Name"].ReadOnly = true;
+            shoppingCartDataGridView.Columns["DailyRate"].ReadOnly = true;
+            shoppingCartDataGridView.Columns["Quantity"].ReadOnly = false;
+            shoppingCartDataGridView.Columns["Quantity"].DefaultCellStyle.BackColor = System.Drawing.SystemColors.Info;
+            shoppingCartDataGridView.Columns["Price"].ReadOnly = true;
+        }
+
+        private void RefreshDataGridView()
+        {
+            shoppingCartDataGridView.DataSource = null;
+            shoppingCartDataGridView.DataSource = _rentalPointOfSaleService.GetRentalCartItems();
+        }
+
+        private void RefreshDuration()
+        {
+            int duration = DurationService.DurationInDays(DateTime.Now, _rentalPointOfSaleService.GetDueDate());
+            daysRentedValueLabel.Text = $"{duration}";
+        }
+
+        private void RefreshTotal()
+        {
+            decimal total = _rentalPointOfSaleService.CalculateExpectedTransactionCostForDuration();
+            rentalTotalValueLabel.Text = $"{total:C}";
+        }
+
+        private void SetDatePickerValueToToday()
+        {
+            rentalDateTimePicker.Value = DateTime.Today;
+        }
+
+        private void SetDatePickerMinDateToToday()
+        {
+            rentalDateTimePicker.MinDate = DateTime.Today;
         }
 
         private void AddRemoveButtonColumn()

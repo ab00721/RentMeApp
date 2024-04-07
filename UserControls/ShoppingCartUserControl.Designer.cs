@@ -97,6 +97,7 @@ namespace RentMeApp.UserControls
             this.shoppingCartDataGridView.TabIndex = 1;
             this.shoppingCartDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShoppingCartDataGridView_CellClick);
             this.shoppingCartDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShoppingCartDataGridView_CellValueChanged);
+            this.shoppingCartDataGridView.DataError += ShoppingCartDataGridView_DataError;
             // 
             // rentalTotalsLayoutPanel
             // 
@@ -146,7 +147,6 @@ namespace RentMeApp.UserControls
             this.rentalDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rentalDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.rentalDateTimePicker.Location = new System.Drawing.Point(795, 23);
-            this.rentalDateTimePicker.MinDate = new System.DateTime(2024, 4, 6, 0, 0, 0, 0);
             this.rentalDateTimePicker.Name = "rentalDateTimePicker";
             this.rentalDateTimePicker.Size = new System.Drawing.Size(227, 31);
             this.rentalDateTimePicker.TabIndex = 1;
