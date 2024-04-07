@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using RentMeApp.Controller;
 using System.Transactions;
+using System.Linq;
 
 /// <summary>
 /// Service for rental point of sale operations.
@@ -14,9 +15,11 @@ public class RentalPointOfSaleService
     private readonly FurnitureController _furnitureController;
     private readonly RentalLineItemController _rentalLineItemController;
     private readonly RentalTransactionController _rentalTransactionController;
+    private readonly DateTime _rentalDate;
 
-    private DateTime _rentalDate;
     private DateTime _dueDate;
+    private Member _member;
+    private EmployeeDTO _employee;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RentalPointOfSaleService"/> class.
@@ -28,9 +31,33 @@ public class RentalPointOfSaleService
         _furnitureController = new FurnitureController();
         _rentalLineItemController = new RentalLineItemController();
         _rentalTransactionController = new RentalTransactionController();
-
         _rentalDate = DateTime.Now;
+
         _dueDate = DateTime.Now;
+    }
+
+    /// <summary>
+    /// Sets the member renting the items.
+    /// </summary>
+    /// <param name="member">The member renting the items.</param>
+    public void SetMember(Member member)
+    {
+        _member = member;
+    }
+
+    /// <summary>
+    /// Sets the employee for renting the items.
+    /// </summary>
+    /// <param name="username">The username of the employee for renting the items.</param>
+    public void SetEmployee(string username)
+    {
+        try
+        {
+            _employee = _employeeController.GetEmployeeByUsername(_username);
+        } catch (Exception ex)
+        {
+            Console.WriteLine("Error while setting employee: " + ex.Message);
+        }
     }
 
     /// <summary>
@@ -151,8 +178,8 @@ public class RentalPointOfSaleService
     /// Calculates the expected cost of the line item over the rental period.
     /// </summary>
     /// <param name="rentalLineItem">The rental line item.</param>
-    /// <param name="rentalDate">The rental date (optional, default: _rentalDate).</param>
-    /// <param name="dueDate">The due date (optional, default: _dueDate).</param>
+    /// <param name="rentalDate">The rental date (optional).</param>
+    /// <param name="dueDate">The due date (optional).</param>
     /// <returns>The line item's expected cost over the rental period.</returns>
     public decimal CalculateExpectedLineCostForDuration(RentalLineItem rentalLineItem, DateTime rentalDate, DateTime dueDate)
     {
@@ -167,8 +194,8 @@ public class RentalPointOfSaleService
     /// Calculates the expected cost of the transaction over the rental period.
     /// </summary>
     /// <param name="rentalLineItems">The list of rental line items.</param>
-    /// <param name="rentalDate">The rental date (optional, default: _rentalDate).</param>
-    /// <param name="dueDate">The due date (optional, default: _dueDate).</param>
+    /// <param name="rentalDate">The rental date (optional).</param>
+    /// <param name="dueDate">The due date (optional).</param>
     /// <returns>The transaction's expected cost over the rental period.</returns>
     public decimal CalculateExpectedTransactionCostForDuration(DateTime rentalDate = default, DateTime dueDate = default)
     {
@@ -181,34 +208,23 @@ public class RentalPointOfSaleService
         }
 
         decimal transactionCost = 0;
-
         foreach (var lineItem in _lineItems)
         {
             transactionCost += CalculateExpectedLineCostForDuration(lineItem, rentalDate, dueDate);
         }
-
         return transactionCost;
-    }
-
-    /// <summary>
-    /// Gets the employee with the given username.
-    /// </summary>
-    /// <param name="username">The username of the employee.</param>
-    /// <returns>The employee with the given username.</returns>
-    public EmployeeDTO GetTransactionCashier(string username)
-    {
-        return _employeeController.GetEmployeeByUsername(username);
     }
 
     /// <summary>
     /// Creates a rental transaction.
     /// </summary>
-    /// <param name="employee">The employee performing the transaction.</param>
-    /// <param name="member">The member renting the items.</param>
     /// <returns>The created rental transaction.</returns>
-    public RentalTransaction CreateRentalTransaction(EmployeeDTO employee, Member member)
+    public RentalTransaction CreateRentalTransaction()
     {
-        RentalTransaction rentalTransaction = new RentalTransaction(employee.EmployeeID, member.MemberID, DateTime.Now, _dueDate, CalculateExpectedTransactionCostForDuration(DateTime.Now, _dueDate));
+        decimal cost = CalculateExpectedTransactionCostForDuration(_rentalDate, _dueDate);
+
+        RentalTransaction rentalTransaction = new RentalTransaction(_employee.EmployeeID, _member.MemberID, _rentalDate, _dueDate, cost);
+
         return rentalTransaction;
     }
 
@@ -246,28 +262,58 @@ public class RentalPointOfSaleService
     }
 
     /// <summary>
+    /// Gets rental cart items for a rental transaction.
+    /// </summary>
+    /// <param name="rentalTransactionID">A rental transaction ID.</param>
+    /// <returns>The list of rental cart items for the given rental transaction.</returns>
+    public List<RentalCartItem> GetRentalTransactionCartItems(int rentalTransactionID)
+    {
+        Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> rentalTransactionDetails = GetRentalTransactionDetails(rentalTransactionID);
+
+        List<Tuple<RentalLineItem, Furniture>> lineItemsWithFurniture = rentalTransactionDetails.Values.FirstOrDefault();
+
+        var rentalCartItems = new List<RentalCartItem>();
+        foreach (var tuple in lineItemsWithFurniture)
+        {
+            RentalLineItem rentalLineItem = tuple.Item1;
+            Furniture furniture = tuple.Item2;
+
+            decimal lineCostPerDay = CalculateLineCostPerDay(rentalLineItem);
+            rentalCartItems.Add(new RentalCartItem(furniture, rentalLineItem.Quantity, lineCostPerDay));
+        }
+
+        return rentalCartItems;
+    }
+
+    /// <summary>
     /// Takes a rental transaction ID and gets the details of the rental transaction and associated rental line items and furniture.
     /// </summary>
     /// <param name="rentalTransactionID">A rental transaction ID</param>
-    /// <returns>A dictionary for a rental transaction and its associated data.</returns>
+    /// <returns>A dictionary for a rental transaction and its details.</returns>
     public Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> GetRentalTransactionDetails(int rentalTransactionID)
     {
         RentalTransaction rentalTransaction = _rentalTransactionController.GetRentalTransactionByRentalTransactionID(rentalTransactionID);
+
         List<RentalLineItem> lineItems = _rentalLineItemController.GetRentalLineItemsByRentalTransactionID(rentalTransactionID);
+
         List<Tuple<RentalLineItem, Furniture>> lineItemsWithFurniture = GetFurnitureItemsPerRentalLineItems(lineItems);
+
         Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> rentalTransactionDetails = GetRentalTransactionWithRentalLineItemsAndFurniture(rentalTransaction, lineItemsWithFurniture);
+
         return rentalTransactionDetails;
     }
 
     /// <summary>
-    /// Returns a dictionary that maps a rental transaction to its details.
+    /// Returns a dictionary that matches a rental transaction to its details.
     /// </summary>
     /// <param name=rentalTransaction">The return transaction.</param>
-    /// <returns>A dictionary for a rental transaction and its associated data.</returns>
+    /// <returns>A dictionary for a rental transaction and its details.</returns>
     private Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> GetRentalTransactionWithRentalLineItemsAndFurniture(RentalTransaction rentalTransaction, List<Tuple<RentalLineItem, Furniture>> lineItemsWithFurniture)
     {
         Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>> rentalTransactionDetails = new Dictionary<RentalTransaction, List<Tuple<RentalLineItem, Furniture>>>();
+
         rentalTransactionDetails.Add(rentalTransaction, lineItemsWithFurniture);
+
         return rentalTransactionDetails;
     }
 
@@ -279,11 +325,14 @@ public class RentalPointOfSaleService
     private List<Tuple<RentalLineItem, Furniture>> GetFurnitureItemsPerRentalLineItems(List<RentalLineItem> rentalLineItems)
     {
         List<Tuple<RentalLineItem, Furniture>> lineItemsWithFurniture = new List<Tuple<RentalLineItem, Furniture>>();
+
         foreach (var rentalLineItem in rentalLineItems)
         {
             Furniture furniture = _furnitureController.GetFurnitureByID(rentalLineItem.FurnitureID);
+
             lineItemsWithFurniture.Add(new Tuple<RentalLineItem, Furniture>(rentalLineItem, furniture));
         }
+
         return lineItemsWithFurniture;
     }
 }

@@ -13,7 +13,8 @@ namespace RentMeApp.UserControls
         public Member Member { get; set; }
 
         internal RentalPointOfSaleService _rentalPointOfSaleService;
-        DataGridViewButtonColumn _removeButtonColumn;
+
+        private DataGridViewButtonColumn _removeButtonColumn;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShoppingCartUserControl"/> class.
@@ -22,9 +23,6 @@ namespace RentMeApp.UserControls
         {
             InitializeComponent();
             _rentalPointOfSaleService = new RentalPointOfSaleService();
-            AddRemoveButtonColumn();
-            SetDatePickerMinDateToToday();
-            RefreshCartAndTotals();
         }
 
         /// <summary>
@@ -56,6 +54,19 @@ namespace RentMeApp.UserControls
         public void RemoveRentalLineItem(Furniture furniture)
         {
             _rentalPointOfSaleService.RemoveRentalLineItem(furniture);
+            RefreshCartAndTotals();
+        }
+
+        /// <summary>
+        /// Event handler for the load event of the ShoppingCartUserControl.
+        /// </summary>
+        public void ShoppingCartUserControl_Load(object sender, EventArgs e)
+        {
+            _rentalPointOfSaleService.SetMember(Member);
+            _rentalPointOfSaleService.SetEmployee(Username);
+
+            AddRemoveButtonColumn();
+            SetDatePickerMinDateToToday();
             RefreshCartAndTotals();
         }
 
@@ -112,6 +123,9 @@ namespace RentMeApp.UserControls
             if (result == DialogResult.Yes)
             {
                 _rentalPointOfSaleService = new RentalPointOfSaleService();
+                _rentalPointOfSaleService.SetMember(Member);
+                _rentalPointOfSaleService.SetEmployee(Username);
+
                 RefreshCartAndTotals();
                 SetDatePickerValueToToday();
             }
@@ -119,8 +133,7 @@ namespace RentMeApp.UserControls
 
         private void CheckoutButton_Click(object sender, EventArgs e)
         {
-            EmployeeDTO employee = _rentalPointOfSaleService.GetTransactionCashier(Username);
-            RentalTransaction transaction = _rentalPointOfSaleService.CreateRentalTransaction(employee, Member);
+            RentalTransaction transaction = _rentalPointOfSaleService.CreateRentalTransaction();
             _rentalPointOfSaleService.SaveRentalTransaction(transaction, _rentalPointOfSaleService.GetRentalLineItems());
         }
 

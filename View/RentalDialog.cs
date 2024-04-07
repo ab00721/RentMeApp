@@ -20,30 +20,32 @@ namespace RentMeApp.View
         public RentalDialog(string username, string firstName, Member selectedMember)
         {
             InitializeComponent();
-            UserUserControl userUserControl = new UserUserControl(username, firstName);
-            this.rentalTableLayoutPanel.Controls.Add(userUserControl);
-            MemberUserControl memberUserControl = new MemberUserControl(selectedMember);
-            this.rentalTableLayoutPanel.Controls.Add(memberUserControl);
 
-            this.rentalShoppingCartUserControl.Username = username;
-            this.rentalShoppingCartUserControl.Member = selectedMember;
+            UserUserControl userUserControl = new UserUserControl(username, firstName);
+            rentalTableLayoutPanel.Controls.Add(userUserControl);
+
+            MemberUserControl memberUserControl = new MemberUserControl(selectedMember);
+            rentalTableLayoutPanel.Controls.Add(memberUserControl);
+
+            rentalShoppingCartUserControl.Username = username;
+            rentalShoppingCartUserControl.Member = selectedMember;
         }
 
         private void RentalDialog_Load(object sender, EventArgs e)
         {
-            this.rentalSearchFurnitureUserControl.SearchFurnitureUserControl_Load(sender, e);
-            this.rentalSearchFurnitureUserControl.TurnOnAddButtonColumn();
-            this.rentalSearchFurnitureUserControl.furnitureDataGridView.CellClick += FurnitureDataGridView_CellClick;
+            rentalSearchFurnitureUserControl.SearchFurnitureUserControl_Load(sender, e);
+            rentalSearchFurnitureUserControl.TurnOnAddButtonColumn();
+            rentalSearchFurnitureUserControl.furnitureDataGridView.CellClick += FurnitureDataGridView_CellClick;
         }
 
         private void FurnitureDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.rentalSearchFurnitureUserControl.furnitureDataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+            if (rentalSearchFurnitureUserControl.furnitureDataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
             {
-                Furniture furniture = this.rentalSearchFurnitureUserControl._furniture[e.RowIndex];
+                Furniture furniture = rentalSearchFurnitureUserControl._furniture[e.RowIndex];
 
-                this.rentalShoppingCartUserControl.AddRentalLineItem(furniture, 1);
-                this.rentalShoppingCartUserControl.RefreshCartAndTotals();
+                rentalShoppingCartUserControl.AddRentalLineItem(furniture, 1);
+                rentalShoppingCartUserControl.RefreshCartAndTotals();
             }
         }
 

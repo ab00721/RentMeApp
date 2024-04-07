@@ -97,7 +97,6 @@ namespace RentMeApp.UserControls
             this.shoppingCartDataGridView.TabIndex = 1;
             this.shoppingCartDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShoppingCartDataGridView_CellClick);
             this.shoppingCartDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShoppingCartDataGridView_CellValueChanged);
-            this.shoppingCartDataGridView.DataError += ShoppingCartDataGridView_DataError;
             // 
             // rentalTotalsLayoutPanel
             // 
@@ -247,6 +246,7 @@ namespace RentMeApp.UserControls
             this.Controls.Add(this.shoppingCartLayoutPanel);
             this.Name = "ShoppingCartUserControl";
             this.Size = new System.Drawing.Size(1043, 480);
+            this.Load += new System.EventHandler(this.ShoppingCartUserControl_Load);
             this.shoppingCartLayoutPanel.ResumeLayout(false);
             this.shoppingCartLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shoppingCartDataGridView)).EndInit();
