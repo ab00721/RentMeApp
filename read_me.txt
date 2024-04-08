@@ -16,3 +16,4 @@ Iteration 2:
 	- User can create a new rental and view rental and return transactions
 	- New return dialog does not work
 	- Reports tab does not work
+	 
