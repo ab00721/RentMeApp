@@ -57,7 +57,6 @@
             this.furnitureDataGridView.RowTemplate.Height = 24;
             this.furnitureDataGridView.Size = new System.Drawing.Size(1015, 409);
             this.furnitureDataGridView.TabIndex = 12;
-            this.furnitureDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FurnitureDataGridView_CellContentClick);
             // 
             // searchButton
             // 
@@ -217,7 +216,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView furnitureDataGridView;
+        public System.Windows.Forms.DataGridView furnitureDataGridView;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TableLayoutPanel furnitureSearchTableLayoutPanel;
         private System.Windows.Forms.Button clearButton;

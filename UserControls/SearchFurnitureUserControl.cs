@@ -10,7 +10,7 @@ namespace RentMeApp.UserControls
     public partial class SearchFurnitureUserControl : UserControl
     {
         private readonly FurnitureController _furnitureController;
-        private List<Furniture> _furniture;
+        public List<Furniture> _furniture;
         DataGridViewButtonColumn _addButtonColumn;
 
         /// <summary>
@@ -51,6 +51,7 @@ namespace RentMeApp.UserControls
             _furniture = furniture;
             furnitureDataGridView.DataSource = null;
             furnitureDataGridView.DataSource = _furniture;
+            furnitureDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void AddButtonColumn()
@@ -74,16 +75,6 @@ namespace RentMeApp.UserControls
         public void TurnOnAddButtonColumn()
         {
             _addButtonColumn.Visible = true;
-        }
-
-        private void FurnitureDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex == furnitureDataGridView.Columns["AddButtonColumn"].Index)
-            {
-                Furniture furniture = _furniture[e.RowIndex];
-                searchMessageLabel.Text = "Added one " + furniture.Name + " to cart.";
-                searchMessageLabel.ForeColor = Color.Red;
-            }
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -199,7 +190,5 @@ namespace RentMeApp.UserControls
             ClearAll();
             RefreshDataGridView();
         }
-
-        
     }
 }

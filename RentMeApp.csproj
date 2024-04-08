@@ -89,6 +89,7 @@
     <Compile Include="Model\EmployeeDTO.cs" />
     <Compile Include="Model\Furniture.cs" />
     <Compile Include="Model\Member.cs" />
+    <Compile Include="Model\RentalCartItem.cs" />
     <Compile Include="Model\RentalLineItem.cs" />
     <Compile Include="Model\RentalTransaction.cs" />
     <Compile Include="Model\ReturnLineItem.cs" />
@@ -114,6 +115,12 @@
     </Compile>
     <Compile Include="UserControls\SearchMemberUserControl.Designer.cs">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ShoppingCartUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ShoppingCartUserControl.Designer.cs">
+      <DependentUpon>ShoppingCartUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UserUserControl.cs">
       <SubType>UserControl</SubType>
@@ -159,6 +166,12 @@
     <Compile Include="View\RentalDialog.Designer.cs">
       <DependentUpon>RentalDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\RentalSummaryDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\RentalSummaryDialog.Designer.cs">
+      <DependentUpon>RentalSummaryDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\SearchFurnitureDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchMemberUserControl.resx">
       <DependentUpon>SearchMemberUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ShoppingCartUserControl.resx">
+      <DependentUpon>ShoppingCartUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UserUserControl.resx">
       <DependentUpon>UserUserControl.cs</DependentUpon>
@@ -216,6 +232,9 @@
     <EmbeddedResource Include="View\RentalDialog.resx">
       <DependentUpon>RentalDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\RentalSummaryDialog.resx">
+      <DependentUpon>RentalSummaryDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\SearchFurnitureDialog.resx">
       <DependentUpon>SearchFurnitureDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -241,7 +260,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Database\cs6232-g5_202404030830.sql" />
+    <Content Include="Database\cs6232-g5_202404030830-UPDATED.sql" />
     <Content Include="read_me.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

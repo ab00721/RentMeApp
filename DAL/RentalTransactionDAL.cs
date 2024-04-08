@@ -98,22 +98,25 @@ namespace RentMeApp.DAL
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
+                        if (reader.Read())
                         {
-                            return new RentalTransaction(
+                            RentalTransaction rentalTransaction = new RentalTransaction(
                                 Convert.ToInt32(reader["EmployeeID"]),
                                 Convert.ToInt32(reader["MemberID"]),
                                 Convert.ToDateTime(reader["RentalDate"]),
                                 Convert.ToDateTime(reader["DueDate"]),
                                 Convert.ToDecimal(reader["TotalCost"])
                             );
+                            rentalTransaction.RentalTransactionID = Convert.ToInt32(reader["RentalTransactionID"]);
+                            return rentalTransaction;
                         }
                     }
                 }
             }
             return null;
         }
-      
+
+
         /// Gets the rental transaction that is associated with a given rental line item ID.
         /// </summary>
         /// <param name="rentalLineItemID">The rental line item ID to use for finding a rental transaction.</param>
