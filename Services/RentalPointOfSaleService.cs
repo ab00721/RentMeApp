@@ -116,7 +116,7 @@ public class RentalPointOfSaleService
         foreach (var lineItem in _lineItems)
         {
             Furniture furniture = _furnitureController.GetFurnitureByID(lineItem.FurnitureID);
-            _cartItems.Add(new RentalCartItem(furniture, lineItem.Quantity, CalculateLineCostPerDay(lineItem)));
+            _cartItems.Add(new RentalCartItem(furniture, lineItem.Quantity, furniture.DailyRate));
         }
         return _cartItems;
     }
@@ -322,8 +322,7 @@ public class RentalPointOfSaleService
             RentalLineItem rentalLineItem = tuple.Item1;
             Furniture furniture = tuple.Item2;
 
-            decimal lineCostPerDay = CalculateLineCostPerDay(rentalLineItem);
-            rentalCartItems.Add(new RentalCartItem(furniture, rentalLineItem.Quantity, lineCostPerDay));
+            rentalCartItems.Add(new RentalCartItem(furniture, rentalLineItem.Quantity, furniture.DailyRate));
         }
 
         return rentalCartItems;
