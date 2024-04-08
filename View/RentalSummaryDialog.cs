@@ -1,10 +1,12 @@
 ﻿using RentMeApp.Model;
 using RentMeApp.UserControls;
-using System.Transactions;
 using System.Windows.Forms;
 
 namespace RentMeApp.View
 {
+    /// <summary>
+    /// Dialog for displaying the rental confirmation page.
+    /// </summary>
     public partial class RentalSummaryDialog : Form
     {
         private readonly RentalPointOfSaleService _rentalPointOfSaleService;

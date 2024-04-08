@@ -4,7 +4,6 @@ using System;
 using RentMeApp.Controller;
 using System.Transactions;
 using System.Linq;
-using System.Runtime.Serialization;
 
 /// <summary>
 /// Service for rental point of sale operations.

@@ -1,7 +1,8 @@
 ﻿namespace RentMeApp.Model
 {
     /// <summary>
-    /// Represents a line in the rental cart.
+    /// Represents a line in the rental cart with optimal fields for 
+    /// viewing the data in a data grid view
     /// </summary>
     public class RentalCartItem
     {
