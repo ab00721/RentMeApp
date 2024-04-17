@@ -56,7 +56,6 @@ namespace RentMeApp.UserControls
 
         private void AddButtonColumn()
         {
-            _addButtonColumn = new DataGridViewButtonColumn();
             _addButtonColumn.Name = "AddButtonColumn";
             _addButtonColumn.HeaderText = "Add To Cart";
             _addButtonColumn.Text = "Add";

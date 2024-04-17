@@ -20,6 +20,7 @@ namespace RentMeApp.UserControls
         private readonly FurnitureController _furnitureController;
         private readonly RentalTransactionController _rentalTransactionController;
         private readonly RentalLineItemController _rentalLineItemController;
+        DataGridViewButtonColumn _returnButtonColumn;
         public List<Furniture> _furniture;
         public List<RentalLineItem> _lineItems;
         public Member _member;
@@ -31,10 +32,12 @@ namespace RentMeApp.UserControls
             _rentalTransactionController = new RentalTransactionController();
             _rentalLineItemController = new RentalLineItemController();
             _furniture = new List<Furniture>();
+            _returnButtonColumn = new DataGridViewButtonColumn();
+            ReturnButtonColumn();
             this._member = selectedMember;
         }
 
-        private void CheckedOutUserControl_Load(object sender, EventArgs e)
+        public void CheckedOutUserControl_Load(object sender, EventArgs e)
         {
             RefreshDataGridView();
         }
@@ -49,6 +52,15 @@ namespace RentMeApp.UserControls
             checkedOutDataGridView.DataSource = null;
             checkedOutDataGridView.DataSource = _lineItems;
             checkedOutDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void ReturnButtonColumn()
+        {
+            _returnButtonColumn.Name = "ReturnButtonColumn";
+            _returnButtonColumn.HeaderText = "Return";
+            _returnButtonColumn.Text = "Return";
+            _returnButtonColumn.UseColumnTextForButtonValue = true;
+            checkedOutDataGridView.Columns.Add(_returnButtonColumn);
         }
 
         public List<RentalLineItem> GetCheckedOutFurnitureForMember(int memberID)
@@ -69,6 +81,11 @@ namespace RentMeApp.UserControls
                 //}
             }
             return lineItems;
+        }
+
+        public DataGridView CheckedOutDataGridView
+        {
+            get { return checkedOutDataGridView; }
         }
 
     }

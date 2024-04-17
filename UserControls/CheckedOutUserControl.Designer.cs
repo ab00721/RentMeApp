@@ -42,6 +42,7 @@
             this.checkedOutDataGridView.Location = new System.Drawing.Point(3, 33);
             this.checkedOutDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkedOutDataGridView.Name = "checkedOutDataGridView";
+            this.checkedOutDataGridView.ReadOnly = true;
             this.checkedOutDataGridView.RowHeadersWidth = 62;
             this.checkedOutDataGridView.RowTemplate.Height = 24;
             this.checkedOutDataGridView.Size = new System.Drawing.Size(884, 432);
