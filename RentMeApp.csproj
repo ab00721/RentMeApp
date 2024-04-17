@@ -98,6 +98,12 @@
     <Compile Include="Services\DurationService.cs" />
     <Compile Include="Services\RentalPointOfSaleService.cs" />
     <Compile Include="Services\ReturnPointOfSaleService.cs" />
+    <Compile Include="UserControls\CheckedOutUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CheckedOutUserControl.Designer.cs">
+      <DependentUpon>CheckedOutUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MemberUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -127,6 +133,12 @@
     </Compile>
     <Compile Include="UserControls\UserUserControl.Designer.cs">
       <DependentUpon>UserUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CheckedOutFurnitureDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CheckedOutFurnitureDialog.Designer.cs">
+      <DependentUpon>CheckedOutFurnitureDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="View\EditMemberDialog.cs">
       <SubType>Form</SubType>
@@ -172,6 +184,12 @@
     <Compile Include="View\RentalSummaryDialog.Designer.cs">
       <DependentUpon>RentalSummaryDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ReturnDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ReturnDialog.Designer.cs">
+      <DependentUpon>ReturnDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\SearchFurnitureDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +208,9 @@
     <Compile Include="View\TransactionsDialog.Designer.cs">
       <DependentUpon>TransactionsDialog.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\CheckedOutUserControl.resx">
+      <DependentUpon>CheckedOutUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MemberUserControl.resx">
       <DependentUpon>MemberUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UserUserControl.resx">
       <DependentUpon>UserUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CheckedOutFurnitureDialog.resx">
+      <DependentUpon>CheckedOutFurnitureDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\EditMemberDialog.resx">
       <DependentUpon>EditMemberDialog.cs</DependentUpon>
@@ -234,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\RentalSummaryDialog.resx">
       <DependentUpon>RentalSummaryDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ReturnDialog.resx">
+      <DependentUpon>ReturnDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SearchFurnitureDialog.resx">
       <DependentUpon>SearchFurnitureDialog.cs</DependentUpon>
