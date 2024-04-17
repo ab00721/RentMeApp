@@ -65,20 +65,12 @@ namespace RentMeApp.UserControls
 
         public List<RentalLineItem> GetCheckedOutFurnitureForMember(int memberID)
         {
-            //List<Furniture> checkedOutFurniture = new List<Furniture>();
-
             List<RentalLineItem> lineItems = new List<RentalLineItem>();
             List<RentalTransaction> rentalTransactions = _rentalTransactionController.GetAllRentalTransactionsByMemberId(memberID);
 
             foreach (RentalTransaction transaction in rentalTransactions)
             {
-                // List<RentalLineItem> lineItems = _rentalLineItemController.GetRentalLineItemsByRentalTransactionID(transaction.RentalTransactionID);
                 lineItems = _rentalLineItemController.GetRentalLineItemsByRentalTransactionID(transaction.RentalTransactionID);
-                //foreach (RentalLineItem lineItem in lineItems)
-                //{
-                //   Furniture furniture = _furnitureController.GetFurnitureByID(lineItem.FurnitureID);
-                //   checkedOutFurniture.Add(furniture);
-                //}
             }
             return lineItems;
         }
