@@ -1,25 +1,27 @@
 ﻿using RentMeApp.Model;
 using RentMeApp.UserControls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 using System.Windows.Forms;
 
 namespace RentMeApp.View
 {
+    /// <summary>
+    /// New Return Dialog Form
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class ReturnDialog : Form
     {
-        CheckedOutUserControl _checkedOutUserControl;
-        DataGridView _checkedOutDataGridView;
-        private bool transactionSaved = false;
+        private readonly CheckedOutUserControl _checkedOutUserControl;
+        private readonly DataGridView _checkedOutDataGridView;
+        private readonly bool transactionSaved = false;
         private readonly Member _member;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReturnDialog"/> class.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="firstName">The first name.</param>
+        /// <param name="selectedMember">The selected member.</param>
         public ReturnDialog(string username, string firstName, Member selectedMember)
         {
             InitializeComponent();

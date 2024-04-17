@@ -2,12 +2,14 @@
 using RentMeApp.Model;
 using System;
 using System.Collections.Generic;
-using System.Transactions;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace RentMeApp.UserControls
 {
+    /// <summary>
+    /// User Control for Checked Out Items
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.UserControl" />
     public partial class CheckedOutUserControl : UserControl
     {
         private readonly RentalTransactionController _rentalTransactionController;
@@ -16,6 +18,10 @@ namespace RentMeApp.UserControls
         public List<CheckedOutItem> _checkedOutItems;
         public Member _member;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CheckedOutUserControl"/> class.
+        /// </summary>
+        /// <param name="selectedMember">The selected member.</param>
         public CheckedOutUserControl(Member selectedMember)
         {
             InitializeComponent();
@@ -27,6 +33,11 @@ namespace RentMeApp.UserControls
             this._member = selectedMember;
         }
 
+        /// <summary>
+        /// Handles the Load event of the CheckedOutUserControl control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         public void CheckedOutUserControl_Load(object sender, EventArgs e)
         {
             RefreshDataGridView();
@@ -44,6 +55,9 @@ namespace RentMeApp.UserControls
             checkedOutDataGridView.Columns[6].HeaderText = "Due Date";
         }
 
+        /// <summary>
+        /// Refreshes the data grid view.
+        /// </summary>
         public void RefreshDataGridView()
         {
             RefreshDataGridView(this.GetCheckedOutFurnitureForMember(_member.MemberID));
@@ -65,6 +79,11 @@ namespace RentMeApp.UserControls
             checkedOutDataGridView.Columns.Add(_returnButtonColumn);
         }
 
+        /// <summary>
+        /// Gets the checked out furniture for member.
+        /// </summary>
+        /// <param name="memberID">The member identifier.</param>
+        /// <returns></returns>
         public List<CheckedOutItem> GetCheckedOutFurnitureForMember(int memberID)
         {
             List<CheckedOutItem> checkedOutItems = new List<CheckedOutItem>();
@@ -78,6 +97,12 @@ namespace RentMeApp.UserControls
             return checkedOutItems;
         }
 
+        /// <summary>
+        /// Gets the checked out data grid view.
+        /// </summary>
+        /// <value>
+        /// The checked out data grid view.
+        /// </value>
         public DataGridView CheckedOutDataGridView
         {
             get { return checkedOutDataGridView; }
