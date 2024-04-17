@@ -303,8 +303,23 @@ namespace RentMeApp.UserControls
 
         private void NewReturn(Member member)
         {
-            searchMessageLabel.Text = "New Return " + member.FirstName;
-            searchMessageLabel.ForeColor = Color.Red;
+            this.ClearMessageLabel();
+
+            Member selectedMember = (Member)memberListView.SelectedItems[0].Tag;
+
+            using (Form newReturn = new View.ReturnDialog(this._username, this._firstName, selectedMember))
+            {
+                DialogResult result = newReturn.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    this.RefreshListView();
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    newReturn.Close();
+                }
+            }
         }
 
         private void ViewTransactions(Member member)
