@@ -69,6 +69,7 @@
     <Compile Include="Controller\MemberController.cs" />
     <Compile Include="Controller\RentalLineItemController.cs" />
     <Compile Include="Controller\RentalTransactionController.cs" />
+    <Compile Include="Controller\ReportController.cs" />
     <Compile Include="Controller\ReturnLineItemController.cs" />
     <Compile Include="Controller\ReturnTransactionController.cs" />
     <Compile Include="Controller\StyleController.cs" />
