@@ -57,9 +57,5 @@ namespace RentMeApp.Controller
             return _rentalLineItemSource.GetRentalLineItemsByRentalTransactionID(rentalTransactionID);
         }
 
-        public List<RentalLineItem> GetCheckedOutLineItemsByRentalTransactionID(int rentalTransactionID)
-        {
-            return _rentalLineItemSource.GetCheckedOutLineItemsByRentalTransactionID(rentalTransactionID);
-        }
     }
 }

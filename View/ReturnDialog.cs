@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace RentMeApp.View
@@ -35,7 +36,7 @@ namespace RentMeApp.View
             returnTableLayoutPanel.Controls.Add(_checkedOutUserControl);
 
             _checkedOutDataGridView = _checkedOutUserControl.CheckedOutDataGridView;
-        }
+        }        
 
         private void ReturnDialog_Load(object sender, EventArgs e)
         {
@@ -49,9 +50,9 @@ namespace RentMeApp.View
             {
                 DataGridViewRow row = _checkedOutDataGridView.Rows[e.RowIndex];
 
-                string furnitrueID = row.Cells["FurnitureID"].Value.ToString();
+                string furnitureName = row.Cells["Name"].Value.ToString();
 
-                returnCartLabel.Text = "Return furniture:" + furnitrueID;
+                returnCartLabel.Text = "Return furniture: " + furnitureName;
 
             }
         }

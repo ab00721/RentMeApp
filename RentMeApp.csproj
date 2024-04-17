@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Controller\AuthenticateController.cs" />
     <Compile Include="Controller\CategoryController.cs" />
+    <Compile Include="Controller\CheckedOutItemController.cs" />
     <Compile Include="Controller\EmployeeController.cs" />
     <Compile Include="Controller\FurnitureController.cs" />
     <Compile Include="Controller\MemberController.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Controller\StyleController.cs" />
     <Compile Include="DAL\AuthenticateDAL.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
+    <Compile Include="DAL\CheckedOutItemDAL.cs" />
     <Compile Include="DAL\EmployeeDAL.cs" />
     <Compile Include="DAL\FurnitureDAL.cs" />
     <Compile Include="DAL\MemberDAL.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="DAL\StyleDAL.cs" />
     <Compile Include="Extension\USState.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\CheckedOutItem.cs" />
     <Compile Include="Model\EmployeeDTO.cs" />
     <Compile Include="Model\Furniture.cs" />
     <Compile Include="Model\Member.cs" />

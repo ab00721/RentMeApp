@@ -1,14 +1,7 @@
 ﻿using RentMeApp.Controller;
 using RentMeApp.Model;
-using RentMeApp.View;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -17,21 +10,18 @@ namespace RentMeApp.UserControls
 {
     public partial class CheckedOutUserControl : UserControl
     {
-        private readonly FurnitureController _furnitureController;
         private readonly RentalTransactionController _rentalTransactionController;
-        private readonly RentalLineItemController _rentalLineItemController;
-        DataGridViewButtonColumn _returnButtonColumn;
-        public List<Furniture> _furniture;
-        public List<RentalLineItem> _lineItems;
+        private readonly CheckedOutItemController _checkedOutItemController;
+        private readonly DataGridViewButtonColumn _returnButtonColumn;
+        public List<CheckedOutItem> _checkedOutItems;
         public Member _member;
 
         public CheckedOutUserControl(Member selectedMember)
         {
             InitializeComponent();
-            _furnitureController = new FurnitureController();
             _rentalTransactionController = new RentalTransactionController();
-            _rentalLineItemController = new RentalLineItemController();
-            _furniture = new List<Furniture>();
+            _checkedOutItemController = new CheckedOutItemController();
+            _checkedOutItems = new List<CheckedOutItem>();
             _returnButtonColumn = new DataGridViewButtonColumn();
             ReturnButtonColumn();
             this._member = selectedMember;
@@ -40,17 +30,29 @@ namespace RentMeApp.UserControls
         public void CheckedOutUserControl_Load(object sender, EventArgs e)
         {
             RefreshDataGridView();
+            ConfigureDataGridView();
+        }
+
+        private void ConfigureDataGridView()
+        {
+            checkedOutDataGridView.Columns[0].HeaderText = "Return Item";
+            checkedOutDataGridView.Columns[1].HeaderText = "Furniture ID";
+            checkedOutDataGridView.Columns[2].HeaderText = "Furniture Name";
+            checkedOutDataGridView.Columns[3].HeaderText = "Quantity Out";
+            checkedOutDataGridView.Columns[4].HeaderText = "Daily Cost";
+            checkedOutDataGridView.Columns[5].HeaderText = "Rental ID";
+            checkedOutDataGridView.Columns[6].HeaderText = "Due Date";
         }
 
         public void RefreshDataGridView()
         {
             RefreshDataGridView(this.GetCheckedOutFurnitureForMember(_member.MemberID));
         }
-        private void RefreshDataGridView(List<RentalLineItem> lineItems)
+        private void RefreshDataGridView(List<CheckedOutItem> checkedOutItems)
         {
-            _lineItems = lineItems;
+            _checkedOutItems = checkedOutItems;
             checkedOutDataGridView.DataSource = null;
-            checkedOutDataGridView.DataSource = _lineItems;
+            checkedOutDataGridView.DataSource = _checkedOutItems;
             checkedOutDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
@@ -63,22 +65,22 @@ namespace RentMeApp.UserControls
             checkedOutDataGridView.Columns.Add(_returnButtonColumn);
         }
 
-        public List<RentalLineItem> GetCheckedOutFurnitureForMember(int memberID)
+        public List<CheckedOutItem> GetCheckedOutFurnitureForMember(int memberID)
         {
-            List<RentalLineItem> lineItems = new List<RentalLineItem>();
+            List<CheckedOutItem> checkedOutItems = new List<CheckedOutItem>();
             List<RentalTransaction> rentalTransactions = _rentalTransactionController.GetAllRentalTransactionsByMemberId(memberID);
 
             foreach (RentalTransaction transaction in rentalTransactions)
             {
-                lineItems = _rentalLineItemController.GetRentalLineItemsByRentalTransactionID(transaction.RentalTransactionID);
+                List<CheckedOutItem> itemsInTransaction = _checkedOutItemController.GetCheckedOutItemsByRentalTransactionID(transaction.RentalTransactionID);
+                checkedOutItems.AddRange(itemsInTransaction);
             }
-            return lineItems;
+            return checkedOutItems;
         }
 
         public DataGridView CheckedOutDataGridView
         {
             get { return checkedOutDataGridView; }
         }
-
     }
 }

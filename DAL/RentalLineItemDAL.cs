@@ -153,44 +153,5 @@ namespace RentMeApp.DAL
 
             return rentalLineItems;
         }
-
-        public List<RentalLineItem> GetCheckedOutLineItemsByRentalTransactionID(int rentalTransactionID)
-        {
-            List<RentalLineItem> checkedOutItems = new List<RentalLineItem>();
-
-            using (SqlConnection connection = RentMeDBConnection.GetConnection())
-            {
-                using (SqlCommand command = new SqlCommand(
-                    "SELECT RLI.FurnitureID, F.Name, RLI.RentalTransactionID, RLI.DailyCost, RT.DueDate " +
-                    "FROM RentalLineItem RLI " +
-                    "INNER JOIN Furniture F ON RLI.FurnitureID = F.FurnitureID " +
-                    "INNER JOIN RentalTransaction RT ON RLI.RentalTransactionID = RT.RentalTransactionID " +
-                    "WHERE RentalTransactionID = @RentalTransactionID", connection))
-                {
-                    command.Parameters.Add("@RentalTransactionID", SqlDbType.Int);
-                    command.Parameters["@RentalTransactionID"].Value = rentalTransactionID;
-
-                    connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            RentalLineItem item = new RentalLineItem(
-                                Convert.ToInt32(reader["FurnitureID"]),
-                                Convert.ToInt32(reader["Quantity"]),
-                                Convert.ToInt32(reader["QuantityReturned"]),
-                                Convert.ToDecimal(reader["DailyCost"])
-                            );
-                            item.RentalLineItemID = Convert.ToInt32(reader["RentalLineItemID"]);
-                            item.RentalTransactionID = Convert.ToInt32(reader["RentalTransactionID"]);
-
-                            checkedOutItems.Add(item);
-                        }
-                    }
-                }
-            }
-
-            return checkedOutItems;
-        }
     }
 }
