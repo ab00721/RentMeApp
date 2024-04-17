@@ -91,6 +91,7 @@
     <Compile Include="Model\Member.cs" />
     <Compile Include="Model\RentalLineItem.cs" />
     <Compile Include="Model\RentalTransaction.cs" />
+    <Compile Include="Model\Report.cs" />
     <Compile Include="Model\ReturnLineItem.cs" />
     <Compile Include="Model\ReturnTransaction.cs" />
     <Compile Include="Model\Style.cs" />
