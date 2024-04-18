@@ -24,7 +24,17 @@ namespace RentMeApp.UserControls
         private void GenerateReportBtn_Click(object sender, EventArgs e)
         {
             List<Report> reports = _reportController.GetMostPopularFurnitureDuringDates(this.StartDateDateTimePicker.Value, this.EndDateDateTimePicker.Value);
-            MessageBox.Show(reports.Count.ToString());
+
+            MostPopularFurnitureDataGridView.DataSource = null;
+            MostPopularFurnitureDataGridView.DataSource = reports;
+            MostPopularFurnitureDataGridView.Columns[0].HeaderText = "Furniture ID";
+            MostPopularFurnitureDataGridView.Columns[1].HeaderText = "Category";
+            MostPopularFurnitureDataGridView.Columns[2].HeaderText = "Name";
+            MostPopularFurnitureDataGridView.Columns[3].HeaderText = "Count of Rentral Transactions";
+            MostPopularFurnitureDataGridView.Columns[4].HeaderText = "Total Transactions";
+            MostPopularFurnitureDataGridView.Columns[5].HeaderText = "% of Total Transactions";
+            MostPopularFurnitureDataGridView.Columns[6].HeaderText = "% b/t 18-29";
+            MostPopularFurnitureDataGridView.Columns[6].HeaderText = "% not b/t 18-29";
         }
     }
 }
