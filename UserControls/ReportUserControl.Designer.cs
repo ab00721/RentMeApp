@@ -61,7 +61,7 @@
             this.ReportTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.ReportTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.ReportTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.ReportTableLayout.Size = new System.Drawing.Size(622, 370);
+            this.ReportTableLayout.Size = new System.Drawing.Size(505, 289);
             this.ReportTableLayout.TabIndex = 0;
             // 
             // EndDateTableLayout
@@ -71,16 +71,16 @@
             this.EndDateTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.33334F));
             this.EndDateTableLayout.Controls.Add(this.EndDateDateTimePicker, 1, 0);
             this.EndDateTableLayout.Controls.Add(this.EndDateLabel, 0, 0);
-            this.EndDateTableLayout.Location = new System.Drawing.Point(3, 40);
+            this.EndDateTableLayout.Location = new System.Drawing.Point(3, 31);
             this.EndDateTableLayout.Name = "EndDateTableLayout";
             this.EndDateTableLayout.RowCount = 1;
             this.EndDateTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.EndDateTableLayout.Size = new System.Drawing.Size(616, 31);
+            this.EndDateTableLayout.Size = new System.Drawing.Size(499, 22);
             this.EndDateTableLayout.TabIndex = 1;
             // 
             // EndDateDateTimePicker
             // 
-            this.EndDateDateTimePicker.Location = new System.Drawing.Point(105, 3);
+            this.EndDateDateTimePicker.Location = new System.Drawing.Point(86, 3);
             this.EndDateDateTimePicker.Name = "EndDateDateTimePicker";
             this.EndDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.EndDateDateTimePicker.TabIndex = 1;
@@ -107,12 +107,12 @@
             this.StartDateTableLayout.Name = "StartDateTableLayout";
             this.StartDateTableLayout.RowCount = 1;
             this.StartDateTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.StartDateTableLayout.Size = new System.Drawing.Size(616, 31);
+            this.StartDateTableLayout.Size = new System.Drawing.Size(499, 22);
             this.StartDateTableLayout.TabIndex = 0;
             // 
             // StartDateDateTimePicker
             // 
-            this.StartDateDateTimePicker.Location = new System.Drawing.Point(105, 3);
+            this.StartDateDateTimePicker.Location = new System.Drawing.Point(86, 3);
             this.StartDateDateTimePicker.Name = "StartDateDateTimePicker";
             this.StartDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.StartDateDateTimePicker.TabIndex = 1;
@@ -124,16 +124,16 @@
             this.StartDateLabel.Location = new System.Drawing.Point(3, 0);
             this.StartDateLabel.Name = "StartDateLabel";
             this.StartDateLabel.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.StartDateLabel.Size = new System.Drawing.Size(80, 21);
+            this.StartDateLabel.Size = new System.Drawing.Size(44, 22);
             this.StartDateLabel.TabIndex = 0;
             this.StartDateLabel.Text = "Start Date:";
             // 
             // GenerateReportBtn
             // 
             this.GenerateReportBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GenerateReportBtn.Location = new System.Drawing.Point(3, 77);
+            this.GenerateReportBtn.Location = new System.Drawing.Point(3, 59);
             this.GenerateReportBtn.Name = "GenerateReportBtn";
-            this.GenerateReportBtn.Size = new System.Drawing.Size(97, 31);
+            this.GenerateReportBtn.Size = new System.Drawing.Size(97, 22);
             this.GenerateReportBtn.TabIndex = 2;
             this.GenerateReportBtn.Text = "Generate";
             this.GenerateReportBtn.UseVisualStyleBackColor = true;
@@ -143,28 +143,33 @@
             // 
             this.MostPopularFurnitureLabel.AutoSize = true;
             this.MostPopularFurnitureLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MostPopularFurnitureLabel.Location = new System.Drawing.Point(3, 111);
+            this.MostPopularFurnitureLabel.Location = new System.Drawing.Point(3, 84);
             this.MostPopularFurnitureLabel.Name = "MostPopularFurnitureLabel";
             this.MostPopularFurnitureLabel.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.MostPopularFurnitureLabel.Size = new System.Drawing.Size(162, 31);
+            this.MostPopularFurnitureLabel.Size = new System.Drawing.Size(162, 28);
             this.MostPopularFurnitureLabel.TabIndex = 4;
             this.MostPopularFurnitureLabel.Text = "Most Popular Furniture";
             // 
             // MostPopularFurnitureDataGridView
             // 
+            this.MostPopularFurnitureDataGridView.AllowUserToDeleteRows = false;
+            this.MostPopularFurnitureDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.MostPopularFurnitureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.MostPopularFurnitureDataGridView.Location = new System.Drawing.Point(3, 151);
+            this.MostPopularFurnitureDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MostPopularFurnitureDataGridView.Location = new System.Drawing.Point(3, 115);
             this.MostPopularFurnitureDataGridView.Name = "MostPopularFurnitureDataGridView";
-            this.MostPopularFurnitureDataGridView.Size = new System.Drawing.Size(616, 216);
+            this.MostPopularFurnitureDataGridView.ReadOnly = true;
+            this.MostPopularFurnitureDataGridView.Size = new System.Drawing.Size(499, 171);
             this.MostPopularFurnitureDataGridView.TabIndex = 5;
             // 
             // ReportUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.ReportTableLayout);
             this.Name = "ReportUserControl";
-            this.Size = new System.Drawing.Size(622, 370);
+            this.Size = new System.Drawing.Size(508, 321);
             this.ReportTableLayout.ResumeLayout(false);
             this.ReportTableLayout.PerformLayout();
             this.EndDateTableLayout.ResumeLayout(false);

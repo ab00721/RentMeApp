@@ -34,7 +34,8 @@ namespace RentMeApp.UserControls
             MostPopularFurnitureDataGridView.Columns[4].HeaderText = "Total Transactions";
             MostPopularFurnitureDataGridView.Columns[5].HeaderText = "% of Total Transactions";
             MostPopularFurnitureDataGridView.Columns[6].HeaderText = "% b/t 18-29";
-            MostPopularFurnitureDataGridView.Columns[6].HeaderText = "% not b/t 18-29";
+            MostPopularFurnitureDataGridView.Columns[7].HeaderText = "% not b/t 18-29";
+
         }
     }
 }
