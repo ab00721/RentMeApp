@@ -71,6 +71,7 @@
     <Compile Include="Controller\MemberController.cs" />
     <Compile Include="Controller\RentalLineItemController.cs" />
     <Compile Include="Controller\RentalTransactionController.cs" />
+    <Compile Include="Controller\ReportController.cs" />
     <Compile Include="Controller\ReturnLineItemController.cs" />
     <Compile Include="Controller\ReturnTransactionController.cs" />
     <Compile Include="Controller\StyleController.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="DAL\RentalLineItemDAL.cs" />
     <Compile Include="DAL\RentalTransactionDAL.cs" />
     <Compile Include="DAL\RentMeDBConnection.cs" />
+    <Compile Include="DAL\ReportDAL.cs" />
     <Compile Include="DAL\ReturnLineItemDAL.cs" />
     <Compile Include="DAL\ReturnTransactionDAL.cs" />
     <Compile Include="DAL\StyleDAL.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Model\RentalCartItem.cs" />
     <Compile Include="Model\RentalLineItem.cs" />
     <Compile Include="Model\RentalTransaction.cs" />
+    <Compile Include="Model\Report.cs" />
     <Compile Include="Model\ReturnLineItem.cs" />
     <Compile Include="Model\ReturnTransaction.cs" />
     <Compile Include="Model\Style.cs" />
@@ -112,6 +115,12 @@
     </Compile>
     <Compile Include="UserControls\MemberUserControl.Designer.cs">
       <DependentUpon>MemberUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ReportUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ReportUserControl.Designer.cs">
+      <DependentUpon>ReportUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\SearchFurnitureUserControl.cs">
       <SubType>UserControl</SubType>
@@ -216,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MemberUserControl.resx">
       <DependentUpon>MemberUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ReportUserControl.resx">
+      <DependentUpon>ReportUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchFurnitureUserControl.resx">
       <DependentUpon>SearchFurnitureUserControl.cs</DependentUpon>
