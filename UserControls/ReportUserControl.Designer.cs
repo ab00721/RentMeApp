@@ -137,6 +137,7 @@
             this.GenerateReportBtn.TabIndex = 2;
             this.GenerateReportBtn.Text = "Generate";
             this.GenerateReportBtn.UseVisualStyleBackColor = true;
+            this.GenerateReportBtn.Click += new System.EventHandler(this.GenerateReportBtn_Click);
             // 
             // MostPopularFurnitureLabel
             // 

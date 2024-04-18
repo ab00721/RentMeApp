@@ -5,16 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RentMeApp.Controller
 {
     public class ReportController
     {
-        private readonly ReportDAL _reportController;
+        private readonly ReportDAL _reportDAL;
+
+        public ReportController()
+        {
+            _reportDAL = new ReportDAL();
+        }
 
         public List<Report> GetMostPopularFurnitureDuringDates(DateTime startDate, DateTime endDate)
         {
-            return _reportController.GetMostPopularFurnitureDuringDates(startDate, endDate);
+            return _reportDAL.GetMostPopularFurnitureDuringDates(startDate, endDate);
         }
     }
 }

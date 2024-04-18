@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RentMeApp.DAL
 {
@@ -41,7 +42,7 @@ namespace RentMeApp.DAL
                             report.TotalTransactions = (int)reader["Total Transactions"];
                             report.PercentageOfTransactions = reader["% of transactions"].ToString();
                             report.PercentageBtwEighteenTwentyNine = reader["% b/t 18-29"].ToString();
-                            report.PercentageNotBtwEighteenTwentyNine = reader["%not  b/t 18-29"].ToString();
+                            report.PercentageNotBtwEighteenTwentyNine = reader["% not b/t 18-29"].ToString();
 
                             reports.Add(report);
 
