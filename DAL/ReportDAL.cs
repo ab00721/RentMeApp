@@ -3,15 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace RentMeApp.DAL
 {
+    /// <summary>
+    /// Connect to Report Stored Procedure
+    /// </summary>
     public class ReportDAL
     {
+        /// <summary>
+        /// Gets the most popular furniture during dates.
+        /// </summary>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">The end date.</param>
+        /// <returns></returns>
         public List<Report> GetMostPopularFurnitureDuringDates(DateTime startDate, DateTime endDate)
         {
             List<Report> reports = new List<Report>();

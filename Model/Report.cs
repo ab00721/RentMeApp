@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RentMeApp.Model
 {
+    /// <summary>
+    /// Model to define a reporting object
+    /// </summary>
     public class Report
     {
         public int FurnitureID { get; set; }
