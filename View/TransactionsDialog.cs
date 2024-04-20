@@ -19,12 +19,13 @@ namespace RentMeApp.View
         private readonly ReturnTransactionController _returnTransactionController;
         private readonly ReturnLineItemController _returnLineItemController;
         private List<RentalTransaction> _rentalTransactions;
-        private List<RentalLineItem> _rentalLineItems;
+        private List<RentalCartItem> _rentalLineItems;
         private List<ReturnTransaction> _returnTransactions;
         private List<ReturnLineItem> _returnLineItems;
         private Member _member;
         DataGridViewButtonColumn _addRentalButtonColumn;
         DataGridViewButtonColumn _addReturnButtonColumn;
+        RentalPointOfSaleService _rentalPointOfSaleService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionsDialog"/> class.
@@ -45,6 +46,7 @@ namespace RentMeApp.View
             this._rentalLineItemController = new RentalLineItemController();
             this._returnTransactionController = new ReturnTransactionController();
             this._returnLineItemController = new ReturnLineItemController();
+            this._rentalPointOfSaleService = new RentalPointOfSaleService();
 
             this.RefreshRentalTransactionDataGridView();
             this.RefreshReturnTransactionDataGridView();
@@ -125,15 +127,15 @@ namespace RentMeApp.View
 
                 transaction = _rentalTransactions[e.RowIndex];
 
-                _rentalLineItems = this._rentalLineItemController.GetRentalLineItemsByRentalTransactionID(transaction.RentalTransactionID);
+                _rentalLineItems = this._rentalPointOfSaleService.GetRentalTransactionCartItems(transaction.RentalTransactionID);
                 DetailsDataGridView.DataSource = null;
                 DetailsDataGridView.DataSource = _rentalLineItems;
-                DetailsDataGridView.Columns[0].HeaderText = "Rental Line Item ID";
-                DetailsDataGridView.Columns[1].HeaderText = "Rental Transaction ID";
-                DetailsDataGridView.Columns[2].HeaderText = "Furniture ID";
+                DetailsDataGridView.Columns[0].HeaderText = "Furniture ID";
+                DetailsDataGridView.Columns[1].HeaderText = "Name";
+                DetailsDataGridView.Columns[2].HeaderText = "Daily Rate";
                 DetailsDataGridView.Columns[3].HeaderText = "Quantity";
-                DetailsDataGridView.Columns[4].HeaderText = "Quantity Returned";
-                DetailsDataGridView.Columns[5].HeaderText = "Daily Cost";
+                DetailsDataGridView.Columns[4].HeaderText = "Price";
+
             }
         }
 
