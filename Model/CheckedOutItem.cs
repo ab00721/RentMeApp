@@ -12,6 +12,7 @@ namespace RentMeApp.Model
         public int QuantityOut { get; set; }
         public decimal DailyRate { get; set; }
         public int RentalTransactionID { get; set; }
+        public int RentalLineItemID { get; set; }
         public DateTime DueDate { get; set; }
 
         /// <summary>
@@ -23,9 +24,10 @@ namespace RentMeApp.Model
         /// <param name="dailyRate">The daily rate.</param>
         /// <param name="rentalTransactionID">The rental transaction identifier.</param>
         /// <param name="dueDate">The due date.</param>
+        /// <param name="rentalLineItemID">The id of the associated rental line item.</param>"
         /// <exception cref="System.ArgumentException">Name - Name cannot be null or empty</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">Furniture ID - Furniture ID  has to be > 0</exception>
-        public CheckedOutItem(int furnitureID, string name, int quantityOut, decimal dailyRate, int rentalTransactionID, DateTime dueDate)
+        public CheckedOutItem(int furnitureID, string name, int quantityOut, decimal dailyRate, int rentalTransactionID, int rentalLineItemID, DateTime dueDate)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -47,6 +49,7 @@ namespace RentMeApp.Model
             this.QuantityOut = quantityOut;
             this.DailyRate = dailyRate;
             this.RentalTransactionID = rentalTransactionID;
+            this.RentalLineItemID = rentalLineItemID;
             this.DueDate = dueDate;
         }
     }

@@ -39,8 +39,11 @@ namespace RentMeApp.UserControls
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         public void CheckedOutUserControl_Load(object sender, EventArgs e)
         {
-            RefreshDataGridView();
-            ConfigureDataGridView();
+            if (Member != null)
+            {
+                RefreshDataGridView();
+                ConfigureDataGridView();
+            }
         }
 
         private void ConfigureDataGridView()
@@ -51,7 +54,10 @@ namespace RentMeApp.UserControls
             checkedOutDataGridView.Columns[3].HeaderText = "Quantity Out";
             checkedOutDataGridView.Columns[4].HeaderText = "Daily Cost";
             checkedOutDataGridView.Columns[5].HeaderText = "Rental ID";
-            checkedOutDataGridView.Columns[6].HeaderText = "Due Date";
+            checkedOutDataGridView.Columns[6].HeaderText = "Line Item ID";
+            checkedOutDataGridView.Columns[7].HeaderText = "Due Date";
+
+            checkedOutDataGridView.Columns[6].Visible = false;
         }
 
         /// <summary>
@@ -59,7 +65,10 @@ namespace RentMeApp.UserControls
         /// </summary>
         public void RefreshDataGridView()
         {
-            RefreshDataGridView(this.GetCheckedOutFurnitureForMember(Member.MemberID));
+            if (Member != null)
+            {
+                RefreshDataGridView(this.GetCheckedOutFurnitureForMember(Member.MemberID));
+            }
         }
         private void RefreshDataGridView(List<CheckedOutItem> checkedOutItems)
         {

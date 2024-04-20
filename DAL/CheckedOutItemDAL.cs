@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RentMeApp.DAL
 {
@@ -18,7 +15,7 @@ namespace RentMeApp.DAL
             using (SqlConnection connection = RentMeDBConnection.GetConnection())
             {
                 using (SqlCommand command = new SqlCommand(
-                    "SELECT RLI.FurnitureID, F.Name, (RLI.Quantity - RLI.QuantityReturned) AS QuantityOut, RLI.RentalTransactionID, RLI.DailyCost, RT.DueDate " +
+                    "SELECT RLI.FurnitureID, F.Name, (RLI.Quantity - RLI.QuantityReturned) AS QuantityOut, RLI.RentalTransactionID, RLI.RentalLineItemID, RLI.DailyCost, RT.DueDate " +
                     "FROM RentalLineItem RLI " +
                     "INNER JOIN Furniture F ON RLI.FurnitureID = F.FurnitureID " +
                     "INNER JOIN RentalTransaction RT ON RLI.RentalTransactionID = RT.RentalTransactionID " +
@@ -38,6 +35,7 @@ namespace RentMeApp.DAL
                                 Convert.ToInt32(reader["QuantityOut"]),
                                 Convert.ToDecimal(reader["DailyCost"]),
                                 Convert.ToInt32(reader["RentalTransactionID"]),
+                                Convert.ToInt32(reader["RentalLineItemID"]),
                                 Convert.ToDateTime(reader["DueDate"])
                             );
                             

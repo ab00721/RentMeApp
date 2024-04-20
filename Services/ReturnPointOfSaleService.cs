@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using RentMeApp.Controller;
 using System.Transactions;
+using System.Linq;
 
 /// <summary>
 /// Service for return point of sale operations.
@@ -10,11 +11,15 @@ using System.Transactions;
 public class ReturnPointOfSaleService
 {
     private readonly List<ReturnLineItem> _returnLineItems;
+    private readonly EmployeeController _employeeController = new EmployeeController();
     private readonly FurnitureController _furnitureController;
     private readonly RentalLineItemController _rentalLineItemController;
     private readonly RentalTransactionController _rentalTransactionController;
     private readonly ReturnLineItemController _returnLineItemController;
     private readonly ReturnTransactionController _returnTransactionController;
+
+    private Member _member;
+    private EmployeeDTO _employee;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ReturnPointOfSaleService"/> class.
@@ -22,11 +27,55 @@ public class ReturnPointOfSaleService
     public ReturnPointOfSaleService()
     {
         _returnLineItems = new List<ReturnLineItem>();
+        _employeeController = new EmployeeController();
         _furnitureController = new FurnitureController();
         _rentalLineItemController = new RentalLineItemController();
         _rentalTransactionController = new RentalTransactionController();
         _returnLineItemController = new ReturnLineItemController();
         _returnTransactionController = new ReturnTransactionController();
+    }
+
+    /// <summary>
+    /// Sets the member renting the items.
+    /// </summary>
+    /// <param name="member">The member renting the items.</param>
+    public void SetMember(Member member)
+    {
+        _member = member;
+    }
+
+    /// <summary>
+    /// Gets the member renting the items.
+    /// </summary>
+    /// <returns>The member renting the items.</returns>
+    public Member GetMember()
+    {
+        return _member;
+    }
+
+    /// <summary>
+    /// Sets the employee for renting the items.
+    /// </summary>
+    /// <param name="username">The username of the employee for renting the items.</param>
+    public void SetEmployee(string username)
+    {
+        try
+        {
+            _employee = _employeeController.GetEmployeeByUsername(username);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error while setting employee: " + ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// Gets the employee for renting the items.
+    /// </summary>
+    /// <returns>The employee for renting the items.</returns>
+    public EmployeeDTO GetEmployee()
+    {
+        return _employee;
     }
 
     /// <summary>
@@ -39,18 +88,99 @@ public class ReturnPointOfSaleService
     }
 
     /// <summary>
+    /// Gets the return cart items by converting the return line items.
+    /// </summary>
+    /// <returns>The list of return cart items.</returns>
+    public List<ReturnCartItem> GetReturnCartItems()
+    {
+        List<ReturnCartItem> returnCartItems = new List<ReturnCartItem>();
+
+        foreach (var returnLineItem in _returnLineItems)
+        {
+            RentalTransaction rentalTransaction = _rentalTransactionController.GetRentalTransactionByRentalLineItemID(returnLineItem.RentalLineItemID);
+            RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(returnLineItem.RentalLineItemID);
+            Furniture furniture = _furnitureController.GetFurnitureByID(rentalLineItem.FurnitureID);
+
+            ReturnCartItem returnCartItem = new ReturnCartItem();
+            returnCartItem.RentalLineItemID = returnLineItem.RentalLineItemID;
+            returnCartItem.FurnitureID = furniture.FurnitureID;
+            returnCartItem.Name = furniture.Name;
+            returnCartItem.DailyRate = furniture.DailyRate;
+            returnCartItem.Quantity = returnLineItem.Quantity;
+
+            int expectedDuration = DurationService.DurationInDays(rentalTransaction.RentalDate, rentalTransaction.DueDate);
+            returnCartItem.ExpectedDuration = expectedDuration;
+            returnCartItem.AlreadyPaid = rentalLineItem.DailyCost * returnLineItem.Quantity * expectedDuration;
+
+            int actualDuration = DurationService.DurationInDays(rentalTransaction.RentalDate, DateTime.Now);
+            returnCartItem.ActualDuration = actualDuration;
+
+            returnCartItems.Add(returnCartItem);
+        }
+
+        return returnCartItems;
+    }
+
+    /// <summary>
     /// Adds a return line item to the list of items.
     /// </summary>
-    /// 
     /// <param name="rentalLineItemID">The ID of the associated rental line item.</param>
     /// <param name="quantity">The quantity of the furniture to add.</param>
     public void AddReturnLineItem(int rentalLineItemID, int quantity)
     {
         RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(rentalLineItemID);
         Furniture furniture = _furnitureController.GetFurnitureByID(rentalLineItem.FurnitureID);
-        ReturnLineItem item = new ReturnLineItem(rentalLineItem.RentalLineItemID, quantity, furniture.DailyRate * quantity);
-        _returnLineItems.Add(item);
+
+        ReturnLineItem existingReturnLineItem = _returnLineItems.FirstOrDefault(item => item.RentalLineItemID == rentalLineItemID);
+        if (existingReturnLineItem != null)
+        {
+            existingReturnLineItem.Quantity += quantity;
+        }
+        else
+        {
+            ReturnLineItem item = new ReturnLineItem(rentalLineItem.RentalLineItemID, quantity, furniture.DailyRate * quantity);
+            _returnLineItems.Add(item);
+        }
     }
+
+    /// <summary>
+    /// Updates a return line item with the given rental line item and quantity.
+    /// </summary>
+    /// <param name="rentalLineItem">The rental line item to update.</param>
+    /// <param name="newQuantity">The new quantity for the return line item.</param>
+    public void UpdateReturnLineItem(RentalLineItem rentalLineItem, int newQuantity)
+    {
+        ReturnLineItem returnLineItem = _returnLineItems.FirstOrDefault(item => item.RentalLineItemID == rentalLineItem.RentalLineItemID);
+        if (returnLineItem != null)
+        {
+            returnLineItem.Quantity = newQuantity;
+        }
+    }
+
+    /// <summary>
+    /// Removes the return line items associated with the given rental line item ID.
+    /// </summary>
+    /// <param name="rentalLineItemID">The ID of the rental line item.</param>
+    public void RemoveReturnLineItems(int rentalLineItemID)
+    {
+        _returnLineItems.RemoveAll(_returnLineItems => _returnLineItems.RentalLineItemID == rentalLineItemID);
+    }
+
+    /// <summary>
+    /// Gets the rental line item associated with the given return cart item.
+    /// </summary>
+    /// <param name="returnCartItem">The return cart item.</param>
+    /// <returns>The rental line item associated with the return cart item.</returns>
+    public RentalLineItem GetRentalLineItemByReturnCartItem(ReturnCartItem returnCartItem)
+    {
+        ReturnLineItem returnLineItem = _returnLineItems.FirstOrDefault(item => item.RentalLineItemID == returnCartItem.RentalLineItemID);
+        if (returnLineItem != null)
+        {
+            return _rentalLineItemController.GetRentalLineItemByID(returnLineItem.RentalLineItemID);
+        }
+        return null;
+    }
+
 
     /// <summary>
     /// Retrieve the cost of the a line item over the rental period
