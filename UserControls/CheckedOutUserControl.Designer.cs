@@ -89,7 +89,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView checkedOutDataGridView;
+        internal System.Windows.Forms.DataGridView checkedOutDataGridView;
         private System.Windows.Forms.Label checkedOutLabel;
         private System.Windows.Forms.TableLayoutPanel checkedOutTableLayoutPanel;
     }

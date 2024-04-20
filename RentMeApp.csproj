@@ -122,6 +122,12 @@
     <Compile Include="UserControls\ReportUserControl.Designer.cs">
       <DependentUpon>ReportUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ReturnUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ReturnUserControl.Designer.cs">
+      <DependentUpon>ReturnUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchFurnitureUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
