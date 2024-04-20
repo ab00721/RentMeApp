@@ -51,6 +51,12 @@ namespace RentMeApp.View
                 errorsExist = true;
             }
 
+            if (!int.TryParse(zip, out int x))
+            {
+                ZipErrorLabel.Text = "Zip must be numeric.";
+                errorsExist = true;
+            }
+
             if (string.IsNullOrEmpty(firstName))
             {
                 FirstNameErrorLabel.Text = "First Name cannot be null or empty.";
