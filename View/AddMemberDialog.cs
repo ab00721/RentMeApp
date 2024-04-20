@@ -45,15 +45,9 @@ namespace RentMeApp.View
             string zip = ZipTextBox.Text;
             string phone = PhoneTextBox.Text;
 
-            if (string.IsNullOrEmpty(zip))
+            if (string.IsNullOrEmpty(zip) || !int.TryParse(zip, out int x))
             {
-                ZipErrorLabel.Text = "Zip cannot be null or empty.";
-                errorsExist = true;
-            }
-
-            if (!int.TryParse(zip, out int x))
-            {
-                ZipErrorLabel.Text = "Zip must be numeric.";
+                ZipErrorLabel.Text = "Zip must be numeric and cannot be null or empty.";
                 errorsExist = true;
             }
 
