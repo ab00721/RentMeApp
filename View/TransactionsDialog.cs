@@ -1,6 +1,7 @@
 ﻿using RentMeApp.Controller;
 using RentMeApp.Model;
 using RentMeApp.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -15,17 +16,18 @@ namespace RentMeApp.View
         private readonly SearchMemberUserControl _searchMemberUserControl;
         private readonly UserUserControl _userUserControl;
         private readonly RentalTransactionController _rentalTransactionController;
-        private readonly RentalLineItemController _rentalLineItemController;
         private readonly ReturnTransactionController _returnTransactionController;
         private readonly ReturnLineItemController _returnLineItemController;
         private List<RentalTransaction> _rentalTransactions;
         private List<RentalCartItem> _rentalLineItems;
         private List<ReturnTransaction> _returnTransactions;
         private List<ReturnLineItem> _returnLineItems;
+        //private Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> _returnLineItems;
         private Member _member;
         DataGridViewButtonColumn _addRentalButtonColumn;
         DataGridViewButtonColumn _addReturnButtonColumn;
         RentalPointOfSaleService _rentalPointOfSaleService;
+        ReturnPointOfSaleService _returnPointOfSaleService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionsDialog"/> class.
@@ -43,10 +45,10 @@ namespace RentMeApp.View
             this._member = selectedMember;
             this._searchMemberUserControl = searchMemberUserController;
             this._rentalTransactionController = new RentalTransactionController();
-            this._rentalLineItemController = new RentalLineItemController();
             this._returnTransactionController = new ReturnTransactionController();
             this._returnLineItemController = new ReturnLineItemController();
             this._rentalPointOfSaleService = new RentalPointOfSaleService();
+            this._returnPointOfSaleService = new ReturnPointOfSaleService();
 
             this.RefreshRentalTransactionDataGridView();
             this.RefreshReturnTransactionDataGridView();
@@ -146,6 +148,8 @@ namespace RentMeApp.View
                 ReturnTransaction transaction = new ReturnTransaction();
 
                 transaction = _returnTransactions[e.RowIndex];
+
+                //_returnLineItems = this._returnPointOfSaleService.GetReturnTransactionDetails(transaction.ReturnTransactionID);
 
                 _returnLineItems = this._returnLineItemController.GetReturnLineItemsByReturnTransactionID(transaction.ReturnTransactionID);
                 DetailsDataGridView.DataSource = null;

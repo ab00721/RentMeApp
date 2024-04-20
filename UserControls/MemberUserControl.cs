@@ -18,6 +18,8 @@ namespace RentMeApp.UserControls
             InitializeComponent();
             nameLabel.Text = "Member Name: " + member.FirstName + " " + member.LastName;
             idLabel.Text = "Member ID: " + member.MemberID;
+            phoneLabel.Text = "Phone: " + member.Phone;
+            addressLabel.Text = "Address: " + member.AddressOne + ", " + member.City + " " + member.State + " " + member.Zip;
         }
     }
 }
