@@ -48,11 +48,11 @@
             this.returnTableLayoutPanel.RowCount = 6;
             this.returnTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.returnTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.returnTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            this.returnTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 480F));
+            this.returnTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 310F));
+            this.returnTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 540F));
             this.returnTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.returnTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.returnTableLayoutPanel.Size = new System.Drawing.Size(1218, 1004);
+            this.returnTableLayoutPanel.Size = new System.Drawing.Size(1218, 1084);
             this.returnTableLayoutPanel.TabIndex = 0;
             // 
             // checkedOutUserControl
@@ -63,18 +63,18 @@
             this.checkedOutUserControl.Member = null;
             this.checkedOutUserControl.Name = "checkedOutUserControl";
             this.checkedOutUserControl.Padding = new System.Windows.Forms.Padding(15, 10, 30, 10);
-            this.checkedOutUserControl.Size = new System.Drawing.Size(1212, 292);
+            this.checkedOutUserControl.Size = new System.Drawing.Size(1212, 302);
             this.checkedOutUserControl.TabIndex = 0;
             // 
             // returnUserControl
             // 
             this.returnUserControl.BackColor = System.Drawing.SystemColors.Control;
             this.returnUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.returnUserControl.Location = new System.Drawing.Point(3, 503);
+            this.returnUserControl.Location = new System.Drawing.Point(3, 513);
             this.returnUserControl.Member = null;
             this.returnUserControl.Name = "returnUserControl";
             this.returnUserControl.Padding = new System.Windows.Forms.Padding(15, 30, 30, 30);
-            this.returnUserControl.Size = new System.Drawing.Size(1212, 474);
+            this.returnUserControl.Size = new System.Drawing.Size(1212, 534);
             this.returnUserControl.TabIndex = 1;
             this.returnUserControl.Username = null;
             // 
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1218, 1004);
+            this.ClientSize = new System.Drawing.Size(1218, 1084);
             this.Controls.Add(this.returnTableLayoutPanel);
             this.MinimizeBox = false;
             this.Name = "ReturnDialog";

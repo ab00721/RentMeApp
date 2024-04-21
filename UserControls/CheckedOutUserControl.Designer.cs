@@ -47,7 +47,7 @@
             this.checkedOutDataGridView.RowHeadersWidth = 62;
             this.checkedOutDataGridView.RowTemplate.Height = 24;
             this.checkedOutDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.checkedOutDataGridView.Size = new System.Drawing.Size(995, 280);
+            this.checkedOutDataGridView.Size = new System.Drawing.Size(995, 226);
             this.checkedOutDataGridView.TabIndex = 13;
             // 
             // checkedOutLabel
@@ -73,7 +73,7 @@
             this.checkedOutTableLayoutPanel.RowCount = 2;
             this.checkedOutTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.checkedOutTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.checkedOutTableLayoutPanel.Size = new System.Drawing.Size(1001, 280);
+            this.checkedOutTableLayoutPanel.Size = new System.Drawing.Size(1001, 270);
             this.checkedOutTableLayoutPanel.TabIndex = 0;
             // 
             // CheckedOutUserControl
@@ -83,7 +83,7 @@
             this.Controls.Add(this.checkedOutTableLayoutPanel);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "CheckedOutUserControl";
-            this.Size = new System.Drawing.Size(1001, 280);
+            this.Size = new System.Drawing.Size(1001, 270);
             this.Load += new System.EventHandler(this.CheckedOutUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.checkedOutDataGridView)).EndInit();
             this.checkedOutTableLayoutPanel.ResumeLayout(false);

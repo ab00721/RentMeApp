@@ -1,6 +1,7 @@
 ﻿using RentMeApp.Model;
 using RentMeApp.View;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace RentMeApp.UserControls
@@ -55,10 +56,10 @@ namespace RentMeApp.UserControls
         /// <summary>
         /// Removes the return line items from the cart that are associated with the given rental line itme.
         /// </summary>
-        /// <param name="rentalLineItem">The rentalLineItem to associated with the return line times to remove.</param>
-        public void RemoveReturnLineItems(RentalLineItem rentalLineItem)
+        /// <param name="rentalLineItemID">The rentalLineItem to associated with the return line times to remove.</param>
+        public void RemoveReturnLineItems(int rentalLineItemID)
         {
-            _returnPointOfSaleService.RemoveReturnLineItems(rentalLineItem.RentalLineItemID);
+            _returnPointOfSaleService.RemoveReturnLineItems(rentalLineItemID);
             RefreshCartAndTotals();
         }
 
@@ -78,9 +79,8 @@ namespace RentMeApp.UserControls
         {
             if (e.ColumnIndex == returnCartDataGridView.Columns["RemoveButtonColumn"].Index && e.RowIndex >= 0)
             {
-                //RentalCartItem cartItem = (RentalCartItem)returnCartDataGridView.Rows[e.RowIndex].DataBoundItem;
-                //Furniture furniture = _rentalPointOfSaleService.GetFurnitureByRentalCartItem(cartItem);
-                //RemoveRentalLineItem(furniture);
+                ReturnCartItem cartItem = (ReturnCartItem)returnCartDataGridView.Rows[e.RowIndex].DataBoundItem;
+                RemoveReturnLineItems(cartItem.RentalLineItemID);
                 RefreshCartAndTotals();
             }
         }
@@ -119,9 +119,9 @@ namespace RentMeApp.UserControls
             DialogResult result = MessageBox.Show("Are you sure you want to empty your cart?", "Empty Cart", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                //_rentalPointOfSaleService = new RentalPointOfSaleService();
-                //_rentalPointOfSaleService.SetMember(Member);
-                //_rentalPointOfSaleService.SetEmployee(Username);
+                _returnPointOfSaleService = new ReturnPointOfSaleService();
+                _returnPointOfSaleService.SetMember(Member);
+                _returnPointOfSaleService.SetEmployee(Username);
 
                 RefreshCartAndTotals();
             }
@@ -129,22 +129,23 @@ namespace RentMeApp.UserControls
 
         private void CheckoutButton_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to proceed with checkout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Are you sure you want to proceed with return?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 try
                 {
-                    //EmployeeDTO employee = _rentalPointOfSaleService.GetEmployee();
-                    //Member member = _rentalPointOfSaleService.GetMember();
+                    EmployeeDTO employee = _returnPointOfSaleService.GetEmployee();
+                    Member member = _returnPointOfSaleService.GetMember();
 
-                    //RentalTransaction emptyTransaction = _rentalPointOfSaleService.CreateRentalTransaction();
-                    //List<RentalLineItem> lineItems = _rentalPointOfSaleService.GetRentalLineItems();
-                    //int transactionID = _rentalPointOfSaleService.SaveRentalTransaction(emptyTransaction, lineItems);
+                    ReturnTransaction emptyTransaction = _returnPointOfSaleService.CreateReturnTransaction(employee, member);
+                    List<ReturnLineItem> lineItems = _returnPointOfSaleService.GetReturnLineItems();
+                    int transactionID = _returnPointOfSaleService.SaveReturnTransaction(emptyTransaction, lineItems);
 
-                    //RentalTransactionSaved?.Invoke(this, EventArgs.Empty);
+                    RentalTransactionSaved?.Invoke(this, EventArgs.Empty);
 
-                    //_rentalSummaryDialog = new RentalSummaryDialog(employee, member, transactionID);
-                    _returnSummaryDialog.ShowDialog();
+                    MessageBox.Show($"Return transaction {transactionID} has been saved.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // _returnSummaryDialog = new ReturnSummaryDialog(employee, member, transactionID);
+                    // _returnSummaryDialog.ShowDialog();
                 }
                 catch (Exception ex)
                 {
@@ -156,20 +157,22 @@ namespace RentMeApp.UserControls
         private void ConfigureDataGridView()
         {
             returnCartDataGridView.Columns[0].HeaderText = "Remove From Cart";
-            returnCartDataGridView.Columns[1].HeaderText = "Furniture ID";
-            returnCartDataGridView.Columns[2].HeaderText = "Furniture Name";
-            returnCartDataGridView.Columns[3].HeaderText = "Daily Cost";
-            returnCartDataGridView.Columns[4].HeaderText = "Qty To Return";
-            returnCartDataGridView.Columns[5].HeaderText = "Expected Duration";
-            returnCartDataGridView.Columns[6].HeaderText = "Already Paid";
-            returnCartDataGridView.Columns[7].HeaderText = "Actual Duration";
-            returnCartDataGridView.Columns[8].HeaderText = "Actual Price";
-            returnCartDataGridView.Columns[9].HeaderText = "Subtotal";
+            returnCartDataGridView.Columns[1].HeaderText = "Line";
+            returnCartDataGridView.Columns[2].HeaderText = "Furniture ID";
+            returnCartDataGridView.Columns[3].HeaderText = "Furniture Name";
+            returnCartDataGridView.Columns[4].HeaderText = "Daily Cost";
+            returnCartDataGridView.Columns[5].HeaderText = "Qty To Return";
+            returnCartDataGridView.Columns[6].HeaderText = "Expected Duration";
+            returnCartDataGridView.Columns[7].HeaderText = "Already Paid";
+            returnCartDataGridView.Columns[8].HeaderText = "Actual Duration";
+            returnCartDataGridView.Columns[9].HeaderText = "Actual Price";
+            returnCartDataGridView.Columns[10].HeaderText = "Subtotal";
         }
 
         private void StyleDataGridView()
         {
             returnCartDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            returnCartDataGridView.Columns["RentalLineItemID"].Visible = false;
             returnCartDataGridView.Columns["FurnitureID"].ReadOnly = true;
             returnCartDataGridView.Columns["Name"].ReadOnly = true;
             returnCartDataGridView.Columns["DailyRate"].ReadOnly = true;

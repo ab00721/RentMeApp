@@ -267,14 +267,17 @@ public class ReturnPointOfSaleService
     /// </summary>
     /// <param name="returnTransaction">The return transaction to save.</param>
     /// <param name="returnLineItems">The list of return line items to save.</param>
-    public void SaveReturnTransaction(ReturnTransaction returnTransaction, List<ReturnLineItem> returnLineItems)
+    /// <returns>The newly created ReturnTransactionID.</returns>
+    public int SaveReturnTransaction(ReturnTransaction returnTransaction, List<ReturnLineItem> returnLineItems)
     {
+        int returnTransactionID = 0;
+
         using (var scope = new TransactionScope())
         {
             try
             {
                 // Save return transaction to the database and retrieve the ReturnTransactionID
-                int returnTransactionID = _returnTransactionController.AddReturnTransaction(returnTransaction);
+                returnTransactionID = _returnTransactionController.AddReturnTransaction(returnTransaction);
 
                 foreach (var returnLineItem in returnLineItems)
                 {
@@ -302,6 +305,8 @@ public class ReturnPointOfSaleService
                 Console.WriteLine("Error while saving return transaction: " + ex.Message);
             }
         }
+
+        return returnTransactionID;
     }
 
     /// <summary>

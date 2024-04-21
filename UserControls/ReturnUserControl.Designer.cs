@@ -29,13 +29,16 @@
         private void InitializeComponent()
         {
             this.returnCartLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.innerTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.emptyButton = new System.Windows.Forms.Button();
             this.returnCartLabel = new System.Windows.Forms.Label();
             this.returnCartDataGridView = new System.Windows.Forms.DataGridView();
             this.returnTotalsLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.returnTotalLabel = new System.Windows.Forms.Label();
             this.returnTotalValueLabel = new System.Windows.Forms.Label();
-            this.checkoutButton = new System.Windows.Forms.Button();
+            this.completeButton = new System.Windows.Forms.Button();
             this.returnCartLayoutPanel.SuspendLayout();
+            this.innerTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.returnCartDataGridView)).BeginInit();
             this.returnTotalsLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -45,19 +48,48 @@
             this.returnCartLayoutPanel.ColumnCount = 2;
             this.returnCartLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.returnCartLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.returnCartLayoutPanel.Controls.Add(this.innerTableLayoutPanel, 1, 0);
             this.returnCartLayoutPanel.Controls.Add(this.returnCartLabel, 0, 0);
             this.returnCartLayoutPanel.Controls.Add(this.returnCartDataGridView, 0, 1);
             this.returnCartLayoutPanel.Controls.Add(this.returnTotalsLayoutPanel, 0, 2);
             this.returnCartLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.returnCartLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.returnCartLayoutPanel.Name = "returnCartLayoutPanel";
-            this.returnCartLayoutPanel.RowCount = 2;
+            this.returnCartLayoutPanel.RowCount = 4;
             this.returnCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.returnCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.returnCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             this.returnCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.returnCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.returnCartLayoutPanel.Size = new System.Drawing.Size(1043, 480);
             this.returnCartLayoutPanel.TabIndex = 0;
+            // 
+            // innerTableLayoutPanel
+            // 
+            this.innerTableLayoutPanel.ColumnCount = 1;
+            this.innerTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.innerTableLayoutPanel.Controls.Add(this.emptyButton, 0, 1);
+            this.innerTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.innerTableLayoutPanel.Location = new System.Drawing.Point(840, 3);
+            this.innerTableLayoutPanel.Name = "innerTableLayoutPanel";
+            this.innerTableLayoutPanel.RowCount = 3;
+            this.innerTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.innerTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.innerTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.innerTableLayoutPanel.Size = new System.Drawing.Size(200, 64);
+            this.innerTableLayoutPanel.TabIndex = 4;
+            // 
+            // emptyButton
+            // 
+            this.emptyButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.emptyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emptyButton.Location = new System.Drawing.Point(3, 11);
+            this.emptyButton.Name = "emptyButton";
+            this.emptyButton.Size = new System.Drawing.Size(194, 39);
+            this.emptyButton.TabIndex = 0;
+            this.emptyButton.Text = "Empty";
+            this.emptyButton.UseVisualStyleBackColor = true;
+            this.emptyButton.Click += new System.EventHandler(this.EmptyButton_Click);
             // 
             // returnCartLabel
             // 
@@ -84,7 +116,7 @@
             this.returnCartDataGridView.RowHeadersWidth = 62;
             this.returnCartLayoutPanel.SetRowSpan(this.returnCartDataGridView, 2);
             this.returnCartDataGridView.RowTemplate.Height = 28;
-            this.returnCartDataGridView.Size = new System.Drawing.Size(1037, 210);
+            this.returnCartDataGridView.Size = new System.Drawing.Size(1037, 226);
             this.returnCartDataGridView.TabIndex = 1;
             this.returnCartDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ReturnCartDataGridView_CellClick);
             this.returnCartDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ReturnCartDataGridView_CellValueChanged);
@@ -100,19 +132,17 @@
             this.returnTotalsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1F));
             this.returnTotalsLayoutPanel.Controls.Add(this.returnTotalLabel, 1, 1);
             this.returnTotalsLayoutPanel.Controls.Add(this.returnTotalValueLabel, 2, 1);
-            this.returnTotalsLayoutPanel.Controls.Add(this.checkoutButton, 2, 2);
+            this.returnTotalsLayoutPanel.Controls.Add(this.completeButton, 2, 2);
             this.returnTotalsLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.returnTotalsLayoutPanel.Location = new System.Drawing.Point(3, 289);
+            this.returnTotalsLayoutPanel.Location = new System.Drawing.Point(3, 305);
             this.returnTotalsLayoutPanel.Name = "returnTotalsLayoutPanel";
             this.returnTotalsLayoutPanel.RowCount = 5;
             this.returnTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.returnTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.returnTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.returnTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.returnTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.returnTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.returnTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.returnTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.returnTotalsLayoutPanel.Size = new System.Drawing.Size(1037, 188);
+            this.returnTotalsLayoutPanel.Size = new System.Drawing.Size(1037, 172);
             this.returnTotalsLayoutPanel.TabIndex = 2;
             // 
             // returnTotalLabel
@@ -139,17 +169,18 @@
             this.returnTotalValueLabel.Text = "$0.00";
             this.returnTotalValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // checkoutButton
+            // completeButton
             // 
-            this.checkoutButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkoutButton.Location = new System.Drawing.Point(795, 63);
-            this.checkoutButton.Name = "checkoutButton";
-            this.checkoutButton.Size = new System.Drawing.Size(227, 54);
-            this.checkoutButton.TabIndex = 6;
-            this.checkoutButton.Text = "Checkout";
-            this.checkoutButton.UseVisualStyleBackColor = true;
-            this.checkoutButton.Click += new System.EventHandler(this.CheckoutButton_Click);
+            this.completeButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.completeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.completeButton.Location = new System.Drawing.Point(795, 100);
+            this.completeButton.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.completeButton.Name = "completeButton";
+            this.completeButton.Size = new System.Drawing.Size(227, 57);
+            this.completeButton.TabIndex = 6;
+            this.completeButton.Text = "Complete";
+            this.completeButton.UseVisualStyleBackColor = true;
+            this.completeButton.Click += new System.EventHandler(this.CheckoutButton_Click);
             // 
             // ReturnUserControl
             // 
@@ -162,6 +193,7 @@
             this.Load += new System.EventHandler(this.ReturnUserControl_Load);
             this.returnCartLayoutPanel.ResumeLayout(false);
             this.returnCartLayoutPanel.PerformLayout();
+            this.innerTableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.returnCartDataGridView)).EndInit();
             this.returnTotalsLayoutPanel.ResumeLayout(false);
             this.returnTotalsLayoutPanel.PerformLayout();
@@ -177,6 +209,8 @@
         private System.Windows.Forms.TableLayoutPanel returnTotalsLayoutPanel;
         private System.Windows.Forms.Label returnTotalLabel;
         private System.Windows.Forms.Label returnTotalValueLabel;
-        private System.Windows.Forms.Button checkoutButton;
+        private System.Windows.Forms.Button completeButton;
+        private System.Windows.Forms.TableLayoutPanel innerTableLayoutPanel;
+        private System.Windows.Forms.Button emptyButton;
     }
 }

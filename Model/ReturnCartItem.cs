@@ -19,7 +19,7 @@
         {
             get
             {
-                return DailyRate * ActualDuration;
+                return DailyRate * ActualDuration * Quantity;
             }
         }
 
