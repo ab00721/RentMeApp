@@ -17,7 +17,6 @@ namespace RentMeApp.DAL
                 "Data Source=localhost;Initial Catalog=cs6232-g5; " +
                 // "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=cs6232-g5;" +
                 // "Data Source=REG-DBARBERO3\\SQLEXPRESS;Initial Catalog=cs6232-g5; " +
-                // "Data Source=REG-DBARBERO3\\SQLEXPRESS;Initial Catalog=report-test-db; " +
                 "Integrated Security=True";
 
             SqlConnection connection = new SqlConnection(connectionString);
