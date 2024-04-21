@@ -45,10 +45,16 @@ namespace RentMeApp.View
         {
             if (checkedOutUserControl.checkedOutDataGridView.Columns["ReturnButtonColumn"] is DataGridViewButtonColumn)
             {
-                CheckedOutItem checkedOutItem = checkedOutUserControl._checkedOutItems[e.RowIndex];
-
-                returnUserControl.AddReturnLineItem(checkedOutItem, checkedOutItem.QuantityOut);
-                returnUserControl.RefreshCartAndTotals();
+                try
+                {
+                    CheckedOutItem checkedOutItem = checkedOutUserControl._checkedOutItems[e.RowIndex];
+                    returnUserControl.AddReturnLineItem(checkedOutItem, checkedOutItem.QuantityOut);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
         }
 

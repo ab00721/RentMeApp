@@ -1,10 +1,6 @@
 ﻿using RentMeApp.DAL;
 using RentMeApp.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RentMeApp.Controller
 {
@@ -23,6 +19,11 @@ namespace RentMeApp.Controller
         public List<CheckedOutItem> GetCheckedOutItemsByRentalTransactionID(int rentalTransactionID)
         {
             return _checkedOutItemSource.GetCheckedOutItemsByRentalTransactionID(rentalTransactionID);
+        }
+
+        public bool CheckedOutItemsExistForMember(int memberID)
+        {
+            return _checkedOutItemSource.CheckedOutItemsExistForMember(memberID);
         }
     }
 }

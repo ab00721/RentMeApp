@@ -40,6 +40,7 @@ namespace RentMeApp.UserControls
             ConfigureDataGridView();
             StyleDataGridView();
             RefreshTotal();
+            EvaluateQuantityCellValues();
         }
 
         /// <summary>
@@ -134,6 +135,8 @@ namespace RentMeApp.UserControls
             {
                 try
                 {
+                    _returnPointOfSaleService.ValidAllQuantities(returnCartDataGridView);
+
                     EmployeeDTO employee = _returnPointOfSaleService.GetEmployee();
                     Member member = _returnPointOfSaleService.GetMember();
 
@@ -157,7 +160,7 @@ namespace RentMeApp.UserControls
         private void ConfigureDataGridView()
         {
             returnCartDataGridView.Columns[0].HeaderText = "Remove From Cart";
-            returnCartDataGridView.Columns[1].HeaderText = "Line";
+            returnCartDataGridView.Columns[1].HeaderText = "Rental Line";
             returnCartDataGridView.Columns[2].HeaderText = "Furniture ID";
             returnCartDataGridView.Columns[3].HeaderText = "Furniture Name";
             returnCartDataGridView.Columns[4].HeaderText = "Daily Cost";
@@ -172,17 +175,21 @@ namespace RentMeApp.UserControls
         private void StyleDataGridView()
         {
             returnCartDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            returnCartDataGridView.Columns["RentalLineItemID"].Visible = false;
+            returnCartDataGridView.Columns["RentalLineItemID"].ReadOnly = true;
             returnCartDataGridView.Columns["FurnitureID"].ReadOnly = true;
             returnCartDataGridView.Columns["Name"].ReadOnly = true;
             returnCartDataGridView.Columns["DailyRate"].ReadOnly = true;
             returnCartDataGridView.Columns["Quantity"].ReadOnly = false;
-            returnCartDataGridView.Columns["Quantity"].DefaultCellStyle.BackColor = System.Drawing.SystemColors.Info;
             returnCartDataGridView.Columns["ExpectedDuration"].ReadOnly = true;
             returnCartDataGridView.Columns["AlreadyPaid"].ReadOnly = true;
             returnCartDataGridView.Columns["ActualDuration"].ReadOnly = true;
             returnCartDataGridView.Columns["ActualPrice"].ReadOnly = true;
             returnCartDataGridView.Columns["Subtotal"].ReadOnly = true;
+        }
+
+        private void EvaluateQuantityCellValues()
+        {
+            _returnPointOfSaleService.EvaluateQuantityCellValues(returnCartDataGridView);
         }
 
         private void RefreshDataGridView()

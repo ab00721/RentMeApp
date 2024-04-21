@@ -19,7 +19,7 @@ namespace RentMeApp.DAL
                     "FROM RentalLineItem RLI " +
                     "INNER JOIN Furniture F ON RLI.FurnitureID = F.FurnitureID " +
                     "INNER JOIN RentalTransaction RT ON RLI.RentalTransactionID = RT.RentalTransactionID " +
-                    "WHERE RLI.RentalTransactionID = @RentalTransactionID", connection))
+                    "WHERE RLI.RentalTransactionID = @RentalTransactionID AND (RLI.Quantity - RLI.QuantityReturned) > 0", connection))
                 {
                     command.Parameters.Add("@RentalTransactionID", SqlDbType.Int);
                     command.Parameters["@RentalTransactionID"].Value = rentalTransactionID;
@@ -38,7 +38,7 @@ namespace RentMeApp.DAL
                                 Convert.ToInt32(reader["RentalLineItemID"]),
                                 Convert.ToDateTime(reader["DueDate"])
                             );
-                            
+
                             checkedOutItems.Add(item);
                         }
                     }
@@ -46,6 +46,27 @@ namespace RentMeApp.DAL
             }
 
             return checkedOutItems;
+        }
+
+        public bool CheckedOutItemsExistForMember(int memberID)
+        {
+            using (SqlConnection connection = RentMeDBConnection.GetConnection())
+            {
+                using (SqlCommand command = new SqlCommand(
+                    "SELECT COUNT(*) " +
+                    "FROM RentalLineItem RLI " +
+                    "INNER JOIN RentalTransaction RT ON RLI.RentalTransactionID = RT.RentalTransactionID " +
+                    "WHERE RT.MemberID = @MemberID AND (RLI.Quantity - RLI.QuantityReturned) > 0", connection))
+                {
+                    command.Parameters.Add("@MemberID", SqlDbType.Int);
+                    command.Parameters["@MemberID"].Value = memberID;
+
+                    connection.Open();
+                    int count = (int)command.ExecuteScalar();
+
+                    return count > 0;
+                }
+            }
         }
     }
 }

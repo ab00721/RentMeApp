@@ -4,6 +4,7 @@ using System;
 using RentMeApp.Controller;
 using System.Transactions;
 using System.Linq;
+using System.Windows.Forms;
 
 /// <summary>
 /// Service for return point of sale operations.
@@ -128,18 +129,24 @@ public class ReturnPointOfSaleService
     /// <param name="quantity">The quantity of the furniture to add.</param>
     public void AddReturnLineItem(int rentalLineItemID, int quantity)
     {
-        RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(rentalLineItemID);
-        Furniture furniture = _furnitureController.GetFurnitureByID(rentalLineItem.FurnitureID);
+        try
+        {
+            RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(rentalLineItemID);
+            Furniture furniture = _furnitureController.GetFurnitureByID(rentalLineItem.FurnitureID);
 
-        ReturnLineItem existingReturnLineItem = _returnLineItems.FirstOrDefault(item => item.RentalLineItemID == rentalLineItemID);
-        if (existingReturnLineItem != null)
+            ReturnLineItem existingReturnLineItem = _returnLineItems.FirstOrDefault(item => item.RentalLineItemID == rentalLineItemID);
+            if (existingReturnLineItem != null)
+            {
+                UpdateReturnLineItem(rentalLineItem, quantity);
+            }
+            else
+            {
+                ReturnLineItem item = new ReturnLineItem(rentalLineItem.RentalLineItemID, quantity, furniture.DailyRate * quantity);
+                _returnLineItems.Add(item);
+            }
+        } catch (Exception ex)
         {
-            existingReturnLineItem.Quantity += quantity;
-        }
-        else
-        {
-            ReturnLineItem item = new ReturnLineItem(rentalLineItem.RentalLineItemID, quantity, furniture.DailyRate * quantity);
-            _returnLineItems.Add(item);
+            throw ex;
         }
     }
 
@@ -355,4 +362,49 @@ public class ReturnPointOfSaleService
         }
         return details;
     }
+
+    public void ValidQuantity(int rentalLineItemID, int newQuantity)
+    {
+        RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(rentalLineItemID);
+        int quantityOut = rentalLineItem.Quantity - rentalLineItem.QuantityReturned;
+
+        if (newQuantity > quantityOut)
+        {
+            throw new Exception($"Input quantity exceeds checked-out quantity.\n\nRental Line: {rentalLineItem.RentalLineItemID}\nFurniture ID:{rentalLineItem.FurnitureID}\n\nChecked-out Qty: {quantityOut}\nInput Qty: {newQuantity}");
+        }
+    }
+
+    public void ValidAllQuantities(DataGridView dataGridView)
+    {
+        foreach (DataGridViewRow row in dataGridView.Rows)
+        {
+            if (row.Cells["Quantity"].Value != null && int.TryParse(row.Cells["Quantity"].Value.ToString(), out int newQuantity))
+            {
+                int rentalLineItemID = Convert.ToInt32(row.Cells["RentalLineItemID"].Value);
+                ValidQuantity(rentalLineItemID, newQuantity);
+            }
+        }
+    }
+
+    public void EvaluateQuantityCellValues(DataGridView dataGridView)
+    {
+        foreach (DataGridViewRow row in dataGridView.Rows)
+        {
+            if (row.Cells["Quantity"].Value != null && int.TryParse(row.Cells["Quantity"].Value.ToString(), out int newQuantity))
+            {
+                int rentalLineItemID = Convert.ToInt32(row.Cells["RentalLineItemID"].Value);
+
+                try
+                {
+                    ValidQuantity(rentalLineItemID, newQuantity);
+                    row.Cells["Quantity"].Style.BackColor = System.Drawing.SystemColors.Info;
+                }
+                catch (Exception)
+                {
+                    row.Cells["Quantity"].Style.BackColor = System.Drawing.Color.Pink;
+                    row.Cells["Quantity"].ErrorText = "Invalid Quantity";
+                }
+            }
+        }
+    }   
 }

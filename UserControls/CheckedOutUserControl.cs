@@ -54,10 +54,10 @@ namespace RentMeApp.UserControls
             checkedOutDataGridView.Columns[3].HeaderText = "Quantity Out";
             checkedOutDataGridView.Columns[4].HeaderText = "Daily Cost";
             checkedOutDataGridView.Columns[5].HeaderText = "Rental ID";
-            checkedOutDataGridView.Columns[6].HeaderText = "Line Item ID";
+            checkedOutDataGridView.Columns[6].HeaderText = "Rental Line";
             checkedOutDataGridView.Columns[7].HeaderText = "Due Date";
 
-            checkedOutDataGridView.Columns[6].Visible = false;
+            checkedOutDataGridView.Columns[5].Visible = false;
         }
 
         /// <summary>
