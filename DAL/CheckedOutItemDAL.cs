@@ -6,8 +6,17 @@ using System.Data;
 
 namespace RentMeApp.DAL
 {
+    /// <summary>
+    /// The Data Access Layer for the CheckedOutItem entity 
+    /// </summary>
     public class CheckedOutItemDAL
     {
+
+        /// <summary>
+        /// Retrieves a list of checked-out items associated with a given rental transaction ID.
+        /// </summary>
+        /// <param name="rentalTransactionID">The ID of the rental transaction.</param>
+        /// <returns>A list of the checked-out items.</returns>
         public List<CheckedOutItem> GetCheckedOutItemsByRentalTransactionID(int rentalTransactionID)
         {
             List<CheckedOutItem> checkedOutItems = new List<CheckedOutItem>();
@@ -48,6 +57,11 @@ namespace RentMeApp.DAL
             return checkedOutItems;
         }
 
+        /// <summary>
+        /// Checks if checked-out items exist for a specific member ID.
+        /// </summary>
+        /// <param name="memberID">The member ID.</param>
+        /// <returns>True if checked-out items exist for the member; otherwise, false.</returns>
         public bool CheckedOutItemsExistForMember(int memberID)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())

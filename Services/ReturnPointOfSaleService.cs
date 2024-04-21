@@ -318,6 +318,12 @@ public class ReturnPointOfSaleService
         return returnTransactionID;
     }
 
+    /// <summary>
+    /// Checks if new quantity for a rental line item is less than or equal to the checked-out quantity.
+    /// </summary>
+    /// <param name="rentalLineItemID">The ID of the rental line item.</param>
+    /// <param name="newQuantity">The integer to be the new quantity.</param>
+    /// <exception cref="Exception">Thrown when the new quantity exceeds the checked-out quantity.</exception>
     public void ValidQuantity(int rentalLineItemID, int newQuantity)
     {
         RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(rentalLineItemID);
@@ -325,10 +331,14 @@ public class ReturnPointOfSaleService
 
         if (newQuantity > quantityOut)
         {
-            throw new Exception($"Input quantity exceeds checked-out quantity.\n\nRental Line: {rentalLineItem.RentalLineItemID}\nFurniture ID:{rentalLineItem.FurnitureID}\n\nChecked-out Qty: {quantityOut}\nInput Qty: {newQuantity}");
+            throw new Exception($"Cart quantity exceeds checked-out quantity.\n\nRental Line: {rentalLineItem.RentalLineItemID}\nFurniture ID:{rentalLineItem.FurnitureID}\n\nChecked-out Qty: {quantityOut}\nCart Qty: {newQuantity}");
         }
     }
 
+    /// <summary>
+    /// Checks all quantities in a DataGridView to ensure they do not exceed the checked-out quantities.
+    /// </summary>
+    /// <param name="dataGridView">The DataGridView with the quantities in it.</param>
     public void ValidAllQuantities(DataGridView dataGridView)
     {
         foreach (DataGridViewRow row in dataGridView.Rows)
@@ -341,6 +351,11 @@ public class ReturnPointOfSaleService
         }
     }
 
+    /// <summary>
+    /// Checks the quantity cell values in a DataGridView and re-styles invalid quantities.
+    /// </summary>
+    /// <param name="dataGridView">The DataGridView with the quantities in it.</param>
+    /// <remarks>
     public void EvaluateQuantityCellValues(DataGridView dataGridView)
     {
         foreach (DataGridViewRow row in dataGridView.Rows)

@@ -3,15 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace RentMeApp.DAL
 {
+    /// <summary>
+    /// The Data Access Layer for the Report entity. 
+    /// </summary>
     public class ReportDAL
     {
+        /// <summary>
+        /// Gets a list of reports on the most popular furniture items rented within the given date range.
+        /// </summary>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">The end date.</param>
+        /// <returns>A list of Report objects.</returns>
         public List<Report> GetMostPopularFurnitureDuringDates(DateTime startDate, DateTime endDate)
         {
             List<Report> reports = new List<Report>();
@@ -46,8 +51,6 @@ namespace RentMeApp.DAL
 
                             reports.Add(report);
 
-
-
                             //Incident incident = new Incident();
                             //incident.ProductCode = reader["Product Code"].ToString();
                             //if (reader["Date Opened"] != DBNull.Value)
@@ -67,6 +70,5 @@ namespace RentMeApp.DAL
 
             return reports;
         }
-
     }
 }
