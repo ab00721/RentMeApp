@@ -293,6 +293,9 @@
     <EmbeddedResource Include="View\ReturnDialog.resx">
       <DependentUpon>ReturnDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\ReturnSummaryDialog.resx">
+      <DependentUpon>ReturnSummaryDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\SearchFurnitureDialog.resx">
       <DependentUpon>SearchFurnitureDialog.cs</DependentUpon>
     </EmbeddedResource>

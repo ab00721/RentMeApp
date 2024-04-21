@@ -104,6 +104,8 @@ namespace RentMeApp.DAL
                                 Convert.ToDateTime(reader["ReturnDate"]),
                                 Convert.ToDecimal(reader["TotalCost"])
                             );
+
+                            returnTransaction.ReturnTransactionID = returnTransactionID;
                         }
                     }
                 }

@@ -91,12 +91,15 @@ public class ReturnPointOfSaleService
     /// <summary>
     /// Gets the return cart items by converting the return line items.
     /// </summary>
+    /// <param name="returnLineItems">Optional: The list of return line items to use.</param>
     /// <returns>The list of return cart items.</returns>
-    public List<ReturnCartItem> GetReturnCartItems()
+    public List<ReturnCartItem> GetReturnCartItems(List<ReturnLineItem> returnLineItems = null)
     {
         List<ReturnCartItem> returnCartItems = new List<ReturnCartItem>();
 
-        foreach (var returnLineItem in _returnLineItems)
+        List<ReturnLineItem> lineItems = returnLineItems ?? _returnLineItems;
+
+        foreach (var returnLineItem in lineItems)
         {
             RentalTransaction rentalTransaction = _rentalTransactionController.GetRentalTransactionByRentalLineItemID(returnLineItem.RentalLineItemID);
             RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(returnLineItem.RentalLineItemID);
@@ -187,7 +190,6 @@ public class ReturnPointOfSaleService
         }
         return null;
     }
-
 
     /// <summary>
     /// Retrieve the cost of the a line item over the rental period
@@ -316,53 +318,6 @@ public class ReturnPointOfSaleService
         return returnTransactionID;
     }
 
-    /// <summary>
-    /// Takes a return transaction ID and gets the details of the return transaction and associated line items and furniture.
-    /// </summary>
-    /// <param name="returnTransactionID">A return transaction ID</param>
-    /// <returns>A dictionary for a return transaction and its associated data.</returns>
-    public Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> GetReturnTransactionDetails(int returnTransactionID)
-    {
-        ReturnTransaction returnTransaction = _returnTransactionController.GetReturnTransactionByReturnTransactionID(returnTransactionID);
-        List<ReturnLineItem> returnLineItems = _returnLineItemController.GetReturnLineItemsByReturnTransactionID(returnTransactionID);
-        List<Tuple<ReturnLineItem, RentalLineItem, Furniture>> details = GetFurnitureItemsAndRentalLineItemsPerReturnLineItems(returnLineItems);
-        Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> returnTransactionDetails = GetReturnTransactionWithAllLineItemsAndFurniture(returnTransaction, details);
-
-        return returnTransactionDetails;
-    }
-
-    /// <summary>
-    /// Returns a dictionary that maps a return transaction to its details.
-    /// </summary>
-    /// <param name="returnTransaction">The return transaction.</param>
-    /// <param name="details">A list of tuples for line items, rental line items, and furniture.</param>
-    /// <returns>A dictionary for a return transaction and its associated data.</returns>
-    private Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> GetReturnTransactionWithAllLineItemsAndFurniture(ReturnTransaction returnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>> details)
-    {
-        Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> returnTransactionDetails = new Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>>();
-        returnTransactionDetails.Add(returnTransaction, details);
-        return returnTransactionDetails;
-    }
-
-    /// <summary>
-    /// Gets the furniture items and rental line items for the given return line items.
-    /// </summary>
-    /// <param name="returnLineItems">A list of return line items.</param>
-    /// <returns>A list of the return line items, rental line items, and furniture.</returns>
-    private List<Tuple<ReturnLineItem, RentalLineItem, Furniture>> GetFurnitureItemsAndRentalLineItemsPerReturnLineItems(List<ReturnLineItem> returnLineItems)
-    {
-        List<Tuple<ReturnLineItem, RentalLineItem, Furniture>> details = new List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>();
-        foreach (var returnLineItem in returnLineItems)
-        {
-            RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(returnLineItem.RentalLineItemID);
-            Furniture furniture = _furnitureController.GetFurnitureByID(rentalLineItem.FurnitureID);
-
-            Tuple<ReturnLineItem, RentalLineItem, Furniture> detail = new Tuple<ReturnLineItem, RentalLineItem, Furniture>(returnLineItem, rentalLineItem, furniture);
-            details.Add(detail);
-        }
-        return details;
-    }
-
     public void ValidQuantity(int rentalLineItemID, int newQuantity)
     {
         RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(rentalLineItemID);
@@ -406,5 +361,27 @@ public class ReturnPointOfSaleService
                 }
             }
         }
-    }   
+    }
+
+    /// <summary>
+    /// Gets the return transaction by the given return transaction ID.
+    /// </summary>
+    /// <param name="returnTransactionID">The ID of the return transaction.</param>
+    /// <returns>The return transaction.</returns>
+    public ReturnTransaction GetReturnTransaction(int returnTransactionID)
+    {
+        return _returnTransactionController.GetReturnTransactionByReturnTransactionID(returnTransactionID);
+    }
+
+    /// <summary>
+    /// Gets return cart items for a return transaction.
+    /// </summary>
+    /// <param name="returnTransactionID">A return transaction ID.</param>
+    /// <returns>The list of return cart items for the given return transaction.</returns>
+    public List<ReturnCartItem> GetReturnTransactionCartItems(int returnTransactionID)
+    {
+        List<ReturnLineItem> returnLineItems = _returnLineItemController.GetReturnLineItemsByReturnTransactionID(returnTransactionID);
+
+        return GetReturnCartItems(returnLineItems);
+    }
 }

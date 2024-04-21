@@ -11,7 +11,7 @@ namespace RentMeApp.View
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class ReturnDialog : Form
     {
-        private readonly bool transactionSaved = false;
+        private bool transactionSaved = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReturnDialog"/> class.
@@ -33,6 +33,12 @@ namespace RentMeApp.View
 
             returnUserControl.Username = username;
             returnUserControl.Member = selectedMember;
+
+            returnUserControl.ReturnTransactionSaved += (sender, e) =>
+            {
+                transactionSaved = true;
+                Close();
+            };
         }        
 
         private void ReturnDialog_Load(object sender, EventArgs e)

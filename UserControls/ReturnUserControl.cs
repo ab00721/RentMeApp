@@ -11,7 +11,7 @@ namespace RentMeApp.UserControls
     /// </summary>
     public partial class ReturnUserControl : UserControl
     {
-        public event EventHandler RentalTransactionSaved;
+        public event EventHandler ReturnTransactionSaved;
 
         private ReturnSummaryDialog _returnSummaryDialog;
 
@@ -144,11 +144,10 @@ namespace RentMeApp.UserControls
                     List<ReturnLineItem> lineItems = _returnPointOfSaleService.GetReturnLineItems();
                     int transactionID = _returnPointOfSaleService.SaveReturnTransaction(emptyTransaction, lineItems);
 
-                    RentalTransactionSaved?.Invoke(this, EventArgs.Empty);
+                    ReturnTransactionSaved?.Invoke(this, EventArgs.Empty);
 
-                    MessageBox.Show($"Return transaction {transactionID} has been saved.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // _returnSummaryDialog = new ReturnSummaryDialog(employee, member, transactionID);
-                    // _returnSummaryDialog.ShowDialog();
+                    _returnSummaryDialog = new ReturnSummaryDialog(employee, member, transactionID);
+                    _returnSummaryDialog.ShowDialog();
                 }
                 catch (Exception ex)
                 {
