@@ -319,19 +319,34 @@ public class ReturnPointOfSaleService
     }
 
     /// <summary>
-    /// Checks if new quantity for a rental line item is less than or equal to the checked-out quantity.
+    /// Checks if new quantity for a rental line item is valid.
     /// </summary>
     /// <param name="rentalLineItemID">The ID of the rental line item.</param>
     /// <param name="newQuantity">The integer to be the new quantity.</param>
-    /// <exception cref="Exception">Thrown when the new quantity exceeds the checked-out quantity.</exception>
-    public void ValidQuantity(int rentalLineItemID, int newQuantity)
+    /// <exception cref="Exception">Thrown when the new quantity is invalid.</exception>
+    public void ValidQuantity(int rentalLineItemID, int? newQuantity)
     {
+        if (newQuantity == null)
+        {
+            throw new Exception("Invalid quantity. Quantity cannot be null.");
+        }
+
+        if (!int.TryParse(newQuantity.ToString(), out int parsedQuantity))
+        {
+            throw new Exception("Invalid quantity. Quantity must be a valid integer.");
+        }
+
+        if (parsedQuantity <= 0)
+        {
+            throw new Exception("Invalid quantity. Quantity must be greater than zero.");
+        }
+
         RentalLineItem rentalLineItem = _rentalLineItemController.GetRentalLineItemByID(rentalLineItemID);
         int quantityOut = rentalLineItem.Quantity - rentalLineItem.QuantityReturned;
 
-        if (newQuantity > quantityOut)
+        if (parsedQuantity > quantityOut)
         {
-            throw new Exception($"Cart quantity exceeds checked-out quantity.\n\nRental Line: {rentalLineItem.RentalLineItemID}\nFurniture ID:{rentalLineItem.FurnitureID}\n\nChecked-out Qty: {quantityOut}\nCart Qty: {newQuantity}");
+            throw new Exception($"Cart quantity exceeds checked-out quantity.\n\nRental Line: {rentalLineItem.RentalLineItemID}\nFurniture ID:{rentalLineItem.FurnitureID}\n\nChecked-out Qty: {quantityOut}\nCart Qty: {parsedQuantity}");
         }
     }
 
