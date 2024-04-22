@@ -356,6 +356,11 @@ public class ReturnPointOfSaleService
     /// <param name="dataGridView">The DataGridView with the quantities in it.</param>
     public void ValidAllQuantities(DataGridView dataGridView)
     {
+        if (dataGridView.Rows.Count == 0)
+        {
+            throw new Exception("The cart is empty.");
+        }
+
         foreach (DataGridViewRow row in dataGridView.Rows)
         {
             if (row.Cells["Quantity"].Value != null && int.TryParse(row.Cells["Quantity"].Value.ToString(), out int newQuantity))
