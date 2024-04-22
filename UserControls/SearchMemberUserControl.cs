@@ -14,8 +14,8 @@ namespace RentMeApp.UserControls
     /// <seealso cref="System.Windows.Forms.UserControl" />
     public partial class SearchMemberUserControl : UserControl
     {
-        //private readonly MemberControllerX _memberControllerX;
         private readonly MemberController _memberController;
+        private readonly CheckedOutItemController _checkedOutItemController;
         private Member _selectedMember;
         private string _username;
         private string _firstName;
@@ -28,6 +28,7 @@ namespace RentMeApp.UserControls
             InitializeComponent();
             ClearMessageLabel();
             _memberController = new MemberController();
+            _checkedOutItemController = new CheckedOutItemController();
             PopulateSearchByComboBox();
         }
 
@@ -309,6 +310,12 @@ namespace RentMeApp.UserControls
 
             using (Form newReturn = new View.ReturnDialog(this._username, this._firstName, selectedMember))
             {
+                if (!_checkedOutItemController.CheckedOutItemsExistForMember(selectedMember.MemberID))
+                {
+                    MessageBox.Show($"This member has no items to return.\n\nID: {selectedMember.MemberID}\n\nName: {selectedMember.LastName}, {selectedMember.FirstName}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 DialogResult result = newReturn.ShowDialog();
 
                 if (result == DialogResult.OK)

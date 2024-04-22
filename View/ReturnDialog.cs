@@ -11,10 +11,7 @@ namespace RentMeApp.View
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class ReturnDialog : Form
     {
-        private readonly CheckedOutUserControl _checkedOutUserControl;
-        private readonly DataGridView _checkedOutDataGridView;
-        private readonly bool transactionSaved = false;
-        private readonly Member _member;
+        private bool transactionSaved = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReturnDialog"/> class.
@@ -26,36 +23,44 @@ namespace RentMeApp.View
         {
             InitializeComponent();
 
-            this._member = selectedMember;
-
             UserUserControl userUserControl = new UserUserControl(username, firstName);
             returnTableLayoutPanel.Controls.Add(userUserControl);
 
-            MemberUserControl memberUserControl = new MemberUserControl(_member);
+            MemberUserControl memberUserControl = new MemberUserControl(selectedMember);
             returnTableLayoutPanel.Controls.Add(memberUserControl);
 
-            _checkedOutUserControl = new CheckedOutUserControl(_member);
-            returnTableLayoutPanel.Controls.Add(_checkedOutUserControl);
+            checkedOutUserControl.Member = selectedMember;
 
-            _checkedOutDataGridView = _checkedOutUserControl.CheckedOutDataGridView;
+            returnUserControl.Username = username;
+            returnUserControl.Member = selectedMember;
+
+            returnUserControl.ReturnTransactionSaved += (sender, e) =>
+            {
+                transactionSaved = true;
+                Close();
+            };
         }        
 
         private void ReturnDialog_Load(object sender, EventArgs e)
         {
-            _checkedOutUserControl.CheckedOutUserControl_Load(sender, e);
-            _checkedOutDataGridView.CellClick += CheckedOutDataGridView_CellClick;
+            checkedOutUserControl.CheckedOutUserControl_Load(sender, e);
+            checkedOutUserControl.checkedOutDataGridView.CellClick += CheckedOutDataGridView_CellClick;
         }
 
         private void CheckedOutDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == _checkedOutDataGridView.Columns["ReturnButtonColumn"].Index && e.RowIndex >= 0)
+            if (checkedOutUserControl.checkedOutDataGridView.Columns["ReturnButtonColumn"] is DataGridViewButtonColumn)
             {
-                DataGridViewRow row = _checkedOutDataGridView.Rows[e.RowIndex];
-
-                string furnitureName = row.Cells["Name"].Value.ToString();
-
-                returnCartLabel.Text = "Return furniture: " + furnitureName;
-
+                try
+                {
+                    CheckedOutItem checkedOutItem = checkedOutUserControl._checkedOutItems[e.RowIndex];
+                    returnUserControl.AddReturnLineItem(checkedOutItem, checkedOutItem.QuantityOut);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
         }
 
@@ -72,3 +77,4 @@ namespace RentMeApp.View
         }
     }
 }
+

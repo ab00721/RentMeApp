@@ -11,6 +11,11 @@ namespace RentMeApp.DAL
     /// </summary>
     public class RentalTransactionDAL
     {
+        /// <summary>
+        /// Inserts a new rental transaction into the database.
+        /// </summary>
+        /// <param name="rentalTransaction">The the transaction to insert.</param>
+        /// <returns>The ID of the newly inserted rental transaction.</returns>
         public int InsertRentalTransaction(RentalTransaction rentalTransaction)
         {
             int rentalTransactionID = 0;

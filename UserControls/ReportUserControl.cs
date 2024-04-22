@@ -2,19 +2,20 @@
 using RentMeApp.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RentMeApp.UserControls
 {
+    /// <summary>
+    /// User Control for the report feature.
+    /// </summary>
     public partial class ReportUserControl : UserControl
     {
         private readonly ReportController _reportController;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReportUserControl"/> class.
+        /// </summary>
         public ReportUserControl()
         {
             InitializeComponent();
@@ -35,7 +36,6 @@ namespace RentMeApp.UserControls
             MostPopularFurnitureDataGridView.Columns[5].HeaderText = "% of Total Transactions";
             MostPopularFurnitureDataGridView.Columns[6].HeaderText = "% b/t 18-29";
             MostPopularFurnitureDataGridView.Columns[7].HeaderText = "% not b/t 18-29";
-
         }
     }
 }

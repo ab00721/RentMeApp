@@ -1,7 +1,6 @@
 ﻿using RentMeApp.DAL;
 using RentMeApp.Model;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace RentMeApp.Controller
 {
@@ -12,6 +11,9 @@ namespace RentMeApp.Controller
     {
         private readonly ReturnTransactionDAL _returnTransactionSource;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReturnTransactionController"/> class.
+        /// </summary>
         public ReturnTransactionController()
         {
             _returnTransactionSource = new ReturnTransactionDAL();

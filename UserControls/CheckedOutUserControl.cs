@@ -16,13 +16,13 @@ namespace RentMeApp.UserControls
         private readonly CheckedOutItemController _checkedOutItemController;
         private readonly DataGridViewButtonColumn _returnButtonColumn;
         public List<CheckedOutItem> _checkedOutItems;
-        public Member _member;
+
+        public Member Member { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckedOutUserControl"/> class.
         /// </summary>
-        /// <param name="selectedMember">The selected member.</param>
-        public CheckedOutUserControl(Member selectedMember)
+        public CheckedOutUserControl()
         {
             InitializeComponent();
             _rentalTransactionController = new RentalTransactionController();
@@ -30,7 +30,6 @@ namespace RentMeApp.UserControls
             _checkedOutItems = new List<CheckedOutItem>();
             _returnButtonColumn = new DataGridViewButtonColumn();
             ReturnButtonColumn();
-            this._member = selectedMember;
         }
 
         /// <summary>
@@ -40,8 +39,11 @@ namespace RentMeApp.UserControls
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         public void CheckedOutUserControl_Load(object sender, EventArgs e)
         {
-            RefreshDataGridView();
-            ConfigureDataGridView();
+            if (Member != null)
+            {
+                RefreshDataGridView();
+                ConfigureDataGridView();
+            }
         }
 
         private void ConfigureDataGridView()
@@ -52,7 +54,10 @@ namespace RentMeApp.UserControls
             checkedOutDataGridView.Columns[3].HeaderText = "Quantity Out";
             checkedOutDataGridView.Columns[4].HeaderText = "Daily Cost";
             checkedOutDataGridView.Columns[5].HeaderText = "Rental ID";
-            checkedOutDataGridView.Columns[6].HeaderText = "Due Date";
+            checkedOutDataGridView.Columns[6].HeaderText = "Rental Line";
+            checkedOutDataGridView.Columns[7].HeaderText = "Due Date";
+
+            checkedOutDataGridView.Columns[5].Visible = false;
         }
 
         /// <summary>
@@ -60,7 +65,10 @@ namespace RentMeApp.UserControls
         /// </summary>
         public void RefreshDataGridView()
         {
-            RefreshDataGridView(this.GetCheckedOutFurnitureForMember(_member.MemberID));
+            if (Member != null)
+            {
+                RefreshDataGridView(this.GetCheckedOutFurnitureForMember(Member.MemberID));
+            }
         }
         private void RefreshDataGridView(List<CheckedOutItem> checkedOutItems)
         {

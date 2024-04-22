@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace RentMeApp.UserControls
 {
+    /// <summary>
+    /// User Control for the furniture search feature.
+    /// </summary>
     public partial class SearchFurnitureUserControl : UserControl
     {
         private readonly FurnitureController _furnitureController;

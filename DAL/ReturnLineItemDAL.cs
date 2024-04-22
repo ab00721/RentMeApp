@@ -11,6 +11,10 @@ namespace RentMeApp.DAL
     /// </summary>
     public class ReturnLineItemDAL
     {
+        /// <summary>
+        /// Inserts a return line item into the database.
+        /// </summary>
+        /// <param name="returnLineItem">The return line item to insert.</param>
         public void InsertReturnLineItem(ReturnLineItem returnLineItem)
         {
             using (SqlConnection connection = RentMeDBConnection.GetConnection())

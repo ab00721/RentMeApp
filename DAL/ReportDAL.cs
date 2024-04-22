@@ -51,8 +51,6 @@ namespace RentMeApp.DAL
 
                             reports.Add(report);
 
-
-
                             //Incident incident = new Incident();
                             //incident.ProductCode = reader["Product Code"].ToString();
                             //if (reader["Date Opened"] != DBNull.Value)
@@ -72,6 +70,5 @@ namespace RentMeApp.DAL
 
             return reports;
         }
-
     }
 }
