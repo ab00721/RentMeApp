@@ -16,4 +16,7 @@ Iteration 2:
 	- User can create a new rental and view rental and return transactions
 	- New return dialog does not work
 	- Reports tab does not work
-	 
+
+Iteration 3:
+	- User can create a new return and sees summary upon completion.
+	- Report tab works with view of most popular furniture per criteria.
