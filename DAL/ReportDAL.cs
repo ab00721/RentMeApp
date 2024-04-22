@@ -7,16 +7,16 @@ using System.Data.SqlClient;
 namespace RentMeApp.DAL
 {
     /// <summary>
-    /// The Data Access Layer for the Report entity. 
+    /// Connect to Report Stored Procedure
     /// </summary>
     public class ReportDAL
     {
         /// <summary>
-        /// Gets a list of reports on the most popular furniture items rented within the given date range.
+        /// Gets the most popular furniture during dates.
         /// </summary>
         /// <param name="startDate">The start date.</param>
         /// <param name="endDate">The end date.</param>
-        /// <returns>A list of Report objects.</returns>
+        /// <returns></returns>
         public List<Report> GetMostPopularFurnitureDuringDates(DateTime startDate, DateTime endDate)
         {
             List<Report> reports = new List<Report>();
