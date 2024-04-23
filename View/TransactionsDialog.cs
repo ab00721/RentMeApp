@@ -1,7 +1,6 @@
 ﻿using RentMeApp.Controller;
 using RentMeApp.Model;
 using RentMeApp.UserControls;
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -17,12 +16,10 @@ namespace RentMeApp.View
         private readonly UserUserControl _userUserControl;
         private readonly RentalTransactionController _rentalTransactionController;
         private readonly ReturnTransactionController _returnTransactionController;
-        private readonly ReturnLineItemController _returnLineItemController;
         private List<RentalTransaction> _rentalTransactions;
         private List<RentalCartItem> _rentalLineItems;
         private List<ReturnTransaction> _returnTransactions;
-        private List<ReturnLineItem> _returnLineItems;
-        //private Dictionary<ReturnTransaction, List<Tuple<ReturnLineItem, RentalLineItem, Furniture>>> _returnLineItems;
+        private List<ReturnCartItem> _returnLineItems;
         private Member _member;
         DataGridViewButtonColumn _addRentalButtonColumn;
         DataGridViewButtonColumn _addReturnButtonColumn;
@@ -46,7 +43,6 @@ namespace RentMeApp.View
             this._searchMemberUserControl = searchMemberUserController;
             this._rentalTransactionController = new RentalTransactionController();
             this._returnTransactionController = new ReturnTransactionController();
-            this._returnLineItemController = new ReturnLineItemController();
             this._rentalPointOfSaleService = new RentalPointOfSaleService();
             this._returnPointOfSaleService = new ReturnPointOfSaleService();
 
@@ -149,16 +145,20 @@ namespace RentMeApp.View
 
                 transaction = _returnTransactions[e.RowIndex];
 
-                //_returnLineItems = this._returnPointOfSaleService.GetReturnTransactionDetails(transaction.ReturnTransactionID);
+                _returnLineItems = this._returnPointOfSaleService.GetReturnTransactionCartItems(transaction.ReturnTransactionID);
 
-                _returnLineItems = this._returnLineItemController.GetReturnLineItemsByReturnTransactionID(transaction.ReturnTransactionID);
                 DetailsDataGridView.DataSource = null;
                 DetailsDataGridView.DataSource = _returnLineItems;
-                DetailsDataGridView.Columns[0].HeaderText = "Return Line Item ID";
-                DetailsDataGridView.Columns[1].HeaderText = "Rental Line Item ID";
-                DetailsDataGridView.Columns[2].HeaderText = "Return Transaction ID";
-                DetailsDataGridView.Columns[3].HeaderText = "Quantity";
-                DetailsDataGridView.Columns[4].HeaderText = "Daily Cost";
+                DetailsDataGridView.Columns[0].HeaderText = "Rental Line Item ID";
+                DetailsDataGridView.Columns[1].HeaderText = "Furniture ID";
+                DetailsDataGridView.Columns[2].HeaderText = "Name";
+                DetailsDataGridView.Columns[3].HeaderText = "Daily Rate";
+                DetailsDataGridView.Columns[4].HeaderText = "Quantity";
+                DetailsDataGridView.Columns[5].HeaderText = "Expected Duration";
+                DetailsDataGridView.Columns[6].HeaderText = "Already Paid";
+                DetailsDataGridView.Columns[7].HeaderText = "Actual Duration";
+                DetailsDataGridView.Columns[8].HeaderText = "Actual Price";
+                DetailsDataGridView.Columns[9].HeaderText = "Subtotal";
             }
         }
     }
