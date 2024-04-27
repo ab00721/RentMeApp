@@ -54,7 +54,7 @@ namespace RentMeApp.View
 
         private void AssignLabelValues()
         {
-            int duration = DurationService.DurationInDays(_transaction.RentalDate, _transaction.DueDate); ;
+            int duration = DurationService.RentalDurationInDays(_transaction.RentalDate, _transaction.DueDate); ;
             durationValueLabel.Text = duration.ToString();
 
             decimal pricePerDay = _transaction.TotalCost / duration;

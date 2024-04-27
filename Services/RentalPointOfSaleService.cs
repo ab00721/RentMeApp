@@ -203,7 +203,7 @@ public class RentalPointOfSaleService
     {
         decimal expectedCost = 0;
 
-        expectedCost += CalculateLineCostPerDay(rentalLineItem) * DurationService.DurationInDays(rentalDate, dueDate);
+        expectedCost += CalculateLineCostPerDay(rentalLineItem) * DurationService.RentalDurationInDays(rentalDate, dueDate);
 
         return expectedCost;
     }
