@@ -132,7 +132,8 @@ namespace RentMeApp.View
                 DetailsDataGridView.Columns[1].HeaderText = "Name";
                 DetailsDataGridView.Columns[2].HeaderText = "Daily Rate";
                 DetailsDataGridView.Columns[3].HeaderText = "Quantity";
-                DetailsDataGridView.Columns[4].HeaderText = "Price";
+                DetailsDataGridView.Columns[4].HeaderText = "Quantity Returned";
+                DetailsDataGridView.Columns[5].HeaderText = "Price";
 
             }
         }
