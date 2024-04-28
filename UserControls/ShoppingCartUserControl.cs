@@ -182,7 +182,7 @@ namespace RentMeApp.UserControls
 
         private void RefreshDuration()
         {
-            int duration = DurationService.RentalDurationInDays(DateTime.Now, _rentalPointOfSaleService.GetDueDate());
+            int duration = DurationService.DurationInDays(DateTime.Now, _rentalPointOfSaleService.GetDueDate());
             daysRentedValueLabel.Text = $"{duration}";
         }
 
