@@ -60,6 +60,7 @@ namespace RentMeApp.View
             decimal pricePerDay = _transaction.TotalCost / duration;
             pricePerDayValueLabel.Text = pricePerDay.ToString("C");
 
+            rentalDateValueLabel.Text = _transaction.RentalDate.ToString("yyyy-MM-dd");
             returnDateValueLabel.Text = _transaction.DueDate.ToString("yyyy-MM-dd");
             totalValueLabel.Text = _transaction.TotalCost.ToString("C");
             transactionValueLabel.Text = _transaction.RentalTransactionID.ToString();

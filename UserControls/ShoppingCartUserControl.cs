@@ -98,8 +98,19 @@ namespace RentMeApp.UserControls
                     RentalCartItem cartItem = (RentalCartItem)shoppingCartDataGridView.Rows[e.RowIndex].DataBoundItem;
                     Furniture furniture = _rentalPointOfSaleService.GetFurnitureByRentalCartItem(cartItem);
 
-                    _rentalPointOfSaleService.UpdateRentalLineItem(furniture, newQuantity);
-                    RefreshCartAndTotals();
+                    int inStockQuantity = furniture.InStockQuantity;
+                    if (newQuantity <= inStockQuantity)
+                    {
+                        _rentalPointOfSaleService.UpdateRentalLineItem(furniture, newQuantity);
+                        RefreshCartAndTotals();
+                    }
+                    else
+                    {
+                        cell.Style.BackColor = System.Drawing.Color.LightPink;
+                        cell.ErrorText = "Invalid quantity";
+                        MessageBox.Show("Your order quantity exceeds the in stock quantity.", "Invalid Quantity", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
                 }
                 else
                 {

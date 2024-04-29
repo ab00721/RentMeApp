@@ -60,13 +60,14 @@ namespace RentMeApp.UserControls
             this.shoppingCartLayoutPanel.Controls.Add(this.tableLayoutPanel1, 1, 0);
             this.shoppingCartLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.shoppingCartLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.shoppingCartLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.shoppingCartLayoutPanel.Name = "shoppingCartLayoutPanel";
             this.shoppingCartLayoutPanel.RowCount = 2;
-            this.shoppingCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.shoppingCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.shoppingCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.shoppingCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 190F));
-            this.shoppingCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.shoppingCartLayoutPanel.Size = new System.Drawing.Size(1043, 480);
+            this.shoppingCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 152F));
+            this.shoppingCartLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.shoppingCartLayoutPanel.Size = new System.Drawing.Size(927, 384);
             this.shoppingCartLayoutPanel.TabIndex = 0;
             // 
             // shoppingCartLabel
@@ -76,7 +77,7 @@ namespace RentMeApp.UserControls
             this.shoppingCartLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shoppingCartLabel.Location = new System.Drawing.Point(3, 0);
             this.shoppingCartLabel.Name = "shoppingCartLabel";
-            this.shoppingCartLabel.Size = new System.Drawing.Size(162, 70);
+            this.shoppingCartLabel.Size = new System.Drawing.Size(128, 56);
             this.shoppingCartLabel.TabIndex = 0;
             this.shoppingCartLabel.Text = "Shopping Cart";
             this.shoppingCartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -88,12 +89,13 @@ namespace RentMeApp.UserControls
             this.shoppingCartDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.shoppingCartLayoutPanel.SetColumnSpan(this.shoppingCartDataGridView, 2);
             this.shoppingCartDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.shoppingCartDataGridView.Location = new System.Drawing.Point(3, 73);
+            this.shoppingCartDataGridView.Location = new System.Drawing.Point(3, 58);
+            this.shoppingCartDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.shoppingCartDataGridView.Name = "shoppingCartDataGridView";
             this.shoppingCartDataGridView.RowHeadersWidth = 62;
             this.shoppingCartLayoutPanel.SetRowSpan(this.shoppingCartDataGridView, 2);
             this.shoppingCartDataGridView.RowTemplate.Height = 28;
-            this.shoppingCartDataGridView.Size = new System.Drawing.Size(1037, 210);
+            this.shoppingCartDataGridView.Size = new System.Drawing.Size(921, 168);
             this.shoppingCartDataGridView.TabIndex = 1;
             this.shoppingCartDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShoppingCartDataGridView_CellClick);
             this.shoppingCartDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShoppingCartDataGridView_CellValueChanged);
@@ -115,17 +117,18 @@ namespace RentMeApp.UserControls
             this.rentalTotalsLayoutPanel.Controls.Add(this.rentalTotalValueLabel, 2, 3);
             this.rentalTotalsLayoutPanel.Controls.Add(this.checkoutButton, 2, 4);
             this.rentalTotalsLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rentalTotalsLayoutPanel.Location = new System.Drawing.Point(3, 289);
+            this.rentalTotalsLayoutPanel.Location = new System.Drawing.Point(3, 230);
+            this.rentalTotalsLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rentalTotalsLayoutPanel.Name = "rentalTotalsLayoutPanel";
             this.rentalTotalsLayoutPanel.RowCount = 7;
-            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.rentalTotalsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.rentalTotalsLayoutPanel.Size = new System.Drawing.Size(1037, 188);
+            this.rentalTotalsLayoutPanel.Size = new System.Drawing.Size(921, 152);
             this.rentalTotalsLayoutPanel.TabIndex = 2;
             // 
             // dueDateLabel
@@ -133,9 +136,9 @@ namespace RentMeApp.UserControls
             this.dueDateLabel.AutoSize = true;
             this.dueDateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dueDateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dueDateLabel.Location = new System.Drawing.Point(521, 20);
+            this.dueDateLabel.Location = new System.Drawing.Point(463, 16);
             this.dueDateLabel.Name = "dueDateLabel";
-            this.dueDateLabel.Size = new System.Drawing.Size(268, 40);
+            this.dueDateLabel.Size = new System.Drawing.Size(238, 32);
             this.dueDateLabel.TabIndex = 0;
             this.dueDateLabel.Text = "Due Date:";
             this.dueDateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -146,9 +149,10 @@ namespace RentMeApp.UserControls
             this.rentalDateTimePicker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rentalDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rentalDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.rentalDateTimePicker.Location = new System.Drawing.Point(795, 23);
+            this.rentalDateTimePicker.Location = new System.Drawing.Point(707, 18);
+            this.rentalDateTimePicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rentalDateTimePicker.Name = "rentalDateTimePicker";
-            this.rentalDateTimePicker.Size = new System.Drawing.Size(227, 31);
+            this.rentalDateTimePicker.Size = new System.Drawing.Size(201, 27);
             this.rentalDateTimePicker.TabIndex = 1;
             this.rentalDateTimePicker.ValueChanged += new System.EventHandler(this.RentalDateTimePicker_ValueChanged);
             // 
@@ -157,9 +161,9 @@ namespace RentMeApp.UserControls
             this.rentalDurationLabel.AutoSize = true;
             this.rentalDurationLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rentalDurationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rentalDurationLabel.Location = new System.Drawing.Point(521, 60);
+            this.rentalDurationLabel.Location = new System.Drawing.Point(463, 48);
             this.rentalDurationLabel.Name = "rentalDurationLabel";
-            this.rentalDurationLabel.Size = new System.Drawing.Size(268, 40);
+            this.rentalDurationLabel.Size = new System.Drawing.Size(238, 32);
             this.rentalDurationLabel.TabIndex = 2;
             this.rentalDurationLabel.Text = "Rental Duration (Days):";
             this.rentalDurationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -169,9 +173,9 @@ namespace RentMeApp.UserControls
             this.daysRentedValueLabel.AutoSize = true;
             this.daysRentedValueLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.daysRentedValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.daysRentedValueLabel.Location = new System.Drawing.Point(795, 60);
+            this.daysRentedValueLabel.Location = new System.Drawing.Point(707, 48);
             this.daysRentedValueLabel.Name = "daysRentedValueLabel";
-            this.daysRentedValueLabel.Size = new System.Drawing.Size(227, 40);
+            this.daysRentedValueLabel.Size = new System.Drawing.Size(201, 32);
             this.daysRentedValueLabel.TabIndex = 3;
             this.daysRentedValueLabel.Text = "0";
             this.daysRentedValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -181,9 +185,9 @@ namespace RentMeApp.UserControls
             this.rentalTotalLabel.AutoSize = true;
             this.rentalTotalLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rentalTotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rentalTotalLabel.Location = new System.Drawing.Point(521, 100);
+            this.rentalTotalLabel.Location = new System.Drawing.Point(463, 80);
             this.rentalTotalLabel.Name = "rentalTotalLabel";
-            this.rentalTotalLabel.Size = new System.Drawing.Size(268, 40);
+            this.rentalTotalLabel.Size = new System.Drawing.Size(238, 32);
             this.rentalTotalLabel.TabIndex = 4;
             this.rentalTotalLabel.Text = "Total:";
             this.rentalTotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -193,9 +197,9 @@ namespace RentMeApp.UserControls
             this.rentalTotalValueLabel.AutoSize = true;
             this.rentalTotalValueLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rentalTotalValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rentalTotalValueLabel.Location = new System.Drawing.Point(795, 100);
+            this.rentalTotalValueLabel.Location = new System.Drawing.Point(707, 80);
             this.rentalTotalValueLabel.Name = "rentalTotalValueLabel";
-            this.rentalTotalValueLabel.Size = new System.Drawing.Size(227, 40);
+            this.rentalTotalValueLabel.Size = new System.Drawing.Size(201, 32);
             this.rentalTotalValueLabel.TabIndex = 5;
             this.rentalTotalValueLabel.Text = "$0.00";
             this.rentalTotalValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -204,9 +208,10 @@ namespace RentMeApp.UserControls
             // 
             this.checkoutButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkoutButton.Location = new System.Drawing.Point(795, 143);
+            this.checkoutButton.Location = new System.Drawing.Point(707, 114);
+            this.checkoutButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkoutButton.Name = "checkoutButton";
-            this.checkoutButton.Size = new System.Drawing.Size(227, 54);
+            this.checkoutButton.Size = new System.Drawing.Size(201, 44);
             this.checkoutButton.TabIndex = 6;
             this.checkoutButton.Text = "Checkout";
             this.checkoutButton.UseVisualStyleBackColor = true;
@@ -215,25 +220,27 @@ namespace RentMeApp.UserControls
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 114F));
             this.tableLayoutPanel1.Controls.Add(this.emptyButton, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(840, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(746, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 64);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(178, 52);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // emptyButton
             // 
             this.emptyButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.emptyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emptyButton.Location = new System.Drawing.Point(3, 11);
+            this.emptyButton.Location = new System.Drawing.Point(3, 8);
+            this.emptyButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.emptyButton.Name = "emptyButton";
-            this.emptyButton.Size = new System.Drawing.Size(194, 39);
+            this.emptyButton.Size = new System.Drawing.Size(172, 32);
             this.emptyButton.TabIndex = 0;
             this.emptyButton.Text = "Empty";
             this.emptyButton.UseVisualStyleBackColor = true;
@@ -241,12 +248,13 @@ namespace RentMeApp.UserControls
             // 
             // ShoppingCartUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.shoppingCartLayoutPanel);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ShoppingCartUserControl";
-            this.Size = new System.Drawing.Size(1043, 480);
+            this.Size = new System.Drawing.Size(927, 384);
             this.Load += new System.EventHandler(this.ShoppingCartUserControl_Load);
             this.shoppingCartLayoutPanel.ResumeLayout(false);
             this.shoppingCartLayoutPanel.PerformLayout();
