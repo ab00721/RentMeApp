@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.ReportTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.MostPopularFurnitureDataGridView = new System.Windows.Forms.DataGridView();
             this.EndDateTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.EndDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.EndDateLabel = new System.Windows.Forms.Label();
@@ -37,12 +38,11 @@
             this.StartDateLabel = new System.Windows.Forms.Label();
             this.GenerateReportBtn = new System.Windows.Forms.Button();
             this.MostPopularFurnitureLabel = new System.Windows.Forms.Label();
-            this.MostPopularFurnitureDataGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.ReportTableLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MostPopularFurnitureDataGridView)).BeginInit();
             this.EndDateTableLayout.SuspendLayout();
             this.StartDateTableLayout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MostPopularFurnitureDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // ReportTableLayout
@@ -67,6 +67,20 @@
             this.ReportTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.54546F));
             this.ReportTableLayout.Size = new System.Drawing.Size(508, 321);
             this.ReportTableLayout.TabIndex = 0;
+            // 
+            // MostPopularFurnitureDataGridView
+            // 
+            this.MostPopularFurnitureDataGridView.AllowUserToDeleteRows = false;
+            this.MostPopularFurnitureDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.MostPopularFurnitureDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.MostPopularFurnitureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.MostPopularFurnitureDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MostPopularFurnitureDataGridView.Location = new System.Drawing.Point(3, 148);
+            this.MostPopularFurnitureDataGridView.Name = "MostPopularFurnitureDataGridView";
+            this.MostPopularFurnitureDataGridView.ReadOnly = true;
+            this.MostPopularFurnitureDataGridView.RowHeadersWidth = 62;
+            this.MostPopularFurnitureDataGridView.Size = new System.Drawing.Size(502, 170);
+            this.MostPopularFurnitureDataGridView.TabIndex = 6;
             // 
             // EndDateTableLayout
             // 
@@ -154,29 +168,15 @@
             this.MostPopularFurnitureLabel.TabIndex = 4;
             this.MostPopularFurnitureLabel.Text = "Most Popular Furniture";
             // 
-            // MostPopularFurnitureDataGridView
-            // 
-            this.MostPopularFurnitureDataGridView.AllowUserToDeleteRows = false;
-            this.MostPopularFurnitureDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.MostPopularFurnitureDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.MostPopularFurnitureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.MostPopularFurnitureDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MostPopularFurnitureDataGridView.Location = new System.Drawing.Point(3, 148);
-            this.MostPopularFurnitureDataGridView.Name = "MostPopularFurnitureDataGridView";
-            this.MostPopularFurnitureDataGridView.ReadOnly = true;
-            this.MostPopularFurnitureDataGridView.RowHeadersWidth = 62;
-            this.MostPopularFurnitureDataGridView.Size = new System.Drawing.Size(502, 170);
-            this.MostPopularFurnitureDataGridView.TabIndex = 6;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 87);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(490, 26);
+            this.label1.Size = new System.Drawing.Size(489, 26);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Get the most popular furniture between the specified time period where the furnit" +
-    "ure has appeard on at least 2 transactions.";
+            this.label1.Text = "Get the most popular furniture between the provided time period where the furnitu" +
+    "re has appeard on at least 2 transactions.";
             // 
             // ReportUserControl
             // 
@@ -188,11 +188,11 @@
             this.Size = new System.Drawing.Size(508, 321);
             this.ReportTableLayout.ResumeLayout(false);
             this.ReportTableLayout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MostPopularFurnitureDataGridView)).EndInit();
             this.EndDateTableLayout.ResumeLayout(false);
             this.EndDateTableLayout.PerformLayout();
             this.StartDateTableLayout.ResumeLayout(false);
             this.StartDateTableLayout.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MostPopularFurnitureDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
