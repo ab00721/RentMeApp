@@ -20,3 +20,6 @@ Iteration 2:
 Iteration 3:
 	- User can create a new return and sees summary upon completion.
 	- Report tab works with view of most popular furniture per criteria.
+
+Final Iteration:
+	- The database has changed to resolve feedback provided in iteration 3 on our report's stored procedure
