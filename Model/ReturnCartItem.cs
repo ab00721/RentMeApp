@@ -11,8 +11,17 @@
         public string Name { get; set; } = string.Empty;
         public decimal DailyRate { get; set; } = 0;
         public int Quantity { get; set; } = 0;
+        
         public int ExpectedDuration { get; set; } = 0;
-        public decimal AlreadyPaid { get; set; } = 0;
+
+        public decimal AlreadyPaid
+        {
+            get
+            {
+                return DailyRate * ExpectedDuration * Quantity;
+            }
+        }
+
         public int ActualDuration { get; set; } = 0;
 
         public decimal ActualPrice
@@ -27,7 +36,7 @@
         {
             get
             {
-                return (DailyRate * ActualDuration) - AlreadyPaid;
+                return ActualPrice - AlreadyPaid;
             }
         }
     }

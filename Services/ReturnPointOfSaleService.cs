@@ -109,12 +109,11 @@ public class ReturnPointOfSaleService
             returnCartItem.RentalLineItemID = returnLineItem.RentalLineItemID;
             returnCartItem.FurnitureID = furniture.FurnitureID;
             returnCartItem.Name = furniture.Name;
-            returnCartItem.DailyRate = furniture.DailyRate;
+            returnCartItem.DailyRate = rentalLineItem.DailyCost;
             returnCartItem.Quantity = returnLineItem.Quantity;
 
             int expectedDuration = DurationService.DurationInDays(rentalTransaction.RentalDate, rentalTransaction.DueDate);
             returnCartItem.ExpectedDuration = expectedDuration;
-            returnCartItem.AlreadyPaid = rentalLineItem.DailyCost * returnLineItem.Quantity * expectedDuration;
 
             int actualDuration = DurationService.DurationInDays(rentalTransaction.RentalDate, DateTime.Now);
             returnCartItem.ActualDuration = actualDuration;
@@ -230,7 +229,12 @@ public class ReturnPointOfSaleService
         decimal actualCost = 0;
 
         RentalTransaction rentalTransaction = _rentalTransactionController.GetRentalTransactionByRentalLineItemID(returnLineItem.RentalLineItemID);
-        actualCost += RetrieveLineItemCostPerDay(returnLineItem) * DurationService.DurationInDays(rentalTransaction.RentalDate, returnDate);
+        
+        decimal costPerDay = RetrieveLineItemCostPerDay(returnLineItem);
+
+        int duration = DurationService.DurationInDays(rentalTransaction.RentalDate, returnDate);
+        
+        actualCost += costPerDay * duration;
 
         return actualCost;
     }
